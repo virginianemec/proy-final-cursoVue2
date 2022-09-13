@@ -1,2 +1,24 @@
-# proy-final-cursoVue2
-Este es el proyecto Final del curso de Vue 2 - Coderhouse
+# proy-final-cursovue2
+
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
