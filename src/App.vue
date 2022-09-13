@@ -1,20 +1,21 @@
 <template>
-  <div id='app'>
+    <div id='app' class=''>
     <img alt='Vue logo' src='./assets/logo.png' />
-    <div v-if="loginFunction">
-      <LoginComponent :login-correcto="true" @loginSussec="loginSussec()" />
-      <br />
-      <h2>No tengo cuenta</h2>
-      <button class="btn-primary" @click="registrame()">Registrarme </button>
+    <div v-if='loginFunction'>
+      <LoginComponent :login-correcto='true' @loginSuccess='loginSuccess()' />
+
+      <h3>No tengo cuenta</h3>
+      <button type='button' class='btn btn-primary' @click='registrame()' >Registrarme </button>
       </div>
 
-    <div v-if="registerFunction">
+    <div v-if='registerFunction'>
 
-       <RegisterComponent :register-correcto="true" @registerSussec="registerSussec()"/>
+       <RegisterComponent :register-correcto='true' @registerSuccess='registerSuccess()'
+        @volver='volverALogin()'/>
 
     </div>
-     <div v-if="indexFunction">
-          <ListadoPedidosComponent />
+     <div v-if='indexFunction'>
+          <ListadoPedidosComponent  @volver='volverALogin()'/>/>
     </div>
   </div>
 </template>
@@ -41,7 +42,7 @@ export default {
     };
   },
   methods: {
-    loginSussec() {
+    loginSuccess() {
     // Enviar al index
       console.log('hola!! bienvenido al index.');
       this.loginFunction = false;
@@ -54,13 +55,28 @@ export default {
       this.registerFunction = true;
       this.indexFunction = false;
     },
-    registerSussec() {
+    registerSuccess() {
     // Enviar al index
       console.log('hola!! register');
       this.loginFunction = false;
       this.registerFunction = false;
       this.indexFunction = true;
       // this.$alert('Su usuario se ha creado correctamente. Bienvenido', 'Atención', 'success');
+    },
+    volverALogin() {
+      this.loginFunction = true;
+      this.registerFunction = false;
+      this.indexFunction = false;
+    },
+    volverARegister() {
+      this.loginFunction = false;
+      this.registerFunction = true;
+      this.indexFunction = false;
+    },
+    volverAIndex() {
+      this.loginFunction = false;
+      this.registerFunction = false;
+      this.indexFunction = true;
     },
   },
 };

@@ -1,17 +1,17 @@
-<!-- eslint-disable no-unused-expressions -->
+<!-- eslint-disable no-unused-expressions -->type='button'Success
 <!-- eslint-disable no-unused-expressions -->
 <!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
   <div class='login'>
     <h3 class='title'>Bienvenido - Iniciar Sesión</h3>
     <div class='form'>
-        <label class="class-label" for='mail'>Mail</label>
+        <label class='class-label' for='mail'>Mail</label>
         <input type='text' id='mail' v-model='email'  alt='Ingrese correo electrónico'/>
-        <label  class="class-label" for='pass'>Password</label>
+        <label  class='class-label' for='pass'>Password</label>
         <input type='password' id='pass' v-bind='password' hint='Ingrese Password'/>
-         <p v-if='errorLogin'  class="class-label">Has introducido mal el email o la contraseña.</p>
+         <p v-if='errorLogin'  class='class-label'>Has introducido mal el email o la contraseña.</p>
         <br />
-        <button class='btn-primary' @click='loginUser()'>Login</button>
+        <button type='button' class='btn btn-primary'  @click='loginUser()'>Login</button>
     </div>
   </div>
 </template>
@@ -38,7 +38,7 @@ export default {
       // eslint-disable-next-line no-unused-expressions
       if (this.loginCorrecto) {
         this.errorLogin = false;
-        this.$emit('loginSussec');
+        this.$emit('loginSuccess');
       } else {
         this.errorLogin = true;
         this.$alert('Los datos ingresados no son correctos.', 'Atención', 'error');
@@ -52,7 +52,7 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style >
 .login {
   padding: 2rem;
 }
@@ -63,7 +63,7 @@ export default {
   color: wheat;
 }
 .form {
-  margin: 3rem auto;
+  margin: 1rem auto;
   display: flex;
   flex-direction: column;
   justify-content: center;

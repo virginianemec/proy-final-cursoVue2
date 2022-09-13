@@ -7,8 +7,12 @@
           <CardPedido :nombre="pedido.obs" :precio="pedido.id"></CardPedido></tr>
         </tbody>
       </table>
+
+      <div >
+      <button type='button' class='btn btn-primary' @click='atras()'>Volver</button>
     </div>
-</template>
+    </div>
+  </template>
 
 <script>
 import CardPedido from '@/components/CardPedido.vue';
@@ -37,6 +41,11 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    atras() {
+      this.$emit('volver');
+    },
   },
 };
 </script>
