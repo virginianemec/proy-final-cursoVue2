@@ -1,6 +1,6 @@
 <template>
     <div id='app' class=''>
-    <img alt='Vue logo' src='./assets/logo.png' />
+    <img alt='Mi app de Comidas!' src='./assets/logo.png' />
     <div v-if='loginFunction'>
       <LoginComponent :login-correcto='true' @loginSuccess='loginSuccess()' />
 
@@ -15,7 +15,7 @@
 
     </div>
      <div v-if='indexFunction'>
-          <ListadoPedidosComponent  @volver='volverALogin()'/>/>
+          <ListadoNegociosComponent  @volver='volverALogin()'/>/>
     </div>
   </div>
 </template>
@@ -23,14 +23,14 @@
 <script>
 import LoginComponent from '@/components/LoginComponent.vue';
 import RegisterComponent from '@/components/RegisterComponent.vue';
-import ListadoPedidosComponent from '@/components/ListadoPedidosComponent.vue';
+import ListadoNegociosComponent from '@/components/ListadoNegociosComponent.vue';
 
 export default {
   name: 'App',
   components: {
     LoginComponent,
     RegisterComponent,
-    ListadoPedidosComponent,
+    ListadoNegociosComponent,
   },
   data() {
     return {

@@ -4,40 +4,51 @@
 
         <tbody >
           <tr v-for="pedido in pedidos" :key="pedido.id">
-          <CardPedido :nombre="pedido.obs" :precio="pedido.id"></CardPedido></tr>
+          <RowPedido :nombre="pedido.nombre" :precio="pedido.total"
+          :detalle="pedido.detalle"></RowPedido>
+        </tr>
         </tbody>
       </table>
 
-      <div >
-      <button type='button' class='btn btn-primary' @click='atras()'>Volver</button>
-    </div>
     </div>
   </template>
 
 <script>
-import CardPedido from '@/components/CardPedido.vue';
+import RowPedido from '@/components/RowPedido.vue';
 
 export default {
   name: 'ListadoPedidosComponent',
   components: {
-    CardPedido,
+    RowPedido,
   },
   data() {
     return {
       pedidos: [
         {
           id: 1,
-          obs: '',
-          detalle: [{
-            prodId: 1, prodName: 'Tostada', prodPrecio: 270,
-          }],
+          usuario: '',
+          fecha: '',
+          total: 0,
+          detalle: [
+            {
+              id: 1,
+              nombre: 'Tostada',
+              precio: 270,
+            },
+          ],
         },
         {
           id: 2,
-          obs: '',
-          detalle: [{
-            prodId: 1, prodName: 'Gaseosa', prodPrecio: 180,
-          }],
+          usuario: '',
+          fecha: '',
+          total: 0,
+          detalle: [
+            {
+              id: 1,
+              nombre: 'Gaseosa',
+              precio: 180,
+            },
+          ],
         },
       ],
     };
