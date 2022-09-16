@@ -1,9 +1,13 @@
 <template>
-  <div>
-    <p>{{ nombre }}</p>
-    <p>{{ precio }}</p>
 
-    <CountComponent :cantidad="cantidad" :precio="precio"> </CountComponent>
+<div class="margin border">
+    <h3>{{nombre}}</h3>
+    <img src={{imagen}} alt=""/>
+    <div class="d-flex justify-content-between">
+        <span>#{{precio}}</span>
+        <!--<span>{{product.cantidad}}</span>-->
+        <CountComponent :cantidad="cantidad" :precio="precio"> </CountComponent>
+    </div>
   </div>
 </template>
 
@@ -24,7 +28,7 @@ export default {
     },
     imagen: {
       stype: String,
-      default: 'No-image-available',
+      default: './assets/No-image-available.png',
     },
     // creo  que necesitare inicializar la cantidad en caso de edit.
     cantidad: {
@@ -38,11 +42,12 @@ export default {
   data() {
 
   },
-  methods: {
+  computed: {
     getImagenSrc() {
       return `./assets/${this.imagen}/.png`;
     },
   },
+  methods: {},
 };
 </script>
 

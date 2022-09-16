@@ -15,7 +15,7 @@
 
     </div>
      <div v-if='indexFunction'>
-          <ListadoNegociosComponent  @volver='volverALogin()'/>/>
+          <ListadoNegociosComponent  @volver='volverALogin()'/>
     </div>
   </div>
 </template>

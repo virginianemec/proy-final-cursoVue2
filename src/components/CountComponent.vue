@@ -1,8 +1,10 @@
 <template>
-  <div>
+  <div class="card">
     <button @click="decrementar()">-</button>
     <p>{{ cantidad }}</p>
     <button @click="aumentar()">+</button>
+    <br>
+    <p>{{precioTotal}}</p>
   </div>
 </template>
 
@@ -47,5 +49,14 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+  .card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration-color: blueviolet;
+    padding-block: 10,10,10,10;
+    border-block: 1,1,1,1;
+  }
 </style>

@@ -4,7 +4,7 @@
       <tbody>
         <tr v-for='negocio in negocios' :key='negocio.id'>
           <NegocioComponent
-          :nomidbre='negocio.id'
+            :id='negocio.id'
             :nombre='negocio.nombre'
             :categoria='negocio.categoria'
           ></NegocioComponent>

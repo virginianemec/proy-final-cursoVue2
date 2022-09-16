@@ -1,11 +1,13 @@
 <template>
   <div>
-    <p>{{ id }}</p>
+    <p>Datos del negocio</p>
     <p>{{ nombre }}</p>
     <p>{{ categoria }}</p>
     <br />
+    <p>Productos del negocio</p>
     <ListadoProductosComponent />
     <br />
+    <p>Pedidos del negocio</p>
     <ListadoPedidosComponent />
     <br />
   </div>
