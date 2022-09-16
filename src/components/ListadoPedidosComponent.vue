@@ -1,17 +1,18 @@
 <template>
-    <div>
-        <table class="table border-primary">
-
-        <tbody >
-          <tr v-for="pedido in pedidos" :key="pedido.id">
-          <RowPedido :nombre="pedido.nombre" :precio="pedido.total"
-          :detalle="pedido.detalle"></RowPedido>
+  <div >
+    <table class="table border-primary">
+      <tbody>
+        <tr v-for="pedido in pedidos" :key="pedido.id">
+          <RowPedido
+            :nombre="pedido.nombre"
+            :precio="pedido.total"
+            :detalle="pedido.detalle"
+          ></RowPedido>
         </tr>
-        </tbody>
-      </table>
-
-    </div>
-  </template>
+      </tbody>
+    </table>
+  </div>
+</template>
 
 <script>
 import RowPedido from '@/components/RowPedido.vue';
@@ -61,6 +62,6 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 
 </style>

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!--
     <table class='table border-primary'>
       <tbody>
         <tr v-for='producto in productos' :key='producto.id'>
@@ -12,6 +13,17 @@
         </tr>
       </tbody>
     </table>
+  -->
+
+    <div v-for="producto in productos" :key="producto.id">
+      <CardProducto
+        :id="producto.id"
+        :nombre="producto.nombre"
+        :precio="producto.precio"
+        :imagen="producto.imagen"
+        :cantidad="producto.cantidad"
+      ></CardProducto>
+    </div>
   </div>
 </template>
 
@@ -29,16 +41,16 @@ export default {
         {
           id: 1,
           nombre: 'Sand. Vegano',
-          imagen: './assets/logo1.png',
-          presio: 150,
+          imagen: 'logo.png',
+          precio: 150,
           // no se si necesito cantidad.
           cantidad: 0,
         },
         {
           id: 2,
           nombre: 'Ensalada',
-          imagen: './assets/logo1.png',
-          presio: 150,
+          imagen: 'logo.png',
+          precio: 150,
           // no se si necesito cantidad.
           cantidad: 0,
         },
@@ -52,6 +64,4 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>
+<style scoped></style>

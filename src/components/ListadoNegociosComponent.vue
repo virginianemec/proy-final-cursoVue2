@@ -1,17 +1,20 @@
 <template>
-  <div>
-    <table class='table border-primary'>
+  <div >
+    <table class="table border-primary">
       <tbody>
-        <tr v-for='negocio in negocios' :key='negocio.id'>
+        <tr v-for="negocio in negocios" :key="negocio.id">
           <NegocioComponent
-            :id='negocio.id'
-            :nombre='negocio.nombre'
-            :categoria='negocio.categoria'
+            :id="negocio.id"
+            :nombre="negocio.nombre"
+            :categoria="negocio.categoria"
           ></NegocioComponent>
         </tr>
       </tbody>
     </table>
-
+    <br/>
+    <div>
+      <button type="button" class="btn btn-primary" @click="atras()">Volver</button>
+    </div>
   </div>
 </template>
 
@@ -46,5 +49,5 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 </style>

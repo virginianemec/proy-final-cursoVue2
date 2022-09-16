@@ -1,21 +1,22 @@
 <template>
-    <div id='app' class=''>
-    <img alt='Mi app de Comidas!' src='./assets/logo.png' />
-    <div v-if='loginFunction'>
-      <LoginComponent :login-correcto='true' @loginSuccess='loginSuccess()' />
+  <div id="app" class="">
+    <div class="img"><img alt="Mi app de Comidas!" src="./assets/logo.png" /></div>
+    <div v-if="loginFunction">
+      <LoginComponent :login-correcto="true" @loginSuccess="loginSuccess()" />
 
       <h3>No tengo cuenta</h3>
-      <button type='button' class='btn btn-primary' @click='registrame()' >Registrarme </button>
-      </div>
-
-    <div v-if='registerFunction'>
-
-       <RegisterComponent :register-correcto='true' @registerSuccess='registerSuccess()'
-        @volver='volverALogin()'/>
-
+      <button type="button" class="btn btn-primary" @click="registrame()">Registrarme</button>
     </div>
-     <div v-if='indexFunction'>
-          <ListadoNegociosComponent  @volver='volverALogin()'/>
+
+    <div v-if="registerFunction" style="padding-block: 10;">
+      <RegisterComponent
+        :register-correcto="true"
+        @registerSuccess="registerSuccess()"
+        @volver="volverALogin()"
+      />
+    </div>
+    <div v-if="indexFunction">
+      <ListadoNegociosComponent @volver="volverALogin()" />
     </div>
   </div>
 </template>
@@ -34,8 +35,8 @@ export default {
   },
   data() {
     return {
-    // Data que se usa solo a fines practicos, calculo que luego no se usaran
-    // para mostrar solo la primer pantalla login.
+      // Data que se usa solo a fines practicos, calculo que luego no se usaran
+      // para mostrar solo la primer pantalla login.
       loginFunction: true,
       indexFunction: false,
       registerFunction: false,
@@ -43,7 +44,7 @@ export default {
   },
   methods: {
     loginSuccess() {
-    // Enviar al index
+      // Enviar al index
       console.log('hola!! bienvenido al index.');
       this.loginFunction = false;
       this.registerFunction = false;
@@ -56,7 +57,7 @@ export default {
       this.indexFunction = false;
     },
     registerSuccess() {
-    // Enviar al index
+      // Enviar al index
       console.log('hola!! register');
       this.loginFunction = false;
       this.registerFunction = false;
@@ -87,8 +88,33 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.img {
+  padding: 2rem;
+}
+.title {
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+}
+.class-label {
+  color: wheat;
+}
+.form {
+  margin: 1rem auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 20%;
+  min-width: 350px;
+  max-width: 80%;
+  background: rgba(19, 35, 47, 0.9);
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.3);
+}
+img {
+  width: 100px;
+  height: 100px;
+  padding: 10px 0px 10px 0px;
 }
 </style>

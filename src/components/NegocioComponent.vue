@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <p>Datos del negocio</p>
     <p>{{ nombre }}</p>
     <p>{{ categoria }}</p>
@@ -21,7 +21,7 @@ export default {
   name: 'NegocioComponent',
   data() {
     return {
-    /*
+      /*
       pedidos: [
         {
           id: 1,
@@ -73,5 +73,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

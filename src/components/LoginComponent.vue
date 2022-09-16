@@ -53,26 +53,4 @@ export default {
 };
 </script>
 <style >
-.login {
-  padding: 2rem;
-}
-.title {
-  text-align: center;
-}
-.class-label{
-  color: wheat;
-}
-.form {
-  margin: 1rem auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 20%;
-  min-width: 350px;
-  max-width: 80%;
-  background: rgba(19, 35, 47, 0.9);
-  border-radius: 5px;
-  padding: 20px;
-  box-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.3);
-}
 </style>

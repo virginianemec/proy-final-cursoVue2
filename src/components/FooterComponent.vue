@@ -6,11 +6,11 @@
 
 <style scoped>
 * {
-  background-color: #393B43;
+  background-color: #393b43;
 }
 p {
   text-align: center;
-  color: #E5F876;
+  color: #f8cf76;
   font-size: 20px;
   padding: 60px;
 }
