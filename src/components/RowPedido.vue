@@ -33,13 +33,8 @@ export default {
       type: Array,
     },
   },
-  components: {},
   data() {
     return {};
   },
-  methods: {},
 };
 </script>
-
-<style>
-</style>

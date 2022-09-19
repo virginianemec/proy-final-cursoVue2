@@ -17,7 +17,6 @@
 <script>
 export default {
   name: 'ListadoOfertasComponent',
-  components: {},
   props: {
     ofertas: [],
   },
@@ -31,4 +30,3 @@ export default {
   },
 };
 </script>
-<style scoped></style>
