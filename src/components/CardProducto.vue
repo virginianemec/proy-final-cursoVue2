@@ -1,16 +1,17 @@
+<!-- eslint-disable vuejs-accessibility/alt-text -->
 <template>
-  <div class="div--container">
-    <table class="table">
+  <div class='div--container'>
+    <table class='table'>
       <thead>
         <tr>
-          <th colspan="2">{{ nombre }}</th>
+          <th colspan='2'>{{ nombre }}</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td colspan="2">
-            <img :src="require(`@/assets/images/${imagen}.png`)" />
-            <!--<img :src="getImagenSrc" alt="article image" /> -->
+          <td colspan='2'>
+            <img :src='require(`@/assets/images/${imagen}.png`)' />
+            <!--<img :src='getImagenSrc' alt='article image' /> -->
           </td>
         </tr>
 
@@ -23,13 +24,12 @@
           <td>: ${{ precio }}</td>
         </tr>
         <tr>
-          <td colspan="2">
+          <td colspan='2'>
             <CountComponent
-              :cantidad="cantidad"
-              :precio="precio"
-              @modificarCarrito="modificarCarrito($event)"
-            >
-            </CountComponent>
+              :cantidad='cantidad'
+              :precio='precio'
+              @modificarCarrito='modificarCarrito($event)'
+            ></CountComponent>
           </td>
         </tr>
 
@@ -44,10 +44,10 @@
 </template>
 
 <script>
-import CountComponent from "@/components/CountComponent.vue";
+import CountComponent from '@/components/CountComponent.vue';
 
 export default {
-  name: "CardProducto",
+  name: 'CardProducto',
   // propiedades del producto:
   props: {
     id: {
@@ -56,7 +56,7 @@ export default {
     },
     nombre: {
       type: String,
-      default: "Sin nombre",
+      default: 'Sin nombre',
     },
     precio: {
       type: Number,
@@ -64,7 +64,7 @@ export default {
     },
     imagen: {
       stype: String,
-      default: "../assets/No-image-available.png",
+      default: '../assets/No-image-available.png',
     },
   },
   components: {
@@ -85,7 +85,7 @@ export default {
   methods: {
     modificarCarrito(objEvent) {
       this.total = objEvent.total;
-      this.$emit("modificarCarrito", {
+      this.$emit('modificarCarrito', {
         id: this.id,
         precio: this.precio,
         nombre: this.nombre,

@@ -1,3 +1,4 @@
+<!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
   <div class='login'>
     <h3 class='title'>Bienvenido - Iniciar Sesión</h3>
@@ -49,7 +50,6 @@ export default {
     };
   },
   methods: {
-
     loginUser() {
       if (this.existeUsuario()) {
         this.$emit('loginSuccess');
@@ -73,7 +73,6 @@ export default {
     },
   },
 };
-
 </script>
 <style scoped>
 .btn-primary {
@@ -81,4 +80,7 @@ export default {
   background-color: orange;
   border-color: orange;
 }
+  .class-label {
+    color: #04000a;
+  }
 </style>

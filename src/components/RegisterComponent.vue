@@ -1,3 +1,5 @@
+<!-- eslint-disable max-len -->
+<!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
   <div class='login'>
     <h3 class='title'>Registrarme</h3>
@@ -9,9 +11,7 @@
           <field-messages name='nombre'>
             <div class='class-label'>Ok.</div>
             <div class='class-label' slot='required'>Ingrese un nombre por favor.</div>
-            <div class='class-label' slot='customValidator'>
-              El nombre debe ser unico. Intente otro.
-            </div>
+            <div class='class-label' slot='customValidator'>El nombre debe ser unico. Intente otro.</div>
           </field-messages>
         </validate>
 
@@ -43,9 +43,10 @@
           <field-messages name='passwordRepeat'>
             <div class='class-label'>Ok.</div>
             <div class='class-label' slot='required'>Indique password por favor.</div>
-            <div class='class-label' slot='customValidatorPassword'>
-              Las contraseñas ingresadas no coinciden.
-            </div>
+            <div
+              class='class-label'
+              slot='customValidatorPassword'
+            >Las contraseñas ingresadas no coinciden.</div>
           </field-messages>
         </validate>
 
@@ -56,9 +57,7 @@
             <div class='class-label'>Ok.</div>
             <div class='class-label' slot='required'>Indique su edad por favor.</div>
             <!-- <div slot='number'>Parece que no es una edad válida!</div> -->
-            <div class='class-label' slot='edadValidator'>
-              Debe ser mayor de edad (Mas de 18 años).
-            </div>
+            <div class='class-label' slot='edadValidator'>Debe ser mayor de edad (Mas de 18 años).</div>
           </field-messages>
         </validate>
         <div class='fc my-3'>
@@ -67,7 +66,7 @@
       </vue-form>
     </div>
     <div class='text-center'>
-      <button type='button' class='btn btn-primary' @click='atras()'>Volver</button>
+      <button type='submit' class='btn btn-primary' @click='atras()'>Volver</button>
     </div>
   </div>
 </template>
@@ -162,4 +161,7 @@ export default {
   background-color: orange;
   border-color: orange;
 }
+  .class-label {
+    color: #04000a;
+  }
 </style>

@@ -1,24 +1,21 @@
 <template>
-  <div class='div--container'>
-    <h1 class='text-center'>CARRITO!</h1>
-    <div class='row '>
-
-        <table class='table border-primary'>
-          <thead>
-            <tr>
-              <th>Cant. producto</th>
-              <th>Precio</th>
-              <th>Subtotal</th>
-            </tr>
-          </thead>
-          <tbody v-for='producto in carrito' :key='producto.id'>
-            <ProductoObject :producto='producto' />
-          </tbody>
-        </table>
-        <div>Total:  ${{ getTotal }}
-          </div>
-        </div>
-
+  <div class="div--container">
+    <h1 class="text-center">CARRITO!</h1>
+    <div class="row">
+      <table class="table border-primary">
+        <thead>
+          <tr>
+            <th>Cant. producto</th>
+            <th>Precio</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody v-for="producto in carrito" :key="producto.id">
+          <ProductoObject :producto="producto" />
+        </tbody>
+      </table>
+      <div>Total: ${{ getTotal }}</div>
+    </div>
   </div>
 </template>
 
@@ -59,7 +56,7 @@ export default {
 </script>
 
 <style scoped>
-  .div--container {
+.div--container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

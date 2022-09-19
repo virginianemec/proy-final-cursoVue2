@@ -1,11 +1,11 @@
 <template>
   <tr>
-      <td >
-        <p>{{ this.displayProduct }}</p>
-      </td>
-     <td >$ {{ this.producto.precio }}</td>
-     <td>$ {{ this.total }}</td>
-    </tr>
+    <td>
+      <p>{{ this.displayProduct }}</p>
+    </td>
+    <td>$ {{ this.producto.precio }}</td>
+    <td>$ {{ this.total }}</td>
+  </tr>
 </template>
 
 <script>

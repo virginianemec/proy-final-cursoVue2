@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div>
     <table class="table border-primary">
       <tbody>
         <tr v-for="pedido in pedidos" :key="pedido.id">
@@ -25,8 +25,7 @@ export default {
     RowPedido,
   },
   data() {
-    return {
-    };
+    return {};
   },
   methods: {
     atras() {
@@ -40,5 +39,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

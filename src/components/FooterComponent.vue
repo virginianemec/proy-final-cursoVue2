@@ -9,12 +9,14 @@
 .footer-map {
   height: 20%;
   width: 100%;
-  background-image: url("../assets/logo.png");
+  background-image: url('../assets/logo.png');
   background-size: cover;
   border-color: #ccc;
 }
+
 h1 {
   text-align: center;
   padding: 20px;
+    color: #dd845a;
 }
 </style>

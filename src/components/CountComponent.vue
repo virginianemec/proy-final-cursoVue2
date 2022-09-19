@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: "CountComponent",
+  name: 'CountComponent',
   props: {
     cantidadInicial: {
       type: Number,
@@ -34,13 +34,13 @@ export default {
     aumentar() {
       if (this.cantidad >= 0) {
         this.cantidad += 1;
-        this.$emit("modificarCarrito", { funcion: "+", total: this.precioTotal });
+        this.$emit('modificarCarrito', { funcion: '+', total: this.precioTotal });
       }
     },
     decrementar() {
       if (this.cantidad > 0) {
         this.cantidad -= 1;
-        this.$emit("modificarCarrito", { funcion: "-", total: this.precioTotal });
+        this.$emit('modificarCarrito', { funcion: '-', total: this.precioTotal });
       }
     },
     resetear() {

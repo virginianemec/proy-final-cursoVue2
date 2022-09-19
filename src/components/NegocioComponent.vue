@@ -3,10 +3,9 @@
     <div class='tabla--titulo'>{{ nombre }} - {{ categoria }}</div>
     <div class='tabla--datos'>Productos del negocio</div>
     <ListadoProductosComponent
-      :productos='productos'
-      @modificarCarrito='modificarCarrito($event)'
-    />
-    <br /><!--
+    :productos='productos' @modificarCarrito='modificarCarrito($event)' />
+    <br />
+    <!--
     <div class='tabla--datos'> Pedidos del negocio</div>
     <ListadoPedidosComponent :pedidos='pedidos' />
     <br />

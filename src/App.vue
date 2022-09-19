@@ -1,9 +1,8 @@
 <template>
   <div id='app'>
     <HeaderComponent
-      :mostrarVolverEnNavBar='!mostrarVolverEnNavBar'
-      @volver='volverALogin()'
-    ></HeaderComponent>
+    :mostrarVolverEnNavBar='!mostrarVolverEnNavBar' @volver='volverALogin()'>
+  </HeaderComponent>
     <article>
       <div v-if='loginFunction'>
         <LoginComponent
@@ -14,9 +13,7 @@
         <div class='text-center'>
           <h1>No tengo cuenta</h1>
 
-          <button type='button' class='btn btn-primary' @click='registrame()'>
-            Registrarme
-          </button>
+          <button type='button' class='btn btn-primary' @click='registrame()'>Registrarme</button>
         </div>
       </div>
 
@@ -155,9 +152,7 @@ export default {
           obj.cantidad -= 1;
         } else {
           console.log('id - precio', objEvento.id, objEvento.precio);
-          const indexOfObject = this.carrito.findIndex(
-            (object) => object.id === objEvento.id,
-          );
+          const indexOfObject = this.carrito.findIndex((object) => object.id === objEvento.id);
 
           this.carrito.splice(indexOfObject, 1);
         }
@@ -176,11 +171,6 @@ export default {
   line-height: 1.42857143;
   color: #959595;
   box-sizing: border-box;
-  /*padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;*/
-  /* box-sizing: border-box;*/
 }
 
 body {
@@ -197,9 +187,10 @@ body {
   /*margin: 1rem auto;
   display: flex;
   flex: 1;*/
-
+/* este etsa
   margin: 1rem auto;
   text-align: center;
+  */
 }
 #main > nav,
 #main > aside {
@@ -243,9 +234,6 @@ aside {
   border-radius: 5px;
   padding: 20px;
   box-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.3);
-}
-.class-label {
-  color: #389393;
 }
 @media screen and (max-width: 575px) {
   #main {

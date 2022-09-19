@@ -65,7 +65,7 @@ export default {
           // no se si necesito cantidad.
           cantidad: 0,
         },
-		{
+        {
           id: 9,
           nombre: 'Brusqueta Mediterranea x 2u',
           imagen: 'brusquetaMediterranea',

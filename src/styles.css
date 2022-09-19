@@ -9,118 +9,13 @@ h3,
 h4, 
 h5, 
 h6 {
-	color: #dd845a;
+	/* color: #dd845a; */
 	}
 
- 
-.featured-product h3 {
-	color: #dd845a;
-	font-size: 18px;
-	}
-
-.featured-product .price {
-	color: #dd845a;
-	font-size: 18px;
-	}
-	/*
-.footer-map {
-	height: 20%;
-	width: 100%;
-	background: url('./images/logo.png');
-	background-size: cover;
-	border-color: #ccc;
-	}*/
 
 /*
-*************************** 
-Override Bootstrap Classes 
-***************************
-*/
-
-/* Links */
-a {
-    color: orange;
-    text-decoration: none;
-  }
-  a:hover,
-  a:focus {
-    color: darkorange;
-    text-decoration: underline;
-  }
-  
-  /* Navbar */
-  .navbar-default {
-    background-color: #fff;
-  }
-  .navbar-default .navbar-brand {
-    color: #dd845a;
-  }
-  .navbar-default .navbar-brand:hover,
-  .navbar-default .navbar-brand:focus {
-    color: sienna;
-    background-color: transparent;
-  }
-  
-  /* Primary Buttons */
-  .btn-primary {
-    color: #fff;
-    background-color: orange;
-    border-color: orange;
-  }
-  .btn-primary:focus,
-  .btn-primary.focus {
-    color: #fff;
-    background-color: darkorange;
-    border-color: darkorange;
-  }
-  .btn-primary:hover {
-    color: #fff;
-    background-color: darkorange;
-    border-color: darkorange;
-  }
-  .btn-primary:active,
-  .btn-primary.active,
-  .open > .dropdown-toggle.btn-primary {
-    color: #fff;
-    background-color: darkorange;
-    border-color: darkorange;
-  }
-  .btn-primary:active:hover,
-  .btn-primary.active:hover,
-  .open > .dropdown-toggle.btn-primary:hover,
-  .btn-primary:active:focus,
-  .btn-primary.active:focus,
-  .open > .dropdown-toggle.btn-primary:focus,
-  .btn-primary:active.focus,
-  .btn-primary.active.focus,
-  .open > .dropdown-toggle.btn-primary.focus {
-    color: #fff;
-    background-color: darkorange;
-    border-color: darkorange;
-  }
-  
-  .btn-primary.disabled,
-  .btn-primary[disabled],
-  fieldset[disabled] .btn-primary,
-  .btn-primary.disabled:hover,
-  .btn-primary[disabled]:hover,
-  fieldset[disabled] .btn-primary:hover,
-  .btn-primary.disabled:focus,
-  .btn-primary[disabled]:focus,
-  fieldset[disabled] .btn-primary:focus,
-  .btn-primary.disabled.focus,
-  .btn-primary[disabled].focus,
-  fieldset[disabled] .btn-primary.focus,
-  .btn-primary.disabled:active,
-  .btn-primary[disabled]:active,
-  fieldset[disabled] .btn-primary:active,
-  .btn-primary.disabled.active,
-  .btn-primary[disabled].active,
-  fieldset[disabled] .btn-primary.active {
-    background-color: sandybrown;
-    border-color: sandybrown;
-  }
-
+ background-color: sandybrown;
+ border-color: sandybrown;
 
 .form {
     display: flex;
@@ -128,12 +23,12 @@ a {
     justify-content: center;
     width: 30%;
     /*min-width: 20%;*/
-    max-width: 80%;
+ /*   max-width: 80%;
     background: #9e94f3;
     border-radius: 5px;
     padding: 20px;
     box-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.3);
-  }
+  }*/
 /*
     .form {
       display: flex;
@@ -148,9 +43,3 @@ a {
       box-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.3);
     }*/
 
-  .class-label {
-    color: #04000a;
-  }
-.contenido {
-    height: 500px;
-}
