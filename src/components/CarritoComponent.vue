@@ -10,8 +10,8 @@
             <th>Subtotal</th>
           </tr>
         </thead>
-        <tbody v-for="producto in carrito" :key="producto.id">
-          <ProductoObject :producto="producto" />
+        <tbody v-for="product in carrito" :key="product.id">
+          <ProductoObject :product="product" />
         </tbody>
       </table>
       <div>Total: ${{ getTotal }}</div>
@@ -36,18 +36,19 @@ export default {
     };
   },
   methods: {
-    calcularTotalProducto(precio, cantidad) {
-      return precio * cantidad;
+    // TODO: pasar nombres metohos a ingles
+    calcularTotalProducto(price, cant) {
+      return price * cant;
     },
   },
   computed: {
-    totalProducto(precio, cantidad) {
-      return precio * cantidad;
+    totalProducto(price, cant) {
+      return price * cant;
     },
     getTotal() {
       let total1 = 0;
       this.carrito.forEach((val) => {
-        total1 += this.calcularTotalProducto(val.precio, val.cantidad);
+        total1 += this.calcularTotalProducto(val.price, val.cant);
       });
       return total1;
     },

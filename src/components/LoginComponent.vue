@@ -1,6 +1,6 @@
 <!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
-  <div class='login'>
+  <div >
     <h3 class='title'>Bienvenido - Iniciar Sesión</h3>
     <div class='form'>
       <vue-form :state='formState' @submit.prevent='onSubmit()'>
@@ -35,13 +35,13 @@
 export default {
   name: 'LoginComponent',
   props: {
-    usuarios: [],
+    users: [],
   },
   data() {
     return {
       formState: {},
       data: {
-        nombre: '',
+        name: '',
         email: '',
         password: '',
       },
@@ -59,7 +59,7 @@ export default {
     },
     existeUsuario() {
       // TODO: verificar contra mas datos
-      const obj = this.usuarios.find((val) => val.email === this.data.email);
+      const obj = this.users.find((val) => val.email === this.data.email);
       return !!obj;
     },
     onSubmit() {
@@ -75,6 +75,18 @@ export default {
 };
 </script>
 <style scoped>
+  .form {
+  /*display: flex;*/
+  /*flex-direction: column;
+  justify-content: center;
+  width: 35%;
+  min-width: 350px;
+  max-width: 80%;
+  /* background: rgba(19, 35, 47, 0.9);*/
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.3);
+}
 .btn-primary {
   color: #fff;
   background-color: orange;

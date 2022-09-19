@@ -6,13 +6,13 @@
       <div v-for="negocio in negocios" :key="negocio.id">
         <NegocioComponent
           :id="negocio.id"
-          :nombre="negocio.nombre"
-          :categoria="negocio.categoria"
+          :name="negocio.name"
+          :category="negocio.category"
           :carrito="carrito"
-          :productos="negocio.productos"
+          :products="negocio.products"
           :ofertas="negocio.ofertas"
-          :pedidos="negocio.pedidos"
-          @modificarCarrito="modificarCarrito($event)"
+          :orders="negocio.orders"
+          @carritoUpdate="carritoUpdate($event)"
         ></NegocioComponent>
       </div>
     </div>
@@ -33,8 +33,8 @@ export default {
     negocios: [],
   },
   methods: {
-    modificarCarrito(obj) {
-      this.$emit('modificarCarrito', obj);
+    carritoUpdate(obj) {
+      this.$emit('carritoUpdate', obj);
     },
   },
   data() {

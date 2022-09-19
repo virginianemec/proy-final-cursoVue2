@@ -1,10 +1,10 @@
 <template>
   <div>
-    <p>{{ usuario }}</p>
-    <p>{{ nombre }}</p>
-    <p>{{ fecha }}</p>
+    <p>{{ user }}</p>
+    <p>{{ name }}</p>
+    <p>{{ date }}</p>
     <p>{{ total }}</p>
-    {{detalle}}
+    {{detail}}
   </div>
 </template>
 
@@ -17,11 +17,11 @@ export default {
       type: Number,
       default: 0,
     },
-    usuario: {
+    user: {
       type: String,
       default: 'Sin nombre',
     },
-    fecha: {
+    date: {
       type: String,
       default: '',
     },
@@ -29,7 +29,7 @@ export default {
       type: Number,
       default: 0,
     },
-    detalle: {
+    detail: {
       type: Array,
     },
   },

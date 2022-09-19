@@ -1,8 +1,8 @@
 <template>
   <div class="row--botones">
-    <button class="coder--button" @click="decrementar()">-</button>
-    <p>{{ cantidad }}</p>
-    <button class="coder--button" @click="aumentar()">+</button>
+    <button class="coder--button" @click="decrease()">-</button>
+    <p>{{ cant }}</p>
+    <button class="coder--button" @click="increase()">+</button>
     <br />
     <!--<p>{{ precioTotal }}</p> -->
   </div>
@@ -12,11 +12,11 @@
 export default {
   name: 'CountComponent',
   props: {
-    cantidadInicial: {
+    cantInicial: {
       type: Number,
       default: 0,
     },
-    precio: {
+    price: {
       type: Number,
       default: 0,
     },
@@ -24,32 +24,32 @@ export default {
   data() {
     return {
       total: 0,
-      cantidad: 0,
+      cant: 0,
     };
   },
   created() {
-    this.cantidad = this.cantidadInicial;
+    this.cant = this.cantInicial;
   },
   methods: {
-    aumentar() {
-      if (this.cantidad >= 0) {
-        this.cantidad += 1;
-        this.$emit('modificarCarrito', { funcion: '+', total: this.precioTotal });
+    increase() {
+      if (this.cant >= 0) {
+        this.cant += 1;
+        this.$emit('carritoUpdate', { updateFuntion: '+', total: this.totalPrice });
       }
     },
-    decrementar() {
-      if (this.cantidad > 0) {
-        this.cantidad -= 1;
-        this.$emit('modificarCarrito', { funcion: '-', total: this.precioTotal });
+    decrease() {
+      if (this.cant > 0) {
+        this.cant -= 1;
+        this.$emit('carritoUpdate', { updateFuntion: '-', total: this.totalPrice });
       }
     },
-    resetear() {
-      this.cantidad = 0;
+    reset() {
+      this.cant = 0;
     },
   },
   computed: {
-    precioTotal() {
-      return this.cantidad * parseFloat(this.precio);
+    totalPrice() {
+      return this.cant * parseFloat(this.price);
     },
   },
 };

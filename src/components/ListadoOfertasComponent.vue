@@ -25,8 +25,8 @@ export default {
     return {};
   },
   methods: {
-    atras() {
-      this.$emit('volver');
+    back() {
+      this.$emit('back');
     },
   },
 };

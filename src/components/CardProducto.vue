@@ -4,13 +4,13 @@
     <table class='table'>
       <thead>
         <tr>
-          <th colspan='2'>{{ nombre }}</th>
+          <th colspan='2'>{{ name }}</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td colspan='2'>
-            <img :src='require(`@/assets/images/${imagen}.png`)' />
+            <img :src='require(`@/assets/images/${image}.png`)' />
             <!--<img :src='getImagenSrc' alt='article image' /> -->
           </td>
         </tr>
@@ -21,14 +21,14 @@
         </tr>
         <tr>
           <th>Precio</th>
-          <td>: ${{ precio }}</td>
+          <td>: ${{ price }}</td>
         </tr>
         <tr>
           <td colspan='2'>
             <CountComponent
-              :cantidad='cantidad'
-              :precio='precio'
-              @modificarCarrito='modificarCarrito($event)'
+              :cant='cant'
+              :price='price'
+              @carritoUpdate='carritoUpdate($event)'
             ></CountComponent>
           </td>
         </tr>
@@ -54,15 +54,15 @@ export default {
       type: Number,
       default: 0,
     },
-    nombre: {
+    name: {
       type: String,
       default: 'Sin nombre',
     },
-    precio: {
+    price: {
       type: Number,
       default: 0,
     },
-    imagen: {
+    image: {
       stype: String,
       default: '../assets/No-image-available.png',
     },
@@ -72,24 +72,24 @@ export default {
   },
   data() {
     return {
-      // creo  que necesitare inicializar la cantidad en caso de edit.
-      cantidad: 0,
+      // creo  que necesitare inicializar la cant en caso de edit.
+      cant: 0,
       total: 0,
     };
   },
   computed: {
     getImagenSrc() {
-      return `./assets/${this.imagen}.png`;
+      return `./assets/${this.image}.png`;
     },
   },
   methods: {
-    modificarCarrito(objEvent) {
+    carritoUpdate(objEvent) {
       this.total = objEvent.total;
-      this.$emit('modificarCarrito', {
+      this.$emit('carritoUpdate', {
         id: this.id,
-        precio: this.precio,
-        nombre: this.nombre,
-        modif: objEvent.funcion,
+        price: this.price,
+        name: this.name,
+        updateFuntion: objEvent.updateFuntion,
       });
     },
   },

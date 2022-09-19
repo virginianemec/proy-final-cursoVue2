@@ -3,7 +3,7 @@
     <td>
       <p>{{ this.displayProduct }}</p>
     </td>
-    <td>$ {{ this.producto.precio }}</td>
+    <td>$ {{ this.product.price }}</td>
     <td>$ {{ this.total }}</td>
   </tr>
 </template>
@@ -12,14 +12,14 @@
 export default {
   name: 'ProductoObject',
   props: {
-    producto: {},
+    product: {},
   },
   computed: {
     displayProduct() {
-      return ` ${this.producto.cantidad} ${this.producto.nombre}`;
+      return ` ${this.product.cant} ${this.product.name}`;
     },
     total() {
-      return this.producto.cantidad * this.producto.precio;
+      return this.product.cant * this.product.price;
     },
   },
 };

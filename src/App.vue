@@ -1,28 +1,31 @@
 <template>
   <div id='app'>
     <HeaderComponent
-    :mostrarVolverEnNavBar='!mostrarVolverEnNavBar' @volver='volverALogin()'>
-  </HeaderComponent>
+      :buttonReturnShowInHeader='!buttonReturnShowInHeader'
+      @back='returnToLogin()'
+    >
+    </HeaderComponent>
     <article>
       <div v-if='loginFunction'>
         <LoginComponent
-          :login-correcto='true'
-          :usuarios='usuarios'
+          :users='users'
           @loginSuccess='loginSuccess($event)'
         />
-        <div class='text-center'>
-          <h1>No tengo cuenta</h1>
+        <!-- <div class='text-center'>-->
+        <div class='title'>No tengo cuenta</div>
 
-          <button type='button' class='btn btn-primary' @click='registrame()'>Registrarme</button>
-        </div>
+        <button type='submit' class='btn btn-primary' @click='registrame()'>
+          Registrarme
+        </button>
+        <!--</div>-->
       </div>
 
       <div v-if='registerFunction'>
         <RegisterComponent
           :register-correcto='true'
-          :usuarios='usuarios'
+          :users='users'
           @registerSuccess='registerSuccess($event)'
-          @volver='volverALogin()'
+          @back='returnToLogin()'
         />
       </div>
 
@@ -30,7 +33,7 @@
         <ListadoNegociosComponent
           :carrito='carrito'
           :negocios='negocios'
-          @modificarCarrito='modificarCarrito($event)'
+          @carritoUpdate='carritoUpdate($event)'
         />
       </div>
 
@@ -38,6 +41,9 @@
         <aside>
           <CarritoComponent :carrito='carrito' />
         </aside>
+        <button type='button' class='btn btn-primary' @click='reset()'>
+          Vaciar carrito
+        </button>
       </div>
     </article>
     <FooterComponent></FooterComponent>
@@ -67,112 +73,115 @@ export default {
     return {
       // Data que se usa solo a fines practicos, calculo que luego no se usaran
       // para mostrar solo la primer pantalla login.
+      // esto se manejara preguntando si el
+      // usuairo exuste en el array de users del componenet
       loginFunction: true,
       indexFunction: false,
       registerFunction: false,
 
       carrito: [],
       negocios: DatosBD.negocios,
-      usuarios: [{ email: 'virginia@ta.com', password: '123' }],
+      users: [{ email: 'virginia@ta.com', password: '123' }],
     };
   },
   computed: {
-    mostrarVolverEnNavBar() {
+    buttonReturnShowInHeader() {
       return this.loginFunction || this.registerFunction;
     },
   },
   methods: {
     loginSuccess() {
       // Enviar al index
-      console.log('hola!! bienvenido al index.');
+      // esto se manejara preguntando si el
+      // usuairo exuste en el array de users del componenet
+      // console.log('hola!! bienvenido al index.');
       this.loginFunction = false;
       this.registerFunction = false;
       this.indexFunction = true;
       // this.$alert('Bienvenido', 'Atención', 'success');
     },
     registrame() {
+      // esto se manejara preguntando si el
+      // usuairo exuste en el array de users del componenet
       this.loginFunction = false;
       this.registerFunction = true;
       this.indexFunction = false;
     },
-    registerSuccess(usuario) {
-      this.usuarios.push(usuario);
+    registerSuccess(user) {
+      // esto se manejara preguntando si el
+      // usuairo exuste en el array de users del componenet
+      this.users.push(user);
       // Enviar al index
-      console.log('hola!! register');
+      // console.log('hola!! register');
       this.loginFunction = false;
       this.registerFunction = false;
       this.indexFunction = true;
 
       // this.$alert('Su usuario se ha creado correctamente. Bienvenido', 'Atención', 'success');
     },
-    volverALogin() {
+    returnToLogin() {
+      // esto se manejara preguntando si el
+      // usuairo exuste en el array de users del componenet
       this.loginFunction = true;
       this.registerFunction = false;
       this.indexFunction = false;
     },
-    volverARegister() {
-      this.loginFunction = false;
-      this.registerFunction = true;
-      this.indexFunction = false;
-    },
-    volverAIndex() {
-      this.loginFunction = false;
-      this.registerFunction = false;
-      this.indexFunction = true;
-    },
-    modificarCarrito(objProdCant) {
-      if (objProdCant.modif === '+') {
-        this.aumentar(objProdCant);
+    carritoUpdate(objProdCant) {
+      if (objProdCant.updateFuntion === '+') {
+        this.increase(objProdCant);
       } else {
-        this.decrementar(objProdCant);
+        this.decrease(objProdCant);
       }
     },
-    aumentar(objEvento) {
+    increase(objEvento) {
       const obj = this.carrito.find((val) => val.id === objEvento.id);
       if (obj) {
-        if (obj.cantidad >= 0) {
-          // this.cantidad += 1;
-          // this.$emit('aumentar');
-          obj.cantidad += 1;
+        if (obj.cant >= 0) {
+          obj.cant += 1;
         }
       } else {
-        console.log('id - precio', objEvento.id, objEvento.precio);
+        console.log('id - price', objEvento.id, objEvento.price);
         this.carrito.push({
           id: objEvento.id,
-          nombre: objEvento.nombre,
-          precio: objEvento.precio,
-          cantidad: 1,
+          name: objEvento.name,
+          price: objEvento.price,
+          cant: 1,
         });
       }
     },
-    decrementar(objEvento) {
+    decrease(objEvento) {
       const obj = this.carrito.find((val) => val.id === objEvento.id);
       if (obj) {
-        if (obj.cantidad > 1) {
-          obj.cantidad -= 1;
+        if (obj.cant > 1) {
+          obj.cant -= 1;
         } else {
-          console.log('id - precio', objEvento.id, objEvento.precio);
-          const indexOfObject = this.carrito.findIndex((object) => object.id === objEvento.id);
+          console.log('id - price', objEvento.id, objEvento.price);
+          const indexOfObject = this.carrito.findIndex(
+            (object) => object.id === objEvento.id,
+          );
 
           this.carrito.splice(indexOfObject, 1);
         }
       }
+    },
+    reset() {
+      // no funciona bien pues en pantalla no reinicia los countComponents
+      this.carrito = [];
     },
   },
 };
 </script>
 
 <style>
-* {
+ *{
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.42857143;
   color: #959595;
   box-sizing: border-box;
 }
-
 body {
   display: flex;
   min-height: 100vh;
@@ -184,63 +193,37 @@ body {
   flex: 1;
 }
 #main > article {
-  /*margin: 1rem auto;
+  margin: 1rem auto;
   display: flex;
-  flex: 1;*/
-/* este etsa
+  flex: 1;
+  /* este etsa*/
   margin: 1rem auto;
   text-align: center;
-  */
 }
-#main > nav,
 #main > aside {
   flex: 0 0 20vw;
   background: beige;
 }
-#main > nav {
-  order: -1;
-}
-header,
-footer {
-  background: #f5a25d;
-  height: 20vh;
-  color: #389393;
-  text-align: center;
-}
-header,
-footer,
 article,
-nav,
 aside {
   padding: 1em;
   text-align: center;
 }
-.img {
-  padding: 2rem;
+.btn-primary {
+  color: #fff;
+  background-color: orange;
+  border-color: orange;
 }
 .title {
   text-align: center;
   font-weight: bold;
+  color: #504c4c;
   font-size: calc(1.3rem + 0.6vw);
 }
-.form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 20%;
-  min-width: 350px;
-  max-width: 80%;
-  /* background: rgba(19, 35, 47, 0.9);*/
-  border-radius: 5px;
-  padding: 20px;
-  box-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.3);
-}
+
 @media screen and (max-width: 575px) {
-  #main {
-    display: block;
-  }
-  .form {
-    max-width: 80%;
+  * {
+    max-width: 100%;
   }
 }
 </style>

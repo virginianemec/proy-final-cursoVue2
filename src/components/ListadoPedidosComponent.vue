@@ -2,13 +2,13 @@
   <div>
     <table class="table border-primary">
       <tbody>
-        <tr v-for="pedido in pedidos" :key="pedido.id">
+        <tr v-for="order in orders" :key="order.id">
           <RowPedido
-            :nombre="pedido.nombre"
-            :precio="pedido.total"
-            :usuario="pedido.usuario"
-            :fecha="pedido.fecha"
-            :detalle="pedido.detalle"
+            :name="order.name"
+            :price="order.total"
+            :user="order.user"
+            :date="order.date"
+            :details="order.details"
           ></RowPedido>
         </tr>
       </tbody>
@@ -28,12 +28,12 @@ export default {
     return {};
   },
   methods: {
-    atras() {
-      this.$emit('volver');
+    back() {
+      this.$emit('back');
     },
   },
   props: {
-    pedidos: [],
+    orders: [],
   },
 };
 </script>

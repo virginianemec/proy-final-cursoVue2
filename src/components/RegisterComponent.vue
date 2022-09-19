@@ -1,14 +1,14 @@
 <!-- eslint-disable max-len -->
 <!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
-  <div class='login'>
+  <div >
     <h3 class='title'>Registrarme</h3>
     <div class='form'>
-      <vue-form :state='formStateReg' @submit.prevent='onRegister()' name='registro'>
+      <vue-form :state='formStateReg' @submit.prevent='onRegister()' name='registry'>
         <validate class='fc' tag='label' :custom='{ customValidator: customValidator }'>
-          <label class='class-label' for='nombre'>Nombre*</label>
-          <input v-model='data.nombre' type='text' required name='nombre' />
-          <field-messages name='nombre'>
+          <label class='class-label' for='name'>Nombre*</label>
+          <input v-model='data.name' type='text' required name='name' />
+          <field-messages name='name'>
             <div class='class-label'>Ok.</div>
             <div class='class-label' slot='required'>Ingrese un nombre por favor.</div>
             <div class='class-label' slot='customValidator'>El nombre debe ser unico. Intente otro.</div>
@@ -50,14 +50,14 @@
           </field-messages>
         </validate>
 
-        <validate class='fc my-3' tag='label' :custom='{ edadValidator: edadValidator }'>
-          <label class='class-label' for='edad'>Edad*</label>
-          <input v-model='data.edad' required name='edad' type='number' />
-          <field-messages name='edad'>
+        <validate class='fc my-3' tag='label' :custom='{ ageValidator: ageValidator }'>
+          <label class='class-label' for='age'>Edad*</label>
+          <input v-model='data.age' required name='age' type='number' />
+          <field-messages name='age'>
             <div class='class-label'>Ok.</div>
             <div class='class-label' slot='required'>Indique su edad por favor.</div>
             <!-- <div slot='number'>Parece que no es una edad válida!</div> -->
-            <div class='class-label' slot='edadValidator'>Debe ser mayor de edad (Mas de 18 años).</div>
+            <div class='class-label' slot='ageValidator'>Debe ser mayor de edad (Mas de 18 años).</div>
           </field-messages>
         </validate>
         <div class='fc my-3'>
@@ -66,7 +66,7 @@
       </vue-form>
     </div>
     <div class='text-center'>
-      <button type='submit' class='btn btn-primary' @click='atras()'>Volver</button>
+      <button type='submit' class='btn btn-primary' @click='back()'>Volver</button>
     </div>
   </div>
 </template>
@@ -78,22 +78,22 @@ export default {
     return {
       formStateReg: {},
       data: {
-        nombre: '',
+        name: '',
         email: '',
         password: '',
         passwordRepeat: '',
         rol: '',
-        edad: '',
-        color_preferido: '',
+        age: '',
+        favouriteColor: '',
       },
     };
   },
   props: {
-    usuarios: [],
+    users: [],
   },
   methods: {
-    registerUser() {
-      if (!this.existeUsuario()) {
+    userRegister() {
+      if (!this.userExist()) {
         this.$alert('Su usuario se ha creado correctamente. Bienvenido', 'Atención', 'success');
         this.$emit('registerSuccess', this.data);
       } else {
@@ -111,20 +111,20 @@ export default {
         return;
       }
       // si son correctos continua.
-      this.registerUser();
+      this.userRegister();
     },
-    atras() {
-      this.$emit('volver');
+    back() {
+      this.$emit('back');
     },
-    existeUsuario() {
+    userExist() {
       // TODO: verificar contra mas datos
-      const obj = this.usuarios.find((val) => val.email === this.data.email);
+      const obj = this.users.find((val) => val.email === this.data.email);
       return !!obj;
     },
-    edadValidator() {
+    ageValidator() {
       let respuesta = false;
 
-      if (this.data.edad >= 18) {
+      if (this.data.age >= 18) {
         respuesta = true;
       }
       return respuesta;
@@ -132,7 +132,7 @@ export default {
     customValidator() {
       let respuesta = false;
 
-      if (!this.existeUsuarioNombre()) {
+      if (!this.userNameExists()) {
         respuesta = true;
       }
       return respuesta;
@@ -146,9 +146,9 @@ export default {
       }
       return respuesta;
     },
-    existeUsuarioNombre() {
+    userNameExists() {
       // TODO: verificar contra mas datos
-      const obj = this.usuarios.find((val) => val.nombre === this.data.nombre);
+      const obj = this.users.find((val) => val.name === this.data.name);
       return !!obj;
     },
   },
@@ -156,6 +156,18 @@ export default {
 </script>
 
 <style scoped>
+    .form {
+  /*display: flex;*/
+  /*flex-direction: column;
+  justify-content: center;
+  width: 35%;
+  min-width: 350px;
+  max-width: 80%;
+  /* background: rgba(19, 35, 47, 0.9);*/
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.3);
+}
 .btn-primary {
   color: #fff;
   background-color: orange;

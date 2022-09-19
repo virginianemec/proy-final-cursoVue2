@@ -1,9 +1,9 @@
 <template>
   <div class='coder--header'>
-    <h1>PediSalud</h1>
-    <h1>¡Nuestra web de comidas saludables!</h1>
-    <div v-if='this.mostrarVolverEnNavBar'>
-      <button type='button' class='btn btn-primary' @click='atras()'>Cerrar Sesión</button>
+    <div class="title">PediSalud</div>
+    <div class="title">¡Nuestra web de comidas saludables!</div>
+    <div v-if='buttonReturnShowInHeader'>
+      <button type='button' class='btn btn-primary' @click='back()'>Cerrar Sesión</button>
     </div>
   </div>
 </template>
@@ -11,11 +11,11 @@
 export default {
   name: 'HeaderComponent',
   props: {
-    mostrarVolverEnNavBar: Boolean,
+    buttonReturnShowInHeader: Boolean,
   },
   methods: {
-    atras() {
-      this.$emit('volver');
+    back() {
+      this.$emit('back');
     },
   },
 };
@@ -31,5 +31,13 @@ h1 {
   text-align: center;
   padding: 20px;
     color: #dd845a;
+}
+.title {
+  text-align: center;
+  padding: 20px;
+  font-weight: bold;
+  color: #504c4c;
+  color: #1a1919;
+    font-size: calc(1.5rem + 1.5vw);
 }
 </style>

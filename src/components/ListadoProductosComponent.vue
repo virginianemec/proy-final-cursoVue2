@@ -1,13 +1,13 @@
 <template>
   <div class='contenedor'>
-    <div v-for='producto in productos' :key='producto.id'>
+    <div v-for='product in products' :key='product.id'>
       <CardProducto
-        :id='producto.id'
-        :nombre='producto.nombre'
-        :precio='producto.precio'
-        :imagen='producto.imagen'
-        :cantidad='producto.cantidad'
-        @modificarCarrito='modificarCarrito($event)'
+        :id='product.id'
+        :name='product.name'
+        :price='product.price'
+        :image='product.image'
+        :cant='product.cant'
+        @carritoUpdate='carritoUpdate($event)'
       ></CardProducto>
     </div>
   </div>
@@ -22,17 +22,17 @@ export default {
     CardProducto,
   },
   props: {
-    productos: [],
+    products: [],
   },
   data() {
     return {};
   },
   methods: {
-    atras() {
-      this.$emit('volver');
+    back() {
+      this.$emit('back');
     },
-    modificarCarrito(obj) {
-      this.$emit('modificarCarrito', obj);
+    carritoUpdate(obj) {
+      this.$emit('carritoUpdate', obj);
     },
   },
 };

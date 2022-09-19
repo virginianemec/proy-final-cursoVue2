@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class='tabla--titulo'>{{ nombre }} - {{ categoria }}</div>
+    <div class='tabla--titulo'>{{ name }} - {{ category }}</div>
     <div class='tabla--datos'>Productos del negocio</div>
     <ListadoProductosComponent
-    :productos='productos' @modificarCarrito='modificarCarrito($event)' />
+    :products='this.products' @carritoUpdate='carritoUpdate($event)' />
     <br />
     <!--
     <div class='tabla--datos'> Pedidos del negocio</div>
@@ -29,22 +29,22 @@ export default {
     return {};
   },
   props: {
-    nombre: {
+    name: {
       type: String,
       default: 'Sin nombre',
     },
-    categoria: {
+    category: {
       type: String,
       default: 'Sin categoria',
     },
     carrito: [],
-    productos: [],
+    products: [],
     ofertas: [],
-    pedidos: [],
+    orders: [],
   },
   methods: {
-    modificarCarrito(obj) {
-      this.$emit('modificarCarrito', obj);
+    carritoUpdate(obj) {
+      this.$emit('carritoUpdate', obj);
     },
   },
   components: {
