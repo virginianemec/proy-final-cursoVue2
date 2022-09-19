@@ -1,63 +1,33 @@
 <template>
-  <div >
-    <p>Datos del negocio</p>
-    <p>{{ nombre }}</p>
-    <p>{{ categoria }}</p>
+  <div>
+    <div class='tabla--titulo'>{{ nombre }} - {{ categoria }}</div>
+    <div class='tabla--datos'>Productos del negocio</div>
+    <ListadoProductosComponent
+      :productos='productos'
+      @modificarCarrito='modificarCarrito($event)'
+    />
+    <br /><!--
+    <div class='tabla--datos'> Pedidos del negocio</div>
+    <ListadoPedidosComponent :pedidos='pedidos' />
     <br />
-    <p>Productos del negocio</p>
-    <ListadoProductosComponent />
     <br />
-    <p>Pedidos del negocio</p>
-    <ListadoPedidosComponent />
-    <br />
+    <div class='tabla--datos'> Ofertas</div>
+    <ListadoOfertasComponent :ofertas='ofertas' />
+    <br />-->
   </div>
 </template>
 
 <script>
+/*
 import ListadoPedidosComponent from './ListadoPedidosComponent.vue';
+import ListadoOfertasComponent from './ListadoOfertasComponent.vue';
+*/
 import ListadoProductosComponent from './ListadoProductosComponent.vue';
 
 export default {
   name: 'NegocioComponent',
   data() {
-    return {
-      /*
-      pedidos: [
-        {
-          id: 1,
-          obs: '',
-          detalle: [
-            {
-              prodId: 1,
-              prodName: 'Tostada',
-              prodPrecio: 270,
-            },
-          ],
-        },
-        {
-          id: 2,
-          obs: '',
-          detalle: [
-            {
-              prodId: 1,
-              prodName: 'Gaseosa',
-              prodPrecio: 180,
-            },
-          ],
-        },
-      ],
-      productos: [
-        {
-          id: 1,
-          nombre: 'Sand. Vegano',
-          imagen: './assets/imagen1.png',
-          // no se si necesito cantidad.
-          cantidad: 0,
-        },
-      ],
-      */
-      ofertas: [],
-    };
+    return {};
   },
   props: {
     nombre: {
@@ -68,9 +38,38 @@ export default {
       type: String,
       default: 'Sin categoria',
     },
+    carrito: [],
+    productos: [],
+    ofertas: [],
+    pedidos: [],
   },
-  components: { ListadoPedidosComponent, ListadoProductosComponent },
+  methods: {
+    modificarCarrito(obj) {
+      this.$emit('modificarCarrito', obj);
+    },
+  },
+  components: {
+    // ListadoPedidosComponent,
+    ListadoProductosComponent,
+    // ListadoOfertasComponent,
+  },
 };
 </script>
 
-<style></style>
+<style scoped>
+* {
+}
+.tabla--titulo {
+  background: yellowgreen;
+  height: 25px;
+  color: black;
+  text-align: center;
+  padding: 20px;
+}
+.tabla--datos {
+  background: yellowgreen;
+  height: 25px;
+  color: black;
+  font: bold;
+}
+</style>

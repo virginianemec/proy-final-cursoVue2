@@ -1,19 +1,41 @@
 <template>
   <div >
-    <table class="table border-primary">
+    <h1 class='text-center'>mis negocios</h1>
+
+    <div class='d-flex justify-content-beetween row'>
+      <div v-for='negocio in negocios' :key='negocio.id'>
+              <NegocioComponent
+                :id='negocio.id'
+                :nombre='negocio.nombre'
+                :categoria='negocio.categoria'
+                :carrito='carrito'
+                :productos='negocio.productos'
+                :ofertas='negocio.ofertas'
+                :pedidos='negocio.pedidos'
+                @modificarCarrito='modificarCarrito($event)'
+              ></NegocioComponent>
+      </div>
+
+    </div>
+
+        <!--
+    <table class='table '>
       <tbody>
-        <tr v-for="negocio in negocios" :key="negocio.id">
+        <tr v-for='negocio in negocios' :key='negocio.id'>
           <NegocioComponent
-            :id="negocio.id"
-            :nombre="negocio.nombre"
-            :categoria="negocio.categoria"
+            :id='negocio.id'
+            :nombre='negocio.nombre'
+            :categoria='negocio.categoria'
+            :carrito='carrito'
+            @modificarCarrito='modificarCarrito($event)'
           ></NegocioComponent>
         </tr>
       </tbody>
-    </table>
+    </table>-->
     <br/>
     <div>
-      <button type="button" class="btn btn-primary" @click="atras()">Volver</button>
+
+      <!--<button type='button' class='btn btn-primary' @click='atras()'>Volver</button> -->
     </div>
   </div>
 </template>
@@ -26,24 +48,22 @@ export default {
   components: {
     NegocioComponent,
   },
-  props: {},
+  props: {
+    carrito: [],
+    negocios: [],
+  },
   methods: {
+  /*
     atras() {
       this.$emit('volver');
+    },
+    */
+    modificarCarrito(obj) {
+      this.$emit('modificarCarrito', obj);
     },
   },
   data() {
     return {
-      negocios: [
-        {
-          id: 1,
-          nombre: 'Morena',
-          categoria: 'Food Natural',
-          pedidos: [],
-          productos: [],
-          ofertas: [],
-        },
-      ],
     };
   },
 };

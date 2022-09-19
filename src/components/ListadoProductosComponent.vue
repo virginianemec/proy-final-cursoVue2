@@ -1,27 +1,13 @@
 <template>
-  <div>
-    <!--
-    <table class='table border-primary'>
-      <tbody>
-        <tr v-for='producto in productos' :key='producto.id'>
-          <CardProducto
-            :nombre='producto.nombre'
-            :precio='producto.precio'
-            :imagen='producto.imagen'
-            :cantidad='producto.cantidad'
-          ></CardProducto>
-        </tr>
-      </tbody>
-    </table>
-  -->
-
-    <div v-for="producto in productos" :key="producto.id">
+  <div class='contenedor'>
+    <div v-for='producto in productos' :key='producto.id'>
       <CardProducto
-        :id="producto.id"
-        :nombre="producto.nombre"
-        :precio="producto.precio"
-        :imagen="producto.imagen"
-        :cantidad="producto.cantidad"
+        :id='producto.id'
+        :nombre='producto.nombre'
+        :precio='producto.precio'
+        :imagen='producto.imagen'
+        :cantidad='producto.cantidad'
+        @modificarCarrito='modificarCarrito($event)'
       ></CardProducto>
     </div>
   </div>
@@ -35,33 +21,29 @@ export default {
   components: {
     CardProducto,
   },
+  props: {
+    productos: [],
+  },
   data() {
-    return {
-      productos: [
-        {
-          id: 1,
-          nombre: 'Sand. Vegano',
-          imagen: 'logo.png',
-          precio: 150,
-          // no se si necesito cantidad.
-          cantidad: 0,
-        },
-        {
-          id: 2,
-          nombre: 'Ensalada',
-          imagen: 'logo.png',
-          precio: 150,
-          // no se si necesito cantidad.
-          cantidad: 0,
-        },
-      ],
-    };
+    return {};
   },
   methods: {
     atras() {
       this.$emit('volver');
     },
+    modificarCarrito(obj) {
+      this.$emit('modificarCarrito', obj);
+    },
   },
 };
 </script>
-<style scoped></style>
+<style scoped>
+.contenedor {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding-top: 20px;
+}
+</style>

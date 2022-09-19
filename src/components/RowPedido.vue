@@ -1,10 +1,10 @@
 <template>
   <div>
     <p>{{ usuario }}</p>
-    <p>{{ id }}</p>
+    <p>{{ nombre }}</p>
     <p>{{ fecha }}</p>
     <p>{{ total }}</p>
-    {{detalle}}
+          {{detalle}}
   </div>
 </template>
 

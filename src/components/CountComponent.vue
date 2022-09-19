@@ -1,8 +1,8 @@
 <template>
-  <div   style="display: flex; flex-direction: row;">
-    <button class="coder--button" @click="decrementar()">-</button>
+  <div style='display: flex; flex-direction: row'>
+    <button class='coder--button' @click='decrementar()'>-</button>
     <p>{{ cantidad }}</p>
-    <button class="coder--button" @click="aumentar()">+</button>
+    <button class='coder--button' @click='aumentar()'>+</button>
     <br />
     <p>{{ precioTotal }}</p>
   </div>
@@ -32,10 +32,16 @@ export default {
   },
   methods: {
     aumentar() {
-      if (this.cantidad >= 0) this.cantidad += 1;
+      if (this.cantidad >= 0) {
+        this.cantidad += 1;
+        this.$emit('modificarCarrito', { funcion: '+', total: this.precioTotal });
+      }
     },
     decrementar() {
-      if (this.cantidad > 0) this.cantidad -= 1;
+      if (this.cantidad > 0) {
+        this.cantidad -= 1;
+        this.$emit('modificarCarrito', { funcion: '-', total: this.precioTotal });
+      }
     },
     resetear() {
       this.cantidad = 0;

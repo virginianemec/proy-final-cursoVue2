@@ -1,17 +1,20 @@
 <template>
-  <footer>
-    <p>Hecho con ❤</p>
-  </footer>
+  <div class='footer-map'>
+    <h1>Gracias por visitarnos!</h1>
+    <h1>Hecho con ❤</h1>
+  </div>
 </template>
 
 <style scoped>
-* {
-  background-color: #393b43;
+.footer-map {
+  height: 20%;
+  width: 100%;
+  background-image: url("../assets/logo.png");
+  background-size: cover;
+  border-color: #ccc;
 }
-p {
+h1 {
   text-align: center;
-  color: #f8cf76;
-  font-size: 20px;
-  padding: 60px;
+  padding: 20px;
 }
 </style>

@@ -6,6 +6,8 @@
           <RowPedido
             :nombre="pedido.nombre"
             :precio="pedido.total"
+            :usuario="pedido.usuario"
+            :fecha="pedido.fecha"
             :detalle="pedido.detalle"
           ></RowPedido>
         </tr>
@@ -24,40 +26,15 @@ export default {
   },
   data() {
     return {
-      pedidos: [
-        {
-          id: 1,
-          usuario: '',
-          fecha: '',
-          total: 0,
-          detalle: [
-            {
-              id: 1,
-              nombre: 'Tostada',
-              precio: 270,
-            },
-          ],
-        },
-        {
-          id: 2,
-          usuario: '',
-          fecha: '',
-          total: 0,
-          detalle: [
-            {
-              id: 1,
-              nombre: 'Gaseosa',
-              precio: 180,
-            },
-          ],
-        },
-      ],
     };
   },
   methods: {
     atras() {
       this.$emit('volver');
     },
+  },
+  props: {
+    pedidos: [],
   },
 };
 </script>

@@ -1,17 +1,36 @@
 <template>
-  <header class="coder--header">
-    <h1>CoderHouse</h1>
-  </header>
+  <div class='coder--header'>
+    <h1>PediSalud</h1>
+    <h1>¡Nuestra web de comidas saludables!</h1>
+    <div v-if='this.mostrarVolverEnNavBar'>
+      <button type='button' class='btn btn-primary' @click='atras()'>
+        Cerrar Sesión
+      </button>
+    </div>
+  </div>
 </template>
-
+<script>
+export default {
+  name: 'HeaderComponent',
+  props: {
+    mostrarVolverEnNavBar: Boolean,
+  },
+  methods: {
+    atras() {
+      this.$emit('volver');
+    },
+  },
+};
+</script>
 <style scoped>
 .coder--header {
-  background-color: #393B43;
+  width: 100%;
+  background-image: url('../assets/logo.png');
+  background-size: cover;
+  background-position: center;
 }
 h1 {
-  color: #f8cf76;
-  font-size: 25px;
-  margin-left: 5px;
-  padding: 30px;
+  text-align: center;
+  padding: 20px;
 }
 </style>
