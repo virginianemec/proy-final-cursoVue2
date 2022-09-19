@@ -182,6 +182,7 @@ export default {
     margin-left: auto;*/
   /* box-sizing: border-box;*/
 }
+
 body {
   display: flex;
   min-height: 100vh;

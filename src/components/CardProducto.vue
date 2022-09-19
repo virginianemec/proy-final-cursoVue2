@@ -39,50 +39,6 @@
     </table>
   </div>
 </template>
-<!--
-    <table>
-      <tr>
-        <th colspan='2'>{{ nombre }}</th>
-      </tr>
-      <tr>
-        <td colspan='2'>
-          <img :src='getImagenSrc' alt='article image' />
-        </td>
-      </tr>
-      <tr>
-        <th>Código</th>
-        <td>: {{ id }}</td>
-      </tr>
-      <tr>
-        <th>Precio</th>
-        <td>: ${{ precio }}</td>
-      </tr>
-      <tr>
-        <td colspan='2'>
-          <CountComponent
-            :cantidad='cantidad'
-            :precio='precio'
-            @modificarCarrito='modificarCarrito($event)'
-          >
-          </CountComponent>
-        </td>
-      </tr>
-    </table>
-    -->
-
-<!--
-
-  <div class='margin border'>
-    <h3>{{ nombre }}</h3>
-    no <img alt='Mi app de Comidas!' src='getImagenSrc()' />
-    <div class='d-flex justify-content-between'>
-      <span>#{{ precio }}</span>
-      no <span>{{cantidad}}</span>
-      <CountComponent :cantidad='cantidad' :precio='precio'> </CountComponent>
-    </div>
-  </div>
-</template>
--->
 
 <script>
 import CountComponent from '@/components/CountComponent.vue';

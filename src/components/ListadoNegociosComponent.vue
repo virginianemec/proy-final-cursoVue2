@@ -15,28 +15,8 @@
                 @modificarCarrito='modificarCarrito($event)'
               ></NegocioComponent>
       </div>
-
     </div>
-
-        <!--
-    <table class='table '>
-      <tbody>
-        <tr v-for='negocio in negocios' :key='negocio.id'>
-          <NegocioComponent
-            :id='negocio.id'
-            :nombre='negocio.nombre'
-            :categoria='negocio.categoria'
-            :carrito='carrito'
-            @modificarCarrito='modificarCarrito($event)'
-          ></NegocioComponent>
-        </tr>
-      </tbody>
-    </table>-->
     <br/>
-    <div>
-
-      <!--<button type='button' class='btn btn-primary' @click='atras()'>Volver</button> -->
-    </div>
   </div>
 </template>
 
@@ -53,11 +33,6 @@ export default {
     negocios: [],
   },
   methods: {
-  /*
-    atras() {
-      this.$emit('volver');
-    },
-    */
     modificarCarrito(obj) {
       this.$emit('modificarCarrito', obj);
     },

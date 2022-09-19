@@ -36,15 +36,15 @@ export default {
         {
           id: 1,
           nombre: 'Sand. Vegano',
-          imagen: 'logo',
+          imagen: 'SandwichVegano',
           precio: 150,
           // no se si necesito cantidad.
           cantidad: 0,
         },
         {
           id: 2,
-          nombre: 'Ensalada',
-          imagen: 'logo',
+          nombre: 'Ensalada variadito de primavera!',
+          imagen: 'ensaladaVarPrimavera',
           precio: 150,
           // no se si necesito cantidad.
           cantidad: 0,
@@ -52,7 +52,7 @@ export default {
         {
           id: 7,
           nombre: 'Arroz yamani con acelgas salteadas x 500gr',
-          imagen: 'logo',
+          imagen: 'arrozYamaniAcelga',
           precio: 510,
           // no se si necesito cantidad.
           cantidad: 0,
@@ -60,8 +60,16 @@ export default {
         {
           id: 8,
           nombre: 'Canelones de acelga x 6',
-          imagen: 'logo',
+          imagen: 'CanelonesAcelga',
           precio: 1250,
+          // no se si necesito cantidad.
+          cantidad: 0,
+        },
+		{
+          id: 9,
+          nombre: 'Brusqueta Mediterranea x 2u',
+          imagen: 'brusquetaMediterranea',
+          precio: 1200,
           // no se si necesito cantidad.
           cantidad: 0,
         },
@@ -70,7 +78,7 @@ export default {
         {
           id: 1,
           nombre: 'Sand. Vegano',
-          imagen: 'logo',
+          imagen: 'SandwichVegano',
           precio: 150,
           cantidad: 2,
           descuento: 50,
@@ -88,33 +96,33 @@ export default {
       productos: [
         {
           id: 3,
-          nombre: 'Hamburguesa de Lenteja',
-          imagen: 'logo',
-          precio: 75,
+          nombre: 'Ensalada de Lenteja',
+          imagen: 'ensaladaLenteja',
+          precio: 250,
           // no se si necesito cantidad.
           cantidad: 0,
         },
         {
           id: 4,
-          nombre: 'Tostadas integrales',
-          imagen: 'logo',
-          precio: 85,
+          nombre: 'Tostadas de Frijoliltos x 1u',
+          imagen: 'TostadaFrijoles',
+          precio: 180,
           // no se si necesito cantidad.
           cantidad: 0,
         },
         {
           id: 5,
-          nombre: 'Tofu x 500gr',
-          imagen: 'logo',
-          precio: 260,
+          nombre: 'Tofu para la picada x 500gr',
+          imagen: 'picaditaTofu',
+          precio: 1600,
           // no se si necesito cantidad.
           cantidad: 0,
         },
         {
           id: 6,
           nombre: 'Empanadas de soja x 12 u',
-          imagen: 'logo',
-          precio: 1500,
+          imagen: 'empanadasSojaText',
+          precio: 1800,
           // no se si necesito cantidad.
           cantidad: 0,
         },

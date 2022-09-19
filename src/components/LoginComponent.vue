@@ -1,7 +1,3 @@
-<!-- eslint-disable no-unused-expressions -->
-type='button'Success
-<!-- eslint-disable no-unused-expressions -->
-<!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
   <div class='login'>
     <h3 class='title'>Bienvenido - Iniciar Sesión</h3>
@@ -39,10 +35,6 @@ export default {
   name: 'LoginComponent',
   props: {
     usuarios: [],
-    loginCorrecto: {
-      type: Boolean,
-      default: false,
-    },
   },
   data() {
     return {
@@ -54,30 +46,14 @@ export default {
       },
       // No se usa aun.
       checked: [],
-
-      /*
-      data: {
-        email: '',
-        password: '',
-      },
-      */
-      // Esta variable es para ver la logica. seguramente luego no la use.
-      // errorLogin: false,
     };
   },
   methods: {
-    /*
-   onSubmit() {
-      this.loginUser();
-    },
-    */
+
     loginUser() {
-      // eslint-disable-next-line no-unused-expressions
       if (this.existeUsuario()) {
-        // this.errorLogin = false;
         this.$emit('loginSuccess');
       } else {
-        // this.errorLogin = true;
         this.$alert('Los datos ingresados no corresponden a un usuario.', 'Atención', 'error');
       }
     },
@@ -97,7 +73,7 @@ export default {
     },
   },
 };
-// quiakits
+
 </script>
 <style scoped>
 .btn-primary {

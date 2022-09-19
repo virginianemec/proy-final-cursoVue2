@@ -1,6 +1,3 @@
-<!-- eslint-disable no-unused-expressions -->
-<!-- eslint-disable no-unused-expressions -->
-<!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
   <div class='login'>
     <h3 class='title'>Registrarme</h3>
@@ -68,12 +65,6 @@
           <button type='submit' class='btn btn btn-primary'>Registrarme</button>
         </div>
       </vue-form>
-
-      <!--
-      <button type='button' class='btn btn-primary' @click='registerUser()'>
-        Registrarme
-      </button>
-      -->
     </div>
     <div class='text-center'>
       <button type='button' class='btn btn-primary' @click='atras()'>Volver</button>
@@ -96,18 +87,6 @@ export default {
         edad: '',
         color_preferido: '',
       },
-      // usersLogued: [],
-      // checked: [],
-      // login: true,
-
-      /*
-      data: {
-        email: '',
-        password: '',
-        passwordRepeat: '',
-        registerError: false,
-      },
-      */
     };
   },
   props: {
@@ -115,12 +94,10 @@ export default {
   },
   methods: {
     registerUser() {
-      // eslint-disable-next-line no-unused-expressions
       if (!this.existeUsuario()) {
         this.$alert('Su usuario se ha creado correctamente. Bienvenido', 'Atención', 'success');
         this.$emit('registerSuccess', this.data);
       } else {
-        // this.registerError = true;
         this.$alert(
           'Ya existe un usuario con mismos datos. Intente nuevamente.',
           'Atención',
