@@ -3,7 +3,9 @@
     <div class='tabla--titulo'>{{ name }} - {{ category }}</div>
     <div class='tabla--datos'>Productos del negocio</div>
     <ListadoProductosComponent
-    :products='this.products' @carritoUpdate='carritoUpdate($event)' />
+      :products='this.products'
+      @carritoUpdate='carritoUpdate($event)'
+    />
     <br />
     <!--
     <div class='tabla--datos'> Pedidos del negocio</div>

@@ -11,7 +11,7 @@
         <tr>
           <td colspan='2'>
             <img :src='require(`@/assets/images/${image}.png`)' />
-            <!--<img :src='getImagenSrc' alt='article image' /> -->
+            <!--<img :src='getImagenSrc' alt='articcantidadle image' /> -->
           </td>
         </tr>
 

@@ -1,8 +1,8 @@
 <template>
-  <div class="row--botones">
-    <button class="coder--button" @click="decrease()">-</button>
+  <div class='row--botones'>
+    <button class='coder--button' @click='decrease()'>-</button>
     <p>{{ cant }}</p>
-    <button class="coder--button" @click="increase()">+</button>
+    <button class='coder--button' @click='increase()'>+</button>
     <br />
     <!--<p>{{ precioTotal }}</p> -->
   </div>
@@ -34,13 +34,19 @@ export default {
     increase() {
       if (this.cant >= 0) {
         this.cant += 1;
-        this.$emit('carritoUpdate', { updateFuntion: '+', total: this.totalPrice });
+        this.$emit('carritoUpdate', {
+          updateFuntion: '+',
+          total: this.totalPrice,
+        });
       }
     },
     decrease() {
       if (this.cant > 0) {
         this.cant -= 1;
-        this.$emit('carritoUpdate', { updateFuntion: '-', total: this.totalPrice });
+        this.$emit('carritoUpdate', {
+          updateFuntion: '-',
+          total: this.totalPrice,
+        });
       }
     },
     reset() {

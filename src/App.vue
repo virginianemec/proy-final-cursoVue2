@@ -7,10 +7,7 @@
     </HeaderComponent>
     <article>
       <div v-if='loginFunction'>
-        <LoginComponent
-          :users='users'
-          @loginSuccess='loginSuccess($event)'
-        />
+        <LoginComponent :users='users' @loginSuccess='loginSuccess($event)' />
         <!-- <div class='text-center'>-->
         <div class='title'>No tengo cuenta</div>
 
@@ -173,7 +170,7 @@ export default {
 </script>
 
 <style>
- *{
+* {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;

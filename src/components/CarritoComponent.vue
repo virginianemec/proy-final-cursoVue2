@@ -1,8 +1,8 @@
 <template>
-  <div class="div--container">
-    <h1 class="text-center">CARRITO!</h1>
-    <div class="row">
-      <table class="table border-primary">
+  <div class='div--container'>
+    <h1 class='text-center'>CARRITO!</h1>
+    <div class='row'>
+      <table class='table border-primary'>
         <thead>
           <tr>
             <th>Cant. producto</th>
@@ -10,8 +10,8 @@
             <th>Subtotal</th>
           </tr>
         </thead>
-        <tbody v-for="product in carrito" :key="product.id">
-          <ProductoObject :product="product" />
+        <tbody v-for='product in carrito' :key='product.id'>
+          <ProductoObject :product='product' />
         </tbody>
       </table>
       <div>Total: ${{ getTotal }}</div>

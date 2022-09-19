@@ -1,14 +1,14 @@
 <template>
   <div>
-    <table class="table border-primary">
+    <table class='table border-primary'>
       <tbody>
-        <tr v-for="order in orders" :key="order.id">
+        <tr v-for='order in orders' :key='order.id'>
           <RowPedido
-            :name="order.name"
-            :price="order.total"
-            :user="order.user"
-            :date="order.date"
-            :details="order.details"
+            :name='order.name'
+            :price='order.total'
+            :user='order.user'
+            :date='order.date'
+            :details='order.details'
           ></RowPedido>
         </tr>
       </tbody>

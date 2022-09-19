@@ -1,6 +1,6 @@
 <!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
-  <div >
+  <div>
     <h3 class='title'>Bienvenido - Iniciar Sesión</h3>
     <div class='form'>
       <vue-form :state='formState' @submit.prevent='onSubmit()'>
@@ -9,17 +9,30 @@
           <input v-model='data.email' required name='email' type='email' />
           <field-messages name='email'>
             <div>Ok.</div>
-            <div class='class-label' slot='required'>Indique el email por favor.</div>
-            <div class='class-label' slot='email'>Parece que no es un email válido!</div>
+            <div class='class-label' slot='required'>
+              Indique el email por favor.
+            </div>
+            <div class='class-label' slot='email'>
+              Parece que no es un email válido!
+            </div>
           </field-messages>
         </validate>
 
         <validate class='fc my-3' tag='label'>
-          <label class='class-label' for='password' type='password'>Password*</label>
-          <input v-model='data.password' required name='password' type='password' />
+          <label class='class-label' for='password' type='password'
+            >Password*</label
+          >
+          <input
+            v-model='data.password'
+            required
+            name='password'
+            type='password'
+          />
           <field-messages name='password'>
             <div>Ok.</div>
-            <div class='class-label' slot='required'>Indique password por favor.</div>
+            <div class='class-label' slot='required'>
+              Indique password por favor.
+            </div>
           </field-messages>
         </validate>
 
@@ -54,7 +67,11 @@ export default {
       if (this.existeUsuario()) {
         this.$emit('loginSuccess');
       } else {
-        this.$alert('Los datos ingresados no corresponden a un usuario.', 'Atención', 'error');
+        this.$alert(
+          'Los datos ingresados no corresponden a un usuario.',
+          'Atención',
+          'error',
+        );
       }
     },
     existeUsuario() {
@@ -75,7 +92,7 @@ export default {
 };
 </script>
 <style scoped>
-  .form {
+.form {
   /*display: flex;*/
   /*flex-direction: column;
   justify-content: center;
@@ -92,7 +109,7 @@ export default {
   background-color: orange;
   border-color: orange;
 }
-  .class-label {
-    color: #04000a;
-  }
+.class-label {
+  color: #04000a;
+}
 </style>

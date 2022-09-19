@@ -4,7 +4,7 @@
     <p>{{ name }}</p>
     <p>{{ date }}</p>
     <p>{{ total }}</p>
-    {{detail}}
+    {{ detail }}
   </div>
 </template>
 
