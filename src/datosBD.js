@@ -49,6 +49,22 @@ export default {
           // no se si necesito cantidad.
           cantidad: 0,
         },
+		{
+          id: 7,
+          nombre: 'Arroz yamani con acelgas salteadas x 500gr',
+          imagen: 'logo',
+          precio: 510,
+          // no se si necesito cantidad.
+          cantidad: 0,
+        },
+		{
+          id: 8,
+          nombre: 'Canelones de acelga x 6',
+          imagen: 'logo',
+          precio: 1250,
+          // no se si necesito cantidad.
+          cantidad: 0,
+        },
       ],
       ofertas: [
         {
@@ -69,7 +85,40 @@ export default {
       nombre: 'Sarteneando quinoa!',
       categoria: 'Food Natural',
       pedidos: [],
-      productos: [],
+       productos: [
+        {
+          id: 3,
+          nombre: 'Hamburguesa de Lenteja',
+          imagen: 'logo',
+          precio: 75,
+          // no se si necesito cantidad.
+          cantidad: 0,
+        },
+        {
+          id: 4,
+          nombre: 'Tostadas integrales',
+          imagen: 'logo',
+          precio: 85,
+          // no se si necesito cantidad.
+          cantidad: 0,
+        },
+		{
+          id: 5,
+          nombre: 'Tofu x 500gr',
+          imagen: 'logo',
+          precio: 260,
+          // no se si necesito cantidad.
+          cantidad: 0,
+        },
+		{
+          id: 6,
+          nombre: 'Empanadas de soja x 12 u',
+          imagen: 'logo',
+          precio: 1500,
+          // no se si necesito cantidad.
+          cantidad: 0,
+        },
+      ],
       ofertas: [],
     },
   ],
