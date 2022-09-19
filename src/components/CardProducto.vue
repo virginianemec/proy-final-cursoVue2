@@ -34,7 +34,9 @@
         </tr>
 
         <tr>
-          <td>{{ total }}</td>
+          <td>
+            <p>{{ total }}</p>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -113,5 +115,11 @@ table {
   transition: 0.3s;
   color: #2c3e50;
   text-align: center;
+}
+p {
+  margin: 12px 0px 0px 0px;
+  color: #fd9001;
+  text-align: center;
+  font-size: 18px;
 }
 </style>

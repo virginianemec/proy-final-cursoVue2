@@ -1,16 +1,16 @@
 <template>
-  <div style='display: flex; flex-direction: row'>
-    <button class='coder--button' @click='decrementar()'>-</button>
+  <div class="row--botones">
+    <button class="coder--button" @click="decrementar()">-</button>
     <p>{{ cantidad }}</p>
-    <button class='coder--button' @click='aumentar()'>+</button>
+    <button class="coder--button" @click="aumentar()">+</button>
     <br />
-    <p>{{ precioTotal }}</p>
+    <!--<p>{{ precioTotal }}</p> -->
   </div>
 </template>
 
 <script>
 export default {
-  name: 'CountComponent',
+  name: "CountComponent",
   props: {
     cantidadInicial: {
       type: Number,
@@ -34,13 +34,13 @@ export default {
     aumentar() {
       if (this.cantidad >= 0) {
         this.cantidad += 1;
-        this.$emit('modificarCarrito', { funcion: '+', total: this.precioTotal });
+        this.$emit("modificarCarrito", { funcion: "+", total: this.precioTotal });
       }
     },
     decrementar() {
       if (this.cantidad > 0) {
         this.cantidad -= 1;
-        this.$emit('modificarCarrito', { funcion: '-', total: this.precioTotal });
+        this.$emit("modificarCarrito", { funcion: "-", total: this.precioTotal });
       }
     },
     resetear() {
@@ -70,5 +70,12 @@ p {
   color: #fd9001;
   text-align: center;
   font-size: 18px;
+}
+.row--botones {
+  display: flex;
+  text-align: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
 }
 </style>
