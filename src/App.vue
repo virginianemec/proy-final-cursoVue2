@@ -9,7 +9,7 @@
         <LoginComponent
           :login-correcto='true'
           :usuarios='usuarios'
-          @loginSuccess='loginSuccess(event)'
+          @loginSuccess='loginSuccess($event)'
         />
         <div class='text-center'>
           <h1>No tengo cuenta</h1>

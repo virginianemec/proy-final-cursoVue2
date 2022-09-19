@@ -1,4 +1,5 @@
-<!-- eslint-disable no-unused-expressions -->type='button'Success
+<!-- eslint-disable no-unused-expressions -->
+type='button'Success
 <!-- eslint-disable no-unused-expressions -->
 <!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
@@ -17,13 +18,8 @@
         </validate>
 
         <validate class='fc my-3' tag='label'>
-          <label class='class-label' for='password' type="password">Password*</label>
-          <input
-            v-model='data.password'
-            required
-            name='password'
-            type='password'
-          />
+          <label class='class-label' for='password' type='password'>Password*</label>
+          <input v-model='data.password' required name='password' type='password' />
           <field-messages name='password'>
             <div>Ok.</div>
             <div class='class-label' slot='required'>Indique password por favor.</div>
@@ -31,7 +27,7 @@
         </validate>
 
         <div class='fc my-3'>
-          <button type='submit' class='btn btn-info'>Login</button>
+          <button type='submit' class='btn btn-primary'>Login</button>
         </div>
       </vue-form>
     </div>
@@ -70,7 +66,7 @@ export default {
     };
   },
   methods: {
-  /*
+    /*
    onSubmit() {
       this.loginUser();
     },
@@ -82,11 +78,7 @@ export default {
         this.$emit('loginSuccess');
       } else {
         // this.errorLogin = true;
-        this.$alert(
-          'Los datos ingresados no corresponden a un usuario.',
-          'Atención',
-          'error',
-        );
+        this.$alert('Los datos ingresados no corresponden a un usuario.', 'Atención', 'error');
       }
     },
     existeUsuario() {
@@ -107,5 +99,10 @@ export default {
 };
 // quiakits
 </script>
-<style >
+<style scoped>
+.btn-primary {
+  color: #fff;
+  background-color: orange;
+  border-color: orange;
+}
 </style>
