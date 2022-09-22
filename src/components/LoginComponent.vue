@@ -64,7 +64,7 @@ export default {
       checked: [],
 
       //url de mockapi de usuarios:
-      url = 
+      url = ""
     };
   },
   methods: {
