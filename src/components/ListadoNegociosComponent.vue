@@ -9,7 +9,7 @@
           :name='negocio.name'
           :category='negocio.category'
           :carrito='carrito'
-          :products='negocio.products'
+          :products='productosFromApi'
           :ofertas='negocio.ofertas'
           :orders='negocio.orders'
           @carritoUpdate='carritoUpdate($event)'
@@ -36,9 +36,26 @@ export default {
     carritoUpdate(obj) {
       this.$emit('carritoUpdate', obj);
     },
+    async getProductos() {
+      await this.axios
+        .get(this.url)
+        .then((response) => {
+          console.table(response.data);
+          this.productosFromApi = response.data;
+        })
+        .catch((err) => {
+          console.error(`${err}`);
+        });
+    },
+  },
+  create() {
+    this.getProductos();
   },
   data() {
-    return {};
+    return {
+      productosFromApi: [],
+      url: 'https://632ba1f21aabd8373989647d.mockapi.io/productos',
+    };
   },
 };
 </script>
