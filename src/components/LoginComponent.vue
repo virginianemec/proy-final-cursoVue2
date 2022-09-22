@@ -57,9 +57,14 @@ export default {
         name: '',
         email: '',
         password: '',
+        // agrego el rol del usaurio
+        rol: '',
       },
       // No se usa aun.
       checked: [],
+
+      //url de mockapi de usuarios:
+      url = 
     };
   },
   methods: {
@@ -70,11 +75,34 @@ export default {
         this.$alert(
           'Los datos ingresados no corresponden a un usuario.',
           'Atención',
-          'error',
+          'error'
         );
       }
     },
-    existeUsuario() {
+    async existeUsuario() {
+      // consultar en api el usuario con el name y password. GET.
+      // Retornando sus datos y rol, o vacio.
+      const dataToPost = {
+        name: this.data.name,
+        password: this.data.password,
+      };
+      const config = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: JSON.stringify(dataToPost),
+      };
+
+      await this.axios
+        .get(this.url, config)
+        .then((response) => {
+          console.table(response.data);
+          this.productosFromApi = response.data;
+        })
+        .catch((err) => {
+          console.error(`${err}`);
+        });
       // TODO: verificar contra mas datos
       const obj = this.users.find((val) => val.email === this.data.email);
       return !!obj;

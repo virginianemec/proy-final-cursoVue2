@@ -48,7 +48,7 @@ export default {
         });
     },
   },
-  create() {
+  created() {
     this.getProductos();
   },
   data() {

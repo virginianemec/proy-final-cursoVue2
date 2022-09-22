@@ -25,7 +25,15 @@
           @back='returnToLogin()'
         />
       </div>
-
+      <div v-if='indexFunction'>
+        <PageUserComponent
+          :carrito='carrito'
+          :negocios='negocios'
+          @carritoUpdate='carritoUpdate($event)'
+          @reset='reset()'
+          ></PageUserComponent>
+      </div>
+<!--
       <div v-if='indexFunction'>
         <ListadoNegociosComponent
           :carrito='carrito'
@@ -42,6 +50,7 @@
           Vaciar carrito
         </button>
       </div>
+    -->
     </article>
     <FooterComponent></FooterComponent>
   </div>
@@ -50,8 +59,8 @@
 <script>
 import LoginComponent from '@/components/LoginComponent.vue';
 import RegisterComponent from '@/components/RegisterComponent.vue';
-import ListadoNegociosComponent from '@/components/ListadoNegociosComponent.vue';
-import CarritoComponent from '@/components/CarritoComponent.vue';
+/*import ListadoNegociosComponent from '@/components/ListadoNegociosComponent.vue';
+import CarritoComponent from '@/components/CarritoComponent.vue';*/
 import HeaderComponent from './components/HeaderComponent.vue';
 import FooterComponent from './components/FooterComponent.vue';
 import DatosBD from './datosBD';
@@ -61,8 +70,8 @@ export default {
   components: {
     LoginComponent,
     RegisterComponent,
-    ListadoNegociosComponent,
-    CarritoComponent,
+    //ListadoNegociosComponent,
+    //CarritoComponent,
     HeaderComponent,
     FooterComponent,
   },
