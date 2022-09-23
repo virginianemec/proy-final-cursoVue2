@@ -53,6 +53,7 @@ export default {
 
       // url de mockapi de usuarios:
       url: 'https://632ba1f21aabd8373989647d.mockapi.io/users',
+      user: {},
     };
   },
   methods: {
@@ -60,7 +61,7 @@ export default {
       this.existeUsuario()
         .then((respLogin) => {
           if (respLogin) {
-            this.$emit('loginSuccess');
+            this.$emit('loginSuccess', this.user);
           } else {
             this.$alert('Los datos ingresados no corresponden a un usuario.', 'Atención', 'error');
           }
@@ -81,7 +82,7 @@ export default {
         // password: this.data.password,
       };
       const config = {
-        method: 'POST',
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -95,11 +96,12 @@ export default {
           this.usersFromApi = response.data;
           // TODO: verificar contra mas datos
           const obj = this.usersFromApi.find((val) => val.email === this.data.email);
-          if (obj) this.data = obj;
+          if (obj) this.user = obj;
           return !!obj;
         })
         .catch((err) => {
           console.error(`${err}`);
+          this.user = {};
           return false;
         });
     },

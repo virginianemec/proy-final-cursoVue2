@@ -26,6 +26,7 @@
           :negocios="negocios"
           @carritoUpdate="carritoUpdate($event)"
           @reset="reset()"
+          :user="user"
         ></PageUserComponent>
       </div>
       <!--
@@ -85,6 +86,7 @@ export default {
       carrito: [],
       negocios: DatosBD.negocios,
       users: [{ email: 'virginia@ta.com', password: '123' }],
+      user: {},
     };
   },
   computed: {
@@ -93,11 +95,12 @@ export default {
     },
   },
   methods: {
-    loginSuccess() {
+    loginSuccess(user) {
       // Enviar al index
       // esto se manejara preguntando si el
       // usuairo exuste en el array de users del componenet
       // console.log('hola!! bienvenido al index.');
+      this.user = user;
       this.loginFunction = false;
       this.registerFunction = false;
       this.indexFunction = true;
