@@ -1,39 +1,34 @@
 <template>
-  <div id='app'>
-    <HeaderComponent
-      :buttonReturnShowInHeader='!buttonReturnShowInHeader'
-      @back='returnToLogin()'
-    >
-    </HeaderComponent>
+  <div id="app">
+    <HeaderComponent :buttonReturnShowInHeader="!buttonReturnShowInHeader"
+     @back="returnToLogin()"></HeaderComponent>
     <article>
-      <div v-if='loginFunction'>
-        <LoginComponent :users='users' @loginSuccess='loginSuccess($event)' />
+      <div v-if="loginFunction">
+        <LoginComponent :users="users" @loginSuccess="loginSuccess($event)" />
         <!-- <div class='text-center'>-->
-        <div class='title'>No tengo cuenta</div>
+        <div class="title">No tengo cuenta</div>
 
-        <button type='submit' class='btn btn-primary' @click='registrame()'>
-          Registrarme
-        </button>
+        <button type="submit" class="btn btn-primary" @click="registrame()">Registrarme</button>
         <!--</div>-->
       </div>
 
-      <div v-if='registerFunction'>
+      <div v-if="registerFunction">
         <RegisterComponent
-          :register-correcto='true'
-          :users='users'
-          @registerSuccess='registerSuccess($event)'
-          @back='returnToLogin()'
+          :register-correcto="true"
+          :users="users"
+          @registerSuccess="registerSuccess($event)"
+          @back="returnToLogin()"
         />
       </div>
-      <div v-if='indexFunction'>
+      <div v-if="indexFunction">
         <PageUserComponent
-          :carrito='carrito'
-          :negocios='negocios'
-          @carritoUpdate='carritoUpdate($event)'
-          @reset='reset()'
-          ></PageUserComponent>
+          :carrito="carrito"
+          :negocios="negocios"
+          @carritoUpdate="carritoUpdate($event)"
+          @reset="reset()"
+        ></PageUserComponent>
       </div>
-<!--
+      <!--
       <div v-if='indexFunction'>
         <ListadoNegociosComponent
           :carrito='carrito'
@@ -50,7 +45,7 @@
           Vaciar carrito
         </button>
       </div>
-    -->
+      -->
     </article>
     <FooterComponent></FooterComponent>
   </div>
@@ -59,8 +54,9 @@
 <script>
 import LoginComponent from '@/components/LoginComponent.vue';
 import RegisterComponent from '@/components/RegisterComponent.vue';
-/*import ListadoNegociosComponent from '@/components/ListadoNegociosComponent.vue';
-import CarritoComponent from '@/components/CarritoComponent.vue';*/
+/* import ListadoNegociosComponent from '@/components/ListadoNegociosComponent.vue';
+import CarritoComponent from '@/components/CarritoComponent.vue'; */
+import PageUserComponent from './components/PageUserComponent.vue';
 import HeaderComponent from './components/HeaderComponent.vue';
 import FooterComponent from './components/FooterComponent.vue';
 import DatosBD from './datosBD';
@@ -70,8 +66,9 @@ export default {
   components: {
     LoginComponent,
     RegisterComponent,
-    //ListadoNegociosComponent,
-    //CarritoComponent,
+    // ListadoNegociosComponent,
+    // CarritoComponent,
+    PageUserComponent,
     HeaderComponent,
     FooterComponent,
   },
@@ -162,9 +159,7 @@ export default {
           obj.cant -= 1;
         } else {
           console.log('id - price', objEvento.id, objEvento.price);
-          const indexOfObject = this.carrito.findIndex(
-            (object) => object.id === objEvento.id,
-          );
+          const indexOfObject = this.carrito.findIndex((object) => object.id === objEvento.id);
 
           this.carrito.splice(indexOfObject, 1);
         }
@@ -182,7 +177,7 @@ export default {
 * {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.42857143;
   color: #959595;

@@ -1,43 +1,30 @@
 <!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
   <div>
-    <h3 class='title'>Bienvenido - Iniciar Sesión</h3>
-    <div class='form'>
-      <vue-form :state='formState' @submit.prevent='onSubmit()'>
-        <validate class='fc my-3' tag='label'>
-          <label class='class-label' for='email'>Email*</label>
-          <input v-model='data.email' required name='email' type='email' />
-          <field-messages name='email'>
+    <h3 class="title">Bienvenido - Iniciar Sesión</h3>
+    <div class="form">
+      <vue-form :state="formState" @submit.prevent="onSubmit()">
+        <validate class="fc my-3" tag="label">
+          <label class="class-label" for="email">Email*</label>
+          <input v-model="data.email" required name="email" type="email" />
+          <field-messages name="email">
             <div>Ok.</div>
-            <div class='class-label' slot='required'>
-              Indique el email por favor.
-            </div>
-            <div class='class-label' slot='email'>
-              Parece que no es un email válido!
-            </div>
+            <div class="class-label" slot="required">Indique el email por favor.</div>
+            <div class="class-label" slot="email">Parece que no es un email válido!</div>
           </field-messages>
         </validate>
 
-        <validate class='fc my-3' tag='label'>
-          <label class='class-label' for='password' type='password'
-            >Password*</label
-          >
-          <input
-            v-model='data.password'
-            required
-            name='password'
-            type='password'
-          />
-          <field-messages name='password'>
+        <validate class="fc my-3" tag="label">
+          <label class="class-label" for="password" type="password">Password*</label>
+          <input v-model="data.password" required name="password" type="password" />
+          <field-messages name="password">
             <div>Ok.</div>
-            <div class='class-label' slot='required'>
-              Indique password por favor.
-            </div>
+            <div class="class-label" slot="required">Indique password por favor.</div>
           </field-messages>
         </validate>
 
-        <div class='fc my-3'>
-          <button type='submit' class='btn btn-primary'>Login</button>
+        <div class="fc my-3">
+          <button type="submit" class="btn btn-primary">Login</button>
         </div>
       </vue-form>
     </div>
@@ -62,29 +49,36 @@ export default {
       },
       // No se usa aun.
       checked: [],
+      usersFromApi: [],
 
-      //url de mockapi de usuarios:
-      url = ""
+      // url de mockapi de usuarios:
+      url: 'https://632ba1f21aabd8373989647d.mockapi.io/users',
     };
   },
   methods: {
-    loginUser() {
-      if (this.existeUsuario()) {
-        this.$emit('loginSuccess');
-      } else {
-        this.$alert(
-          'Los datos ingresados no corresponden a un usuario.',
-          'Atención',
-          'error'
-        );
-      }
+    async loginUser() {
+      this.existeUsuario()
+        .then((respLogin) => {
+          if (respLogin) {
+            this.$emit('loginSuccess');
+          } else {
+            this.$alert('Los datos ingresados no corresponden a un usuario.', 'Atención', 'error');
+          }
+        })
+        .catch(() => {
+          this.$alert(
+            'Los datos no son correctos o hubo algun probema contra el servidor.',
+            'Atención',
+            'error',
+          );
+        });
     },
     async existeUsuario() {
       // consultar en api el usuario con el name y password. GET.
       // Retornando sus datos y rol, o vacio.
       const dataToPost = {
         name: this.data.name,
-        password: this.data.password,
+        // password: this.data.password,
       };
       const config = {
         method: 'POST',
@@ -98,23 +92,25 @@ export default {
         .get(this.url, config)
         .then((response) => {
           console.table(response.data);
-          this.productosFromApi = response.data;
+          this.usersFromApi = response.data;
+          // TODO: verificar contra mas datos
+          const obj = this.usersFromApi.find((val) => val.email === this.data.email);
+          if (obj) this.data = obj;
+          return !!obj;
         })
         .catch((err) => {
           console.error(`${err}`);
+          return false;
         });
-      // TODO: verificar contra mas datos
-      const obj = this.users.find((val) => val.email === this.data.email);
-      return !!obj;
     },
-    onSubmit() {
+    async onSubmit() {
       // valida el form
       if (this.formState.$invalid) {
         this.$alert('Los datos no son correctos. Verifiquelos por favor.');
         return;
       }
       // si el form e socrrecto sigue con la autenticacion.
-      this.loginUser();
+      await this.loginUser();
     },
   },
 };
