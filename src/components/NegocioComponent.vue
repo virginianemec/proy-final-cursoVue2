@@ -3,7 +3,7 @@
     <div class='tabla--titulo'>{{ name }} - {{ category }}</div>
     <div class='tabla--datos'>Productos del negocio</div>
     <ListadoProductosComponent
-      :products='this.products'
+      :products='this.productosFromApi'
       @carritoUpdate='carritoUpdate($event)'
     />
     <br />
@@ -27,9 +27,6 @@ import ListadoProductosComponent from './ListadoProductosComponent.vue';
 
 export default {
   name: 'NegocioComponent',
-  data() {
-    return {};
-  },
   props: {
     name: {
       type: String,
@@ -39,14 +36,49 @@ export default {
       type: String,
       default: 'Sin categoria',
     },
+    id: {
+      type: String,
+      default: '',
+    },
     carrito: [],
+    /* Products ya no es una props,
+    // lo busco desde el api para el id de este negocio.
     products: [],
+    */
     ofertas: [],
     orders: [],
+  },
+  data() {
+    return {
+      productosFromApi: [],
+      url: 'https://632ba1f21aabd8373989647d.mockapi.io/productos/',
+    };
+  },
+  created() {
+    this.getProductos();
   },
   methods: {
     carritoUpdate(obj) {
       this.$emit('carritoUpdate', obj);
+    },
+    async getProductos() {
+      /*
+      const dataToGet = {
+        negocio: this.id,
+      };
+      */
+      await this.axios
+        .get(`${this.url}?negocio=${this.id}`)
+        .then((response) => {
+          console.table(response.data);
+          // const respArray = response.data;
+          // this.productosFromApi.push(respArray.forEach((val) =>
+          // { val.negocio === parseInt(this.id); }));
+          this.productosFromApi = response.data;
+        })
+        .catch((err) => {
+          console.error(`${err}`);
+        });
     },
   },
   components: {

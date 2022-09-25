@@ -8,12 +8,14 @@
           :id='negocio.id'
           :name='negocio.name'
           :category='negocio.category'
-          :carrito='carrito'
-          :products='productosFromApi'
           :ofertas='negocio.ofertas'
           :orders='negocio.orders'
           @carritoUpdate='carritoUpdate($event)'
         ></NegocioComponent>
+        <!--  No mando el carrito
+                     :carrito='carrito'
+          Los produstos los busco en el negocio por el id.
+          :products='productosFromApi'-->
       </div>
     </div>
     <br />
@@ -36,25 +38,14 @@ export default {
     carritoUpdate(obj) {
       this.$emit('carritoUpdate', obj);
     },
-    async getProductos() {
-      await this.axios
-        .get(this.url)
-        .then((response) => {
-          console.table(response.data);
-          this.productosFromApi = response.data;
-        })
-        .catch((err) => {
-          console.error(`${err}`);
-        });
-    },
   },
   created() {
-    this.getProductos();
+    // this.getProductos();
   },
   data() {
     return {
-      productosFromApi: [],
-      url: 'https://632ba1f21aabd8373989647d.mockapi.io/productos',
+      // productosFromApi: [],
+      // url: 'https://632ba1f21aabd8373989647d.mockapi.io/productos',
     };
   },
 };

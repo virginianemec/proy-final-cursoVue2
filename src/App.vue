@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-    <HeaderComponent :buttonReturnShowInHeader="!buttonReturnShowInHeader"
+
+    <HeaderComponent :user="user"
      @back="returnToLogin()"></HeaderComponent>
+
+    <!--
     <article>
       <div v-if="loginFunction">
         <LoginComponent :users="users" @loginSuccess="loginSuccess($event)" />
-        <!-- <div class='text-center'>-->
-        <div class="title">No tengo cuenta</div>
-
+      <div class="title">No tengo cuenta</div>
         <button type="submit" class="btn btn-primary" @click="registrame()">Registrarme</button>
-        <!--</div>-->
       </div>
 
       <div v-if="registerFunction">
@@ -29,7 +29,8 @@
           :user="user"
         ></PageUserComponent>
       </div>
-      <!--
+    -->
+      <!-- esta parte fue al pagecomponent
       <div v-if='indexFunction'>
         <ListadoNegociosComponent
           :carrito='carrito'
@@ -46,18 +47,24 @@
           Vaciar carrito
         </button>
       </div>
-      -->
-    </article>
+  </article>
+-->
+<router-view>
+    </router-view>
     <FooterComponent></FooterComponent>
+
   </div>
 </template>
 
 <script>
-import LoginComponent from '@/components/LoginComponent.vue';
+/*
+mport LoginComponent from '@/components/LoginComponent.vue';
 import RegisterComponent from '@/components/RegisterComponent.vue';
+import PageUserComponent from './components/PageUserComponent.vue';
+*/
 /* import ListadoNegociosComponent from '@/components/ListadoNegociosComponent.vue';
 import CarritoComponent from '@/components/CarritoComponent.vue'; */
-import PageUserComponent from './components/PageUserComponent.vue';
+
 import HeaderComponent from './components/HeaderComponent.vue';
 import FooterComponent from './components/FooterComponent.vue';
 import DatosBD from './datosBD';
@@ -65,11 +72,11 @@ import DatosBD from './datosBD';
 export default {
   name: 'App',
   components: {
-    LoginComponent,
-    RegisterComponent,
+    // LoginComponent,
+    // RegisterComponent,
+    // PageUserComponent,
     // ListadoNegociosComponent,
     // CarritoComponent,
-    PageUserComponent,
     HeaderComponent,
     FooterComponent,
   },
@@ -86,7 +93,7 @@ export default {
       carrito: [],
       negocios: DatosBD.negocios,
       users: [{ email: 'virginia@ta.com', password: '123' }],
-      user: {},
+      user: null,
     };
   },
   computed: {
@@ -95,6 +102,7 @@ export default {
     },
   },
   methods: {
+    // lleve este metodo a loginview?
     loginSuccess(user) {
       // Enviar al index
       // esto se manejara preguntando si el

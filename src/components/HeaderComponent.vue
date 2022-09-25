@@ -2,10 +2,15 @@
   <div class='coder--header'>
     <div class='title'>PediSalud</div>
     <div class='title'>¡Nuestra web de comidas saludables!</div>
-    <div v-if='buttonReturnShowInHeader'>
+    <div v-if='user'>
       <button type='button' class='btn btn-primary' @click='back()'>
         Cerrar Sesión
       </button>
+
+     <div id="menu">
+      <router-link to="/">Login</router-link>
+    </div>
+
     </div>
   </div>
 </template>
@@ -13,7 +18,14 @@
 export default {
   name: 'HeaderComponent',
   props: {
+    user: null,
+    /*
+    no tenog mas esta variable ni el emit del app.
+    ahora con el usuario logueado defino el header.
+    y con el router el back.
+
     buttonReturnShowInHeader: Boolean,
+  */
   },
   methods: {
     back() {

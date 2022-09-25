@@ -10,7 +10,7 @@ export default {
           usuario: '',
           fecha: '',
           total: 0,
-          detalle: [
+          detail: [
             {
               id: 1,
               name: 'Tostada',
@@ -23,7 +23,7 @@ export default {
           usuario: '',
           fecha: '',
           total: 0,
-          detalle: [
+          detail: [
             {
               id: 1,
               name: 'Gaseosa',
@@ -81,10 +81,10 @@ export default {
           image: 'SandwichVegano',
           price: 150,
           cant: 2,
-          descuento: 50,
-          tipo: '%',
+          discount: 50,
+          typeDiscount: '%',
           // no se si necesito cant.price
-          descripcion: 'Llevando 2, pagas el 50% cada uno!!!',
+          description: 'Llevando 2, pagas el 50% cada uno!!!',
         },
       ],
     },
