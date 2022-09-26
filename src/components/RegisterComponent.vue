@@ -135,7 +135,7 @@ export default {
     };
   },
   props: {
-    users: [],
+    // users: [],
   },
   methods: {
     async userRegister() {

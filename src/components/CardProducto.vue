@@ -10,7 +10,7 @@
       <tbody>
         <tr>
           <td colspan='2'>
-            <img :src='require(`@/assets/images/${image}.png`)' />
+            <img :src='require(`@/assets/images/${getImage()}.png`)' />
             <!--<img :src='getImagenSrc' alt='articcantidadle image' /> -->
           </td>
         </tr>
@@ -92,6 +92,9 @@ export default {
         updateFuntion: objEvent.updateFuntion,
       });
     },
+    getImage() {
+      return (this.image === '') ? 'No-image-available' : this.image;
+    },
   },
 };
 </script>
@@ -106,7 +109,7 @@ export default {
   padding-top: 20px;
 }
 table {
-  width: 80%;
+  width: 90%;
   margin: auto;
   padding: 25px;
   margin-bottom: 20px;
@@ -116,10 +119,16 @@ table {
   color: #2c3e50;
   text-align: center;
 }
+tr {
+  width: 180px;
+}
 p {
   margin: 12px 0px 0px 0px;
   color: #fd9001;
   text-align: center;
   font-size: 18px;
+}
+img {
+  width: 150px;
 }
 </style>

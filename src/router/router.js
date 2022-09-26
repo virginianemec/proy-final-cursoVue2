@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
 import Index from '../views/Index.vue';
+import Productos from '../views/Productos.vue';
 
 Vue.use(VueRouter);
 
@@ -33,6 +34,10 @@ export default new VueRouter({
       name: 'Register',
       component: Register,
     },
-
+    {
+      path: '/productos',
+      name: 'Productos',
+      component: Productos,
+    },
   ],
 });

@@ -23,6 +23,12 @@ Vue.use(VueForm);
 
 // const router = new VueRouter({routes, mode: 'history'});
 
+Vue.filter('categoryFilter', (value) => {
+  console.log('en el main');
+  if (!value) return 'Sin categoria';
+  return value.toString().toUpperCase();
+});
+
 new Vue({
   router,
   render: (h) => h(App),

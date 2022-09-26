@@ -140,7 +140,7 @@ export default {
       this.registerFunction = false;
       this.indexFunction = false;
     },
-    carritoUpdate(objProdCant) {
+    /*carritoUpdate(objProdCant) {
       if (objProdCant.updateFuntion === '+') {
         this.increase(objProdCant);
       } else {
@@ -179,7 +179,7 @@ export default {
     reset() {
       // no funciona bien pues en pantalla no reinicia los countComponents
       this.carrito = [];
-    },
+    },*/
   },
 };
 </script>
