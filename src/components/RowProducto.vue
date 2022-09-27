@@ -3,7 +3,7 @@
     <td>
       <p>{{ this.displayProduct }}</p>
     </td>
-    <td>$ {{ this.product.price }}</td>
+    <td>$ {{ this.product.productPrice }}</td>
     <td>$ {{ this.total }}</td>
   </tr>
 </template>
@@ -16,10 +16,10 @@ export default {
   },
   computed: {
     displayProduct() {
-      return ` ${this.product.cant} ${this.product.name}`;
+      return ` ${this.product.cant} ${this.product.productName}`;
     },
     total() {
-      return this.product.cant * this.product.price;
+      return this.product.cant * this.product.productPrice;
     },
   },
 };

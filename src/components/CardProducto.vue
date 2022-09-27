@@ -86,9 +86,9 @@ export default {
     carritoUpdate(objEvent) {
       this.total = objEvent.total;
       this.$emit('carritoUpdate', {
-        id: this.id,
-        price: this.price,
-        name: this.name,
+        productId: this.id,
+        productPrice: this.price,
+        productName: this.name,
         updateFuntion: objEvent.updateFuntion,
       });
     },

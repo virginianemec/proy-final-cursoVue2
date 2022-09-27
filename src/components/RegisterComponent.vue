@@ -159,7 +159,7 @@ export default {
                   'success',
                 );
                 //  this.$emit('registerSuccess', this.user);
-                this.$router.push({ name: 'Index' });
+                this.$router.push({ name: 'Index', query: { user: this.user } });
               })
               .catch((err) => {
                 this.$alert(

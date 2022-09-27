@@ -29,7 +29,6 @@ export default {
   data() {
     return {
       URL: 'https://632ba1f21aabd8373989647d.mockapi.io/',
-      carrito: [],
       negocios: [],
     };
   },
@@ -38,6 +37,7 @@ export default {
     carrito: [],
     negocios: [],
     */
+    carrito: [],
     user: null,
   },
   methods: {
