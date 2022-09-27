@@ -15,13 +15,14 @@
       @carritoUpdate="carritoUpdate($event)"
       :carrito="carrito"
       @reset="reset()"
+      :comprar="comprar()"
       :user="user"
     ></PageUserComponent>
   </article>
 </template>
 
 <script>
-import PageUserComponent from "@/components/PageUserComponent.vue";
+import PageUserComponent from '@/components/PageUserComponent.vue';
 
 export default {
   components: {
@@ -34,16 +35,19 @@ export default {
     return {
       user: this.$route.query.user,
       carrito: [],
-      urlCarrito: "https://632ba1f21aabd8373989647d.mockapi.io/carritos/",
+      urlCarrito: 'https://632ba1f21aabd8373989647d.mockapi.io/carritos',
     };
   },
   methods: {
     async carritoGetFromUser() {
       await this.axios
-        .get(`${this.urlCarrito}?user=${this.userId}`)
+        .get(`${this.urlCarrito}/?user=${this.userId}`)
         .then((response) => {
           console.table(response.data);
-          this.carrito = response.data;
+          const arrayResp = response.data;
+          this.carrito = arrayResp.forEach(
+            (item) => item.estado = 'PEND',
+          );
         })
         .catch((error) => {
           this.carrito = [];
@@ -51,13 +55,14 @@ export default {
         });
     },
     carritoUpdate(objProdCant) {
-      if (objProdCant.updateFuntion === "+") {
+      if (objProdCant.updateFuntion === '+') {
         this.increase(objProdCant);
       } else {
         this.decrease(objProdCant);
       }
     },
     async increase(objEvento) {
+      console.log(objEvento);
       const obj = this.carrito.find(
         (val) => val.productId === objEvento.productId,
       );
@@ -65,8 +70,16 @@ export default {
         if (obj.cant >= 0) {
           obj.cant += 1;
         }
+        const idProducto = obj.id;
+        await this.axios.put(`${this.urlCarrito}/${idProducto}`, obj)
+        // await this.axios.put(this.urlCarrito, obj)
+          .then((response) => {
+            console.table(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       } else {
-        console.log("id - price", objEvento.productId, objEvento.productPrice);
         const productToCarrito = {
           productId: objEvento.productId,
           productName: objEvento.productName,
@@ -74,26 +87,20 @@ export default {
           user: this.userId,
           cant: 1,
           createdAt: new Date(),
+          estado: 'PEND',
         };
-        await this.axios.post(this.urlCarrito, productToCarrito)
-        .then((response) => {
-          console.table(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-        /*
-        this.carrito.push({
-          productId: objEvento.productId,
-          productName: objEvento.productName,
-          productPrice: objEvento.productPrice,
-          user: this.userId,
-          cant: 1,
-          createdAt: new Date(),
-        });
-        */
-       this.carritoGetFromUser();
+
+        console.log('id - price', objEvento.productId, objEvento.productPrice);
+
+        await this.axios.post(`${this.urlCarrito}/`, productToCarrito)
+          .then((response) => {
+            console.table(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
+      this.carritoGetFromUser();
     },
     async decrease(objEvento) {
       const obj = this.carrito.find(
@@ -102,66 +109,77 @@ export default {
       if (obj) {
         if (obj.cant > 1) {
           obj.cant -= 1;
-          // decrementar la cantidad y put del obj
-          const productToCarrito = {
-          productId: objEvento.productId,
-          productName: objEvento.productName,
-          productPrice: objEvento.productPrice,
-          user: this.userId,
-          cant: 1,
-          createdAt: new Date(),
-        };
-        await this.axios.put(this.urlCarrito, productToCarrito)
-        .then((response) => {
-          console.table(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-        //put 
+          const idProducto = obj.id;
+          await this.axios.put(`${this.urlCarrito}/${idProducto}`, obj)
+          // await this.axios.put(this.urlCarrito, obj)
+            .then((response) => {
+              console.table(response.data);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        // put
         } else {
           console.log(
-            "id - price",
+            'id - price',
             objEvento.productId,
             objEvento.productPrice,
           );
-          const indexOfObject = this.carrito.findIndex(
-            (object) => object.productId === objEvento.productId,
-          );
-          this.carrito.splice(indexOfObject, 1);
-
-          //delete del carrito
-          const productToCarrito = {
-          productId: objEvento.productId,
-          productName: objEvento.productName,
-          productPrice: objEvento.productPrice,
-          user: this.userId,
-          cant: 1,
-          createdAt: new Date(),
-        };
-        await this.axios.delete(this.urlCarrito, productToCarrito)
-        .then((response) => {
-          console.table(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-        //delete
+          const idProducto = obj.id;
+          await this.axios.delete(`${this.urlCarrito}/${idProducto}`)
+            .then((response) => {
+              console.table(response.data);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        // delete
         }
       }
+      this.carritoGetFromUser();
     },
-    reset() {
+    async reset() {
       // no funciona bien pues en pantalla no reinicia los countComponents
-      this.carrito = [];
+      // this.carrito = [];
+      this.carrito.forEach(
+        async (val) => {
+          const idCarrito = val.id;
+          await this.axios.delete(`${this.urlCarrito}/${idCarrito}`)
+            .then((response) => {
+              console.table(response.data);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        },
+      );
+      this.carritoGetFromUser();
+    },
+    async comprar() {
+      this.carrito.forEach(
+        async (val) => {
+          val.estado = 'PEDIDO';
+          console.log(val);
+          const idCarrito = val.id;
+          await this.axios.put(`${this.urlCarrito}/${idCarrito}`, val)
+            .then((response) => {
+              console.table(response.data);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        },
+      );
+      this.carritoGetFromUser();
     },
   },
   computed: {
     isAdmin() {
-      if (this.user) return this.user.rol === "admin";
+      if (this.user) return this.user.rol === 'admin';
       return false;
     },
     userId() {
-      if (this.user) return this.user.id;
+      if (this.user) return parseInt(this.user.id);
       return 1;
     },
   },

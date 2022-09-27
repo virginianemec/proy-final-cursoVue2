@@ -7,10 +7,11 @@
       @carritoUpdate='carritoUpdate($event)'
     />
     <br />
-    <!--
+
     <div class='tabla--datos'> Pedidos del negocio</div>
-    <ListadoPedidosComponent :pedidos='pedidos' />
+    <ListadoPedidosComponent />
     <br />
+  <!--
     <br />
     <div class='tabla--datos'> Ofertas</div>
     <ListadoOfertasComponent :ofertas='ofertas' />
@@ -19,8 +20,8 @@
 </template>
 
 <script>
-/*
 import ListadoPedidosComponent from './ListadoPedidosComponent.vue';
+/*
 import ListadoOfertasComponent from './ListadoOfertasComponent.vue';
 */
 import ListadoProductosComponent from './ListadoProductosComponent.vue';
@@ -40,49 +41,58 @@ export default {
       type: String,
       default: '',
     },
-    carrito: [],
     /* Products ya no es una props,
     // lo busco desde el api para el id de este negocio.
     products: [],
     */
     ofertas: [],
-    orders: [],
   },
   data() {
     return {
       productosFromApi: [],
       url: 'https://632ba1f21aabd8373989647d.mockapi.io/productos/',
+      urlOrders: 'https://632ba1f21aabd8373989647d.mockapi.io/carritos/',
+      orders: [],
     };
   },
   created() {
-    this.getProductos();
+    this.getProducts();
+    this.getOrders();
   },
   methods: {
     carritoUpdate(obj) {
       this.$emit('carritoUpdate', obj);
     },
-    async getProductos() {
-      /*
-      const dataToGet = {
-        negocio: this.id,
-      };
-      */
+    async getProducts() {
       await this.axios
         .get(`${this.url}?negocio=${this.id}`)
         .then((response) => {
           console.table(response.data);
-          // const respArray = response.data;
-          // this.productosFromApi.push(respArray.forEach((val) =>
-          // { val.negocio === parseInt(this.id); }));
           this.productosFromApi = response.data;
         })
         .catch((err) => {
           console.error(`${err}`);
         });
     },
+    async getOrders() {
+      // por ahora: son los items de los carritos de los usuarios qeu tienen el estado = PEDIDO.
+      await this.axios
+        .get(`${this.urlOrders}?negocio=${this.id}`)
+        .then((response) => {
+          console.table(response.data);
+          // const respArray = response.data;
+          // this.orders.push(respArray.forEach((val) =>
+          // { val.negocio === parseInt(this.id); }));
+          this.orders = response.data;
+        })
+        .catch((err) => {
+          console.log('error', err);
+        })
+        .finally(() => console.log('Peticion terminada'));
+    },
   },
   components: {
-    // ListadoPedidosComponent,
+    ListadoPedidosComponent,
     ListadoProductosComponent,
     // ListadoOfertasComponent,
   },
