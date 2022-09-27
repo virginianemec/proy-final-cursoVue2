@@ -10,7 +10,7 @@
             <th>Subtotal</th>
           </tr>
         </thead>
-        <tbody v-for='product in carrito' :key='product.productId'>
+        <tbody v-for='(product,index) in carrito' :key="'product'+index">
           <ProductoObject :product='product' />
         </tbody>
       </table>

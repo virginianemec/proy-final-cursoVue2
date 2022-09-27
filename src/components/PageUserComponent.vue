@@ -50,6 +50,9 @@ export default {
     reset() {
       this.$emit('reset');
     },
+    comprar() {
+      this.$emit('comprar');
+    },
     async cargarProps() {
       await this.axios
         .get(this.URL)

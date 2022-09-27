@@ -15,7 +15,7 @@
       @carritoUpdate="carritoUpdate($event)"
       :carrito="carrito"
       @reset="reset()"
-      :comprar="comprar()"
+      @comprar="comprar()"
       :user="user"
     ></PageUserComponent>
   </article>
@@ -40,14 +40,14 @@ export default {
   },
   methods: {
     async carritoGetFromUser() {
-      await this.axios
+      this.axios
         .get(`${this.urlCarrito}/?user=${this.userId}`)
         .then((response) => {
           console.table(response.data);
-          const arrayResp = response.data;
-          this.carrito = arrayResp.forEach(
-            (item) => item.estado = 'PEND',
-          );
+          this.carrito = response.data;
+          // this.carrito.push(response.data.forEach((item) => { item.estado === 'PEND'; }));
+
+          // this.carrito.push(response.data.filter((item) => item.estado === 'PEND'));
         })
         .catch((error) => {
           this.carrito = [];
