@@ -1,13 +1,13 @@
 <template>
-  <div class='contenedor'>
-    <div v-for='product in products' :key='product.id'>
+  <div class="contenedor">
+    <div v-for="product in products" :key="product.id">
       <CardProducto
-        :id='product.id'
-        :name='product.name'
-        :price='product.price'
-        :image='product.image'
-        :cant='product.cant'
-        @carritoUpdate='carritoUpdate($event)'
+        :id="product.id"
+        :name="product.name"
+        :price="product.price"
+        :image="product.image"
+        :cant="product.cant"
+        @carritoUpdate="carritoUpdate($event)"
       ></CardProducto>
     </div>
   </div>

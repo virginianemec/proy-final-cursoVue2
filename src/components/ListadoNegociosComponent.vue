@@ -2,20 +2,16 @@
   <div>
     <h1>Mis negocios</h1>
 
-    <div class='d-flex justify-content-beetween row'>
-      <div v-for='negocio in negocios' :key='negocio.id'>
+    <div class="d-flex justify-content-beetween row">
+      <div v-for="negocio in negocios" :key="negocio.id">
         <NegocioComponent
-          :id='negocio.id'
-          :name='negocio.name'
-          :category='negocio.category'
-          :ofertas='negocio.ofertas'
-          :orders='negocio.orders'
-          @carritoUpdate='carritoUpdate($event)'
+          :id="negocio.id"
+          :name="negocio.name"
+          :category="negocio.category"
+          :ofertas="negocio.ofertas"
+          :orders="negocio.orders"
+          @carritoUpdate="carritoUpdate($event)"
         ></NegocioComponent>
-        <!--  No mando el carrito
-                     :carrito='carrito'
-          Los produstos los busco en el negocio por el id.
-          :products='productosFromApi'-->
       </div>
     </div>
     <br />

@@ -1,6 +1,7 @@
 <template>
   <div>
-    <ProductFormComponent @itemAdd="itemAddFromForm($event)" :products="products"></ProductFormComponent>
+    <ProductFormComponent @itemAdd="itemAddFromForm($event)"
+    :products="products"></ProductFormComponent>
     <ProductsTableComponente :products="products"></ProductsTableComponente>
   </div>
 </template>
@@ -25,7 +26,6 @@ export default {
       const id = this.products.length + 1;
       objProduct.id = id;
       objProduct.id_producto = id;
-      // this.products.push(objProduct);
       await this.productSave(objProduct)
         .then((resp) => {
           console.log(resp);

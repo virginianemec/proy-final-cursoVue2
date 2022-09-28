@@ -1,70 +1,12 @@
 <template>
   <div id="app">
-
-    <HeaderComponent :user="user"
-     @back="returnToLogin()"></HeaderComponent>
-
-    <!--
-    <article>
-      <div v-if="loginFunction">
-        <LoginComponent :users="users" @loginSuccess="loginSuccess($event)" />
-      <div class="title">No tengo cuenta</div>
-        <button type="submit" class="btn btn-primary" @click="registrame()">Registrarme</button>
-      </div>
-
-      <div v-if="registerFunction">
-        <RegisterComponent
-          :register-correcto="true"
-          :users="users"
-          @registerSuccess="registerSuccess($event)"
-          @back="returnToLogin()"
-        />
-      </div>
-      <div v-if="indexFunction">
-        <PageUserComponent
-          :carrito="carrito"
-          :negocios="negocios"
-          @carritoUpdate="carritoUpdate($event)"
-          @reset="reset()"
-          :user="user"
-        ></PageUserComponent>
-      </div>
-    -->
-      <!-- esta parte fue al pagecomponent
-      <div v-if='indexFunction'>
-        <ListadoNegociosComponent
-          :carrito='carrito'
-          :negocios='negocios'
-          @carritoUpdate='carritoUpdate($event)'
-        />
-      </div>
-
-      <div v-if='indexFunction'>
-        <aside>
-          <CarritoComponent :carrito='carrito' />
-        </aside>
-        <button type='button' class='btn btn-primary' @click='reset()'>
-          Vaciar carrito
-        </button>
-      </div>
-  </article>
--->
-<router-view>
-    </router-view>
+    <HeaderComponent :user="user" @back="returnToLogin()"></HeaderComponent>
+    <router-view></router-view>
     <FooterComponent></FooterComponent>
-
   </div>
 </template>
 
 <script>
-/*
-mport LoginComponent from '@/components/LoginComponent.vue';
-import RegisterComponent from '@/components/RegisterComponent.vue';
-import PageUserComponent from './components/PageUserComponent.vue';
-*/
-/* import ListadoNegociosComponent from '@/components/ListadoNegociosComponent.vue';
-import CarritoComponent from '@/components/CarritoComponent.vue'; */
-
 import HeaderComponent from './components/HeaderComponent.vue';
 import FooterComponent from './components/FooterComponent.vue';
 import DatosBD from './datosBD';
@@ -72,11 +14,6 @@ import DatosBD from './datosBD';
 export default {
   name: 'App',
   components: {
-    // LoginComponent,
-    // RegisterComponent,
-    // PageUserComponent,
-    // ListadoNegociosComponent,
-    // CarritoComponent,
     HeaderComponent,
     FooterComponent,
   },
@@ -140,46 +77,6 @@ export default {
       this.registerFunction = false;
       this.indexFunction = false;
     },
-    /*carritoUpdate(objProdCant) {
-      if (objProdCant.updateFuntion === '+') {
-        this.increase(objProdCant);
-      } else {
-        this.decrease(objProdCant);
-      }
-    },
-    increase(objEvento) {
-      const obj = this.carrito.find((val) => val.id === objEvento.id);
-      if (obj) {
-        if (obj.cant >= 0) {
-          obj.cant += 1;
-        }
-      } else {
-        console.log('id - price', objEvento.id, objEvento.price);
-        this.carrito.push({
-          id: objEvento.id,
-          name: objEvento.name,
-          price: objEvento.price,
-          cant: 1,
-        });
-      }
-    },
-    decrease(objEvento) {
-      const obj = this.carrito.find((val) => val.id === objEvento.id);
-      if (obj) {
-        if (obj.cant > 1) {
-          obj.cant -= 1;
-        } else {
-          console.log('id - price', objEvento.id, objEvento.price);
-          const indexOfObject = this.carrito.findIndex((object) => object.id === objEvento.id);
-
-          this.carrito.splice(indexOfObject, 1);
-        }
-      }
-    },
-    reset() {
-      // no funciona bien pues en pantalla no reinicia los countComponents
-      this.carrito = [];
-    },*/
   },
 };
 </script>

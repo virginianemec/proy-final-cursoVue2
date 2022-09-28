@@ -1,27 +1,29 @@
 <template>
   <div>
-    <div class='tabla--titulo'>{{ name }} - {{ category }}</div>
-    <div class='tabla--datos'>Productos del negocio</div>
+    <div class="tabla--titulo">{{ name }} - {{ category }}</div>
+    <div class="tabla--datos">Productos del negocio</div>
     <ListadoProductosComponent
-      :products='this.productosFromApi'
-      @carritoUpdate='carritoUpdate($event)'
+      :products="this.productosFromApi"
+      @carritoUpdate="carritoUpdate($event)"
     />
     <br />
+    <!--  Pendiente proxima entrega  -->
+    <!--
+        <div class='tabla--datos'> Pedidos del negocio</div>
+        <ListadoPedidosComponent />
+        <br />
 
-    <div class='tabla--datos'> Pedidos del negocio</div>
-    <ListadoPedidosComponent />
-    <br />
-  <!--
-    <br />
-    <div class='tabla--datos'> Ofertas</div>
-    <ListadoOfertasComponent :ofertas='ofertas' />
-    <br />-->
+        <br />
+        <div class='tabla--datos'> Ofertas</div>
+        <ListadoOfertasComponent :ofertas='ofertas' />
+        <br />
+    -->
   </div>
 </template>
 
 <script>
-import ListadoPedidosComponent from './ListadoPedidosComponent.vue';
 /*
+import ListadoPedidosComponent from './ListadoPedidosComponent.vue';
 import ListadoOfertasComponent from './ListadoOfertasComponent.vue';
 */
 import ListadoProductosComponent from './ListadoProductosComponent.vue';
@@ -51,13 +53,13 @@ export default {
     return {
       productosFromApi: [],
       url: 'https://632ba1f21aabd8373989647d.mockapi.io/productos/',
-      urlOrders: 'https://632ba1f21aabd8373989647d.mockapi.io/carritos/',
+      // urlOrders: 'https://632ba1f21aabd8373989647d.mockapi.io/carritos/',
       orders: [],
     };
   },
   created() {
     this.getProducts();
-    this.getOrders();
+    // this.getOrders();
   },
   methods: {
     carritoUpdate(obj) {
@@ -75,7 +77,7 @@ export default {
         });
     },
     async getOrders() {
-      // por ahora: son los items de los carritos de los usuarios qeu tienen el estado = PEDIDO.
+      // por ahora: son los items de los carritos de los usuarios que tienen el estado = PEDIDO.
       await this.axios
         .get(`${this.urlOrders}?negocio=${this.id}`)
         .then((response) => {
@@ -92,8 +94,8 @@ export default {
     },
   },
   components: {
-    ListadoPedidosComponent,
     ListadoProductosComponent,
+    // ListadoPedidosComponent,
     // ListadoOfertasComponent,
   },
 };
@@ -108,6 +110,7 @@ export default {
   color: black;
   text-align: center;
   padding: 20px;
+  font-size: large;
 }
 .tabla--datos {
   background: yellowgreen;

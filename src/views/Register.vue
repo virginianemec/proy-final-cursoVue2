@@ -1,9 +1,6 @@
 <template>
   <div>
-    <RegisterComponent
-      @registerSuccess='registerSuccess($event)'
-      @back='returnToLogin()'
-    />
+    <RegisterComponent @registerSuccess="registerSuccess($event)" @back="returnToLogin()" />
   </div>
 </template>
 

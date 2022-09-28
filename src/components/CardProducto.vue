@@ -1,16 +1,16 @@
 <!-- eslint-disable vuejs-accessibility/alt-text -->
 <template>
-  <div class='div--container'>
-    <table class='table'>
+  <div class="div--container">
+    <table class="table">
       <thead>
         <tr>
-          <th colspan='2'>{{ name }}</th>
+          <th colspan="2">{{ name }}</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td colspan='2'>
-            <img :src='require(`@/assets/images/${getImage()}.png`)' />
+          <td colspan="2">
+            <img :src="require(`@/assets/images/${getImage()}.png`)" />
             <!--<img :src='getImagenSrc' alt='articcantidadle image' /> -->
           </td>
         </tr>
@@ -24,12 +24,9 @@
           <td>: ${{ price }}</td>
         </tr>
         <tr>
-          <td colspan='2'>
-            <CountComponent
-              :cant='cant'
-              :price='price'
-              @carritoUpdate='carritoUpdate($event)'
-            ></CountComponent>
+          <td colspan="2">
+            <CountComponent :cant="cant" :price="price"
+            @carritoUpdate="carritoUpdate($event)"></CountComponent>
           </td>
         </tr>
 
@@ -93,7 +90,7 @@ export default {
       });
     },
     getImage() {
-      return (this.image === '') ? 'No-image-available' : this.image;
+      return this.image === '' ? 'No-image-available' : this.image;
     },
   },
 };

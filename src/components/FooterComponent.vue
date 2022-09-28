@@ -17,6 +17,6 @@
 h1 {
   text-align: center;
   padding: 20px;
-  color: #dd845a;
+  color: #131212;
 }
 </style>

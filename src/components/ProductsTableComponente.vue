@@ -1,10 +1,10 @@
 <!-- eslint-disable vue/no-multiple-template-root -->
 <template>
-  <div class='div--container'>
-    <div class='titleTable'>LISTADO DE PRODUCTOS</div>
-    <table class='table'>
+  <div class="div--container">
+    <div class="titleTable">LISTADO DE PRODUCTOS</div>
+    <table class="table">
       <thead>
-        <tr class='table--tr'>
+        <tr class="table--tr">
           <th>ID</th>
           <th>NOMBRE</th>
           <th>PRECIO</th>
@@ -12,13 +12,13 @@
           <th>A LA VENTA?</th>
         </tr>
       </thead>
-      <tbody v-for='(product, i) in products' :key='i'>
+      <tbody v-for="(product, i) in products" :key="i">
         <tr>
-          <td class='table--td'>{{ product.id }}</td>
-          <td class='table--td'>{{ product.name | nameFilter(product.name) }}</td>
-          <td class='table--td'>{{ product.price | priceFilter(product.price) }}</td>
-          <td class='table--td'>{{ product.category | categoryFilter }}</td>
-          <td class='table--td'>{{ product.activo | isActivo(product.activo) }}</td>
+          <td class="table--td">{{ product.id }}</td>
+          <td class="table--td">{{ product.name | nameFilter(product.name) }}</td>
+          <td class="table--td">{{ product.price | priceFilter(product.price) }}</td>
+          <td class="table--td">{{ product.category | categoryFilter }}</td>
+          <td class="table--td">{{ product.activo | isActivo(product.activo) }}</td>
         </tr>
       </tbody>
     </table>

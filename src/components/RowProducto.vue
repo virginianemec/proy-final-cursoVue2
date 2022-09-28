@@ -21,6 +21,9 @@ export default {
     total() {
       return this.product.cant * this.product.productPrice;
     },
+    isPend() {
+      return this.estado === 'PEND';
+    },
   },
 };
 </script>

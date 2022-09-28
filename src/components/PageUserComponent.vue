@@ -1,21 +1,20 @@
 <!-- eslint-disable indent -->
 <template>
   <div>
-    <ListadoNegociosComponent
-      :negocios='negocios'
-      @carritoUpdate='carritoUpdate($event)'
-    />
+    <ListadoNegociosComponent :negocios="negocios" @carritoUpdate="carritoUpdate($event)" />
 
     <aside>
-      <CarritoComponent :carrito='carrito' />
+      <CarritoComponent :carrito="carrito" />
     </aside>
-    <button type='button' class='btn btn-primary' @click='reset()'>
-      Vaciar carrito
-    </button>
+    <button
+      :style="isThereAny"
+      type="button"
+      class="btn btn-primary"
+      @click="reset()"
+    >Vaciar carrito</button>
 
-     <button type='button' class='btn btn-primary' @click='comprar()'>
-      Comprar
-    </button>
+    <button :style="isThereAny" type="button" class="btn btn-primary"
+    @click="comprar()">Comprar</button>
   </div>
 </template>
 
@@ -56,7 +55,9 @@ export default {
     async cargarProps() {
       await this.axios
         .get(this.URL)
-        .then((response) => { this.negocios = response.data; })
+        .then((response) => {
+          this.negocios = response.data;
+        })
         .catch((err) => {
           console.log('error', err);
         })
@@ -65,6 +66,13 @@ export default {
   },
   created() {
     this.cargarProps();
+  },
+  computed: {
+    isThereAny() {
+      // checks whether an element is even
+      const isPend = (item) => item.estado === 'PEND';
+      return this.carrito.some(isPend) ? 'display' : 'display:none';
+    },
   },
 };
 </script>

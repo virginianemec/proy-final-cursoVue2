@@ -1,16 +1,17 @@
 <template>
   <article>
-    <nav>
-      <router-link :to="{ name: 'Login' }">Cerrar Session</router-link>
-      <br />
-      <router-link :to="{ name: 'Login' }"
-        >Ver Carrito - no anda aun</router-link
-      >
-      <br />
+    <div class="div--container">
+      <router-link :to="{ name: 'Login' }">Cerrar Session</router-link>||
       <div v-if="isAdmin">
         <router-link :to="{ name: 'Productos' }">ABM Productos</router-link>
       </div>
-    </nav>
+      <div v-else>
+        <p>
+          El usuario logueado no es Admin..
+          <br />por ello no aparece la opción ABM Productos.
+        </p>
+      </div>
+    </div>
     <PageUserComponent
       @carritoUpdate="carritoUpdate($event)"
       :carrito="carrito"
@@ -45,9 +46,6 @@ export default {
         .then((response) => {
           console.table(response.data);
           this.carrito = response.data;
-          // this.carrito.push(response.data.forEach((item) => { item.estado === 'PEND'; }));
-
-          // this.carrito.push(response.data.filter((item) => item.estado === 'PEND'));
         })
         .catch((error) => {
           this.carrito = [];
@@ -63,16 +61,14 @@ export default {
     },
     async increase(objEvento) {
       console.log(objEvento);
-      const obj = this.carrito.find(
-        (val) => val.productId === objEvento.productId,
-      );
+      const obj = this.carrito.find((val) => val.productId === objEvento.productId);
       if (obj) {
         if (obj.cant >= 0) {
           obj.cant += 1;
         }
         const idProducto = obj.id;
-        await this.axios.put(`${this.urlCarrito}/${idProducto}`, obj)
-        // await this.axios.put(this.urlCarrito, obj)
+        await this.axios
+          .put(`${this.urlCarrito}/${idProducto}`, obj)
           .then((response) => {
             console.table(response.data);
           })
@@ -92,7 +88,8 @@ export default {
 
         console.log('id - price', objEvento.productId, objEvento.productPrice);
 
-        await this.axios.post(`${this.urlCarrito}/`, productToCarrito)
+        await this.axios
+          .post(`${this.urlCarrito}/`, productToCarrito)
           .then((response) => {
             console.table(response.data);
           })
@@ -100,91 +97,106 @@ export default {
             console.log(error);
           });
       }
-      this.carritoGetFromUser();
+      await this.carritoGetFromUser();
     },
     async decrease(objEvento) {
-      const obj = this.carrito.find(
-        (val) => val.productId === objEvento.productId,
-      );
+      const obj = this.carrito.find((val) => val.productId === objEvento.productId);
       if (obj) {
         if (obj.cant > 1) {
           obj.cant -= 1;
           const idProducto = obj.id;
-          await this.axios.put(`${this.urlCarrito}/${idProducto}`, obj)
-          // await this.axios.put(this.urlCarrito, obj)
+          await this.axios
+            .put(`${this.urlCarrito}/${idProducto}`, obj)
             .then((response) => {
               console.table(response.data);
             })
             .catch((error) => {
               console.log(error);
             });
-        // put
         } else {
-          console.log(
-            'id - price',
-            objEvento.productId,
-            objEvento.productPrice,
-          );
+          console.log('id - price', objEvento.productId, objEvento.productPrice);
           const idProducto = obj.id;
-          await this.axios.delete(`${this.urlCarrito}/${idProducto}`)
+          await this.axios
+            .delete(`${this.urlCarrito}/${idProducto}`)
             .then((response) => {
               console.table(response.data);
             })
             .catch((error) => {
               console.log(error);
             });
-        // delete
         }
       }
-      this.carritoGetFromUser();
+      await this.carritoGetFromUser();
     },
     async reset() {
       // no funciona bien pues en pantalla no reinicia los countComponents
-      // this.carrito = [];
-      this.carrito.forEach(
-        async (val) => {
-          const idCarrito = val.id;
-          await this.axios.delete(`${this.urlCarrito}/${idCarrito}`)
-            .then((response) => {
-              console.table(response.data);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        },
-      );
-      this.carritoGetFromUser();
+      // IVAN: no puedo manejar la sincro. El sistema busca el carrito (carritoGetFromUser)
+      // antes de terminar todas las iteraciones.
+      // La idea es eliminar el renglon del carrito (Solo los PEND).
+      await this.carrito.forEach(async (val) => {
+        const idCarrito = val.id;
+        // if (val.estado === 'PEND') {
+        await this.axios
+          .delete(`${this.urlCarrito}/${idCarrito}`)
+          .then((response) => {
+            console.table(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        // }
+      });
+      await this.carritoGetFromUser();
     },
     async comprar() {
-      this.carrito.forEach(
-        async (val) => {
-          val.estado = 'PEDIDO';
-          console.log(val);
-          const idCarrito = val.id;
-          await this.axios.put(`${this.urlCarrito}/${idCarrito}`, val)
-            .then((response) => {
-              console.table(response.data);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        },
-      );
-      this.carritoGetFromUser();
+      // IVAN: no puedo manejar la sincro. El sistema busca el carrito (carritoGetFromUser)
+      // antes de terminar todas las iteraciones.
+      // La idea es setear el renglon del carrito como PEDIDO,
+      // para no mostrarlo como pendiente en pantalla.
+      // Estos items luego pasarian al pedido del negocio dueño del producto. (Proxima entrega!)
+      await this.carrito.forEach(async (val) => {
+        val.estado = 'PEDIDO';
+        console.log(val);
+        const idCarrito = val.id;
+        await this.axios
+          .put(`${this.urlCarrito}/${idCarrito}`, val)
+          .then((response) => {
+            console.table(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      });
+      await this.carritoGetFromUser();
     },
   },
   computed: {
+    // IVAN: se nota que envio mal la propiedad en la ruta,
+    // pues este parametro existe solo en ocasiones.
+    // por eso en pantalla desaparece la opcion de ABM prodctos,
+    // por que no puede verificar situacion de usuario.
     isAdmin() {
-      if (this.user) return this.user.rol === 'admin';
+      if (this.user instanceof Object) return this.user.rol === 'admin';
       return false;
     },
+    // IVAN: se nota que envio mal la propiedad en la ruta,
+    // pues este parametro existe solo en ocasiones.
+    // por eso en el carrito se guarda "user": NaN....
     userId() {
-      if (this.user) return parseInt(this.user.id);
+      if (this.user instanceof Object) return parseInt(this.user.id);
       return 1;
     },
   },
 };
 </script>
 
-<style>
+<style scoped>
+.div--container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  padding-top: 20px;
+}
 </style>

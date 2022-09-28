@@ -1,89 +1,90 @@
+<!-- eslint-disable vuejs-accessibility/form-control-has-label -->
 <!-- eslint-disable vuejs-accessibility/label-has-for -->
 <!-- eslint-disable prettier/prettier -->
 <template>
-  <div class='principal'>
+  <div class="principal">
     <vue-form
-      :state='formStateProducts'
-      @submit.prevent='productAdd()'
-      name='resgiterProduct'
-      class='form'
+      :state="formStateProducts"
+      @submit.prevent="productAdd()"
+      name="resgiterProduct"
+      class="form"
     >
-      <validate tag='label' :custom='{ customValidator: customValidator }'>
-        <div class='renglon'>
+      <validate tag="label" :custom="{ customValidator: customValidator }">
+        <div class="renglon">
           <p>Nombre*:</p>
-          <input v-model.trim='product.name' type='text' required name='name' />
-          <field-messages class='etiqueta' name='name'>
+          <input v-model.trim="product.name" type="text" required name="name" />
+          <field-messages class="etiqueta" name="name">
             <div>Ok.</div>
-            <div slot='required'>Ingrese un nombre por favor.</div>
-            <div slot='customValidator'>El nombre debe ser unico. Intente otro.</div>
+            <div slot="required">Ingrese un nombre por favor.</div>
+            <div slot="customValidator">El nombre debe ser unico. Intente otro.</div>
           </field-messages>
         </div>
       </validate>
 
-      <validate tag='label' :custom='{ priceValidator: priceValidator }'>
-        <div class='renglon'>
+      <validate tag="label" :custom="{ priceValidator: priceValidator }">
+        <div class="renglon">
           <p>Precio*:</p>
           <input
-            v-model.number='product.price'
-            type='number'
+            v-model.number="product.price"
+            type="number"
             required
-            name='price'
-            min='1'
-            max='9999'
+            name="price"
+            min="1"
+            max="9999"
           />
 
-          <field-messages class='etiqueta' name='price'>
+          <field-messages class="etiqueta" name="price">
             <div>Ok.</div>
-            <div slot='required'>Ingrese un precio por favor.</div>
-            <div slot='priceValidator'>La comida sin TACC no debe costar mas de $1500</div>
-            <div slot='min'>El valor debe ser numerico mayor a cero.</div>
-            <div slot='max'>El valor debe ser numerico menor a 9999.</div>
+            <div slot="required">Ingrese un precio por favor.</div>
+            <div slot="priceValidator">La comida sin TACC no debe costar mas de $1500</div>
+            <div slot="min">El valor debe ser numerico mayor a cero.</div>
+            <div slot="max">El valor debe ser numerico menor a 9999.</div>
           </field-messages>
         </div>
       </validate>
 
-      <validate tag='label' :custom='{ categoryValidator: categoryValidator }'>
-        <div class='renglon'>
+      <validate tag="label" :custom="{ categoryValidator: categoryValidator }">
+        <div class="renglon">
           <p>Categoria*:</p>
-          <select id='category' v-model='product.category' name='category' required>
-            <option value='Comida rápida'>Comida rápida</option>
-            <option value='Comida vegana'>Comida vegana</option>
-            <option value='Comida sin TACC'>Comida sin TACC</option>
+          <select id="category" v-model="product.category" name="category" required>
+            <option value="Comida rápida">Comida rápida</option>
+            <option value="Comida vegana">Comida vegana</option>
+            <option value="Comida sin TACC">Comida sin TACC</option>
           </select>
-          <field-messages class='etiqueta' name='category'>
+          <field-messages class="etiqueta" name="category">
             <div>Ok.</div>
-            <div slot='required'>Seleccione una categoria</div>
-            <div slot='categoryValidator'>La comida sin TACC no debe costar mas de $1500</div>
+            <div slot="required">Seleccione una categoria</div>
+            <div slot="categoryValidator">La comida sin TACC no debe costar mas de $1500</div>
           </field-messages>
         </div>
       </validate>
-      <validate tag='label' :custom='{ activoValidator: activoValidator }'>
+      <validate tag="label" :custom="{ activoValidator: activoValidator }">
         <p>¿Disponible para la venta?</p>
-        <div class='renglon'>
+        <div class="renglon">
           <input
-            id='si'
-            name='activo'
-            value='1'
-            checked='checked'
-            type='radio'
-            v-model='product.activo'
+            id="si"
+            name="activo"
+            value="1"
+            checked="checked"
+            type="radio"
+            v-model="product.activo"
           />
-          <label for='si'>
+          <label for="si">
             <span></span> Si
           </label>
-          <input id='no' name='activo' value='2' type='radio' v-model='product.activo' />
-          <label for='no'>
+          <input id="no" name="activo" value="2" type="radio" v-model="product.activo" />
+          <label for="no">
             <span></span> No
           </label>
-          <field-messages class='etiqueta' name='activo'>
+          <field-messages class="etiqueta" name="activo">
             <div>Ok.</div>
-            <div slot='required'>Seleccione una categoria</div>
-            <div slot='activoValidator'>La comida sin TACC no debe costar mas de $1500</div>
+            <div slot="required">Seleccione una categoria</div>
+            <div slot="activoValidator">La comida sin TACC no debe costar mas de $1500</div>
           </field-messages>
         </div>
       </validate>
       <div>
-        <button type='submit' class='btn btn-primary' @keyup.enter='submit'>Nuevo</button>
+        <button type="submit" class="btn btn-primary" @keyup.enter="submit">Nuevo</button>
       </div>
     </vue-form>
   </div>
@@ -165,9 +166,9 @@ export default {
     productExists() {
       let respuesta = false;
 
-      const prodExists = this.products.find(
-        (prod) => { prod.name.toUpperCase() === this.product.name; },
-      );
+      const prodExists = this.products.find((prod) => {
+        prod.name.toUpperCase() === this.product.name;
+      });
       if (prodExists) {
         respuesta = true;
       }
@@ -231,14 +232,14 @@ button {
   cursor: pointer;
 }
 
-input[type='radio'] {
+input[type="radio"] {
   display: none;
 }
-input[type='radio'] + label {
+input[type="radio"] + label {
   font-weight: 400;
   font-size: 14px;
 }
-input[type='radio'] + label span {
+input[type="radio"] + label span {
   display: inline-block;
   width: 18px;
   height: 18px;
@@ -249,20 +250,20 @@ input[type='radio'] + label span {
   border-radius: 50%;
   border: 3px solid #ffffff;
 }
-input[type='radio'] + label span {
+input[type="radio"] + label span {
   background-color: #fff;
 }
-input[type='radio']:checked + label {
+input[type="radio"]:checked + label {
   color: #333;
   font-weight: 700;
 }
-input[type='radio']:checked + label span {
+input[type="radio"]:checked + label span {
   background-color: #eaee14;
   border: 2px solid #140a0a;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
 }
-input[type='radio'] + label span,
-input[type='radio']:checked + label span {
+input[type="radio"] + label span,
+input[type="radio"]:checked + label span {
   -webkit-transition: background-color 0.24s linear;
   -o-transition: background-color 0.24s linear;
   -moz-transition: background-color 0.24s linear;

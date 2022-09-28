@@ -1,8 +1,8 @@
 <template>
-  <div class='row--botones'>
-    <button class='coder--button' @click='decrease()'>-</button>
+  <div class="row--botones">
+    <button class="coder--button" @click="decrease()">-</button>
     <p>{{ cant }}</p>
-    <button class='coder--button' @click='increase()'>+</button>
+    <button class="coder--button" @click="increase()">+</button>
     <br />
     <!--<p>{{ precioTotal }}</p> -->
   </div>

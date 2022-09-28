@@ -1,43 +1,30 @@
 <!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
   <div>
-    <h3 class='title'>Bienvenido - Iniciar Sesión</h3>
-    <div class='form'>
-      <vue-form :state='formState' @submit.prevent='onSubmit()'>
-        <validate class='fc my-3' tag='label'>
-          <label class='class-label' for='email'>Email*</label>
-          <input v-model='data.email' required name='email' type='email' />
-          <field-messages name='email'>
+    <h3 class="title">Bienvenido - Iniciar Sesión</h3>
+    <div class="form">
+      <vue-form :state="formState" @submit.prevent="onSubmit()">
+        <validate class="fc my-3" tag="label">
+          <label class="class-label" for="email">Email*</label>
+          <input v-model="data.email" required name="email" type="email" />
+          <field-messages name="email">
             <div>Ok.</div>
-            <div class='class-label' slot='required'>
-              Indique el email por favor.
-            </div>
-            <div class='class-label' slot='email'>
-              Parece que no es un email válido!
-            </div>
+            <div class="class-label" slot="required">Indique el email por favor.</div>
+            <div class="class-label" slot="email">Parece que no es un email válido!</div>
           </field-messages>
         </validate>
 
-        <validate class='fc my-3' tag='label'>
-          <label class='class-label' for='password' type='password'
-            >Password*</label
-          >
-          <input
-            v-model='data.password'
-            required
-            name='password'
-            type='password'
-          />
-          <field-messages name='password'>
+        <validate class="fc my-3" tag="label">
+          <label class="class-label" for="password" type="password">Password*</label>
+          <input v-model="data.password" required name="password" type="password" />
+          <field-messages name="password">
             <div>Ok.</div>
-            <div class='class-label' slot='required'>
-              Indique password por favor.
-            </div>
+            <div class="class-label" slot="required">Indique password por favor.</div>
           </field-messages>
         </validate>
 
-        <div class='fc my-3'>
-          <button type='submit' class='btn btn-primary'>Login</button>
+        <div class="fc my-3">
+          <button type="submit" class="btn btn-primary">Login</button>
         </div>
       </vue-form>
     </div>
@@ -75,11 +62,7 @@ export default {
           if (respLogin) {
             this.$emit('loginSuccess', this.user);
           } else {
-            this.$alert(
-              'Los datos ingresados no corresponden a un usuario.',
-              'Atención',
-              'error',
-            );
+            this.$alert('Los datos ingresados no corresponden a un usuario.', 'Atención', 'error');
           }
         })
         .catch(() => {
@@ -91,8 +74,6 @@ export default {
         });
     },
     async existeUsuario() {
-      // consultar en api el usuario con el name y password. GET.
-      // Retornando sus datos y rol, o vacio.
       const dataToGet = {
         email: this.data.email,
         // password: this.data.password,
@@ -104,7 +85,6 @@ export default {
         .then((response) => {
           console.table(response.data);
           usersFromApi = response.data;
-          // TODO: verificar contra mas datos
           const obj = usersFromApi.find((val) => val.email === this.data.email);
           if (obj) this.user = obj;
         })
@@ -119,7 +99,7 @@ export default {
         this.$alert('Los datos no son correctos. Verifiquelos por favor.');
         return;
       }
-      // si el form e socrrecto sigue con la autenticacion.
+      // si el form es correcto sigue con la autenticacion.
       await this.loginUser();
     },
   },
@@ -127,13 +107,6 @@ export default {
 </script>
 <style scoped>
 .form {
-  /*display: flex;*/
-  /*flex-direction: column;
-  justify-content: center;
-  width: 35%;
-  min-width: 350px;
-  max-width: 80%;
-  /* background: rgba(19, 35, 47, 0.9);*/
   border-radius: 5px;
   padding: 20px;
   box-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.3);

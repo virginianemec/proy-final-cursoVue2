@@ -1,16 +1,13 @@
 <template>
-  <div class='coder--header'>
-    <div class='title'>PediSalud</div>
-    <div class='title'>¡Nuestra web de comidas saludables!</div>
-    <div v-if='user'>
-      <button type='button' class='btn btn-primary' @click='back()'>
-        Cerrar Sesión
-      </button>
+  <div class="coder--header">
+    <div class="title">PediSalud</div>
+    <div class="title">¡Nuestra web de comidas saludables!</div>
+    <div v-if="user">
+      <button type="button" class="btn btn-primary" @click="back()">Cerrar Sesión</button>
 
-     <div id="menu">
-      <router-link to="/">Login</router-link>
-    </div>
-
+      <div id="menu">
+        <router-link to="/">Login</router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -23,8 +20,6 @@ export default {
     no tenog mas esta variable ni el emit del app.
     ahora con el usuario logueado defino el header.
     y con el router el back.
-
-    buttonReturnShowInHeader: Boolean,
   */
   },
   methods: {
@@ -37,7 +32,7 @@ export default {
 <style scoped>
 .coder--header {
   width: 100%;
-  background-image: url('../assets/logo.png');
+  background-image: url("../assets/logo.png");
   background-size: cover;
   background-position: center;
 }

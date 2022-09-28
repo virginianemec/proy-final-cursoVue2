@@ -1,14 +1,15 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div>
+    <p style="text-align: center;">
+      El usuario virginia@ta.com es el user Admin.
+      <br />Password es requerido pero no se valida.
+      <br />Es el unico usuario que podria crear en próxima etapa los usuarios con tipo.
+    </p>
     <article>
-      <div>
-        <LoginComponent :user='user' @loginSuccess='loginSuccess($event)' />
-        <div class='title'>No tengo cuenta</div>
-        <button type='submit' class='btn btn-primary' @click='registrame()'>
-          Registrarme
-        </button>
-      </div>
+      <LoginComponent :user="user" @loginSuccess="loginSuccess($event)" />
+      <div class="title">No tengo cuenta</div>
+      <button type="submit" class="btn btn-primary" @click="registrame()">Registrarme</button>
     </article>
   </div>
 </template>
@@ -24,12 +25,10 @@ export default {
   },
   methods: {
     loginSuccess(user) {
-      // Enviar al index
-      // esto se manejara preguntando si el
-      // usuairo exuste en el array de users del componenet
-      // console.log('hola!! bienvenido al index.');
       this.user = user;
-      // CONSULTAR: problema!! no puedo reiniciar el header con el usuarios!
+      // CONSULTAR IVAN: problema!! no puedo reiniciar el header con el usuarios!
+      // por eso mando el user al app, pero no hay caso. lo estoy mandando mal. o bien
+      // lo pierdo antes.
       this.$emit('loginSuccess', this.user);
       // this.$alert('Bienvenido', 'Atención', 'success');
       this.$router.push({ name: 'Index', query: { user: this.user } });
