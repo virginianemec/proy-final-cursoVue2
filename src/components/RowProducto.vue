@@ -1,4 +1,5 @@
 <template>
+  <div v-if="isPend">
   <tr>
     <td>
       <p>{{ this.displayProduct }}</p>
@@ -6,6 +7,7 @@
     <td>$ {{ this.product.productPrice }}</td>
     <td>$ {{ this.total }}</td>
   </tr>
+</div>
 </template>
 
 <script>
