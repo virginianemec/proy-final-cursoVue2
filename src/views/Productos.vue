@@ -59,6 +59,19 @@ export default {
           console.error(err);
         });
     },
+    /*
+      async callAxios(str) {
+      try {
+        const url = "http://asd.com”;
+        let response = await axios.get(url, {timeout: 10000});
+        this.results = response.data;
+        return response;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    */
   },
 };
 </script>
