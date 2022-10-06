@@ -1,35 +1,48 @@
 <!-- eslint-disable vue/no-multiple-template-root -->
 <template>
-  <div class="div--container">
-    <div class="titleTable">LISTADO DE PRODUCTOS</div>
-    <table class="table">
-      <thead>
-        <tr class="table--tr">
-          <th>ID</th>
-          <th>NOMBRE</th>
-          <th>PRECIO</th>
-          <th>CATEGORIA</th>
-          <th>A LA VENTA?</th>
-        </tr>
-      </thead>
-      <tbody v-for="(product, i) in products" :key="i">
-        <tr>
-          <td class="table--td">{{ product.id }}</td>
-          <td class="table--td">{{ product.name | nameFilter(product.name) }}</td>
-          <td class="table--td">{{ product.price | priceFilter(product.price) }}</td>
-          <td class="table--td">{{ product.category | categoryFilter }}</td>
-          <td class="table--td">{{ product.activo | isActivo(product.activo) }}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div v-if="isAnyProduct">
+    <div class="div--container">
+      <div class="titleTable">LISTADO DE PRODUCTOS</div>
+
+      <table class="table">
+        <thead>
+          <tr class="table--tr">
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>PRECIO</th>
+            <th>CATEGORIA</th>
+            <th>A LA VENTA?</th>
+          </tr>
+        </thead>
+
+        <tbody v-for="(product, i) in products" :key="i">
+          <tr>
+            <td class="table--td">{{ product.id }}</td>
+            <td class="table--td">{{ product.name | nameFilter(product.name) }}</td>
+            <td class="table--td">{{ product.price | priceFilter(product.price) }}</td>
+            <td class="table--td">{{ product.category | categoryFilter }}</td>
+            <td class="table--td">{{ product.activo | isActivo(product.activo) }}</td>
+            <td>
+              <button v-on:click="productUpdate(product)">Update</button>
+            </td>
+            <td>
+              <button v-on:click="productDelete(product)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
+  <div v-else>" ---- NO HAY PRODUCTOS PARA MOSTRAR ------ "</div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'TableComponente',
   props: {
-    products: [],
+    // products: [],
   },
   filters: {
     nameFilter(value) {
@@ -43,6 +56,29 @@ export default {
     },
     isActivo(value) {
       return value === 1 ? 'SI' : 'NO';
+    },
+  },
+  methods: {
+    async reset() {
+      // metodo para vaciar el listado.
+      await this.$store.dispatch('productsReset');
+    },
+    productUpdate(prod) {
+      console.log(`${prod.id} ${prod.id_producto}`);
+      this.$emit('productController', { function: 'update', product: prod });
+    },
+    productDelete(prod) {
+      console.log(`${prod.id} ${prod.id_producto}`);
+      this.$emit('productController', { function: 'delete', product: prod });
+    },
+  },
+  computed: {
+    ...mapGetters('products', ['getProducts', 'getProductLength']),
+    products() {
+      return this.$store.getters.getProducts;
+    },
+    isAnyProduct() {
+      return this.$store.getters.getProductLength > 0;
     },
   },
 };

@@ -18,7 +18,8 @@
     "vue-axios": "^3.4.1",
     "vue-form": "^4.10.3",
     "vue-router": "^3.6.5",
-    "vue-simple-alert": "^1.1.1"
+    "vue-simple-alert": "^1.1.1",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

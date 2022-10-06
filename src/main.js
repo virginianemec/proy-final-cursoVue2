@@ -8,6 +8,8 @@ import VueRouter from 'vue-router';
 import VueAxios from 'vue-axios';
 import router from './router/router';
 
+import store from './store';
+
 // import Login from './views/Login.vue';
 import App from './App.vue';
 import 'bootstrap';
@@ -30,6 +32,7 @@ Vue.filter('categoryFilter', (value) => {
 });
 
 new Vue({
+  store,
   router,
   render: (h) => h(App),
 }).$mount('#app');
