@@ -7,7 +7,7 @@
       <br />Es el unico usuario que podria crear en próxima etapa los usuarios con tipo.
     </p>
     <article>
-      <LoginComponent :user="user" @loginSuccess="loginSuccess($event)" />
+      <LoginComponent />
       <div class="title">No tengo cuenta</div>
       <button type="submit" class="btn btn-primary" @click="registrame()">Registrarme</button>
     </article>
@@ -15,24 +15,32 @@
 </template>
 
 <script>
+// import { mapGetters } from 'vuex';
 import LoginComponent from '@/components/LoginComponent.vue';
 
 export default {
   data() {
     return {
-      user: null,
+      // user: null,
     };
   },
+  mounted() {
+  // this.getUserLogged();
+  },
   methods: {
+    // este metodo lo llamaba el logincomponent para ir al index.
+    // @loginSuccess="loginSuccess($event)"
+    /*
     loginSuccess(user) {
       this.user = user;
       // CONSULTAR IVAN: problema!! no puedo reiniciar el header con el usuarios!
       // por eso mando el user al app, pero no hay caso. lo estoy mandando mal. o bien
       // lo pierdo antes.
-      this.$emit('loginSuccess', this.user);
+      // ->this.$emit('loginSuccess', this.user);
       // this.$alert('Bienvenido', 'Atención', 'success');
-      this.$router.push({ name: 'Index', query: { user: this.user } });
+       this.$router.push({ name: 'Index', query: { user: this.user } });
     },
+    */
     registrame() {
       this.$router.push({ name: 'Register' });
     },
@@ -40,5 +48,13 @@ export default {
   components: {
     LoginComponent,
   },
+  /*
+  computed: {
+    ...mapGetters(['getUserLoggd']),
+    user() {
+      return this.$store.getters.getUserLogged;
+    },
+  },
+  */
 };
 </script>

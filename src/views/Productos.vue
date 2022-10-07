@@ -2,22 +2,27 @@
   <div>
     <ProductFormComponent @itemAdd="itemAddFromForm($event)"
     :products="products"></ProductFormComponent>
-    <ProductsTableComponente :products="products"></ProductsTableComponente>
+   <!-- <ProductsTableComponente :products="products"></ProductsTableComponente> -->
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import ProductFormComponent from '@/components/ProductFormComponent.vue';
-import ProductsTableComponente from '@/components/ProductsTableComponente.vue';
+// import ProductsTableComponente from '@/components/ProductsTableComponente.vue';
 
 export default {
-  components: { ProductFormComponent, ProductsTableComponente },
+  components: {
+    ProductFormComponent,
+    // ProductsTableComponente
+  },
   data() {
     return {
-      products: [],
-      url: 'https://632ba1f21aabd8373989647d.mockapi.io/productos/',
+    // products: [],
+    // url: 'https://632ba1f21aabd8373989647d.mockapi.io/productos/',
     };
   },
+  /*
   created() {
     this.getProductos();
   },
@@ -59,7 +64,8 @@ export default {
           console.error(err);
         });
     },
-    /*
+    */
+  /*
       async callAxios(str) {
       try {
         const url = "http://asd.com”;
@@ -72,6 +78,26 @@ export default {
     },
 
     */
+  mounted() {
+    this.getProductos();
+    this.$store.dispatch(
+      'cambiarWorkDescription',
+      `Cargue los valores del formulario.  Presione el botón Nuevo, o bien la
+    tecla Enter, para guardar el producto. Si los datos no son correctos, el sistema le avisará.`,
+    );
+  },
+  computed: {
+    ...mapGetters(['getWorkDescription']),
+    description() {
+      return this.$store.getters.getWorkDescription;
+    },
+  },
+  methods: {
+    // obtener los productos from api, desde el store.
+    // cuando inicio la app.
+    async getProductos() {
+      await this.$store.dispatch('productsFromApi');
+    },
   },
 };
 </script>

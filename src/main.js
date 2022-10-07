@@ -23,8 +23,6 @@ Vue.config.productionTip = false;
 Vue.use(VueSimpleAlert);
 Vue.use(VueForm);
 
-// const router = new VueRouter({routes, mode: 'history'});
-
 Vue.filter('categoryFilter', (value) => {
   console.log('en el main');
   if (!value) return 'Sin categoria';

@@ -9,17 +9,30 @@
           <input v-model="data.email" required name="email" type="email" />
           <field-messages name="email">
             <div>Ok.</div>
-            <div class="class-label" slot="required">Indique el email por favor.</div>
-            <div class="class-label" slot="email">Parece que no es un email válido!</div>
+            <div class="class-label" slot="required">
+              Indique el email por favor.
+            </div>
+            <div class="class-label" slot="email">
+              Parece que no es un email válido!
+            </div>
           </field-messages>
         </validate>
 
         <validate class="fc my-3" tag="label">
-          <label class="class-label" for="password" type="password">Password*</label>
-          <input v-model="data.password" required name="password" type="password" />
+          <label class="class-label" for="password" type="password"
+            >Password*</label
+          >
+          <input
+            v-model="data.password"
+            required
+            name="password"
+            type="password"
+          />
           <field-messages name="password">
             <div>Ok.</div>
-            <div class="class-label" slot="required">Indique password por favor.</div>
+            <div class="class-label" slot="required">
+              Indique password por favor.
+            </div>
           </field-messages>
         </validate>
 
@@ -32,10 +45,12 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'LoginComponent',
   props: {
-    users: [],
+    // users: [],
   },
   data() {
     return {
@@ -47,19 +62,43 @@ export default {
         // agrego el rol del usaurio
         rol: '',
       },
-      // No se usa aun.
-      checked: [],
 
       // url de mockapi de usuarios:
-      url: 'https://632ba1f21aabd8373989647d.mockapi.io/users',
-      user: null,
+      // url: 'https://632ba1f21aabd8373989647d.mockapi.io/users',
+      // user: null,
     };
   },
   methods: {
+    async onSubmit() {
+      // valida el form
+      if (this.formState.$invalid) {
+        this.$alert('Los datos no son correctos. Verifiquelos por favor.');
+        return;
+      }
+      // si el form es correcto sigue con la autenticacion.
+      // await this.loginUser();
+
+      // este metodo espera que el store recupere y guarde un usuario.
+      await this.$store.dispatch('getUsersFromApi', this.data);
+
+      if (this.user) {
+        // llama a la vista para que se mueva.
+        // this.$emit('loginSuccess');
+        this.$router.push({ name: 'Index' });
+      } else {
+        this.$alert(
+          'Los datos ingresados no corresponden a un usuario.',
+          'Atención',
+          'error',
+        );
+      }
+    },
+    /*
     async loginUser() {
-      this.existeUsuario()
+      this.existsUsuario()
         .then((respLogin) => {
           if (respLogin) {
+            // la vista llama al arouter.
             this.$emit('loginSuccess', this.user);
           } else {
             this.$alert('Los datos ingresados no corresponden a un usuario.', 'Atención', 'error');
@@ -73,7 +112,7 @@ export default {
           );
         });
     },
-    async existeUsuario() {
+    async existsUsuario() {
       const dataToGet = {
         email: this.data.email,
         // password: this.data.password,
@@ -92,15 +131,12 @@ export default {
           console.error(err);
         });
       return this.user;
-    },
-    async onSubmit() {
-      // valida el form
-      if (this.formState.$invalid) {
-        this.$alert('Los datos no son correctos. Verifiquelos por favor.');
-        return;
-      }
-      // si el form es correcto sigue con la autenticacion.
-      await this.loginUser();
+    }, */
+  },
+  computed: {
+    ...mapGetters(['getUserLoggd']),
+    user() {
+      return this.$store.getters.getUserLogged;
     },
   },
 };
