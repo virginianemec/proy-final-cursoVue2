@@ -91,7 +91,16 @@ export default {
         if (state.carrito[objIndex].cant > 1) {
           await commit('removeItem', objIndex);
           const idProducto = state.carrito[objIndex].id;
-          await this.put(idProducto, objEvento);
+          await axios
+            .put(`${URL}/${idProducto}`, objEvento)
+            .then((response) => {
+              console.table(response.data);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+
+          // await this.put(idProducto, objEvento);
         } else {
           console.log('id - price', objEvento.productId, objEvento.productPrice);
           const idProducto = state.carrito[objIndex].id;
@@ -163,7 +172,7 @@ export default {
           // .put(`${URL}/${valId}`, element)
           .then((response) => {
             console.table(response.data);
-            let arrayNegocios = rootGetters.getAllNegocios();
+            const arrayNegocios = rootGetters.getAllNegocios();
             const negocio = arrayNegocios.find((item) => item.id === parseInt(negocioId, 10));
             if (negocio) negocio.orders.push(element);
           })

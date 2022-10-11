@@ -2,7 +2,8 @@
 <template>
   <div>
     <p style="text-align: center;">
-      El usuario virginia@ta.com es el user Admin.
+      El usuario 'virginia@ta.com' es el user Admin.
+      cecilia@ta.com es un usuario sin privilegios.
       <br />Password es requerido pero no se valida.
     </p>
     <article>
