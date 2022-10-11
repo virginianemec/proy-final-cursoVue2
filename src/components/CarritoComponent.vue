@@ -10,16 +10,26 @@
             <th>Subtotal</th>
           </tr>
         </thead>
-        <tbody v-for="(product,index) in carrito" :key="'product'+index">
+        <div v-for="(product,index) in carrito" :key="index">
           <RowProducto :product="product" />
-        </tbody>
+        </div>
       </table>
       <div>Total: ${{ getTotal }}</div>
     </div>
+    <button
+      :style="isThereAny"
+      type="button"
+      class="btn btn-primary"
+      @click="reset()"
+    >Vaciar carrito</button>
+
+    <button :style="isThereAny" type="button" class="btn btn-primary"
+    @click="comprar()">Comprar</button>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import RowProducto from '@/components/RowProducto.vue';
 
 export default {
@@ -28,7 +38,7 @@ export default {
     RowProducto,
   },
   props: {
-    carrito: [],
+    // carrito: [],
   },
   data() {
     return {
@@ -39,8 +49,43 @@ export default {
     totalProductCalc(price, cant) {
       return price * cant;
     },
+    async reset() {
+      // this.$emit('reset');
+      await this.$store.dispatch('resetCarritoUser');
+      await this.$store.dispatch('carritoUserFromApi', this.userId);
+    },
+    async comprar() {
+      // this.$emit('comprar');
+      // TODO: Probar esto.
+      // await this.$store.dispatch('carritoComprar');
+      // await this.$store.dispatch('updateNegocios');
+      await this.$store.dispatch('carritoComprarDevolver', 'comprar');
+      await this.$store.dispatch('carritoUserFromApi', this.userId);
+    },
+    async devolver() {
+    // this.$emit('comprar');
+      await this.$store.dispatch('carritoComprarDevolver', 'devolver');
+      await this.$store.dispatch('carritoUserFromApi', this.userId);
+    },
   },
   computed: {
+    ...mapGetters(['getCarrito', 'getUserLoggedId']), // , 'getNegocios']),
+    /*
+    negocios() {
+      return this.$store.getters.getNegocios;
+    },
+    */
+    userId() {
+      return this.$store.getters.getUserLoggedId;
+    },
+    carrito() {
+      return this.$store.getters.getCarrito;
+    },
+    isThereAny() {
+      // checks whether an element is even
+      const isPend = (item) => item.estado === 'PENDIENTE';
+      return this.carrito.some(isPend) ? 'display' : 'display:none';
+    },
     /*
     totalProducto(price, cant) {
       return price * cant;
@@ -49,7 +94,7 @@ export default {
     getTotal() {
       let total1 = 0;
       this.carrito.forEach((val) => {
-        if (val.estado === 'PEND') {
+        if (val.estado === 'PENDIENTE') {
           total1 += this.totalProductCalc(val.productPrice, val.cant);
         }
       });

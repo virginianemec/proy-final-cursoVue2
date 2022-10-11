@@ -13,16 +13,15 @@
       </div>
     </div>
     <PageUserComponent
-      @carritoUpdate="carritoUpdate($event)"
-      :carrito="carrito"
       @reset="reset()"
       @comprar="comprar()"
-      :user="user"
     ></PageUserComponent>
+    <!-- :carrito="carrito"  @carritoUpdate="carritoUpdate($event)"-->
   </article>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import PageUserComponent from '@/components/PageUserComponent.vue';
 
 export default {
@@ -30,35 +29,29 @@ export default {
     PageUserComponent,
   },
   created() {
-    this.carritoGetFromUser();
+    // this.carritoUserFromApi();
   },
   data() {
     return {
-      user: this.$route.query.user,
-      carrito: [],
-      urlCarrito: 'https://632ba1f21aabd8373989647d.mockapi.io/carritos',
     };
   },
   methods: {
-    async carritoGetFromUser() {
-      this.axios
-        .get(`${this.urlCarrito}/?user=${this.userId}`)
-        .then((response) => {
-          console.table(response.data);
-          this.carrito = response.data;
-        })
-        .catch((error) => {
-          this.carrito = [];
-          console.log(error);
-        });
+
+    async carritoUserFromApi() {
+      await this.$store.dispatch('carritoUserFromApi', this.userId);
     },
-    carritoUpdate(objProdCant) {
-      if (objProdCant.updateFuntion === '+') {
+    async carritoUpdate(objProdCant) {
+      await this.$store.dispatch('updateCarrito', objProdCant, this.userId);
+      await this.carritoUserFromApi();
+    /*
+     if (objProdCant.updateFuntion === '+') {
         this.increase(objProdCant);
       } else {
         this.decrease(objProdCant);
       }
+      */
     },
+    /*
     async increase(objEvento) {
       console.log(objEvento);
       const obj = this.carrito.find((val) => val.productId === objEvento.productId);
@@ -83,7 +76,7 @@ export default {
           user: this.userId,
           cant: 1,
           createdAt: new Date(),
-          estado: 'PEND',
+          estado: 'PENDIENTE',
         };
 
         console.log('id - price', objEvento.productId, objEvento.productPrice);
@@ -97,7 +90,7 @@ export default {
             console.log(error);
           });
       }
-      await this.carritoGetFromUser();
+      await this.carritoUserFromApi();
     },
     async decrease(objEvento) {
       const obj = this.carrito.find((val) => val.productId === objEvento.productId);
@@ -126,16 +119,19 @@ export default {
             });
         }
       }
-      await this.carritoGetFromUser();
+      await this.carritoUserFromApi();
     },
+    */
     async reset() {
+      await this.$store.dispatch('resetCarritoUser', this.userId);
       // no funciona bien pues en pantalla no reinicia los countComponents
-      // IVAN: no puedo manejar la sincro. El sistema busca el carrito (carritoGetFromUser)
+      // IVAN: no puedo manejar la sincro. El sistema busca el carrito (carritoUserFromApi)
       // antes de terminar todas las iteraciones.
-      // La idea es eliminar el renglon del carrito (Solo los PEND).
+      // La idea es eliminar el renglon del carrito (Solo los PENDIENTE).
+      /*
       await this.carrito.forEach(async (val) => {
         const idCarrito = val.id;
-        // if (val.estado === 'PEND') {
+        // if (val.estado === 'PENDIENTE') {
         await this.axios
           .delete(`${this.urlCarrito}/${idCarrito}`)
           .then((response) => {
@@ -146,14 +142,13 @@ export default {
           });
         // }
       });
-      await this.carritoGetFromUser();
+      */
+      await this.carritoUserFromApi();
     },
     async comprar() {
-      // IVAN: no puedo manejar la sincro. El sistema busca el carrito (carritoGetFromUser)
-      // antes de terminar todas las iteraciones.
-      // La idea es setear el renglon del carrito como PEDIDO,
-      // para no mostrarlo como pendiente en pantalla.
-      // Estos items luego pasarian al pedido del negocio dueño del producto. (Proxima entrega!)
+      // llamar al store para que compre el carrito.
+      await this.$store.dispatch('carritoComprarDevolver', 'comprar');
+      /*
       await this.carrito.forEach(async (val) => {
         val.estado = 'PEDIDO';
         console.log(val);
@@ -167,24 +162,22 @@ export default {
             console.log(error);
           });
       });
-      await this.carritoGetFromUser();
+      */
+      await this.carritoUserFromApi();
     },
   },
   computed: {
-    // IVAN: se nota que envio mal la propiedad en la ruta,
-    // pues este parametro existe solo en ocasiones.
-    // por eso en pantalla desaparece la opcion de ABM prodctos,
-    // por que no puede verificar situacion de usuario.
-    isAdmin() {
-      if (this.user instanceof Object) return this.user.rol === 'admin';
-      return false;
+    ...mapGetters(['isAdmin', 'getUserLoggedId']), // , 'getUserCarrito']),
+    /*
+    carrito() {
+      return this.$store.getters.getUserCarrito;
     },
-    // IVAN: se nota que envio mal la propiedad en la ruta,
-    // pues este parametro existe solo en ocasiones.
-    // por eso en el carrito se guarda "user": NaN....
+    */
+    isAdmin() {
+      return this.$store.getters.isAdmin;
+    },
     userId() {
-      if (this.user instanceof Object) return parseInt(this.user.id);
-      return 1;
+      return this.$store.getters.getUserLoggedId;
     },
   },
 };

@@ -1,7 +1,6 @@
 <template>
   <div>
-    <ProductFormComponent @itemAdd="itemAddFromForm($event)"
-    :products="products"></ProductFormComponent>
+    <ProductFormComponent @itemAdd="itemAddFromForm($event)"></ProductFormComponent>
    <!-- <ProductsTableComponente :products="products"></ProductsTableComponente> -->
   </div>
 </template>

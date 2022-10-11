@@ -50,7 +50,7 @@ export default {
   },
   /*
   computed: {
-    ...mapGetters(['getUserLoggd']),
+    ...mapGetters(['getUserLogged']),
     user() {
       return this.$store.getters.getUserLogged;
     },

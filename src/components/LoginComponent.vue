@@ -84,6 +84,9 @@ export default {
       if (this.user) {
         // llama a la vista para que se mueva.
         // this.$emit('loginSuccess');
+        await this.$store.dispatch('getNegociosFromApi');
+        await this.$store.dispatch('productsFromApi');
+        await this.$store.dispatch('carritoUserFromApi', this.userId);
         this.$router.push({ name: 'Index' });
       } else {
         this.$alert(
@@ -134,9 +137,12 @@ export default {
     }, */
   },
   computed: {
-    ...mapGetters(['getUserLoggd']),
+    ...mapGetters(['getUserLogged', 'getUserLoggedId']),
     user() {
       return this.$store.getters.getUserLogged;
+    },
+    userId() {
+      return this.$store.getters.getUserLoggedId;
     },
   },
 };

@@ -24,7 +24,7 @@ export default {
       return this.product.cant * this.product.productPrice;
     },
     isPend() {
-      return this.estado === 'PEND';
+      return this.product.estado === 'PENDIENTE';
     },
   },
 };

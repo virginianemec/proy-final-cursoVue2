@@ -1,24 +1,17 @@
 <!-- eslint-disable indent -->
 <template>
   <div>
-    <ListadoNegociosComponent :negocios="negocios" @carritoUpdate="carritoUpdate($event)" />
-
+    <ListadoNegociosComponent   />
+<!-- :negocios="negocios" @carritoUpdate="carritoUpdate($event)"-->
     <aside>
-      <CarritoComponent :carrito="carrito" />
+      <CarritoComponent  />
+     <!-- :carrito="carrito"-->
     </aside>
-    <button
-      :style="isThereAny"
-      type="button"
-      class="btn btn-primary"
-      @click="reset()"
-    >Vaciar carrito</button>
-
-    <button :style="isThereAny" type="button" class="btn btn-primary"
-    @click="comprar()">Comprar</button>
   </div>
 </template>
 
 <script>
+// import { mapGetters } from 'vuex';
 import ListadoNegociosComponent from '@/components/ListadoNegociosComponent.vue';
 import CarritoComponent from '@/components/CarritoComponent.vue';
 
@@ -30,8 +23,8 @@ export default {
   },
   data() {
     return {
-      URL: 'https://632ba1f21aabd8373989647d.mockapi.io/negocios',
-      negocios: [],
+      // URL: 'https://632ba1f21aabd8373989647d.mockapi.io/negocios',
+      // negocios: [],
     };
   },
   props: {
@@ -39,20 +32,26 @@ export default {
     carrito: [],
     negocios: [],
     */
-    carrito: [],
-    user: null,
+    // carrito: [],
+    // user: null,
   },
   methods: {
+    /*
     carritoUpdate(obj) {
       this.$emit('carritoUpdate', obj);
     },
+    */
+    /*
     reset() {
       this.$emit('reset');
     },
     comprar() {
       this.$emit('comprar');
     },
+    */
+    /*
     async cargarProps() {
+      this.$store.dispatch('getNegociosFromApi');
       await this.axios
         .get(this.URL)
         .then((response) => {
@@ -62,17 +61,13 @@ export default {
           console.log('error', err);
         })
         .finally(() => console.log('Peticion terminada'));
-    },
+
+    }, */
   },
   created() {
-    this.cargarProps();
+    // this.cargarProps();
   },
   computed: {
-    isThereAny() {
-      // checks whether an element is even
-      const isPend = (item) => item.estado === 'PEND';
-      return this.carrito.some(isPend) ? 'display' : 'display:none';
-    },
   },
 };
 </script>

@@ -2,10 +2,9 @@
   <div>
     <div class="tabla--titulo">{{ name }} - {{ category }}</div>
     <div class="tabla--datos">Productos del negocio</div>
-    <ListadoProductosComponent
-      :products="this.productosFromApi"
-      @carritoUpdate="carritoUpdate($event)"
+    <ListadoProductosComponent :negocioId="this.id" :products="products"
     />
+    <!--  @carritoUpdate="carritoUpdate($event)"-->
     <br />
     <!--  Pendiente proxima entrega  -->
     <!--
@@ -22,6 +21,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 /*
 import ListadoPedidosComponent from './ListadoPedidosComponent.vue';
 import ListadoOfertasComponent from './ListadoOfertasComponent.vue';
@@ -52,30 +52,54 @@ export default {
   data() {
     return {
       productosFromApi: [],
-      url: 'https://632ba1f21aabd8373989647d.mockapi.io/productos/',
+      // url: 'https://632ba1f21aabd8373989647d.mockapi.io/productos/',
       // urlOrders: 'https://632ba1f21aabd8373989647d.mockapi.io/carritos/',
       orders: [],
     };
   },
-  created() {
-    this.getProducts();
+  // created() {
+  create() {
+    // this.getProducts();
     // this.getOrders();
   },
+  computed: {
+    ...mapGetters(['getProductsByNegocioId', 'getProducts']),
+    products() {
+      let productsArray = [];
+      productsArray = this.$store.getters.getProducts.filter(
+        (todo) => todo.negocio === parseInt(this.id, 10),
+      );
+      return productsArray;// getProductsByNegocioId(parseInt(this.id, 10));
+    },
+    /*
+    productsNegocio() {
+      return this.$store.dispatch('getProductsFromNegocio', parseInt(this.id, 10));
+      console.table(this.productosFromApi);
+      return this.productosFromApi;
+    },
+    */
+  },
   methods: {
+    /*
     carritoUpdate(obj) {
       this.$emit('carritoUpdate', obj);
     },
-    async getProducts() {
-      await this.axios
-        .get(`${this.url}?negocio=${this.id}`)
-        .then((response) => {
-          console.table(response.data);
-          this.productosFromApi = response.data;
-        })
-        .catch((err) => {
-          console.error(`${err}`);
-        });
-    },
+    */
+    /*
+    getProducts() {
+      this.productosFromApi = this.$store.dispatch('getProductsFromNegocio', parseInt(this.id, 10));
+    }, */
+    /*
+    await this.axios
+      .get(`${this.url}?negocio=${this.id}`)
+      .then((response) => {
+        console.table(response.data);
+        this.productosFromApi = response.data;
+      })
+      .catch((err) => {
+        console.error(`${err}`);
+      });
+      */
     async getOrders() {
       // por ahora: son los items de los carritos de los usuarios que tienen el estado = PEDIDO.
       await this.axios
@@ -102,8 +126,7 @@ export default {
 </script>
 
 <style scoped>
-* {
-}
+
 .tabla--titulo {
   background: yellowgreen;
   height: 25px;

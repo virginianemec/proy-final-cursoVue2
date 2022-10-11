@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import CountComponent from '@/components/CountComponent.vue';
 
 export default {
@@ -75,19 +76,38 @@ export default {
     };
   },
   computed: {
+    ...mapGetters(['getUserLoggedId']),
+    userId() {
+      return this.$store.getters.getUserLoggedId;
+    },
     getImagenSrc() {
       return `./assets/${this.image}.png`;
     },
   },
   methods: {
-    carritoUpdate(objEvent) {
+    async carritoUpdate(objEvent) {
       this.total = objEvent.total;
+      /*
       this.$emit('carritoUpdate', {
         productId: this.id,
         productPrice: this.price,
         productName: this.name,
         updateFuntion: objEvent.updateFuntion,
       });
+      */
+      const objectdata = {
+        productId: this.id,
+        productPrice: this.price,
+        productName: this.name,
+        updateFuntion: objEvent.updateFuntion,
+        userId: this.userId,
+      };
+      if (objEvent.updateFuntion === '+') {
+        await this.$store.dispatch('increase', objectdata);
+      } else {
+        await this.$store.dispatch('decrease', objectdata);
+      }
+      await this.$store.dispatch('carritoUserFromApi', this.userId);
     },
     getImage() {
       return this.image === '' ? 'No-image-available' : this.image;

@@ -81,12 +81,12 @@ export default {
     },
   },
   computed: {
-    ...mapGetters('products', ['getProducts', 'getProductLength']),
+    ...mapGetters('products', ['getProducts', 'getProductsLength']),
     products() {
       return this.$store.getters.getProducts;
     },
     isAnyProduct() {
-      return this.$store.getters.getProductLength > 0;
+      return this.$store.getters.getProductsLength > 0;
     },
   },
 };

@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 const URL = 'https://632ba1f21aabd8373989647d.mockapi.io/users';
 
 export default {
@@ -35,8 +36,11 @@ export default {
     getUserLogged(state) {
       return state.userLogged;
     },
-    getIsAdmin(state) {
+    isAdmin(state) {
       return state.userLogged.rol === 'admin';
+    },
+    getUserLoggedId(state) {
+      return state.userLogged.id;
     },
   },
   mutations: {

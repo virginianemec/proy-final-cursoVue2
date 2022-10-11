@@ -10,8 +10,8 @@
           :category="negocio.category"
           :ofertas="negocio.ofertas"
           :orders="negocio.orders"
-          @carritoUpdate="carritoUpdate($event)"
         ></NegocioComponent>
+        <!--  @carritoUpdate="carritoUpdate($event)"-->
       </div>
     </div>
     <br />
@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import NegocioComponent from './NegocioComponent.vue';
 
 export default {
@@ -27,22 +28,43 @@ export default {
     NegocioComponent,
   },
   props: {
-    carrito: [],
-    negocios: [],
+    // carrito: [],
+    // negocios: [],
   },
   methods: {
-    carritoUpdate(obj) {
-      this.$emit('carritoUpdate', obj);
+    async carritoUpdate(objProdCant) {
+      // await this.$store.dispatch('updateCarrito', objProdCant, this.userId);
+      // await this.carritoUserFromApi();
+      // TODO no sirve..
+      console.log(objProdCant);
+    },
+    async cargarProps() {
+      // await this.$store.dispatch('getNegociosFromApi');
+      // await this.$store.dispatch('productsFromApi');
     },
   },
-  created() {
-    // this.getProductos();
+  mounted() {
+    this.cargarProps();
   },
   data() {
     return {
       // productosFromApi: [],
       // url: 'https://632ba1f21aabd8373989647d.mockapi.io/productos',
     };
+  },
+  computed: {
+    ...mapGetters(['getNegocios']), // , 'getUserCarrito', 'getUserLoggedId']),
+    negocios() {
+      return this.$store.getters.getNegocios;
+    },
+    /*
+    carrito() {
+      return this.$store.getters.getUserCarrito;
+    },
+    userId() {
+      return this.$store.getters.getUserLoggedId;
+    },
+    */
   },
 };
 </script>

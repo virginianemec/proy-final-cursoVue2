@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import axios from 'axios';
 
-const URL = 'https://632ba1f21aabd8373989647d.mockapi.io/productos/';
+const URL = 'https://632ba1f21aabd8373989647d.mockapi.io/productos';
 
 export default {
   namespace: true,
@@ -13,8 +13,11 @@ export default {
     getProducts(state) {
       return state.products;
     },
-    getProductLength(state) {
+    getProductsLength(state) {
       return state.products.length;
+    },
+    getProductsByNegocioId(state, id) {
+      state.products.find((todo) => todo.negocio === id);
     },
   },
   mutations: {
@@ -25,6 +28,8 @@ export default {
 
   actions: {
     async productsFromApi({ commit }) {
+      // /?user=${user}`)
+      // const urlprod = negocio > 0 ? `${URL}/?negocio=${negocio}` : URL;
       await axios
         .get(URL)
         .then(async (response) => {
@@ -56,7 +61,7 @@ export default {
       state.products.forEach(async (element) => {
         const valId = element.id;
         await axios
-          .delete(`${URL}${valId}`)
+          .delete(`${URL}/${valId}`)
           .then((response) => {
             console.log(response);
           })
@@ -82,7 +87,7 @@ export default {
         'Content-Type': 'application/json',
       };
       await axios
-        .put(URL + valId, data)
+        .put(`${URL}/${valId}`, data)
         .then(async (response) => {
           console.log(response);
         })
@@ -93,7 +98,7 @@ export default {
     },
     async productDelete({ commit, state, context }, valId) {
       await axios
-        .delete(URL + valId)
+        .delete(`${URL}/${valId}`)
         .then(async (response) => {
           console.log(response);
         })
@@ -101,6 +106,10 @@ export default {
           alert(`No se pudo borrar el producto. ${err}`);
         })
         .finally(() => console.log('Peticion terminada - volver a traer los datos.'));
+    },
+    async getProductsFromNegocio({ commit, state, context }, negocio) {
+      const productsFromNegocio = state.products.filter((item) => item.negocio === negocio);
+      return productsFromNegocio;
     },
 
     /*

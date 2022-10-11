@@ -7,13 +7,14 @@
         :price="product.price"
         :image="product.image"
         :cant="product.cant"
-        @carritoUpdate="carritoUpdate($event)"
-      ></CardProducto>
+        ></CardProducto>
+        <!-- @carritoUpdate="carritoUpdate($event)" -->
     </div>
   </div>
 </template>
 
 <script>
+// import { mapGetters } from 'vuex';
 import CardProducto from '@/components/CardProducto.vue';
 
 export default {
@@ -22,18 +23,34 @@ export default {
     CardProducto,
   },
   props: {
+    negocioId: String,
     products: [],
   },
+  mounted() {
+    // this.products = this.$store.dispatch('getProductsFromNegocio', parseInt(this.negocioId, 10));
+  },
   data() {
-    return {};
+    return {
+      // products: [],
+    };
   },
   methods: {
     back() {
       this.$emit('back');
     },
+    /*
     carritoUpdate(obj) {
       this.$emit('carritoUpdate', obj);
     },
+    */
+  },
+  computed: {
+    /*
+    ...mapGetters(['getProductsFromNegocio']), // , 'getUserLoggedId']),
+    products1() {
+      return this.$store.dispatch('getProductsFromNegocio', parseInt(this.id, 10));
+    },
+    */
   },
 };
 </script>
