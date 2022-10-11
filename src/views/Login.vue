@@ -4,7 +4,6 @@
     <p style="text-align: center;">
       El usuario virginia@ta.com es el user Admin.
       <br />Password es requerido pero no se valida.
-      <br />Es el unico usuario que podria crear en próxima etapa los usuarios con tipo.
     </p>
     <article>
       <LoginComponent />
