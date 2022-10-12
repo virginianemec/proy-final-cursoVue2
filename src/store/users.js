@@ -42,6 +42,9 @@ export default {
     getUserLoggedId(state) {
       return state.userLogged.id;
     },
+    getUserLoggedName(state) {
+      return state.userLogged.name;
+    },
   },
   mutations: {
     setUserLogged(state, payload) {

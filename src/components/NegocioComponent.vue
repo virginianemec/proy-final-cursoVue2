@@ -101,7 +101,7 @@ export default {
       });
       */
     async getOrders() {
-      // por ahora: son los items de los carritos de los usuarios que tienen el estado = PEDIDO.
+      // por ahora: son los items de los carritos de los usuarios que tienen el estado = COMPRADO.
       await this.axios
         .get(`${this.urlOrders}?negocio=${this.id}`)
         .then((response) => {

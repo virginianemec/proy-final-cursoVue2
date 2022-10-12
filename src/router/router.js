@@ -4,6 +4,8 @@ import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
 import Index from '../views/Index.vue';
 import Productos from '../views/Productos.vue';
+import Pedidos from '../views/Pedidos.vue';
+import Carrito from '../views/Carrito.vue';
 
 Vue.use(VueRouter);
 
@@ -38,6 +40,16 @@ export default new VueRouter({
       path: '/productos',
       name: 'Productos',
       component: Productos,
+    },
+    {
+      path: '/pedidos',
+      name: 'Pedidos',
+      component: Pedidos,
+    },
+    {
+      path: '/carrito',
+      name: 'Carrito',
+      component: Carrito,
     },
   ],
 });

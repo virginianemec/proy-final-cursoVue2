@@ -3,23 +3,22 @@
   <div>
     <ListadoNegociosComponent   />
 <!-- :negocios="negocios" @carritoUpdate="carritoUpdate($event)"-->
-    <aside>
+<!--    <aside>
       <CarritoComponent  />
-     <!-- :carrito="carrito"-->
-    </aside>
+ :carrito="carrito"
+    </aside> -->
   </div>
 </template>
 
 <script>
 // import { mapGetters } from 'vuex';
 import ListadoNegociosComponent from '@/components/ListadoNegociosComponent.vue';
-import CarritoComponent from '@/components/CarritoComponent.vue';
+
 
 export default {
   name: 'PageUserComponent',
   components: {
     ListadoNegociosComponent,
-    CarritoComponent,
   },
   data() {
     return {

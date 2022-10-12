@@ -1,16 +1,19 @@
 <template>
   <article>
     <div class="div--container">
+      Bienvenido {{ userName }} ||
       <router-link :to="{ name: 'Login' }">Cerrar Session</router-link>||
       <div v-if="isAdmin">
-        <router-link :to="{ name: 'Productos' }">ABM Productos</router-link>
+        <router-link :to="{ name: 'Productos' }">ABM Productos</router-link> ||
       </div>
       <div v-else>
         <p>
           El usuario logueado no es Admin..
-          <br />por ello no aparece la opción ABM Productos.
+          <br />por ello no aparece la opción ABM Productos. ||
         </p>
       </div>
+      <router-link :to="{ name: 'Pedidos' }">{{tituloPedidos}}</router-link>||
+      <router-link :to="{ name: 'Carrito' }"> Ver Carrito</router-link>||
     </div>
     <PageUserComponent
       @reset="reset()"
@@ -150,7 +153,7 @@ export default {
       await this.$store.dispatch('carritoComprarDevolver', 'comprar');
       /*
       await this.carrito.forEach(async (val) => {
-        val.estado = 'PEDIDO';
+        val.estado = 'COMPRADO';
         console.log(val);
         const idCarrito = val.id;
         await this.axios
@@ -167,7 +170,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['isAdmin', 'getUserLoggedId']), // , 'getUserCarrito']),
+    ...mapGetters(['isAdmin', 'getUserLoggedId', 'getUserLoggedName']), // , 'getUserCarrito']),
     /*
     carrito() {
       return this.$store.getters.getUserCarrito;
@@ -178,6 +181,12 @@ export default {
     },
     userId() {
       return this.$store.getters.getUserLoggedId;
+    },
+    userName() {
+      return this.$store.getUserLoggedName;
+    },
+    tituloPedidos() {
+      return (this.$store.getters.isAdmin) ? 'Ver Todos los Pedido' : 'Mis Pedidos';
     },
   },
 };

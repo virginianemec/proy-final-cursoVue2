@@ -35,28 +35,32 @@ export default new Vuex.Store({
     cambiarWorkDescription({ commit }, message) {
       commit('setWorkDescription', message);
     },
-    async carritoComprar({ commit, getters }, accion) {
+    async carritoComprar({ getters }) {
       // comprar: toma cada producto, y actualiza las ordenes para cada negocio dueño dle producto.
       await getters.getCarrito.forEach(async (element) => {
         // carrito
         const valId = element.id;
-        const arrayProductos = getters.getProducts;
+        // const arrayProductos = getters.getProducts;
         // productos
-        const producto = arrayProductos.find((todo) => todo.id === element.productId);
+        // const producto = arrayProductos.find((todo) => todo.id === element.productId);
         // negocio
-        const negocioId = producto.negocio;
-        element.estado = 'PEDIDO';
+        // const negocioId = producto.negocio;
+        element.estado = 'COMPRADO';
         // await commit('comprarDevolverItem', index), accion;
         await axios
-          .delete(`https://632ba1f21aabd8373989647d.mockapi.io/negocios/${element.id}`)
-          // .put(`${URL}/${valId}`, element)
+          // .delete(`https://632ba1f21aabd8373989647d.mockapi.io/negocios/${element.id}`)
+          .put(`${URL}/${valId}`, element)
           .then((response) => {
             console.table(response.data);
+            /*
             const arrayNegocios = getters.getNegocios;
             const negocio = arrayNegocios.find(
               (item) => parseInt(item.id, 10) === parseInt(negocioId, 10),
             );
             if (negocio) negocio.orders.push(element);
+            /*
+            */
+          // TODO: buscar los carritos y ordenes de nuevo.
           })
           .catch((error) => {
             console.log(error);

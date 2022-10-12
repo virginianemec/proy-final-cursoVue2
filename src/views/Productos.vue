@@ -1,7 +1,8 @@
 <template>
   <div>
-    <ProductFormComponent @itemAdd="itemAddFromForm($event)"></ProductFormComponent>
-   <!-- <ProductsTableComponente :products="products"></ProductsTableComponente> -->
+    <ProductFormComponent ></ProductFormComponent>
+   <!-- @itemAdd="itemAddFromForm($event)"
+     <ProductsTableComponente :products="products"></ProductsTableComponente> -->
   </div>
 </template>
 
@@ -79,11 +80,13 @@ export default {
     */
   mounted() {
     this.getProductos();
+    /*
     this.$store.dispatch(
       'cambiarWorkDescription',
       `Cargue los valores del formulario.  Presione el botón Nuevo, o bien la
     tecla Enter, para guardar el producto. Si los datos no son correctos, el sistema le avisará.`,
     );
+    */
   },
   computed: {
     ...mapGetters(['getWorkDescription']),

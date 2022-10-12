@@ -1,23 +1,25 @@
 <template>
-  <div>
-    <p>{{ user }}</p>
-    <p>{{ name }}</p>
-    <p>{{ date }}</p>
-    <p>{{ total }}</p>
-    {{ detail }}
-  </div>
+    <tr>
+      <td>{{this.order.createdAt}}</td>
+    <td>
+      <p>{{ this.displayOrder }}</p>
+    </td>
+    <td> $ {{ this.order.productPrice }}</td>
+    <td> <strong>$ {{ this.totalPrice }} </strong></td>
+  </tr>
 </template>
 
 <script>
 export default {
   name: 'RowPedido',
-  // propiedades del pedido:
+  // propiedades del COMPRADO:
   props: {
-    id: {
+  /*
+   cant: {
       type: Number,
       default: 0,
     },
-    user: {
+    name: {
       type: String,
       default: 'Sin nombre',
     },
@@ -25,16 +27,26 @@ export default {
       type: String,
       default: '',
     },
-    total: {
+    price: {
       type: Number,
       default: 0,
     },
     detail: {
       type: Array,
     },
+    */
+    order: {},
   },
   data() {
     return {};
+  },
+  computed: {
+    totalPrice() {
+      return this.order.cant * parseFloat(this.order.productPrice);
+    },
+    displayOrder() {
+      return ` ${this.order.cant} ${this.order.productName} `;
+    },
   },
 };
 </script>

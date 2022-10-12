@@ -1,16 +1,17 @@
 <template>
   <div>
     <table class="table border-primary">
+      <thead>
+        <th>Fecha</th>
+        <th>Cant. / Descripción</th>
+        <th>Precio</th>
+        <th>Total</th>
+      </thead>
       <tbody>
-        <tr v-for="order in orders" :key="order.id">
-          <RowPedido
-            :name="order.name"
-            :price="order.total"
-            :user="order.user"
-            :date="order.date"
-            :details="order.details"
+        <div v-for="order in orders" :key="order.id">
+          <RowPedido :order="order"
           ></RowPedido>
-        </tr>
+        </div>
       </tbody>
     </table>
   </div>
