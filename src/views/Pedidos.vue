@@ -19,7 +19,7 @@ export default {
     this.getOrders();
   },
   computed: {
-    ...mapGetters(['isAdmin', 'getUserLoggedId', 'getOrdersAll']),
+    ...mapGetters(['isAdmin', 'getUserLoggedId', 'getOrdersAll', 'getNegocios']),
     isAdmin() {
       return this.$store.getters.isAdmin;
     },
@@ -27,6 +27,12 @@ export default {
       return this.$store.getters.getUserLoggedId;
     },
     orders() {
+      if (this.$route.params.idNegocio) {
+        const negocio = this.$store.getters.getNegocios.find(
+          (todo) => (todo.id === this.$route.params.idNegocio),
+        );
+        return negocio.orders;
+      }
       return this.$store.getters.getOrdersAll;
     },
   },
