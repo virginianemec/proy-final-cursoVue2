@@ -25,8 +25,7 @@
         </tr>
         <tr>
           <td colspan="2">
-            <CountComponent :cant="cant" :price="price"
-            @carritoUpdate="carritoUpdate($event)"></CountComponent>
+            <CountComponent :cant="cant" :price="price" @carritoUpdate="carritoUpdate($event)"></CountComponent>
           </td>
         </tr>
 
@@ -49,8 +48,8 @@ export default {
   // propiedades del producto:
   props: {
     id: {
-      type: Number,
-      default: 0,
+      type: String,
+      default: '',
     },
     name: {
       type: String,
@@ -61,8 +60,12 @@ export default {
       default: 0,
     },
     image: {
-      stype: String,
+      type: String,
       default: '../assets/No-image-available.png',
+    },
+    negocio: {
+      type: Number,
+      default: 1,
     },
   },
   components: {
@@ -89,7 +92,7 @@ export default {
       this.total = objEvent.total;
       /*
       this.$emit('carritoUpdate', {
-        productId: this.id,
+        id: this.id,
         productPrice: this.price,
         productName: this.name,
         updateFuntion: objEvent.updateFuntion,
@@ -101,6 +104,7 @@ export default {
         productName: this.name,
         updateFuntion: objEvent.updateFuntion,
         userId: this.userId,
+        negocio: this.negocio,
       };
       if (objEvent.updateFuntion === '+') {
         await this.$store.dispatch('increase', objectdata);

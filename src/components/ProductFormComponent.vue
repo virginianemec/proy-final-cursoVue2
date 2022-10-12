@@ -11,18 +11,11 @@
         <validate tag="label" :custom="{ customValidator: customValidator }">
           <div class="renglon">
             <p>Nombre*:</p>
-            <input
-              v-model.trim="product.name"
-              type="text"
-              required
-              name="name"
-            />
+            <input v-model.trim="product.name" type="text" required name="name" />
             <field-messages class="etiqueta" name="name">
               <div>Ok.</div>
               <div slot="required">Ingrese un nombre por favor.</div>
-              <div slot="customValidator">
-                Ya existe un produto con el mismo nombre. Intente otro.
-              </div>
+              <div slot="customValidator">Ya existe un produto con el mismo nombre. Intente otro.</div>
             </field-messages>
           </div>
         </validate>
@@ -42,27 +35,17 @@
             <field-messages class="etiqueta" name="price">
               <div>Ok.</div>
               <div slot="required">Ingrese un precio por favor.</div>
-              <div slot="priceValidator">
-                La comida sin TACC no debe costar mas de $1500
-              </div>
+              <div slot="priceValidator">La comida sin TACC no debe costar mas de $1500</div>
               <div slot="min">El valor debe ser numerico mayor a cero.</div>
               <div slot="max">El valor debe ser numerico menor a 9999.</div>
             </field-messages>
           </div>
         </validate>
 
-        <validate
-          tag="label"
-          :custom="{ categoryValidator: categoryValidator }"
-        >
+        <validate tag="label" :custom="{ categoryValidator: categoryValidator }">
           <div class="renglon">
             <p>Categoria*:</p>
-            <select
-              id="category"
-              v-model="product.category"
-              name="category"
-              required
-            >
+            <select id="category" v-model="product.category" name="category" required>
               <option value="Comida rápida">Comida rápida</option>
               <option value="Comida vegana">Comida vegana</option>
               <option value="Comida sin TACC">Comida sin TACC</option>
@@ -70,9 +53,7 @@
             <field-messages class="etiqueta" name="category">
               <div>Ok.</div>
               <div slot="required">Seleccione una categoria</div>
-              <div slot="categoryValidator">
-                La comida sin TACC no debe costar mas de $1500
-              </div>
+              <div slot="categoryValidator">La comida sin TACC no debe costar mas de $1500</div>
             </field-messages>
           </div>
         </validate>
@@ -87,37 +68,29 @@
               type="radio"
               v-model="product.activo"
             />
-            <label for="si"> <span> </span> Si </label>
+            <label for="si">
+              <span></span> Si
+            </label>
 
-            <input
-              id="no"
-              name="activo"
-              value="2"
-              type="radio"
-              v-model="product.activo"
-            />
-            <label for="no"> <span> </span> No </label>
+            <input id="no" name="activo" value="2" type="radio" v-model="product.activo" />
+            <label for="no">
+              <span></span> No
+            </label>
             <field-messages class="etiqueta" name="activo">
               <div>Ok.</div>
               <div slot="required">Seleccione una categoria</div>
-              <div slot="activoValidator">
-                La comida sin TACC no debe costar mas de $1500
-              </div>
+              <div slot="activoValidator">La comida sin TACC no debe costar mas de $1500</div>
             </field-messages>
           </div>
         </validate>
         <div>
-          <button type="submit" class="btn btn-primary" @keyup.enter="submit">
-            {{ etiqueta }}
-          </button>
+          <button type="submit" class="btn btn-primary" @keyup.enter="submit">{{ etiqueta }}</button>
         </div>
       </vue-form>
     </div>
     <div>
       <br />
-      <ProductsTableComponente
-        @productController="productController($event)"
-      ></ProductsTableComponente>
+      <ProductsTableComponente @productController="productController($event)"></ProductsTableComponente>
     </div>
   </div>
 </template>
@@ -150,7 +123,7 @@ export default {
         activo: 1,
         id_producto: 0,
         cant: 0,
-        negocio: 0,
+        negocio: 1,
         image: '',
       },
       etiqueta: 'Nuevo',
@@ -165,9 +138,11 @@ export default {
       if (this.productNew) {
         // alert("Guardamos el item");
         const objProduct = { ...this.product };
+        /*
+        // este id lo crea mockapi
         const id = this.products.length + 1;
         objProduct.id = id;
-        objProduct.id_producto = id;
+        */
         await this.productSave(objProduct)
           .then((resp) => {
             console.log(resp);
@@ -176,38 +151,28 @@ export default {
             this.resetProduct();
           })
           .catch((err) => {
-            this.$alert(
-              `No pudo crearse el producto. Intente de nuevo. ${err}`,
-            );
+            this.$alert(`No pudo crearse el producto. Intente de nuevo. ${err}`);
           })
           .finally();
         // console.log("producto.add");
       } else {
         // actualizar...
-        this.$confirm(
-          '¿Seguro desea actualizar este producto?',
-          'Atención',
-          'question',
-        ).then(async () => {
-          await this.$store
-            .dispatch('productUpdate', this.product)
-            .then((resp) => {
-              console.log(resp);
-              this.$alert(
-                'Se ha actualizado el producto.',
-                'Atención',
-                'success',
-              );
-              this.$store.dispatch('productsFromApi');
-              this.resetProduct();
-            })
-            .catch((err) => {
-              this.$alert(
-                `No se pudo actualizar el producto. Intente de nuevo. ${err}`,
-              );
-            })
-            .finally();
-        });
+        this.$confirm('¿Seguro desea actualizar este producto?', 'Atención', 'question').then(
+          async () => {
+            await this.$store
+              .dispatch('productUpdate', this.product)
+              .then((resp) => {
+                console.log(resp);
+                this.$alert('Se ha actualizado el producto.', 'Atención', 'success');
+                this.$store.dispatch('productsFromApi');
+                this.resetProduct();
+              })
+              .catch((err) => {
+                this.$alert(`No se pudo actualizar el producto. Intente de nuevo. ${err}`);
+              })
+              .finally();
+          },
+        );
       }
     },
     async productSave(objToSave) {
@@ -223,7 +188,7 @@ export default {
         activo: 1,
         id_producto: 0,
         cant: 0,
-        negocio: 0,
+        negocio: 1,
         image: '',
       };
       this.etiqueta = 'Nuevo';
@@ -235,7 +200,7 @@ export default {
         this.product.price = objController.product.price;
         this.product.category = objController.product.category;
         this.product.activo = objController.product.activo;
-        this.product.id_producto = objController.product.id_producto;
+        // this.product.id_producto = objController.product.id_producto;
         this.product.cant = objController.product.cant;
         this.product.negocio = objController.product.negocio;
         this.product.image = objController.product.image;
@@ -243,13 +208,9 @@ export default {
         this.etiqueta = 'Actualizar';
       } else {
         // delete
-        this.$confirm(
-          '¿Seguro desea eliminar este producto?',
-          'Atención',
-          'question',
-        )
+        this.$confirm('¿Seguro desea eliminar este producto?', 'Atención', 'question')
           .then(async () => {
-            const id = objController.product.id_producto;
+            const { id } = objController.product;
             await this.$store
               .dispatch('productDelete', id)
               .then(async () => {
@@ -283,11 +244,7 @@ export default {
       const prodExists = this.products.find((prod) => {
         const valor = prod.name;
         const compareValue = valor.toUpperCase();
-        return (
-          compareValue === param
-          && !this.productNew
-          && prod.id !== this.product.id
-        );
+        return compareValue === param && !this.productNew && prod.id !== this.product.id;
       });
       if (prodExists) {
         respuesta = true;

@@ -4,7 +4,7 @@
       Bienvenido {{ userName }} ||
       <router-link :to="{ name: 'Login' }">Cerrar Session</router-link>||
       <div v-if="isAdmin">
-        <router-link :to="{ name: 'Productos' }">ABM Productos</router-link> ||
+        <router-link :to="{ name: 'Productos' }">ABM Productos</router-link>||
       </div>
       <div v-else>
         <p>
@@ -13,12 +13,9 @@
         </p>
       </div>
       <router-link :to="{ name: 'Pedidos' }">{{tituloPedidos}}</router-link>||
-      <router-link :to="{ name: 'Carrito' }"> Ver Carrito</router-link>||
+      <router-link :to="{ name: 'Carrito' }">Ver Carrito</router-link>||
     </div>
-    <PageUserComponent
-      @reset="reset()"
-      @comprar="comprar()"
-    ></PageUserComponent>
+    <PageUserComponent @reset="reset()" @comprar="comprar()"></PageUserComponent>
     <!-- :carrito="carrito"  @carritoUpdate="carritoUpdate($event)"-->
   </article>
 </template>
@@ -35,18 +32,16 @@ export default {
     // this.carritoUserFromApi();
   },
   data() {
-    return {
-    };
+    return {};
   },
   methods: {
-
     async carritoUserFromApi() {
       await this.$store.dispatch('carritoUserFromApi', this.userId);
     },
     async carritoUpdate(objProdCant) {
       await this.$store.dispatch('updateCarrito', objProdCant, this.userId);
       await this.carritoUserFromApi();
-    /*
+      /*
      if (objProdCant.updateFuntion === '+') {
         this.increase(objProdCant);
       } else {
@@ -57,7 +52,7 @@ export default {
     /*
     async increase(objEvento) {
       console.log(objEvento);
-      const obj = this.carrito.find((val) => val.productId === objEvento.productId);
+      const obj = this.carrito.find((val) => val.id === objEvento.id);
       if (obj) {
         if (obj.cant >= 0) {
           obj.cant += 1;
@@ -73,7 +68,7 @@ export default {
           });
       } else {
         const productToCarrito = {
-          productId: objEvento.productId,
+          id: objEvento.id,
           productName: objEvento.productName,
           productPrice: objEvento.productPrice,
           user: this.userId,
@@ -82,7 +77,7 @@ export default {
           estado: 'PENDIENTE',
         };
 
-        console.log('id - price', objEvento.productId, objEvento.productPrice);
+        console.log('id - price', objEvento.id, objEvento.productPrice);
 
         await this.axios
           .post(`${this.urlCarrito}/`, productToCarrito)
@@ -96,7 +91,7 @@ export default {
       await this.carritoUserFromApi();
     },
     async decrease(objEvento) {
-      const obj = this.carrito.find((val) => val.productId === objEvento.productId);
+      const obj = this.carrito.find((val) => val.id === objEvento.id);
       if (obj) {
         if (obj.cant > 1) {
           obj.cant -= 1;
@@ -110,7 +105,7 @@ export default {
               console.log(error);
             });
         } else {
-          console.log('id - price', objEvento.productId, objEvento.productPrice);
+          console.log('id - price', objEvento.id, objEvento.productPrice);
           const idProducto = obj.id;
           await this.axios
             .delete(`${this.urlCarrito}/${idProducto}`)
@@ -127,6 +122,7 @@ export default {
     */
     async reset() {
       await this.$store.dispatch('resetCarritoUser', this.userId);
+      // await this.carritoUserFromApi();
       // no funciona bien pues en pantalla no reinicia los countComponents
       // IVAN: no puedo manejar la sincro. El sistema busca el carrito (carritoUserFromApi)
       // antes de terminar todas las iteraciones.
@@ -146,7 +142,6 @@ export default {
         // }
       });
       */
-      await this.carritoUserFromApi();
     },
     async comprar() {
       // llamar al store para que compre el carrito.
@@ -183,10 +178,10 @@ export default {
       return this.$store.getters.getUserLoggedId;
     },
     userName() {
-      return this.$store.getUserLoggedName;
+      return this.$store.getters.getUserLoggedName;
     },
     tituloPedidos() {
-      return (this.$store.getters.isAdmin) ? 'Ver Todos los Pedido' : 'Mis Pedidos';
+      return this.$store.getters.isAdmin ? 'Ver Todos los Pedido' : 'Mis Pedidos';
     },
   },
 };

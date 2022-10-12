@@ -32,22 +32,22 @@ export default {
   },
   methods: {
     increase() {
-      if (this.cant >= 0) {
-        this.cant += 1;
-        this.$emit('carritoUpdate', {
-          updateFuntion: '+',
-          total: this.totalPrice,
-        });
-      }
+      // if (this.cant >= 0) {
+      this.cant += 1;
+      this.$emit('carritoUpdate', {
+        updateFuntion: '+',
+        total: this.totalPrice,
+      });
+      // }
     },
     decrease() {
-      if (this.cant > 0) {
-        this.cant -= 1;
-        this.$emit('carritoUpdate', {
-          updateFuntion: '-',
-          total: this.totalPrice,
-        });
-      }
+      // if (this.cant > 0) {
+      this.cant -= 1;
+      this.$emit('carritoUpdate', {
+        updateFuntion: '-',
+        total: this.totalPrice,
+      });
+      // }
     },
     reset() {
       this.cant = 0;

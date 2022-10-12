@@ -1,17 +1,17 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import axios from 'axios';
+import Vue from "vue";
+import Vuex from "vuex";
+import axios from "axios";
 
-import products from './products';
-import users from './users';
-import carrito from './carrito';
-import negocios from './negocios';
+import products from "./products";
+import users from "./users";
+import carrito from "./carrito";
+import negocios from "./negocios";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    workDescription: '',
+    workDescription: "",
   },
 
   getters: {
@@ -20,7 +20,9 @@ export default new Vuex.Store({
     },
     getUserCarrito(state, getters, rootState, rootGetters) {
       const userId = rootGetters.getUserLoggedId;
-      const filtrado = rootGetters.getProducts.filter((item) => item.user === userId);
+      const filtrado = rootGetters.getProducts.filter(
+        (item) => item.user === userId
+      );
       return filtrado;
     },
   },
@@ -33,7 +35,7 @@ export default new Vuex.Store({
 
   actions: {
     cambiarWorkDescription({ commit }, message) {
-      commit('setWorkDescription', message);
+      commit("setWorkDescription", message);
     },
     async carritoComprar({ getters }) {
       // comprar: toma cada producto, y actualiza las ordenes para cada negocio dueño dle producto.
@@ -42,10 +44,10 @@ export default new Vuex.Store({
         const valId = element.id;
         // const arrayProductos = getters.getProducts;
         // productos
-        // const producto = arrayProductos.find((todo) => todo.id === element.productId);
+        // const producto = arrayProductos.find((todo) => todo.id === element.id);
         // negocio
         // const negocioId = producto.negocio;
-        element.estado = 'COMPRADO';
+        element.estado = "COMPRADO";
         // await commit('comprarDevolverItem', index), accion;
         await axios
           // .delete(`https://632ba1f21aabd8373989647d.mockapi.io/negocios/${element.id}`)
@@ -60,7 +62,7 @@ export default new Vuex.Store({
             if (negocio) negocio.orders.push(element);
             /*
             */
-          // TODO: buscar los carritos y ordenes de nuevo.
+            // TODO: buscar los carritos y ordenes de nuevo.
           })
           .catch((error) => {
             console.log(error);

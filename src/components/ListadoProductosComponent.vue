@@ -7,8 +7,9 @@
         :price="product.price"
         :image="product.image"
         :cant="product.cant"
-        ></CardProducto>
-        <!-- @carritoUpdate="carritoUpdate($event)" -->
+        :negocio="product.negocio"
+      ></CardProducto>
+      <!-- @carritoUpdate="carritoUpdate($event)" -->
     </div>
   </div>
 </template>

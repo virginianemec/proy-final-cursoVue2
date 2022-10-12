@@ -1,15 +1,19 @@
 <template>
   <div>
-    <div class="tabla--titulo">{{ name }} - {{ category }}</div>
+    <div class="tabla--titulo">{{ name }} - {{ category }} <br>
+      <div v-if="isAdmin">
+        <router-link :to="{ path: `pedidos/${this.id}` }">Pedidos</router-link>
+      </div>
+    </div>
     <div class="tabla--datos">Productos del negocio</div>
     <ListadoProductosComponent :negocioId="this.id" :products="products"
     />
     <!--  @carritoUpdate="carritoUpdate($event)"-->
     <br />
     <!--  Pendiente proxima entrega  -->
-    <!--
+        <!--
         <div class='tabla--datos'> Pedidos del negocio</div>
-        <ListadoPedidosComponent />
+        <ListadoPedidosComponent :orders="orders"/>
         <br />
 
         <br />
@@ -22,8 +26,8 @@
 
 <script>
 import { mapGetters } from 'vuex';
-/*
 import ListadoPedidosComponent from './ListadoPedidosComponent.vue';
+/*
 import ListadoOfertasComponent from './ListadoOfertasComponent.vue';
 */
 import ListadoProductosComponent from './ListadoProductosComponent.vue';
@@ -43,6 +47,7 @@ export default {
       type: String,
       default: '',
     },
+    orders: [],
     /* Products ya no es una props,
     // lo busco desde el api para el id de este negocio.
     products: [],
@@ -54,7 +59,6 @@ export default {
       productosFromApi: [],
       // url: 'https://632ba1f21aabd8373989647d.mockapi.io/productos/',
       // urlOrders: 'https://632ba1f21aabd8373989647d.mockapi.io/carritos/',
-      orders: [],
     };
   },
   // created() {
@@ -63,13 +67,19 @@ export default {
     // this.getOrders();
   },
   computed: {
-    ...mapGetters(['getProductsByNegocioId', 'getProducts']),
+    ...mapGetters(['isAdmin', 'getUserLoggedId', 'getProducts']),
     products() {
       let productsArray = [];
       productsArray = this.$store.getters.getProducts.filter(
         (todo) => todo.negocio === parseInt(this.id, 10),
       );
       return productsArray;// getProductsByNegocioId(parseInt(this.id, 10));
+    },
+    isAdmin() {
+      return this.$store.getters.isAdmin;
+    },
+    userId() {
+      return this.$store.getters.getUserLoggedId;
     },
     /*
     productsNegocio() {
@@ -100,7 +110,7 @@ export default {
         console.error(`${err}`);
       });
       */
-    async getOrders() {
+    /* async getOrders() {
       // por ahora: son los items de los carritos de los usuarios que tienen el estado = COMPRADO.
       await this.axios
         .get(`${this.urlOrders}?negocio=${this.id}`)
@@ -116,10 +126,11 @@ export default {
         })
         .finally(() => console.log('Peticion terminada'));
     },
+    */
   },
   components: {
     ListadoProductosComponent,
-    // ListadoPedidosComponent,
+    ListadoPedidosComponent,
     // ListadoOfertasComponent,
   },
 };

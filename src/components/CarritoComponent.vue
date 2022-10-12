@@ -59,12 +59,12 @@ export default {
       // TODO: Probar esto.
       // await this.$store.dispatch('carritoComprar');
       // await this.$store.dispatch('updateNegocios');
-      await this.$store.dispatch('carritoComprarDevolver', 'comprar');
+      await this.$store.dispatch('carritoComprarDevolver', { accion: 'comprar', userId: this.userId });
       await this.$store.dispatch('carritoUserFromApi', this.userId);
     },
     async devolver() {
     // this.$emit('comprar');
-      await this.$store.dispatch('carritoComprarDevolver', 'devolver');
+      await this.$store.dispatch('carritoComprarDevolver', { accion: 'devolver', userId: this.userId });
       await this.$store.dispatch('carritoUserFromApi', this.userId);
     },
   },

@@ -19,16 +19,10 @@
           <tbody v-for="(product, i) in products" :key="i">
             <tr>
               <td class="table--td">{{ product.id }}</td>
-              <td class="table--td">
-                {{ product.name | nameFilter(product.name) }}
-              </td>
-              <td class="table--td">
-                {{ product.price | priceFilter(product.price) }}
-              </td>
+              <td class="table--td">{{ product.name | nameFilter(product.name) }}</td>
+              <td class="table--td">{{ product.price | priceFilter(product.price) }}</td>
               <td class="table--td">{{ product.category | categoryFilter }}</td>
-              <td class="table--td">
-                {{ product.activo | isActivo(product.activo) }}
-              </td>
+              <td class="table--td">{{ product.activo | isActivo(product.activo) }}</td>
               <td>
                 <button v-on:click="productUpdate(product)">Update</button>
               </td>
@@ -72,11 +66,11 @@ export default {
       await this.$store.dispatch('productsReset');
     },
     productUpdate(prod) {
-      console.log(`${prod.id} ${prod.id_producto}`);
+      console.log(`${prod.id}`);
       this.$emit('productController', { function: 'update', product: prod });
     },
     productDelete(prod) {
-      console.log(`${prod.id} ${prod.id_producto}`);
+      console.log(` ${prod.id}`);
       this.$emit('productController', { function: 'delete', product: prod });
     },
   },

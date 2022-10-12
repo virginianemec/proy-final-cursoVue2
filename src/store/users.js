@@ -17,13 +17,6 @@ export default {
 "createdAt": "2022-09-23T23:27:08.664Z",
 */
     // usuario harcodeado.
-    /* userLogged: {
-      email: 'virginia@ta.com',
-      name: 'Alejo',
-      password: 'admin', // user
-      rol: true,
-      id: '1',
-    }, */
     userLogged: {
       email: '',
       name: '',
