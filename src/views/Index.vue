@@ -1,5 +1,5 @@
 <template>
-  <article>
+  <!--<article>
     <div class="div--container">
       Bienvenido {{ userName }} ||
       <router-link :to="{ name: 'Login' }">Cerrar Session</router-link>||
@@ -15,18 +15,24 @@
       <router-link :to="{ name: 'Pedidos' }">{{tituloPedidos}}</router-link>||
       <router-link :to="{ name: 'Carrito' }">Ver Carrito</router-link>||
     </div>
+
     <PageUserComponent @reset="reset()" @comprar="comprar()"></PageUserComponent>
-    <!-- :carrito="carrito"  @carritoUpdate="carritoUpdate($event)"-->
-  </article>
+  -->
+    <!-- :carrito="carrito"  @carritoUpdate="carritoUpdate($event)"
+ </article>-->
+    <ListadoNegociosComponent   />
+
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import PageUserComponent from '@/components/PageUserComponent.vue';
+// import { mapGetters } from 'vuex';
+// import PageUserComponent from '@/components/PageUserComponent.vue';
+import ListadoNegociosComponent from '@/components/ListadoNegociosComponent.vue';
 
 export default {
   components: {
-    PageUserComponent,
+    // PageUserComponent,
+    ListadoNegociosComponent,
   },
   created() {
     // this.carritoUserFromApi();
@@ -35,6 +41,7 @@ export default {
     return {};
   },
   methods: {
+    /*
     async carritoUserFromApi() {
       await this.$store.dispatch('carritoUserFromApi', this.userId);
     },
@@ -48,7 +55,7 @@ export default {
         this.decrease(objProdCant);
       }
       */
-    },
+    // },
     /*
     async increase(objEvento) {
       console.log(objEvento);
@@ -120,7 +127,7 @@ export default {
       await this.carritoUserFromApi();
     },
     */
-    async reset() {
+    /* async reset() {
       await this.$store.dispatch('resetCarritoUser', this.userId);
       // await this.carritoUserFromApi();
       // no funciona bien pues en pantalla no reinicia los countComponents
@@ -142,7 +149,8 @@ export default {
         // }
       });
       */
-    },
+    /*
+  },
     async comprar() {
       // llamar al store para que compre el carrito.
       await this.$store.dispatch('carritoComprarDevolver', 'comprar');
@@ -161,9 +169,11 @@ export default {
           });
       });
       */
-      await this.carritoUserFromApi();
+    /*   await this.carritoUserFromApi();
     },
+    */
   },
+  /*
   computed: {
     ...mapGetters(['isAdmin', 'getUserLoggedId', 'getUserLoggedName']), // , 'getUserCarrito']),
     /*
@@ -171,6 +181,7 @@ export default {
       return this.$store.getters.getUserCarrito;
     },
     */
+  /*
     isAdmin() {
       return this.$store.getters.isAdmin;
     },
@@ -184,6 +195,7 @@ export default {
       return this.$store.getters.isAdmin ? 'Ver Todos los Pedido' : 'Mis Pedidos';
     },
   },
+  */
 };
 </script>
 

@@ -164,7 +164,7 @@ export default {
           .put(`${URL}/${valId}`, element)
           .then(async (response) => {
             console.table(response.data);
-            await dispatch('carritoUserFromApi', objData.userId);
+            // await dispatch('carritoUserFromApi', objData.userId);
           })
           .catch((error) => {
             console.log(error);
@@ -195,13 +195,13 @@ export default {
         });
     },
     async resetCarritoUser({ state, dispatch }, userId) {
-      await dispatch('carritoUserFromApi', userId);
+      // await dispatch('carritoUserFromApi', userId);
       state.carrito.forEach(async (element) => {
         await axios
           .delete(`${URL}/${element.id}`)
           .then(async (response) => {
             console.table(response.data);
-            await dispatch('carritoUserFromApi', userId);
+            // await dispatch('carritoUserFromApi', userId);
           })
           .catch((error) => {
             console.log(error);

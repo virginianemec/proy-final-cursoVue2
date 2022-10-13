@@ -1,3 +1,4 @@
+import router from '@/router/router';
 import axios from 'axios';
 
 const URL = 'https://632ba1f21aabd8373989647d.mockapi.io/users';
@@ -5,7 +6,7 @@ const URL = 'https://632ba1f21aabd8373989647d.mockapi.io/users';
 export default {
   namespace: true,
   state: {
-  /*  en MockApi.
+    /*  en MockApi.
 "email": "virginia@ta.com",
 "id": "1"
 "name": "Virginia",
@@ -43,9 +44,18 @@ export default {
     setUserLogged(state, payload) {
       state.userLogged = payload;
     },
+    logoutUser(state) {
+      state.userLogged = {
+        email: '',
+        name: '',
+        password: 'user', // user, admin
+        rol: false,
+        id: '',
+      };
+      state.isAdmin = false;
+    },
   },
   actions: {
-
     async getUsersFromApi({ commit }, objUserToLoging) {
       const data = {
         email: objUserToLoging.email,
@@ -100,6 +110,16 @@ export default {
           console.error('error', err);
         })
         .finally(() => console.log('Peticion terminada - action getUserRegisterFromApi.'));
+    },
+
+    logout({ commit}) {
+      commit('logoutUser');
+      // commit('reset');
+      /*
+      commit("resetProducts");
+      commit("resetUsers");
+      */
+      router.push({ name: "Login" });
     },
     /* async login({},data){
 

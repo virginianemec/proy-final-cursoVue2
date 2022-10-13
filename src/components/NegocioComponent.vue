@@ -1,13 +1,15 @@
 <template>
   <div>
     <div class="tabla--titulo">{{ name }} - {{ category }} <br>
-      <div v-if="isAdmin">
-        <router-link :to="{ path: `pedidos/${this.id}` }">Pedidos</router-link>
-      </div>
-    </div>
-    <div class="tabla--datos">Productos del negocio</div>
-    <ListadoProductosComponent :negocioId="this.id" :products="products"
-    />
+      <div class="tabla--titulo">Productos del negocio</div>
+      <div class="tabla--titulo">
+       <router-link v-if="isAdmin" :to="{ path: `pedidos/${this.id}` }">Pedidos</router-link>
+       </div>
+     </div>
+     <br>
+     <div>
+      <ListadoProductosComponent :negocioId="this.id" :products="products" />
+</div>
     <!--  @carritoUpdate="carritoUpdate($event)"-->
     <br />
     <!--  Pendiente proxima entrega  -->
@@ -151,5 +153,12 @@ export default {
   height: 25px;
   color: black;
   font: bold;
+}
+a {
+    color: #302e2e;
+    text-decoration: none;
+}
+a:hover{
+  color: aquamarine;
 }
 </style>

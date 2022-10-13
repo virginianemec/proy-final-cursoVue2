@@ -24,9 +24,11 @@ export default {
     return {};
   },
   methods: {
+    /*
     back() {
       this.$emit('back');
     },
+    */
   },
 };
 </script>

@@ -107,9 +107,9 @@
       </vue-form>
     </div>
     <div class="text-center">
-      <button type="submit" class="btn btn-primary" @click="back()">
+      <!-- <button type="submit" class="btn btn-primary" @click="back()">
         Volver
-      </button>
+      </button> -->
     </div>
   </div>
 </template>
@@ -213,9 +213,11 @@ export default {
       await this.$store.dispatch('registerUserOnApi', userToPost);
     },
 
+    /*
     back() {
       this.$router.push({ name: 'Login' });
     },
+    */
     ageValidator() {
       let respuesta = false;
 

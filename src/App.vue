@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-    <HeaderComponent :user="user" @back="returnToLogin()"></HeaderComponent>
+    <HeaderComponent/>
     <router-view></router-view>
-    <FooterComponent></FooterComponent>
+    <FooterComponent/>
   </div>
 </template>
 
 <script>
 import HeaderComponent from './components/HeaderComponent.vue';
 import FooterComponent from './components/FooterComponent.vue';
-import DatosBD from './datosBD';
+// import DatosBD from './datosBD';
 
 export default {
   name: 'App',
@@ -23,6 +23,7 @@ export default {
       // para mostrar solo la primer pantalla login.
       // esto se manejara preguntando si el
       // usuairo exuste en el array de users del componenet
+      /*
       loginFunction: true,
       indexFunction: false,
       registerFunction: false,
@@ -31,15 +32,19 @@ export default {
       negocios: DatosBD.negocios,
       users: [{ email: 'virginia@ta.com', password: '123' }],
       user: null,
+      */
     };
   },
+  /*
   computed: {
     buttonReturnShowInHeader() {
       return this.loginFunction || this.registerFunction;
     },
   },
+  */
   methods: {
     // lleve este metodo a loginview?
+    /*
     loginSuccess(user) {
       // Enviar al index
       // esto se manejara preguntando si el
@@ -77,6 +82,7 @@ export default {
       this.registerFunction = false;
       this.indexFunction = false;
     },
+    */
   },
 };
 </script>

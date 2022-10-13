@@ -27,6 +27,11 @@ export default {
       const negocio = state.negocios.find((item) => item.id === objData.id);
       negocio.orders = objData.orders;
     },
+    /*
+    reset(state, rootState) {
+        state.negocio = [];
+    },
+    */
   },
   actions: {
 

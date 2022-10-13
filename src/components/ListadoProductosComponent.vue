@@ -36,9 +36,11 @@ export default {
     };
   },
   methods: {
+    /*
     back() {
       this.$emit('back');
     },
+    */
     /*
     carritoUpdate(obj) {
       this.$emit('carritoUpdate', obj);

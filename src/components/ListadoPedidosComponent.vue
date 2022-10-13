@@ -29,9 +29,11 @@ export default {
     return {};
   },
   methods: {
+    /*
     back() {
       this.$emit('back');
     },
+    */
   },
   props: {
     orders: [],
