@@ -1,5 +1,5 @@
 <template>
-  <div class="div--container">
+  <div class="container">
     <h1 class="text-center">CARRITO!</h1>
     <div class="row">
       <table class="table border-primary">
@@ -10,9 +10,18 @@
             <th>Subtotal</th>
           </tr>
         </thead>
-        <div v-for="(product,index) in carrito" :key="index">
+        <tbody  v-for="(product,index) in carrito" :key="index">
+        <!-- <div v-for="(product,index) in carrito" :key="index">
           <RowProducto :product="product" />
-        </div>
+        </div> -->
+          <tr  v-if="isPend(product)">
+            <td>
+              <p>{{ displayProduct(product) }}</p>
+            </td>
+            <td>$ {{ product.productPrice }}</td>
+            <td>$ {{ totalProduct(product) }}</td>
+          </tr>
+        </tbody>
       </table>
       <div>Total: ${{ getTotal }}</div>
     </div>
@@ -30,12 +39,12 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import RowProducto from '@/components/RowProducto.vue';
+// import RowProducto from '@/components/RowProducto.vue';
 
 export default {
   name: 'CarritoComponent',
   components: {
-    RowProducto,
+    // RowProducto,
   },
   props: {
     // carrito: [],
@@ -67,6 +76,17 @@ export default {
       await this.$store.dispatch('carritoComprarDevolver', { accion: 'devolver', userId: this.userId });
       await this.$store.dispatch('carritoUserFromApi', this.userId);
     },
+
+    displayProduct(product) {
+      return ` ${product.cant} ${product.productName}`;
+    },
+    totalProduct(product) {
+      return product.cant * product.productPrice;
+    },
+    isPend(product) {
+      return product.estado === 'PENDIENTE';
+    },
+
   },
   computed: {
     ...mapGetters(['getCarrito', 'getUserLoggedId']), // , 'getNegocios']),

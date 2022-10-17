@@ -1,7 +1,7 @@
 <template>
   <div class="coder--header">
-    <div class="title">PediSalud</div>
-    <div class="title">¡Nuestra web de comidas saludables!</div>
+    <h1>PediSalud</h1>
+    <h1>¡Nuestra web de comidas saludables!</h1>
 
       <div v-if="userIsLogged" class="div--container">
            Bienvenido {{ userName }}
@@ -69,20 +69,18 @@ export default {
 <style scoped>
 .coder--header {
   width: 100%;
-  background-image: url("../assets/logo.png");
+ /* background-image: url("../assets/logo.png"); */
+  background-color: orange;
   background-size: cover;
   background-position: center;
 }
 h1 {
   text-align: center;
-  padding: 20px;
-  color: #dd845a;
+  /*padding: 20px;*/
+  color: #131212;
 }
 .title {
   text-align: center;
-  padding: 20px;
-  font-weight: bold;
-  color: #504c4c;
   color: #1a1919;
   font-size: calc(1.5rem + 1.5vw);
 }

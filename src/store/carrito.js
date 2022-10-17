@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
-import { beforeRead } from '@popperjs/core';
 import axios from 'axios';
 
 const URL = 'https://632ba1f21aabd8373989647d.mockapi.io/carritos';
