@@ -6,6 +6,7 @@ import VueForm from 'vue-form';
 import axios from 'axios';
 import VueRouter from 'vue-router';
 import VueAxios from 'vue-axios';
+import { BootstrapVue } from 'bootstrap-vue';
 import router from './router/router';
 
 import store from './store';
@@ -17,8 +18,7 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 */
 import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
 // import './styles.css';
 
 Vue.use(VueAxios, axios);
