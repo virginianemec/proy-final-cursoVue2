@@ -23,7 +23,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 Vue.use(VueAxios, axios);
 Vue.use(VueRouter);
-
+Vue.use(BootstrapVue);
 Vue.config.productionTip = false;
 Vue.use(VueSimpleAlert);
 Vue.use(VueForm);
