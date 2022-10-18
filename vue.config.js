@@ -5,6 +5,6 @@ module.exports = defineConfig({
   // outputDir: '/dist',
   publicPath:
     process.env.NODE_ENV === 'production'
-      ? '/proy-final-cursovue2'
+      ? '/cursovue'
       : '',
 });
