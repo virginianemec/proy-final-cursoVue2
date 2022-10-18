@@ -7,5 +7,6 @@ git commit -m 'deploy'
 # git push -f git@github.com: <USERNAME>/<USERNAME>.github.io.git master
 # Si va como repositorio, habilita esta otra línea:
 ## virginianemec/proy-final-cursovue2
-git push -f https://github.com:virginianemec/proy-final-cursovue2.git master:gh-pages
-cd -
+git push -f git@github.com:virginianemec/proy-final-cursovue2.git master:gh-pages
+
+pause
