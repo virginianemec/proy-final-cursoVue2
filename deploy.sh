@@ -1,5 +1,6 @@
 npm run build
 # navega previamente hasta el directorio de salida de tus archivos para producción:
+git checkout -b master
 git init
 git add -A
 git commit -m 'deploy'
