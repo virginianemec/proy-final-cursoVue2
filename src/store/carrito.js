@@ -153,7 +153,27 @@ export default {
     // comprar -> estado: COMPRADO, o volver a estado: pendiente.
     async carritoComprarDevolver({ commit, state, dispatch }, objData) {
       await dispatch('carritoUserFromApi', objData.userId);
-      state.carrito.forEach(async (element, index) => {
+      await Promise.all(
+        state.carrito.map(async (element, index) => {
+          const valId = element.id;
+          element.estado = objData.accion === 'comprar' ? 'COMPRADO' : 'PENDIENTE';
+
+          // await commit('comprarDevolverItem', index), accion;
+
+          await axios
+            .put(`${URL}/${valId}`, element)
+            .then(async (response) => {
+              console.table(response.data);
+            // await dispatch('carritoUserFromApi', objData.userId);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }),
+      );
+      await dispatch('carritoUserFromApi', objData.userId);
+
+      /* state.carrito.forEach(async (element, index) => {
         const valId = element.id;
         element.estado = objData.accion === 'comprar' ? 'COMPRADO' : 'PENDIENTE';
 
@@ -168,7 +188,7 @@ export default {
           .catch((error) => {
             console.log(error);
           });
-      });
+      }); */
     },
     async carritoUserFromApi({ commit }, userId) {
       // busco en la Api todos los registros carrito que corresponden al usuario.
@@ -176,14 +196,14 @@ export default {
         .get(`${URL}/?user=${userId}`)
         .then(async (response) => {
           console.table(response.data);
-          // let arrayCarrito = response.data;
+          const arrayCarrito = response.data;
           await commit(
             'setCarrito',
-            response.data.filter((item) => item.estado === 'PENDIENTE'),
+            arrayCarrito.filter((item) => item.estado === 'PENDIENTE'),
           );
           await commit(
             'setUserOrders',
-            response.data.filter((item) => item.estado === 'COMPRADO'),
+            arrayCarrito.filter((item) => item.estado === 'COMPRADO'),
           );
           // await commit('setCarrito', response.data);
         })
@@ -195,6 +215,7 @@ export default {
     },
     async resetCarritoUser({ state, dispatch }, userId) {
       // await dispatch('carritoUserFromApi', userId);
+      /*
       state.carrito.forEach(async (element) => {
         await axios
           .delete(`${URL}/${element.id}`)
@@ -205,8 +226,25 @@ export default {
           .catch((error) => {
             console.log(error);
           });
+        // .finally(await dispatch('carritoUserFromApi', userId));
       });
+      */
+      await Promise.all(
+        state.carrito.map(async (element) => {
+          axios
+            .delete(`${URL}/${element.id}`)
+            .then(async (response) => {
+              console.table(response.data);
+              // await dispatch('carritoUserFromApi', userId);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }),
+      );
+      await dispatch('carritoUserFromApi', userId);
     },
+    /*
     async carritoComprar1({ commit, state, rootGetters }, accion) {
       // comprar: toma cada producto, y actualiza las ordenes para cada negocio dueño dle producto.
       await state.carrito.forEach(async (element, index) => {
@@ -228,13 +266,15 @@ export default {
           });
       });
     },
+    */
     async getOrdersFromApi({ commit }, id) {
       await axios
         .get(`${URL}/?negocio=${id}`)
         .then(async (response) => {
           console.table(response.data);
-          const result = await response.data.filter(
-            (todo) => todo.estado === 'COMPRADO',
+          const arrayCarrito = response.data;
+          const result = await arrayCarrito.filter(
+            (todo) => todo.estado === "COMPRADO"
           );
           console.table(result);
           await commit('setNegocioOrders', { id, orders: result });
@@ -253,7 +293,8 @@ export default {
         .get(urlCarritos)
         .then(async (response) => {
           console.table(response.data);
-          const result = await response.data.filter(
+          const arrayCarrito = response.data;
+          const result = await arrayCarrito.filter(
             (todo) => todo.estado === 'COMPRADO',
           );
           console.table(result);

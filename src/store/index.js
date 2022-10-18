@@ -42,6 +42,7 @@ export default new Vuex.Store({
     cambiarWorkDescription({ commit }, message) {
       commit('setWorkDescription', message);
     },
+    /*
     async carritoComprar({ getters }) {
       // comprar: toma cada producto, y actualiza las ordenes para cada negocio dueño dle producto.
       await getters.getCarrito.forEach(async (element) => {
@@ -67,13 +68,14 @@ export default new Vuex.Store({
             if (negocio) negocio.orders.push(element);
             /*
             */
-            // TODO: buscar los carritos y ordenes de nuevo.
-          })
+    // TODO: buscar los carritos y ordenes de nuevo.
+    /*      })
           .catch((error) => {
             console.log(error);
           });
       });
     },
+    */
   },
   modules: {
     products,

@@ -1,5 +1,5 @@
 <template>
-   <ListadoPedidosComponent :orders="orders"></ListadoPedidosComponent>
+   <ListadoPedidosComponent :orders="orders" :titulo="titulo" ></ListadoPedidosComponent>
 </template>
 
 <script>
@@ -35,6 +35,10 @@ export default {
       }
       return this.$store.getters.getOrdersAll;
     },
+    titulo()
+    {
+      return (this.$route.params.idNegocio) ? `Pedidos de negocio ${this.$route.params.idNegocio}` : 'Listado de Todos los pedidos del sitio.';
+    }
   },
   methods: {
     // obtener los productos from api, desde el store.

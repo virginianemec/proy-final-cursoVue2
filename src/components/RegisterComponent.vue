@@ -4,7 +4,7 @@
 <template>
   <div>
     <h3 class="title">Registrarme</h3>
-    <div class="principal">
+    <div  class="container px-4 text-center">
       <vue-form
         :state="formStateReg"
         @submit.prevent="onRegister()"

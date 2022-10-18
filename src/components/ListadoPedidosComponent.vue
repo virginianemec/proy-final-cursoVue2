@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+       <h1 class="text-center">{{titulo}}!</h1>
     <table class="table border-primary">
       <thead>
         <th>Fecha</th>
@@ -49,6 +50,7 @@ export default {
   },
   props: {
     orders: [],
+    titulo: String,
   },
   computed: {
 

@@ -1,6 +1,6 @@
 <!-- eslint-disable prettier/prettier -->
 <template>
-  <div class="principal">
+  <div class="container">
     <div class="div--container">
       <vue-form
         :state="formStateProducts"
@@ -132,7 +132,11 @@ export default {
   methods: {
     async productAdd() {
       if (this.formStateProducts.$invalid) {
-        alert('Los datos no son correctos. Verifiquelos por favor.');
+        this.$alert(
+          'Los datos no son correctos. Verifiquelos por favor.',
+          'Atención',
+          'error',
+        );
         return;
       }
       if (this.productNew) {

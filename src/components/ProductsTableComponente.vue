@@ -98,7 +98,7 @@ export default {
 table {
   width: 90%;
   margin: auto;
-  padding: 25px;
+  /* padding: 25px; */
   margin-bottom: 20px;
   border-radius: 15px;
   box-shadow: 2px 2px 10px rgb(142, 142, 142);
@@ -112,7 +112,7 @@ table {
   color: white;
   text-align: center;
   font-size: 15px;
-  padding: 10px;
+  /* padding: 10px; */
   width: 90%;
 }
 

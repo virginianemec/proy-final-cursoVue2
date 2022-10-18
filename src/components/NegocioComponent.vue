@@ -1,15 +1,13 @@
 <template>
   <div>
-    <div class="tabla--titulo">{{ name }} - {{ category }} <br>
-      <div class="tabla--titulo">Productos del negocio</div>
-      <div class="tabla--titulo">
-       <router-link v-if="isAdmin" :to="{ path: `pedidos/${this.id}` }">Pedidos</router-link>
-       </div>
-     </div>
+    <div class="tabla--titulo">{{ name }} - {{ category }} -
+      <router-link v-if="isAdmin" :to="{ path: `pedidos/${this.id}` }">Pedidos</router-link> <br>
+      <!--<div class="tabla--titulo">Productos del negocio</div>
+      <div class="tabla--titulo"></div> -->
+    </div>
      <br>
      <div>
-      <ListadoProductosComponent :negocioId="this.id" :products="products" />
-</div>
+      <ListadoProductosComponent :negocioId="this.id" :products="products" /> </div>
     <!--  @carritoUpdate="carritoUpdate($event)"-->
     <br />
     <!--  Pendiente proxima entrega  -->
@@ -28,8 +26,8 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import ListadoPedidosComponent from './ListadoPedidosComponent.vue';
 /*
+import ListadoPedidosComponent from './ListadoPedidosComponent.vue';
 import ListadoOfertasComponent from './ListadoOfertasComponent.vue';
 */
 import ListadoProductosComponent from './ListadoProductosComponent.vue';
@@ -132,7 +130,7 @@ export default {
   },
   components: {
     ListadoProductosComponent,
-    ListadoPedidosComponent,
+    // ListadoPedidosComponent,
     // ListadoOfertasComponent,
   },
 };

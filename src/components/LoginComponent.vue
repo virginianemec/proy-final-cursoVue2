@@ -72,7 +72,11 @@ export default {
     async onSubmit() {
       // valida el form
       if (this.formState.$invalid) {
-        this.$alert('Los datos no son correctos. Verifiquelos por favor.');
+        this.$alert(
+          'Los datos no son correctos. Verifiquelos por favor.',
+          'Atención',
+          'error',
+        );
         return;
       }
       // si el form es correcto sigue con la autenticacion.

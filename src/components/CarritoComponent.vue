@@ -29,28 +29,44 @@
       :style="isThereAny"
       type="button"
       class="btn btn-primary"
+      :disabled="btnIsDisabled"
       @click="reset()"
     >Vaciar carrito</button>
 
-    <button :style="isThereAny" type="button" class="btn btn-primary"
+    <button :style="isThereAny" type="button"
+    :disabled="btnIsDisabled"
+    class="btn btn-primary"
     @click="comprar()">Comprar</button>
+
+    <div v-show="mostrarFormCompra">
+        <!-- form para comprar-->
+        <CompraForm @onCancel="onCancel($event)"
+          @aceptarComprar="aceptarComprar($event)"
+          :total="this.getTotal"></CompraForm>
+    </div>
+
+     <!-- <b-loading :show="loading"></b-loading>
+      <b-spinner v-model="loading" label="Cargando..."></b-spinner> -->
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
+import CompraForm from './CompraForm.vue';
 // import RowProducto from '@/components/RowProducto.vue';
 
 export default {
   name: 'CarritoComponent',
   components: {
-    // RowProducto,
+    CompraForm,
   },
   props: {
     // carrito: [],
   },
   data() {
     return {
+      loading: false,
+      mostrarFormCompra: false,
       total: 0,
     };
   },
@@ -61,20 +77,36 @@ export default {
     async reset() {
       // this.$emit('reset');
       await this.$store.dispatch('resetCarritoUser');
-      await this.$store.dispatch('carritoUserFromApi', this.userId);
+      // await this.$store.dispatch('carritoUserFromApi', this.userId);
+    },
+    onCancel() {
+      console.log('User cancelled the loader.');
+      this.mostrarFormCompra = false;
+    },
+    async aceptarComprar() {
+      this.loading = true;
+      await this.$store.dispatch('carritoComprarDevolver', { accion: 'comprar', userId: this.userId });
+      this.mostrarFormCompra = false;
+      this.loading = false;
+      this.$alert(
+        'Gracias por tu compra!.',
+        'Atención',
+        'success',
+      );
     },
     async comprar() {
       // this.$emit('comprar');
       // TODO: Probar esto.
       // await this.$store.dispatch('carritoComprar');
       // await this.$store.dispatch('updateNegocios');
-      await this.$store.dispatch('carritoComprarDevolver', { accion: 'comprar', userId: this.userId });
-      await this.$store.dispatch('carritoUserFromApi', this.userId);
+      this.mostrarFormCompra = true;
     },
     async devolver() {
     // this.$emit('comprar');
+      this.loading = true;
       await this.$store.dispatch('carritoComprarDevolver', { accion: 'devolver', userId: this.userId });
-      await this.$store.dispatch('carritoUserFromApi', this.userId);
+      // await this.$store.dispatch('carritoUserFromApi', this.userId);
+      this.loading = false;
     },
 
     displayProduct(product) {
@@ -85,6 +117,11 @@ export default {
     },
     isPend(product) {
       return product.estado === 'PENDIENTE';
+    },
+    async actualizarCarrito() {
+      this.loading = true;
+      await this.$store.dispatch('carritoUserFromApi', this.userId);
+      this.loading = false;
     },
 
   },
@@ -100,6 +137,7 @@ export default {
     },
     carrito() {
       return this.$store.getters.getCarrito;
+      // return this.actualizarCarrito();
     },
     isThereAny() {
       // checks whether an element is even
@@ -119,6 +157,9 @@ export default {
         }
       });
       return total1;
+    },
+    btnIsDisabled() {
+      return this.mostrarFormCompra;
     },
   },
 };

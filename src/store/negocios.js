@@ -44,6 +44,12 @@ export default {
           const negociosFromApi = response.data;
           if (negociosFromApi) await commit('setNegocios', negociosFromApi);
           // por cada negocio, busca los carritos cuyo negocio = negocio.id
+          await Promise.all(
+            state.negocios.map(async (negocio) => {
+              await dispatch('getOrdersFromApi', negocio.id, { root: true });
+            }),
+          );
+          /*
           state.negocios.forEach(async (negocio, index) => {
             // dispatch('someOtherAction', null, { root: true }) // -> 'someOtherAction'
            // let orders = [];
@@ -52,12 +58,14 @@ export default {
 
           await dispatch('getOrdersFromApi', negocio.id, { root: true });
           });
+          */
         })
         .catch((err) => {
           console.error('error', err);
         })
         .finally(() => console.log('Peticion terminada - action getNegociosFromApi.'));
     },
+    /*
     async updateNegocios({ state }) {
       state.negocios.forEach(async (negocio) => {
         await axios
@@ -70,5 +78,6 @@ export default {
           });
       });
     },
+    */
   },
 };

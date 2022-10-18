@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
-import axios from "axios";
+import axios from 'axios';
 
-const URL = "https://632ba1f21aabd8373989647d.mockapi.io/productos";
+const URL = 'https://632ba1f21aabd8373989647d.mockapi.io/productos';
 
 export default {
   namespace: true,
@@ -34,14 +34,12 @@ export default {
         .get(URL)
         .then(async (response) => {
           console.table(response.data);
-          await commit("setProducts", response.data);
+          await commit('setProducts', response.data);
         })
         .catch((err) => {
-          console.error("error", err);
+          console.error('error', err);
         })
-        .finally(() =>
-          console.log("Peticion terminada - action productsFromApi.")
-        );
+        .finally(() => console.log('Peticion terminada - action productsFromApi.'));
     },
     async productSave({ commit }, objToSave) {
       const data = {
@@ -73,9 +71,7 @@ export default {
           .catch((err) => {
             alert(err);
           })
-          .finally(() =>
-            console.log("Peticion terminada - volver a traer los datos.")
-          );
+          .finally(() => console.log('Peticion terminada - volver a traer los datos.'));
       });
     },
     async productUpdate({ commit, state, context }, product) {
@@ -91,7 +87,7 @@ export default {
       };
       const valId = product.id;
       const header = {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       };
       await axios
         .put(`${URL}/${valId}`, data)
@@ -101,7 +97,7 @@ export default {
         .catch((err) => {
           alert(err);
         })
-        .finally(console.log("Peticion terminada - volver a traer los datos."));
+        .finally(console.log('Peticion terminada - volver a traer los datos.'));
     },
     async productDelete({ commit, state, context }, valId) {
       await axios
@@ -112,13 +108,11 @@ export default {
         .catch((err) => {
           alert(`No se pudo borrar el producto. ${err}`);
         })
-        .finally(() =>
-          console.log("Peticion terminada - volver a traer los datos.")
-        );
+        .finally(() => console.log('Peticion terminada - volver a traer los datos.'));
     },
     async getProductsFromNegocio({ commit, state, context }, negocio) {
       const productsFromNegocio = state.products.filter(
-        (item) => item.negocio === negocio
+        (item) => item.negocio === negocio,
       );
       return productsFromNegocio;
     },

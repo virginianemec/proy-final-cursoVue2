@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <h1>Mis negocios</h1>
 
     <div class="d-flex justify-content-beetween row">
