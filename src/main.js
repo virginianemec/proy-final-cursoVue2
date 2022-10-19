@@ -2,8 +2,7 @@
 import Vue from 'vue';
 import VueSimpleAlert from 'vue-simple-alert';
 import VueForm from 'vue-form';
-import { BootstrapVue } from "bootstrap-vue";
-
+import { BootstrapVue } from 'bootstrap-vue';
 
 import axios from 'axios';
 import VueRouter from 'vue-router';
@@ -27,7 +26,7 @@ import 'bootstrap';
 
 Vue.use(VueAxios, axios);
 Vue.use(VueRouter);
-
+Vue.use(BootstrapVue);
 
 Vue.config.productionTip = false;
 Vue.use(VueSimpleAlert);
