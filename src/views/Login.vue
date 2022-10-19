@@ -1,11 +1,11 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div>
-    <p style="text-align: center;">
-      El usuario 'virginia@ta.com' es el user Admin.
+    <!-- <p style="text-align: center;">
+       El usuario 'virginia@ta.com' es el user Admin.
       'cecilia@ta.com' es un usuario sin privilegios.
       <br />Password es requerido pero no se valida.
-    </p>
+    </p> -->
     <article>
       <LoginComponent />
       <div class="title">No tengo cuenta</div>

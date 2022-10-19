@@ -53,15 +53,14 @@
 <script>
 import { mapGetters } from 'vuex';
 import CompraForm from './CompraForm.vue';
-// import RowProducto from '@/components/RowProducto.vue';
 
 export default {
   name: 'CarritoComponent',
   components: {
     CompraForm,
   },
-  props: {
-    // carrito: [],
+  beforeMount() {
+    this.actualizarCarrito();
   },
   data() {
     return {
@@ -86,6 +85,7 @@ export default {
     async aceptarComprar() {
       this.loading = true;
       await this.$store.dispatch('carritoComprarDevolver', { accion: 'comprar', userId: this.userId });
+      // await this.$store.dispatch('carritoUserFromApi', this.userId);
       this.mostrarFormCompra = false;
       this.loading = false;
       this.$alert(
@@ -118,6 +118,7 @@ export default {
     isPend(product) {
       return product.estado === 'PENDIENTE';
     },
+    // no se usa?
     async actualizarCarrito() {
       this.loading = true;
       await this.$store.dispatch('carritoUserFromApi', this.userId);
@@ -136,8 +137,8 @@ export default {
       return this.$store.getters.getUserLoggedId;
     },
     carrito() {
+      // this.actualizarCarrito();
       return this.$store.getters.getCarrito;
-      // return this.actualizarCarrito();
     },
     isThereAny() {
       // checks whether an element is even

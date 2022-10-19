@@ -27,31 +27,6 @@ export default {
   components: {
     NegocioComponent,
   },
-  props: {
-    // carrito: [],
-    // negocios: [],
-  },
-  methods: {
-    async carritoUpdate(objProdCant) {
-      // await this.$store.dispatch('updateCarrito', objProdCant, this.userId);
-      // await this.carritoUserFromApi();
-      // TODO no sirve..
-      console.log(objProdCant);
-    },
-    async cargarProps() {
-      // await this.$store.dispatch('getNegociosFromApi');
-      // await this.$store.dispatch('productsFromApi');
-    },
-  },
-  mounted() {
-    this.cargarProps();
-  },
-  data() {
-    return {
-      // productosFromApi: [],
-      // url: 'https://632ba1f21aabd8373989647d.mockapi.io/productos',
-    };
-  },
   computed: {
     ...mapGetters(['getNegocios']), // , 'getUserCarrito', 'getUserLoggedId']),
     negocios() {
