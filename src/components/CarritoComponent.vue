@@ -60,8 +60,8 @@ export default {
   components: {
     CompraForm,
   },
-  props: {
-    // carrito: [],
+  beforeMount() {
+    this.actualizarCarrito();
   },
   data() {
     return {
@@ -120,7 +120,9 @@ export default {
     },
     async actualizarCarrito() {
       this.loading = true;
-      await this.$store.dispatch('carritoUserFromApi', this.userId);
+      // creo que este no va po que si no, al ver l carrito
+      // siempre veria el de la base. no el del store.
+      // await this.$store.dispatch('carritoUserFromApi', this.userId);
       this.loading = false;
     },
 

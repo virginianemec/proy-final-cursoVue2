@@ -35,10 +35,10 @@ export default {
       }
       return this.$store.getters.getOrdersAll;
     },
-    titulo()
-    {
-      return (this.$route.params.idNegocio) ? `Pedidos de negocio ${this.$route.params.idNegocio}` : 'Listado de Todos los pedidos del sitio.';
-    }
+    titulo() {
+      if (this.$route.params.idNegocio) return `Pedidos de negocio ${this.$route.params.idNegocio}`;
+      return this.isAdmin ? 'Listado de Todos los pedidos del sitio.' : 'Mis pedidos';
+    },
   },
   methods: {
     // obtener los productos from api, desde el store.

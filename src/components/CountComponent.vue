@@ -55,7 +55,7 @@ export default {
   },
   computed: {
     totalPrice() {
-      return this.cant * parseFloat(this.price);
+      return this.cant > 0 ? this.cant * parseFloat(this.price) : 0;
     },
   },
 };
