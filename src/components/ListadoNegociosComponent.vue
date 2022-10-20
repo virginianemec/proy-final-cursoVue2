@@ -11,7 +11,6 @@
           :ofertas="negocio.ofertas"
           :orders="negocio.orders"
         ></NegocioComponent>
-        <!--  @carritoUpdate="carritoUpdate($event)"-->
       </div>
     </div>
     <br />
@@ -28,18 +27,10 @@ export default {
     NegocioComponent,
   },
   computed: {
-    ...mapGetters(['getNegocios']), // , 'getUserCarrito', 'getUserLoggedId']),
+    ...mapGetters(['getNegocios']),
     negocios() {
       return this.$store.getters.getNegocios;
     },
-    /*
-    carrito() {
-      return this.$store.getters.getUserCarrito;
-    },
-    userId() {
-      return this.$store.getters.getUserLoggedId;
-    },
-    */
   },
 };
 </script>

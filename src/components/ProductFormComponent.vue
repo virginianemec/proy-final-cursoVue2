@@ -101,16 +101,9 @@ import ProductsTableComponente from '@/components/ProductsTableComponente.vue';
 
 export default {
   name: 'ProductFormComponent',
-  /*
-  props: {
-    // products: [],
-  },
-  */
+
   components: {
     ProductsTableComponente,
-  },
-  created() {
-    // this.product = this.productInit;
   },
   data() {
     return {
@@ -140,12 +133,10 @@ export default {
         return;
       }
       if (this.productNew) {
-        // alert("Guardamos el item");
         const objProduct = { ...this.product };
         /*
         // este id lo crea mockapi
-        const id = this.products.length + 1;
-        objProduct.id = id;
+            objProduct.id = id;
         */
         await this.productSave(objProduct)
           .then((resp) => {
@@ -158,7 +149,6 @@ export default {
             this.$alert(`No pudo crearse el producto. Intente de nuevo. ${err}`);
           })
           .finally();
-        // console.log("producto.add");
       } else {
         // actualizar...
         this.$confirm('¿Seguro desea actualizar este producto?', 'Atención', 'question').then(

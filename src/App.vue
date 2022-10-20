@@ -88,6 +88,7 @@ export default {
 </script>
 
 <style>
+/*
 * {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -112,7 +113,7 @@ body {
   display: flex;
   flex: 1;
   /* este etsa*/
-  margin: 1rem auto;
+/*  margin: 1rem auto;
   text-align: center;
 }
 #main > aside {
@@ -134,6 +135,33 @@ aside {
   font-weight: bold;
   color: #504c4c;
   font-size: calc(1.3rem + 0.6vw);
+}
+*/
+
+body {
+  font-family: Arial;
+  margin: 0;
+}
+
+/* Header/Logo Title */
+.header {
+  padding: 20px;
+  text-align: center;
+  /* background: #1abc9c;
+    font-size: 15px;*/
+  color: white;
+  background-image: url('../src/assets/tituloHeader.png');
+  background-size: cover;
+}
+
+/* Page Content */
+.content {padding:20px;}
+
+/* barra de tareas */
+.navbarMenu {
+    display: inline-flex;
+    justify-content: space-between;
+    gap: 20px;
 }
 
 @media screen and (max-width: 575px) {

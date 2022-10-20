@@ -1,5 +1,10 @@
 <template>
     <ListadoNegociosComponent   />
+    <!-- :negocios="negocios" @carritoUpdate="carritoUpdate($event)"-->
+<!--    <aside>
+      <CarritoComponent  />
+ :carrito="carrito"
+    </aside> -->
 </template>
 
 <script>

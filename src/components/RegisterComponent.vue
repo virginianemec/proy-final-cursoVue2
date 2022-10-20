@@ -129,14 +129,7 @@ export default {
         age: '',
         favouriteColor: '',
       },
-      // url de mockapi de usuarios:
-      // url: 'https://632ba1f21aabd8373989647d.mockapi.io/users',
-      // url: '/users'  //para usar la del router.js.
-      // user: null,
     };
-  },
-  props: {
-    // users: [],
   },
   methods: {
     onRegister() {
@@ -177,7 +170,6 @@ export default {
 
         if (this.user) {
         // llama a la vista para que se mueva.
-        // this.$emit('loginSuccess');
           this.$alert(
             'Su usuario se ha creado correctamente. Bienvenido',
             'Atención',
@@ -213,11 +205,6 @@ export default {
       await this.$store.dispatch('registerUserOnApi', userToPost);
     },
 
-    /*
-    back() {
-      this.$router.push({ name: 'Login' });
-    },
-    */
     ageValidator() {
       let respuesta = false;
 

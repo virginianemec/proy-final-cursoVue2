@@ -1,9 +1,8 @@
 <template>
-  <div class="coder--header">
+  <div class="header">
     <h1>PediSalud</h1>
     <h1>¡Nuestra web de comidas saludables!</h1>
-
-      <div v-if="userIsLogged" class="div--container">
+      <div v-if="userIsLogged" class="navbarMenu">
            Bienvenido {{ userName }}
             <router-link :to="{ name: 'Index' }">Inicio</router-link>
             <div v-if="isAdmin">
@@ -11,17 +10,8 @@
             </div>
             <router-link :to="{ name: 'Pedidos' }">{{tituloPedidos}}</router-link>
             <router-link :to="{ name: 'Carrito' }">Ver Carrito</router-link>
-
             <a href="" @click="$store.dispatch('logout')">Cerrar Session</a>
       </div>
-
-    <!-- <div v-if="user">
-      <button type="button" class="btn btn-primary" @click="back()">Cerrar Sesión</button>
-      <div id="menu">
-        <router-link to="/">Login</router-link>
-      </div>
-    </div> -->
-
  </div>
 </template>
 <script>
@@ -29,14 +19,6 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'HeaderComponent',
-  props: {
-    // user: null,
-    /*
-    no tenog mas esta variable ni el emit del app.
-    ahora con el usuario logueado defino el header.
-    y con el router el back.
-  */
-  },
   methods: {
     back() {
       // this.$emit('back');

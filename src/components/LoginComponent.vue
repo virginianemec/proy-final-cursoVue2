@@ -49,9 +49,6 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'LoginComponent',
-  props: {
-    // users: [],
-  },
   data() {
     return {
       formState: {},
@@ -62,10 +59,6 @@ export default {
         // agrego el rol del usaurio
         rol: '',
       },
-
-      // url de mockapi de usuarios:
-      // url: 'https://632ba1f21aabd8373989647d.mockapi.io/users',
-      // user: null,
     };
   },
   methods: {
@@ -80,14 +73,11 @@ export default {
         return;
       }
       // si el form es correcto sigue con la autenticacion.
-      // await this.loginUser();
-
       // este metodo espera que el store recupere y guarde un usuario.
       await this.$store.dispatch('getUsersFromApi', this.data);
 
       if (this.user) {
         // llama a la vista para que se mueva.
-        // this.$emit('loginSuccess');
         await this.$store.dispatch('getNegociosFromApi');
         await this.$store.dispatch('productsFromApi');
         await this.$store.dispatch('carritoUserFromApi', this.userId);
@@ -100,45 +90,6 @@ export default {
         );
       }
     },
-    /*
-    async loginUser() {
-      this.existsUsuario()
-        .then((respLogin) => {
-          if (respLogin) {
-            // la vista llama al arouter.
-            this.$emit('loginSuccess', this.user);
-          } else {
-            this.$alert('Los datos ingresados no corresponden a un usuario.', 'Atención', 'error');
-          }
-        })
-        .catch(() => {
-          this.$alert(
-            'Los datos no son correctos o hubo algun probema contra el servidor.',
-            'Atención',
-            'error',
-          );
-        });
-    },
-    async existsUsuario() {
-      const dataToGet = {
-        email: this.data.email,
-        // password: this.data.password,
-      };
-      let usersFromApi = [];
-      this.user = null;
-      await this.axios
-        .get(this.url, dataToGet)
-        .then((response) => {
-          console.table(response.data);
-          usersFromApi = response.data;
-          const obj = usersFromApi.find((val) => val.email === this.data.email);
-          if (obj) this.user = obj;
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-      return this.user;
-    }, */
   },
   computed: {
     ...mapGetters(['getUserLogged', 'getUserLoggedId']),

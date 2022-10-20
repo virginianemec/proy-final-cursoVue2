@@ -43,9 +43,6 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'ProductsTableComponente',
-  /* props: {
-    products: {},
-  }, */
   filters: {
     nameFilter(value) {
       if (!value) return '';

@@ -9,10 +9,6 @@
         <th>Total</th>
       </thead>
       <tbody v-for="order in orders" :key="order.id">
-        <!-- <div v-for="order in orders" :key="order.id">
-          <RowPedido :order="order"
-          ></RowPedido>
-        </div> -->
         <tr>
           <td>{{ order.createdAt }}</td>
           <td><p>{{ displayOrder(order) }}</p></td>
@@ -25,24 +21,11 @@
 </template>
 
 <script>
-// import RowPedido from "@/components/RowPedido.vue";
-
 export default {
   name: "ListadoPedidosComponent",
-  components: {
-    // RowPedido,
-  },
-  data() {
-    return {};
-  },
   methods: {
-    /*
-    back() {
-      this.$emit('back');
-    },
-    */
     totalPrice(order) {
-      return order.cant * parseFloat(order.productPrice);
+      return order.cant > 0 ? order.cant * parseFloat(order.productPrice) : 0;
     },
     displayOrder(order) {
       return ` ${order.cant} ${order.productName} `;
@@ -51,9 +34,6 @@ export default {
   props: {
     orders: [],
     titulo: String,
-  },
-  computed: {
-
   },
 };
 </script>

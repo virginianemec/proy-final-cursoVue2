@@ -11,10 +11,7 @@
           </tr>
         </thead>
         <tbody  v-for="(product,index) in carrito" :key="index">
-        <!-- <div v-for="(product,index) in carrito" :key="index">
-          <RowProducto :product="product" />
-        </div> -->
-          <tr  v-if="isPend(product)">
+           <tr  v-if="isPend(product)">
             <td>
               <p>{{ displayProduct(product) }}</p>
             </td>
@@ -128,11 +125,6 @@ export default {
   },
   computed: {
     ...mapGetters(['getCarrito', 'getUserLoggedId']), // , 'getNegocios']),
-    /*
-    negocios() {
-      return this.$store.getters.getNegocios;
-    },
-    */
     userId() {
       return this.$store.getters.getUserLoggedId;
     },
@@ -145,11 +137,7 @@ export default {
       const isPend = (item) => item.estado === 'PENDIENTE';
       return this.carrito.some(isPend) ? 'display' : 'display:none';
     },
-    /*
-    totalProducto(price, cant) {
-      return price * cant;
-    },
-  */
+
     getTotal() {
       let total1 = 0;
       this.carrito.forEach((val) => {

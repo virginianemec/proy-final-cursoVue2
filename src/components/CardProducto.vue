@@ -11,7 +11,6 @@
         <tr>
           <td colspan="2">
             <img :src="require(`@/assets/images/${getImage()}.png`)" />
-            <!--<img :src='getImagenSrc' alt='articcantidadle image' /> -->
           </td>
         </tr>
 
@@ -90,14 +89,6 @@ export default {
   methods: {
     async carritoUpdate(objEvent) {
       this.total = objEvent.total;
-      /*
-      this.$emit('carritoUpdate', {
-        id: this.id,
-        productPrice: this.price,
-        productName: this.name,
-        updateFuntion: objEvent.updateFuntion,
-      });
-      */
       const objectdata = {
         productId: this.id,
         productPrice: this.price,

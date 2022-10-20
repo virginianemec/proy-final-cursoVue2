@@ -20,15 +20,5 @@ export default {
   props: {
     ofertas: [],
   },
-  data() {
-    return {};
-  },
-  methods: {
-    /*
-    back() {
-      this.$emit('back');
-    },
-    */
-  },
 };
 </script>
