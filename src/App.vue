@@ -150,7 +150,7 @@ body {
   /* background: #1abc9c;
     font-size: 15px;*/
   color: white;
-  background-image: url('../src/assets/tituloHeader.png');
+  background-image: url('../src/assets/tituloHeader1.png');
   background-size: cover;
 }
 
@@ -163,7 +163,31 @@ body {
     justify-content: space-between;
     gap: 20px;
 }
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
 
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 @media screen and (max-width: 575px) {
   * {
     max-width: 100%;

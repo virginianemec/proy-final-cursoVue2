@@ -44,6 +44,7 @@
 
      <!-- <b-loading :show="loading"></b-loading>
       <b-spinner v-model="loading" label="Cargando..."></b-spinner> -->
+      <div :show="loading" ><div class="loader"></div> </div>
   </div>
 </template>
 
@@ -149,6 +150,9 @@ export default {
     },
     btnIsDisabled() {
       return this.mostrarFormCompra;
+    },
+    mostrarLoading() {
+      return this.loading ? 'display:block' : 'display:none';
     },
   },
 };
