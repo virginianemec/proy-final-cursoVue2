@@ -1,5 +1,6 @@
 <template>
-  <div class="container">
+ <!-- <div class="container"> -->
+  <div>
     <h1 class="text-center">CARRITO!</h1>
     <div class="row">
       <table class="table border-primary">
@@ -44,7 +45,9 @@
 
      <!-- <b-loading :show="loading"></b-loading>
       <b-spinner v-model="loading" label="Cargando..."></b-spinner> -->
-      <div :show="loading" ><div class="loader"></div> </div>
+      <div v-if="loading" >
+        <div class="loader"></div>
+      </div>
   </div>
 </template>
 
@@ -119,7 +122,7 @@ export default {
     // no se usa?
     async actualizarCarrito() {
       this.loading = true;
-      await this.$store.dispatch('carritoUserFromApi', this.userId);
+      // await this.$store.dispatch('carritoUserFromApi', this.userId);
       this.loading = false;
     },
 

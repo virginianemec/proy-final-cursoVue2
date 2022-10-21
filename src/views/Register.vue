@@ -2,7 +2,7 @@
   <div>
     <RegisterComponent />
     <!-- @registerSuccess="registerSuccess($event)" @back="returnToLogin()" /> -->
-    <router-link :to="{ name: 'Login' }">Inicio</router-link>
+     <div class="divbtn"><router-link :to="{ name: 'Login' }">Inicio</router-link> </div>
   </div>
 </template>
 

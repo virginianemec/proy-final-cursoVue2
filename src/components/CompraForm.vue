@@ -1,6 +1,5 @@
 <template>
-
-    <div class="container">
+     <div> <!-- class="div--container-->
       <vue-form
         :state="formStateCompra"
         @submit.prevent=""

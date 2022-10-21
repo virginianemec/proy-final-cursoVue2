@@ -106,23 +106,23 @@ export default {
         console.log('id - price', objEvento.productId, objEvento.productPrice);
         await commit('addItem', productToCarrito);
         /*
-		await axios
-          .post(`${URL}/`, productToCarrito)
-          .then((response) => {
-            console.log('se agrego al carrito el producto');
-            console.table(response.data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-		  */
+  await axios
+        .post(`${URL}/`, productToCarrito)
+        .then((response) => {
+          console.log('se agrego al carrito el producto');
+          console.table(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    */
       }
     },
     async decrease({ commit, state }, objEvento) {
       console.log('decrease');
       console.table(objEvento);
       console.log('--carrito--');
-      const objIndex = state.carrito.findIndex((val) => {
+      const objIndex = state.carrito.findIndex((val, index) => {
         console.log(index);
         console.table(val);
         return (
@@ -137,17 +137,17 @@ export default {
           // await commit('removeItem', objIndex);
           state.carrito[objIndex].cant -= 1;
           /*
-		  const { id } = state.carrito[objIndex];
-          await axios
-            .put(`${URL}/${id}`, state.carrito[objIndex])
-            .then((response) => {
-              console.log('modificco la cantidad del producto,.');
-              console.table(response.data);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-		   */
+    const { id } = state.carrito[objIndex];
+        await axios
+          .put(`${URL}/${id}`, state.carrito[objIndex])
+          .then((response) => {
+            console.log('modificco la cantidad del producto,.');
+            console.table(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      */
         } else {
           console.log('con cantidad <= 1, lo borra.');
           console.log(
@@ -157,7 +157,7 @@ export default {
           );
           await commit('removeItem', objIndex);
           /*
-		  const { id } = state.carrito[objIndex];
+  const { id } = state.carrito[objIndex];
           await axios
             .delete(`${URL}/${id}`)
             .then((response) => {
@@ -166,7 +166,7 @@ export default {
             .catch((error) => {
               console.log(error);
             });
-			*/
+*/
         }
       } else {
         console.log('el producto a decrementar no existe');
@@ -177,17 +177,30 @@ export default {
       // await dispatch('carritoUserFromApi', objData.userId);
       await Promise.all(
         state.carrito.map(async (element, index) => {
-          const valId = element.id;
           element.estado = objData.accion === 'comprar' ? 'COMPRADO' : 'PENDIENTE';
 
-          await axios
-            .put(`${URL}/${valId}`, element)
-            .then(async (response) => {
-              console.table(response.data);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
+          if (element.id) {
+            const valId = element.id;
+            await axios
+              .put(`${URL}/${valId}`, element)
+              .then((response) => {
+                console.log('se modifico al carrito el producto');
+                console.table(response.data);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          } else {
+            await axios
+              .post(`${URL}/`, element)
+              .then((response) => {
+                console.log('se agrego al carrito el producto');
+                console.table(response.data);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }
         }),
       );
       // await dispatch('carritoUserFromApi', objData.userId);

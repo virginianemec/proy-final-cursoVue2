@@ -3,21 +3,22 @@
 <!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
   <div>
-    <h3 class="title">Registrarme</h3>
-    <div  class="container px-4 text-center">
+   <div class="encabezado">Registrarme</div>
+      <div class="form-caja">
+      <div class="form">
       <vue-form
         :state="formStateReg"
         @submit.prevent="onRegister()"
         name="registry"
         class="form"
       >
+       <p>
         <validate
           class="fc"
           tag="label"
           :custom="{ customValidator: customValidator }"
         >
-          <label class="class-label" for="name">Nombre*</label>
-          <input v-model="data.name" type="text" required name="name" />
+          <input v-model="data.name" type="text" required name="name" placeholder="Nombre*" />
           <field-messages name="name">
             <div class="class-label">Ok.</div>
             <div class="class-label" slot="required">
@@ -28,10 +29,9 @@
             </div>
           </field-messages>
         </validate>
-
+</p><p>
         <validate class="fc my-3" tag="label">
-          <label class="class-label" for="mail">Mail*</label>
-          <input v-model="data.email" required name="email" type="email" />
+          <input v-model="data.email" required name="email" type="email" placeholder="Mail*"/>
           <field-messages name="email">
             <div class="class-label">Ok.</div>
             <div class="class-label" slot="required">
@@ -42,14 +42,14 @@
             </div>
           </field-messages>
         </validate>
-
+</p><p>
         <validate class="fc my-3" tag="label">
-          <label class="class-label" for="password">Password*</label>
           <input
             v-model="data.password"
             required
             name="password"
             type="password"
+            placeholder="Password*"
           />
           <field-messages name="password">
             <div class="class-label">Ok.</div>
@@ -58,19 +58,18 @@
             </div>
           </field-messages>
         </validate>
+        </p><p>
         <validate
           class="fc my-3"
           tag="label"
           :custom="{ customValidatorPassword: customValidatorPassword }"
         >
-          <label class="class-label" for="passwordRepeat"
-            >Repita la password*</label
-          >
           <input
             v-model="data.passwordRepeat"
             required
             name="passwordRepeat"
             type="password"
+            placeholder="Repita la password*"
           />
           <field-messages name="passwordRepeat">
             <div class="class-label">Ok.</div>
@@ -82,14 +81,13 @@
             </div>
           </field-messages>
         </validate>
-
+</p><p>
         <validate
           class="fc my-3"
           tag="label"
           :custom="{ ageValidator: ageValidator }"
         >
-          <label class="class-label" for="age">Edad*</label>
-          <input v-model="data.age" required name="age" type="number" />
+          <input v-model="data.age" required name="age" type="number" placeholder="Edad*"/>
           <field-messages name="age">
             <div class="class-label">Ok.</div>
             <div class="class-label" slot="required">
@@ -101,16 +99,13 @@
             </div>
           </field-messages>
         </validate>
-        <div class="fc my-3">
+        </p>
+        <div>
           <button type="submit" class="btn btn btn-primary">Registrarme</button>
         </div>
       </vue-form>
     </div>
-    <div class="text-center">
-      <!-- <button type="submit" class="btn btn-primary" @click="back()">
-        Volver
-      </button> -->
-    </div>
+</div>
   </div>
 </template>
 
@@ -244,17 +239,5 @@ export default {
 </script>
 
 <style scoped>
-.form {
-  border-radius: 5px;
-  padding: 20px;
-  box-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.3);
-}
-.btn-primary {
-  color: #fff;
-  background-color: orange;
-  border-color: orange;
-}
-.class-label {
-  color: #04000a;
-}
+
 </style>

@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <HeaderComponent/>
+    <div class="content">
     <router-view></router-view>
+    </div>
     <FooterComponent/>
   </div>
 </template>
@@ -125,17 +127,6 @@ aside {
   padding: 1em;
   text-align: center;
 }
-.btn-primary {
-  color: #fff;
-  background-color: orange;
-  border-color: orange;
-}
-.title {
-  text-align: center;
-  font-weight: bold;
-  color: #504c4c;
-  font-size: calc(1.3rem + 0.6vw);
-}
 */
 
 body {
@@ -149,13 +140,40 @@ body {
   text-align: center;
   /* background: #1abc9c;
     font-size: 15px;*/
-  color: white;
-  background-image: url('../src/assets/tituloHeader1.png');
+  color: orange;
+  background-image: url('../src/assets/tituloHeader2.png');
   background-size: cover;
+  height: 250px;
+  display: flex;
+  align-items: flex-end;
+}
+.header div {
+  background-color: black;
+}
+.header div a {
+    text-decoration: none;
+    color: orange;
+}
+.header div a:hover{
+  color: aquamarine;
+}
+
+.encabezado {
+  text-align: center;
+  color : orange;
+  padding-block: 5px;
+  font-size: 2em;
+  font-weight: bold;
 }
 
 /* Page Content */
-.content {padding:20px;}
+.content {
+    padding:20px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
 
 /* barra de tareas */
 .navbarMenu {
@@ -171,18 +189,82 @@ body {
   height: 120px;
   animation: spin 2s linear infinite;
 }
-.loader {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #3498db; /* Blue */
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  animation: spin 2s linear infinite;
+/*
+.btn-primary {
+  color: #fff;
+  background-color: orange;
+  border-color: orange;
+}*/
+.form-caja{
+  /*border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.3);
+  width: 400px;*/
+  background-color: #fff;
+  width: 400px;
+  text-align: center;
+  padding: 20px 0 0 0;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.3);
+  /*box-shadow: 0px 30px 50px 0px r
+    margin: 30px auto;*/
+}
+.form {
+      padding: 0 30px;
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+.btn-primary {
+    color: #fff;
+    background-color: orange;
+    border-color: orange;
+    width: 50%;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+.class-label {
+  color: #04000a;
+}
+.divbtn {
+   text-align: center;
+}
+
+.title {
+  text-align: center;
+  font-weight: bold;
+  color: #504c4c;
+  font-size: calc(1.3rem + 0.6vw);
+}
+p {
+  position: relative;
+}
+
+input {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  outline: none;
+  height: 30px;
+  line-height: 60px;
+  border-radius: 4px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="password"] {
+  width: 100%;
+  padding: 0 0 0 10px;
+  margin: 0;
+  color: #8a8b8e;
+  border: 1px solid #c2c0ca;
+  font-style: normal;
+  font-size: 16px;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  position: relative;
+  display: inline-block;
+  background: none;
 }
 @keyframes spin {
   0% { transform: rotate(0deg); }

@@ -1,7 +1,7 @@
 <template>
   <div class="header">
-    <h1>PediSalud</h1>
-    <h1>¡Nuestra web de comidas saludables!</h1>
+    <!--<h1>PediSalud</h1>
+    <h1>¡Nuestra web de comidas saludables!</h1> -->
       <div v-if="userIsLogged" class="navbarMenu">
            Bienvenido {{ userName }}
             <router-link :to="{ name: 'Index' }">Inicio</router-link>
@@ -75,11 +75,5 @@ h1 {
     width: 100%;
     padding-top: 20px;
 }
-a {
-    color: #302e2e;
-    text-decoration: none;
-}
-a:hover{
-  color: aquamarine;
-}
+
 </style>

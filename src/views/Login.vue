@@ -5,12 +5,12 @@
        El usuario 'virginia@ta.com' es el user Admin.
       'cecilia@ta.com' es un usuario sin privilegios.
       <br />Password es requerido pero no se valida.
-    </p> -->
-    <article>
+    </p>
+    <article> -->
       <LoginComponent />
       <div class="title">No tengo cuenta</div>
-      <button type="submit" class="btn btn-primary" @click="registrame()">Registrarme</button>
-    </article>
+      <div class="divbtn"> <button type="submit" class="btn btn-primary" @click="registrame()">Registrarme</button> </div>
+   <!--  </article> -->
   </div>
 </template>
 

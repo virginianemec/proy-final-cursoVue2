@@ -2,7 +2,7 @@
 <template>
   <div>
     <div v-if="isAnyProduct">
-      <div class="div--container">
+       <div> <!-- class="div--container-->
         <div class="titleTable">LISTADO DE PRODUCTOS</div>
 
         <table class="table">

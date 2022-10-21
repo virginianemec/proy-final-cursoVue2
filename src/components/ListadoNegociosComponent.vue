@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <h1>Mis negocios</h1>
+  <div >
+    <div class="encabezado">Mis negocios</div>
 
     <div class="d-flex justify-content-beetween row">
       <div v-for="negocio in negocios" :key="negocio.id">
@@ -36,9 +36,4 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-  text-align: center;
-  padding: 20px;
-  color: #dd845a;
-}
 </style>
