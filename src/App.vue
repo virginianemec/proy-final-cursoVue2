@@ -141,7 +141,7 @@ body {
   /* background: #1abc9c;
     font-size: 15px;*/
   color: orange;
-  background-image: url('../src/assets/tituloHeader2.png');
+  background-image: url('../src/assets/tituloHeader1.png');
   background-size: cover;
   height: 250px;
   display: flex;
@@ -175,11 +175,23 @@ body {
     align-items: center;
   }
 
+  .scroll {
+      display: block;
+      border: 0px solid red;
+      padding: 5px;
+      margin-top: 5px;
+      width: 100%;
+      height: 100px;
+      overflow-y: scroll;
+        }
 /* barra de tareas */
 .navbarMenu {
     display: inline-flex;
     justify-content: space-between;
     gap: 20px;
+    width: 100%;
+    height: 10%;
+    padding: 10px;
 }
 .loader {
   border: 16px solid #f3f3f3; /* Light grey */

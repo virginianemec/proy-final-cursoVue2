@@ -1,7 +1,7 @@
 <template>
  <!-- <div class="container"> -->
   <div>
-    <h1 class="text-center">CARRITO!</h1>
+    <h1 class="encabezado">CARRITO!</h1>
     <div class="row">
       <table class="table border-primary">
         <thead>
