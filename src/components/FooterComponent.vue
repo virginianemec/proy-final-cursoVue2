@@ -9,7 +9,7 @@
   /*height: 20%;
     background-image: url('../assets/logo.png');
     */
-  background-color: orange;
+  background-color: rgb(214, 142, 45);
   width: 100%;
   background-size: cover;
   border-color: #ccc;

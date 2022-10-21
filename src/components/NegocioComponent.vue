@@ -4,8 +4,8 @@
       <router-link v-if="isAdmin" :to="{ path: `pedidos/${this.id}` }">Pedidos</router-link> <br>
     </div>
      <br>
-     <div>
-      <ListadoProductosComponent :negocioId="this.id" :products="products" /> </div>
+
+      <ListadoProductosComponent :negocioId="this.id" :products="products" /> 
     <br />
     <!--  Pendiente proxima entrega  -->
         <!--

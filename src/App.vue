@@ -139,8 +139,9 @@ body {
   padding: 20px;
   text-align: center;
   /* background: #1abc9c;
-    font-size: 15px;*/
-  color: orange;
+    font-size: 15px;
+      color: orange; */
+  color:  rgb(214, 142, 45);
   background-image: url('../src/assets/tituloHeader1.png');
   background-size: cover;
   height: 250px;
@@ -152,7 +153,8 @@ body {
 }
 .header div a {
     text-decoration: none;
-    color: orange;
+    /*color: orange;*/
+    color:  rgb(214, 142, 45);
 }
 .header div a:hover{
   color: aquamarine;
@@ -160,7 +162,8 @@ body {
 
 .encabezado {
   text-align: center;
-  color : orange;
+  /* color : orange;*/
+  color: rgb(214, 142, 45);
   padding-block: 5px;
   font-size: 2em;
   font-weight: bold;
@@ -218,8 +221,8 @@ body {
   padding: 20px 0 0 0;
   border-radius: 4px;
   box-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.3);
-  /*box-shadow: 0px 30px 50px 0px r
-    margin: 30px auto;*/
+  /*box-shadow: 0px 30px 50px 0px r*/
+    margin: 20px auto;
 }
 .form {
       padding: 0 30px;
@@ -227,8 +230,11 @@ body {
 
 .btn-primary {
     color: #fff;
-    background-color: orange;
-    border-color: orange;
+    /* background-color: orange;
+    border-color: orange; */
+    background-color: rgb(214, 142, 45);
+    border-color: rgb(214, 142, 45);
+
     width: 50%;
     margin-bottom: 10px;
     font-size: 16px;

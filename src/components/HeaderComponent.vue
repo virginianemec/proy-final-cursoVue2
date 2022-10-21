@@ -51,8 +51,9 @@ export default {
 <style scoped>
 .coder--header {
   width: 100%;
- /* background-image: url("../assets/logo.png"); */
-  background-color: orange;
+ /* background-image: url("../assets/logo.png");
+  background-color: orange; */
+  background-color: rgb(214, 142, 45);
   background-size: cover;
   background-position: center;
 }
