@@ -24,7 +24,8 @@
         </tr>
         <tr>
           <td colspan="2">
-            <CountComponent :cant="cant" :price="price" @carritoUpdate="carritoUpdate($event)"></CountComponent>
+            <CountComponent :cantInicial="cant" :id="id" :price="price" :name="name" :negocio="negocio"
+               @carritoUpdate="carritoUpdate($event)"></CountComponent>
           </td>
         </tr>
 
@@ -46,6 +47,9 @@ export default {
   name: 'CardProducto',
   // propiedades del producto:
   props: {
+    producto: {
+      type: Object,
+    },
     id: {
       type: String,
       default: '',
@@ -83,19 +87,27 @@ export default {
       return this.$store.getters.getUserLoggedId;
     },
     getImagenSrc() {
-      return `./assets/${this.image}.png`;
+      return `./assets/${this.producto.image}.png`;
     },
   },
   methods: {
     async carritoUpdate(objEvent) {
       this.total = objEvent.total;
-      const objectdata = {
-        productId: this.id,
+      /* const objectdata = {
+        productId: objEvent.productId,
         productPrice: this.price,
         productName: this.name,
         updateFuntion: objEvent.updateFuntion,
         userId: this.userId,
         negocio: this.negocio,
+      }; */
+      const objectdata = {
+        productId: objEvent.productId,
+        productPrice: objEvent.productPrice,
+        productName: objEvent.productName,
+        updateFuntion: objEvent.updateFuntion,
+        userId: this.userId,
+        negocio: objEvent.negocio,
       };
       if (objEvent.updateFuntion === '+') {
         await this.$store.dispatch('increase', objectdata);
@@ -105,7 +117,7 @@ export default {
       // await this.$store.dispatch('carritoUserFromApi', this.userId);
     },
     getImage() {
-      return this.image === '' ? 'No-image-available' : this.image;
+      return this.producto.image === '' ? 'No-image-available' : this.producto.image;
     },
   },
 };

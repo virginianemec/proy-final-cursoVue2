@@ -1,7 +1,7 @@
 <template>
   <div class="row--botones">
     <button class="coder--button" @click="decrease()">-</button>
-    <p>{{ cant }}</p>
+    <p>{{ cantidad }}</p>
     <button class="coder--button" @click="increase()">+</button>
     <br />
     <!--<p>{{ precioTotal }}</p> -->
@@ -12,6 +12,22 @@
 export default {
   name: 'CountComponent',
   props: {
+    id: {
+      type: String,
+      default: '',
+    },
+    name: {
+      type: String,
+      default: 'Sin nombre',
+    },
+    image: {
+      type: String,
+      default: '../assets/No-image-available.png',
+    },
+    negocio: {
+      type: Number,
+      default: 1,
+    },
     cantInicial: {
       type: Number,
       default: 0,
@@ -34,19 +50,39 @@ export default {
     increase() {
       // if (this.cant >= 0) {
       this.cant += 1;
-      this.$emit('carritoUpdate', {
+      /* this.$emit('carritoUpdate', {
         updateFuntion: '+',
         total: this.totalPrice,
       });
+      */
+      const objectdata = {
+        productId: this.id,
+        productPrice: this.price,
+        productName: this.name,
+        updateFuntion: '+',
+        negocio: this.negocio,
+        total: this.totalPrice,
+      };
+      this.$emit('carritoUpdate', objectdata);
       // }
     },
     decrease() {
       // if (this.cant > 0) {
       this.cant -= 1;
-      this.$emit('carritoUpdate', {
+      /*  this.$emit('carritoUpdate', {
         updateFuntion: '-',
         total: this.totalPrice,
-      });
+      }); */
+
+      const objectdata = {
+        productId: this.id,
+        productPrice: this.price,
+        productName: this.name,
+        updateFuntion: '-',
+        negocio: this.negocio,
+        total: this.totalPrice,
+      };
+      this.$emit('carritoUpdate', objectdata);
       // }
     },
     reset() {
@@ -56,6 +92,9 @@ export default {
   computed: {
     totalPrice() {
       return this.cant > 0 ? this.cant * parseFloat(this.price) : 0;
+    },
+    cantidad() {
+      return this.cant >= 0 ? this.cant : 0;
     },
   },
 };

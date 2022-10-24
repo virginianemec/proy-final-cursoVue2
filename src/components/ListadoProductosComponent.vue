@@ -2,6 +2,7 @@
   <div class="contenedor">
     <div v-for="product in products" :key="product.id">
       <CardProducto
+        :producto="product"
         :id="product.id"
         :name="product.name"
         :price="product.price"

@@ -9,6 +9,7 @@
             <th>Cant. producto</th>
             <th>Precio</th>
             <th>Subtotal</th>
+            <th></th>
           </tr>
         </thead>
         <tbody  v-for="(product,index) in carrito" :key="index">
@@ -18,6 +19,11 @@
             </td>
             <td>$ {{ product.productPrice }}</td>
             <td>$ {{ totalProduct(product) }}</td>
+            <td>
+              <CountComponent :cantInicial="product.cant" :id="product.productId"
+              :price="product.productPrice" :name="product.productName" :negocio="product.negocio"
+               @carritoUpdate="carritoUpdate($event)"></CountComponent>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -53,12 +59,14 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import CountComponent from '@/components/CountComponent.vue';
 import CompraForm from './CompraForm.vue';
 
 export default {
   name: 'CarritoComponent',
   components: {
     CompraForm,
+    CountComponent,
   },
   beforeMount() {
     this.actualizarCarrito();
@@ -124,6 +132,24 @@ export default {
       this.loading = true;
       // await this.$store.dispatch('carritoUserFromApi', this.userId);
       this.loading = false;
+    },
+
+    async carritoUpdate(objEvent) {
+      this.total = objEvent.total;
+      const objectdata = {
+        productId: objEvent.productId,
+        productPrice: objEvent.productPrice,
+        productName: objEvent.productName,
+        updateFuntion: objEvent.updateFuntion,
+        userId: this.userId,
+        negocio: objEvent.negocio,
+      };
+      if (objEvent.updateFuntion === '+') {
+        await this.$store.dispatch('increase', objectdata);
+      } else {
+        await this.$store.dispatch('decrease', objectdata);
+      }
+      // await this.$store.dispatch('carritoUserFromApi', this.userId);
     },
 
   },
