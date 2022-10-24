@@ -11,7 +11,7 @@
       </thead>
       <tbody v-for="order in orders" :key="order.id">
         <tr>
-          <td>{{ order.createdAt  | userFilter(order.createdAt)}}</td>
+          <td>{{ order.createdAt  | dataFilter(order.createdAt)}}</td>
           <td><p>{{ displayOrder(order) }}</p></td>
           <td>$ {{ order.productPrice }}</td>
           <td> <strong>$ {{ totalPrice(order) }} </strong>  </td>
@@ -32,17 +32,10 @@ export default {
       return ` ${order.cant} ${order.productName} `;
     },
   },
-  filters: {
-    userFilter(value) {
-      value = value.toString();
-      const arrayDate = value.split('T')[0].split('-');
-      // const hora = value.split('T')[1];
-      return `${arrayDate[2]}/${arrayDate[1]}/${arrayDate[0]}`;
-    },
-  },
   props: {
     orders: [],
     titulo: String,
+    isAdmin: Boolean,
   },
 };
 </script>

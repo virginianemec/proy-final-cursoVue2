@@ -250,7 +250,7 @@ body {
   text-align: center;
   font-weight: bold;
   color: #504c4c;
-  font-size: calc(1.3rem + 0.6vw);
+  /* font-size: calc(1.3rem + 0.6vw); */
 }
 p {
   position: relative;

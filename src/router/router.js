@@ -53,6 +53,12 @@ export default new VueRouter({
       props: true,
     },
     {
+      path: "/pedidosDelUser/:idUser",
+      name: "PedidosDelUsuario",
+      component: Pedidos,
+      props: true,
+    },
+    {
       path: "/carrito",
       name: "Carrito",
       component: Carrito,

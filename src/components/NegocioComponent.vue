@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="tabla--titulo">{{ name }} - {{ category }} -
+    <div class="tabla--titulo">{{ name }} - {{ category }}
       <router-link v-if="isAdmin" :to="{ path: `pedidos/${this.id}` }">Pedidos</router-link> <br>
     </div>
      <br>
 
-      <ListadoProductosComponent :negocioId="this.id" :products="products" /> 
+      <ListadoProductosComponent :negocioId="this.id" :products="products" />
     <br />
     <!--  Pendiente proxima entrega  -->
         <!--

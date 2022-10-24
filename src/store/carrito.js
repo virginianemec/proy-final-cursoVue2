@@ -262,7 +262,7 @@ export default {
     },
     async getOrdersAllFromApi({ commit, state }, data) {
       // este metodo retorna el conjunto de registros de los carrits del sistema
-      const urlCarritos = data.isAmin ? URL : `${URL}/?user=${data.id}`;
+      const urlCarritos = data.admin ? URL : `${URL}/?user=${data.id}`;
       // si el user es admin, rae todos,
       // sino los del usuario.
       await axios

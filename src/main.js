@@ -37,6 +37,13 @@ Vue.filter('categoryFilter', (value) => {
   if (!value) return 'Sin categoria';
   return value.toString().toUpperCase();
 });
+Vue.filter('dataFilter', (value) => {
+  if (!value) return '';
+  value = value.toString();
+  const arrayDate = value.split('T')[0].split('-');
+  // const hora = value.split('T')[1];
+  return `${arrayDate[2]}/${arrayDate[1]}/${arrayDate[0]}`;
+ });
 
 new Vue({
   store,

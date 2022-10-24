@@ -1,5 +1,5 @@
 <template>
-   <ListadoPedidosComponent :orders="orders" :titulo="titulo" ></ListadoPedidosComponent>
+   <ListadoPedidosComponent :orders="orders" :titulo="titulo"></ListadoPedidosComponent>
 </template>
 
 <script>
@@ -19,7 +19,7 @@ export default {
     this.getOrders();
   },
   computed: {
-    ...mapGetters(['isAdmin', 'getUserLoggedId', 'getOrdersAll', 'getNegocios']),
+    ...mapGetters(['isAdmin', 'getUserLoggedId', 'getOrdersAll', 'getNegocios', 'getUserOrders']),
     isAdmin() {
       return this.$store.getters.isAdmin;
     },
@@ -28,10 +28,14 @@ export default {
     },
     orders() {
       if (this.$route.params.idNegocio) {
-        const negocio = this.$store.getters.getNegocios.find(
+        let negocio = [];
+        negocio = this.$store.getters.getNegocios.find(
           (todo) => (todo.id === this.$route.params.idNegocio),
         );
         return negocio.orders;
+      }
+      if (this.$route.params.idUser) {
+        return this.$store.getters.getUserOrders;
       }
       return this.$store.getters.getOrdersAll;
     },

@@ -7,8 +7,9 @@
             <router-link :to="{ name: 'Index' }">Inicio</router-link>
             <div v-if="isAdmin">
              <router-link :to="{ name: 'Productos' }">ABM Productos</router-link>
+             <router-link :to="{ name: 'Pedidos' }">{{tituloPedidos}}</router-link>
             </div>
-            <router-link :to="{ name: 'Pedidos' }">{{tituloPedidos}}</router-link>
+            <router-link :to="{ path: `pedidosDelUser/${this.userId}` }">Mis Pedidos</router-link>
             <router-link :to="{ name: 'Carrito' }">Ver Carrito</router-link>
             <a href="" @click="$store.dispatch('logout')">Cerrar Session</a>
       </div>
@@ -40,7 +41,7 @@ export default {
       return this.$store.getters.isAdmin;
     },
     tituloPedidos() {
-      return this.$store.getters.isAdmin ? 'Ver Todos los Pedido' : 'Mis Pedidos';
+      return this.$store.getters.isAdmin ? 'Ver Todos los Pedidos' : 'Mis Pedidos';
     },
     userName() {
       return this.$store.getters.getUserLoggedName;
