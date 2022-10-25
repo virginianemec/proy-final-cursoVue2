@@ -5,7 +5,6 @@
     <div class="encabezado">Bienvenido - Iniciar Sesión</div>
 
     <div class="form-caja">
-      <div class="form">
         <vue-form :state="formState" @submit.prevent="onSubmit()">
           <p>
             <validate class="fc my-3" tag="label">
@@ -38,7 +37,6 @@
         </vue-form>
       </div>
     </div>
-  </div>
 </template>
 
 <script>

@@ -93,7 +93,7 @@ export default {
   padding-top: 20px;
 }
 table {
-  width: 90%;
+  /*width: 90%;*/
   margin: auto;
   /* padding: 25px; */
   margin-bottom: 20px;
@@ -110,7 +110,7 @@ table {
   text-align: center;
   font-size: 15px;
   /* padding: 10px; */
-  width: 90%;
+  /*width: 90%; */
 }
 
 th {

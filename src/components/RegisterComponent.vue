@@ -5,12 +5,10 @@
   <div>
    <div class="encabezado">Registrarme</div>
       <div class="form-caja">
-      <div class="form">
       <vue-form
         :state="formStateReg"
         @submit.prevent="onRegister()"
         name="registry"
-        class="form"
       >
        <p>
         <validate
@@ -105,7 +103,6 @@
         </div>
       </vue-form>
     </div>
-</div>
   </div>
 </template>
 

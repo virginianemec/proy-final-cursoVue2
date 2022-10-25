@@ -2,7 +2,7 @@
   <div >
     <div class="encabezado">Mis negocios</div>
 
-    <div class="d-flex justify-content-beetween row">
+    <div class="tabla-negocios">
       <div v-for="negocio in negocios" :key="negocio.id">
         <NegocioComponent
           :id="negocio.id"

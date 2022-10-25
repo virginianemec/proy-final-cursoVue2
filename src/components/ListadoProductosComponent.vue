@@ -30,11 +30,13 @@ export default {
 </script>
 <style scoped>
 .contenedor {
-  display: flex;
+  /*display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
   width: 100%;
-  padding-top: 20px;
+  padding-top: 20px;*/
+  display: flex;
+  gap: 10px;
 }
 </style>

@@ -90,7 +90,7 @@ export default {
 </script>
 
 <style>
-/*
+
 * {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -100,12 +100,14 @@ export default {
   color: #959595;
   box-sizing: border-box;
 }
+/*
 body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
   margin: 0;
 }
+
 #main {
   display: flex;
   flex: 1;
@@ -142,7 +144,7 @@ body {
     font-size: 15px;
       color: orange; */
   color:  rgb(214, 142, 45);
-  background-image: url('../src/assets/tituloHeader1.png');
+  background-image: url('../src/assets/tituloHeader2.png');
   background-size: cover;
   height: 250px;
   display: flex;
@@ -171,11 +173,16 @@ body {
 
 /* Page Content */
 .content {
-    padding:20px;
-    display: flex;
+    padding: 20px;
+    /* display: flex; */
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: center;
+    width: 800px;
+    /* height: 1000px;
+    margin-top: 50px;*/
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .scroll {
@@ -193,8 +200,8 @@ body {
     justify-content: space-between;
     gap: 20px;
     width: 100%;
-    height: 10%;
-    padding: 10px;
+    /*height: 10%;
+    padding: 10px;*/
 }
 .loader {
   border: 16px solid #f3f3f3; /* Light grey */
@@ -210,22 +217,20 @@ body {
   background-color: orange;
   border-color: orange;
 }*/
-.form-caja{
+.form-caja {
   /*border-radius: 5px;
   padding: 20px;
   box-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.3);
   width: 400px;*/
   background-color: #fff;
-  width: 400px;
-  text-align: center;
-  padding: 20px 0 0 0;
+  padding: 20px 30px 30px 30px;
   border-radius: 4px;
   box-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.3);
-  /*box-shadow: 0px 30px 50px 0px r*/
+  /*box-shadow: 0px 30px 50px 0px r;
+  width: 80%;
+  text-align: center;
+  */
     margin: 20px auto;
-}
-.form {
-      padding: 0 30px;
 }
 
 .btn-primary {
@@ -235,7 +240,7 @@ body {
     background-color: rgb(214, 142, 45);
     border-color: rgb(214, 142, 45);
 
-    width: 50%;
+   /* width: 50%; */
     margin-bottom: 10px;
     font-size: 16px;
 }
@@ -269,7 +274,8 @@ input {
 input[type="text"],
 input[type="email"],
 input[type="number"],
-input[type="password"] {
+input[type="password"],
+select {
   width: 100%;
   padding: 0 0 0 10px;
   margin: 0;
@@ -283,6 +289,11 @@ input[type="password"] {
   position: relative;
   display: inline-block;
   background: none;
+}
+.tabla-negocio {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 @keyframes spin {
   0% { transform: rotate(0deg); }

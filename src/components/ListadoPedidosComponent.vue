@@ -2,7 +2,7 @@
   <div>
     <!--   <h1 class="text-center">{{titulo}}!</h1> -->
      <div class="encabezado">{{titulo}}!</div>
-    <table class="table border-primary">
+    <table>
       <thead>
         <th>Fecha</th>
         <th>Cant. / Descripción</th>

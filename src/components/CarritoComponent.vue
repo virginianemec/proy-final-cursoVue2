@@ -3,7 +3,7 @@
   <div>
     <h1 class="encabezado">CARRITO!</h1>
     <div class="row">
-      <table class="table border-primary">
+      <table>
         <thead>
           <tr>
             <th>Cant. producto</th>
