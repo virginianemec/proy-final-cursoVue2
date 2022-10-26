@@ -1,30 +1,50 @@
 <template>
-  <div class="container">
-    <h1 class="text-center">CARRITO!</h1>
-    <div class="row">
-      <table class="table border-primary">
+  <!-- <div class="container"> -->
+  <div>
+    <h1 class="encabezado">CARRITO!</h1>
+      <table>
         <thead>
           <tr>
-            <th>Cant. producto</th>
+            <th>Cant.</th>
+            <th>Producto</th>
             <th>Precio</th>
             <th>Subtotal</th>
+            <th></th>
           </tr>
         </thead>
-        <tbody  v-for="(product,index) in carrito" :key="index">
-        <!-- <div v-for="(product,index) in carrito" :key="index">
-          <RowProducto :product="product" />
-        </div> -->
-          <tr  v-if="isPend(product)">
+        <tbody v-for="(product,index) in carrito" :key="index">
+          <tr v-if="isPend(product)">
+            <td> {{ product.cant }}</td>
             <td>
               <p>{{ displayProduct(product) }}</p>
             </td>
-            <td>$ {{ product.productPrice }}</td>
-            <td>$ {{ totalProduct(product) }}</td>
+            <td class="moneyCell">$ {{ product.productPrice }}</td>
+            <td class="moneyCell">$ {{ totalProduct(product) }}</td>
+            <td>
+              <CountComponent
+                :cantInicial="product.cant"
+                :id="product.productId"
+                :price="product.productPrice"
+                :name="product.productName"
+                :negocio="product.negocio"
+                @carritoUpdate="carritoUpdate($event)"
+              ></CountComponent>
+            </td>
           </tr>
         </tbody>
+          <tbody v-if="!isThereAnyPendiente">
+            <tr>
+              <td colspan="5" style="text-align: center;"> ---- NO HAY COMPRAS PENDIENTES ---- </td>
+            </tr>
+          </tbody>
+        <tfoot>
+          <td colspan="3"><div class="moneyCell">Total: $</div></td>
+          <td><div class="moneyCell">{{ getTotal }}</div></td>
+          <td></td>
+        </tfoot>
       </table>
-      <div>Total: ${{ getTotal }}</div>
-    </div>
+
+    <div class="fila">
     <button
       :style="isThereAny"
       type="button"
@@ -33,32 +53,41 @@
       @click="reset()"
     >Vaciar carrito</button>
 
-    <button :style="isThereAny" type="button"
-    :disabled="btnIsDisabled"
-    class="btn btn-primary"
-    @click="comprar()">Comprar</button>
-
+    <button
+      :style="isThereAny"
+      type="button"
+      :disabled="btnIsDisabled"
+      class="btn btn-primary"
+      @click="comprar()"
+    >Comprar</button>
+  </div>
     <div v-show="mostrarFormCompra">
-        <!-- form para comprar-->
-        <CompraForm @onCancel="onCancel($event)"
-          @aceptarComprar="aceptarComprar($event)"
-          :total="this.getTotal"></CompraForm>
+      <!-- form para comprar-->
+      <CompraForm
+        @onCancel="onCancel($event)"
+        @aceptarComprar="aceptarComprar($event)"
+        :total="this.getTotal"
+      ></CompraForm>
     </div>
 
-     <!-- <b-loading :show="loading"></b-loading>
-      <b-spinner v-model="loading" label="Cargando..."></b-spinner> -->
+    <!-- <b-loading :show="loading"></b-loading>
+    <b-spinner v-model="loading" label="Cargando..."></b-spinner>-->
+    <div v-if="loading">
+      <div class="loader"></div>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
+import CountComponent from '@/components/CountComponent.vue';
 import CompraForm from './CompraForm.vue';
-// import RowProducto from '@/components/RowProducto.vue';
 
 export default {
   name: 'CarritoComponent',
   components: {
     CompraForm,
+    CountComponent,
   },
   beforeMount() {
     this.actualizarCarrito();
@@ -75,9 +104,7 @@ export default {
       return price * cant;
     },
     async reset() {
-      // this.$emit('reset');
       await this.$store.dispatch('resetCarritoUser');
-      // await this.$store.dispatch('carritoUserFromApi', this.userId);
     },
     onCancel() {
       console.log('User cancelled the loader.');
@@ -85,32 +112,28 @@ export default {
     },
     async aceptarComprar() {
       this.loading = true;
-      await this.$store.dispatch('carritoComprarDevolver', { accion: 'comprar', userId: this.userId });
+      await this.$store.dispatch('carritoComprarDevolver', {
+        accion: 'comprar',
+        userId: this.userId,
+      });
       this.mostrarFormCompra = false;
       this.loading = false;
-      this.$alert(
-        'Gracias por tu compra!.',
-        'Atención',
-        'success',
-      );
+      this.$alert('Gracias por tu compra!.', 'Atención', 'success');
     },
     async comprar() {
-      // this.$emit('comprar');
-      // TODO: Probar esto.
-      // await this.$store.dispatch('carritoComprar');
-      // await this.$store.dispatch('updateNegocios');
       this.mostrarFormCompra = true;
     },
     async devolver() {
-    // this.$emit('comprar');
       this.loading = true;
-      await this.$store.dispatch('carritoComprarDevolver', { accion: 'devolver', userId: this.userId });
-      // await this.$store.dispatch('carritoUserFromApi', this.userId);
+      await this.$store.dispatch('carritoComprarDevolver', {
+        accion: 'devolver',
+        userId: this.userId,
+      });
       this.loading = false;
     },
 
     displayProduct(product) {
-      return ` ${product.cant} ${product.productName}`;
+      return product.productName;
     },
     totalProduct(product) {
       return product.cant * product.productPrice;
@@ -118,39 +141,46 @@ export default {
     isPend(product) {
       return product.estado === 'PENDIENTE';
     },
+
     async actualizarCarrito() {
       this.loading = true;
-      // creo que este no va po que si no, al ver l carrito
-      // siempre veria el de la base. no el del store.
-      // await this.$store.dispatch('carritoUserFromApi', this.userId);
       this.loading = false;
     },
 
+    async carritoUpdate(objEvent) {
+      this.total = objEvent.total;
+      const objectdata = {
+        productId: objEvent.productId,
+        productPrice: objEvent.productPrice,
+        productName: objEvent.productName,
+        updateFuntion: objEvent.updateFuntion,
+        userId: this.userId,
+        negocio: objEvent.negocio,
+      };
+      if (objEvent.updateFuntion === '+') {
+        await this.$store.dispatch('increase', objectdata);
+      } else {
+        await this.$store.dispatch('decrease', objectdata);
+      }
+    },
   },
   computed: {
-    ...mapGetters(['getCarrito', 'getUserLoggedId']), // , 'getNegocios']),
-    /*
-    negocios() {
-      return this.$store.getters.getNegocios;
-    },
-    */
+    ...mapGetters(['getCarrito', 'getUserLoggedId']),
     userId() {
       return this.$store.getters.getUserLoggedId;
     },
     carrito() {
       return this.$store.getters.getCarrito;
-      // return this.actualizarCarrito();
     },
     isThereAny() {
-      // checks whether an element is even
       const isPend = (item) => item.estado === 'PENDIENTE';
       return this.carrito.some(isPend) ? 'display' : 'display:none';
     },
-    /*
-    totalProducto(price, cant) {
-      return price * cant;
+    isThereAnyPendiente() {
+      const isPend = (item) => item.estado === 'PENDIENTE';
+      return !!this.carrito.some(isPend);
     },
-  */
+
     getTotal() {
       let total1 = 0;
       this.carrito.forEach((val) => {
@@ -158,22 +188,51 @@ export default {
           total1 += this.totalProductCalc(val.productPrice, val.cant);
         }
       });
-      return total1;
+      return total1 > 0 ? total1 : '';
     },
     btnIsDisabled() {
       return this.mostrarFormCompra;
+    },
+    mostrarLoading() {
+      return this.loading ? 'display:block' : 'display:none';
     },
   },
 };
 </script>
 
 <style scoped>
-.div--container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  width: 100%;
-  padding-top: 20px;
+table {
+  width: 750px;
+  border-collapse: collapse;
+  margin: 10px auto;
 }
+
+/* Zebra striping */
+tr:nth-of-type(odd) {
+  background: #eee;
+}
+
+th {
+  background: rgb(236, 185, 90);
+  color: white;
+  font-weight: bold;
+}
+
+td {
+  border: 1px solid #ccc;
+  text-align: left;
+  font-size: 12x;
+}
+th {
+  border: 1px solid #ccc;
+  text-align: left;
+  font-size: 15px;
+}
+
+tfoot td {
+  background: rgb(236, 185, 90);
+  color: white;
+  font-weight: bold;
+}
+
 </style>

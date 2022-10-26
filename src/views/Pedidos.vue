@@ -1,5 +1,5 @@
 <template>
-   <ListadoPedidosComponent :orders="orders" :titulo="titulo" ></ListadoPedidosComponent>
+   <ListadoPedidosComponent :orders="orders" :titulo="titulo"></ListadoPedidosComponent>
 </template>
 
 <script>
@@ -7,11 +7,6 @@ import { mapGetters } from 'vuex';
 import ListadoPedidosComponent from '../components/ListadoPedidosComponent.vue';
 
 export default {
-  data() {
-    return {
-
-    };
-  },
   components: {
     ListadoPedidosComponent,
   },
@@ -19,7 +14,7 @@ export default {
     this.getOrders();
   },
   computed: {
-    ...mapGetters(['isAdmin', 'getUserLoggedId', 'getOrdersAll', 'getNegocios']),
+    ...mapGetters(['isAdmin', 'getUserLoggedId', 'getOrdersAll', 'getNegocios', 'getUserOrders']),
     isAdmin() {
       return this.$store.getters.isAdmin;
     },
@@ -28,15 +23,20 @@ export default {
     },
     orders() {
       if (this.$route.params.idNegocio) {
-        const negocio = this.$store.getters.getNegocios.find(
+        let negocio = [];
+        negocio = this.$store.getters.getNegocios.find(
           (todo) => (todo.id === this.$route.params.idNegocio),
         );
         return negocio.orders;
+      }
+      if (this.$route.params.idUser) {
+        return this.$store.getters.getUserOrders;
       }
       return this.$store.getters.getOrdersAll;
     },
     titulo() {
       if (this.$route.params.idNegocio) return `Pedidos de negocio ${this.$route.params.idNegocio}`;
+      if (this.$route.params.idUser) return 'Mis pedidos';
       return this.isAdmin ? 'Listado de Todos los pedidos del sitio.' : 'Mis pedidos';
     },
   },

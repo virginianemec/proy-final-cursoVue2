@@ -9,7 +9,7 @@ import Carrito from '../views/Carrito.vue';
 
 Vue.use(VueRouter);
 
-// const router = new VueRouter({routes, mode: 'history'});
+
 export default new VueRouter({
   // generar historial de navegación
   mode: "history",
@@ -49,6 +49,12 @@ export default new VueRouter({
     {
       path: "/pedidos/:idNegocio",
       name: "PedidosDelNegocio",
+      component: Pedidos,
+      props: true,
+    },
+    {
+      path: "/pedidosDelUser/:idUser",
+      name: "PedidosDelUsuario",
       component: Pedidos,
       props: true,
     },

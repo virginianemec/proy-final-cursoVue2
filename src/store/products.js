@@ -28,8 +28,6 @@ export default {
 
   actions: {
     async productsFromApi({ commit }) {
-      // /?user=${user}`)
-      // const urlprod = negocio > 0 ? `${URL}/?negocio=${negocio}` : URL;
       await axios
         .get(URL)
         .then(async (response) => {
@@ -86,9 +84,6 @@ export default {
         id: product.id,
       };
       const valId = product.id;
-      const header = {
-        'Content-Type': 'application/json',
-      };
       await axios
         .put(`${URL}/${valId}`, data)
         .then(async (response) => {
@@ -116,14 +111,5 @@ export default {
       );
       return productsFromNegocio;
     },
-
-    /*
-    deleteTodo(id){
-        axios.delete(`url/todos/${id}`)
-        .then(res => this.todos = this.todos.filter(todo => todo.id !== id))
-        .catch(err => console.log(err));
-        //this.todos = this.todos.filter(todo => todo.id !== id);
-    } // si el metodo estuviene sen otro modulo: dispatch("movement/goForward", speed, { root: true });
-    */
   },
 };

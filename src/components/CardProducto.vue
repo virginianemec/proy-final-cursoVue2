@@ -1,6 +1,6 @@
 <!-- eslint-disable vuejs-accessibility/alt-text -->
 <template>
-  <div class="div--container">
+  <div> <!-- class="div--container-->
     <table class="table">
       <thead>
         <tr>
@@ -11,7 +11,6 @@
         <tr>
           <td colspan="2">
             <img :src="require(`@/assets/images/${getImage()}.png`)" />
-            <!--<img :src='getImagenSrc' alt='articcantidadle image' /> -->
           </td>
         </tr>
 
@@ -25,7 +24,8 @@
         </tr>
         <tr>
           <td colspan="2">
-            <CountComponent :cant="cant" :price="price" @carritoUpdate="carritoUpdate($event)"></CountComponent>
+            <CountComponent :cantInicial="cant" :id="id" :price="price" :name="name" :negocio="negocio"
+               @carritoUpdate="carritoUpdate($event)"></CountComponent>
           </td>
         </tr>
 
@@ -47,6 +47,9 @@ export default {
   name: 'CardProducto',
   // propiedades del producto:
   props: {
+    producto: {
+      type: Object,
+    },
     id: {
       type: String,
       default: '',
@@ -73,7 +76,6 @@ export default {
   },
   data() {
     return {
-      // creo  que necesitare inicializar la cant en caso de edit.
       cant: 0,
       total: 0,
     };
@@ -84,51 +86,34 @@ export default {
       return this.$store.getters.getUserLoggedId;
     },
     getImagenSrc() {
-      return `./assets/${this.image}.png`;
+      return `./assets/${this.producto.image}.png`;
     },
   },
   methods: {
     async carritoUpdate(objEvent) {
       this.total = objEvent.total;
-      /*
-      this.$emit('carritoUpdate', {
-        id: this.id,
-        productPrice: this.price,
-        productName: this.name,
-        updateFuntion: objEvent.updateFuntion,
-      });
-      */
       const objectdata = {
-        productId: this.id,
-        productPrice: this.price,
-        productName: this.name,
+        productId: objEvent.productId,
+        productPrice: objEvent.productPrice,
+        productName: objEvent.productName,
         updateFuntion: objEvent.updateFuntion,
         userId: this.userId,
-        negocio: this.negocio,
+        negocio: objEvent.negocio,
       };
       if (objEvent.updateFuntion === '+') {
         await this.$store.dispatch('increase', objectdata);
       } else {
         await this.$store.dispatch('decrease', objectdata);
       }
-      // await this.$store.dispatch('carritoUserFromApi', this.userId);
     },
     getImage() {
-      return this.image === '' ? 'No-image-available' : this.image;
+      return this.producto.image === '' ? 'No-image-available' : this.producto.image;
     },
   },
 };
 </script>
 
 <style scoped>
-.div--container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 10px;
-  width: 100%;
-  padding-top: 20px;
-}
 table {
   width: 90%;
   margin: auto;
@@ -147,7 +132,7 @@ p {
   margin: 12px 0px 0px 0px;
   color: #fd9001;
   text-align: center;
-  font-size: 18px;
+  font-size: 12px;
 }
 img {
   width: 150px;

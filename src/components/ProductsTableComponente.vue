@@ -2,31 +2,30 @@
 <template>
   <div>
     <div v-if="isAnyProduct">
-      <div class="div--container">
-        <div class="titleTable">LISTADO DE PRODUCTOS</div>
+       <div> <!-- class="div--container-->
+        <div>LISTADO DE PRODUCTOS</div>
 
-        <table class="table">
+        <table >
           <thead>
-            <tr class="table--tr">
+            <tr >
               <th>ID</th>
               <th>NOMBRE</th>
               <th>PRECIO</th>
               <th>CATEGORIA</th>
               <th>A LA VENTA?</th>
+              <th>Acciones</th>
             </tr>
           </thead>
 
-          <tbody v-for="(product, i) in products" :key="i">
+          <tbody v-for="(product, index) in products" :key="index">
             <tr>
-              <td class="table--td">{{ product.id }}</td>
-              <td class="table--td">{{ product.name | nameFilter(product.name) }}</td>
-              <td class="table--td">{{ product.price | priceFilter(product.price) }}</td>
-              <td class="table--td">{{ product.category | categoryFilter }}</td>
-              <td class="table--td">{{ product.activo | isActivo(product.activo) }}</td>
+              <td >{{ product.id }}</td>
+              <td >{{ product.name | nameFilter(product.name) }}</td>
+              <td >{{ product.price | priceFilter(product.price) }}</td>
+              <td >{{ product.category | categoryFilter }}</td>
+              <td >{{ product.activo | isActivo(product.activo) }}</td>
               <td>
                 <button v-on:click="productUpdate(product)">Update</button>
-              </td>
-              <td>
                 <button v-on:click="productDelete(product)">Delete</button>
               </td>
             </tr>
@@ -43,9 +42,6 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'ProductsTableComponente',
-  /* props: {
-    products: {},
-  }, */
   filters: {
     nameFilter(value) {
       if (!value) return '';
@@ -87,49 +83,40 @@ export default {
 </script>
 
 <style scoped>
-.div--container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 10px;
-  width: 100%;
-  padding-top: 20px;
-}
 table {
-  width: 90%;
-  margin: auto;
-  /* padding: 25px; */
-  margin-bottom: 20px;
-  border-radius: 15px;
-  box-shadow: 2px 2px 10px rgb(142, 142, 142);
-  transition: 0.3s;
-  color: #2c3e50;
-  text-align: left;
-  background-color: aliceblue;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px auto;
 }
-.titleTable {
-  background-color: #555555;
-  color: white;
-  text-align: center;
-  font-size: 15px;
-  /* padding: 10px; */
-  width: 90%;
+
+/* Zebra striping */
+tr:nth-of-type(odd) {
+  background: #eee;
 }
 
 th {
+  background: rgb(236, 185, 90);
+  color: white;
+  font-weight: bold;
+}
+
+td {
+  /* padding: 10px; */
+  border: 1px solid #ccc;
   text-align: left;
-  font-size: 16px;
-  padding-left: 10px;
+  font-size: 12x;
 }
-.table--tr {
-  color: #555555;
-  text-align: center;
-  font-size: 2.1rem;
-}
-.table--td {
-  padding-top: 10px;
-  color: #555555;
+th {
+  /* padding: 10px; */
+  border: 1px solid #ccc;
   text-align: left;
-  font-size: 16px;
+  font-size: 15px;
 }
+
+tfoot td {
+  background: rgb(236, 185, 90);
+  color: white;
+  font-weight: bold;
+}
+
 </style>

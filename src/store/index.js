@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
+import router from '@/router/router';
 
 import products from './products';
 import users from './users';
@@ -31,51 +32,21 @@ export default new Vuex.Store({
     setWorkDescription(state, message) {
       state.workDescription = message;
     },
-    /*
-    reset(rootState) {
-      rootState.setNegocios([]);
-    },
-    */
   },
 
   actions: {
     cambiarWorkDescription({ commit }, message) {
       commit('setWorkDescription', message);
     },
-    /*
-    async carritoComprar({ getters }) {
-      // comprar: toma cada producto, y actualiza las ordenes para cada negocio dueño dle producto.
-      await getters.getCarrito.forEach(async (element) => {
-        // carrito
-        const valId = element.id;
-        // const arrayProductos = getters.getProducts;
-        // productos
-        // const producto = arrayProductos.find((todo) => todo.id === element.id);
-        // negocio
-        // const negocioId = producto.negocio;
-        element.estado = 'COMPRADO';
-        // await commit('comprarDevolverItem', index), accion;
-        await axios
-          // .delete(`https://632ba1f21aabd8373989647d.mockapi.io/negocios/${element.id}`)
-          .put(`${URL}/${valId}`, element)
-          .then((response) => {
-            console.table(response.data);
-            /*
-            const arrayNegocios = getters.getNegocios;
-            const negocio = arrayNegocios.find(
-              (item) => parseInt(item.id, 10) === parseInt(negocioId, 10),
-            );
-            if (negocio) negocio.orders.push(element);
-            /*
-            */
-    // TODO: buscar los carritos y ordenes de nuevo.
-    /*      })
-          .catch((error) => {
-            console.log(error);
-          });
-      });
+
+    async logout({ commit, dispatch }) {
+      await dispatch('setCarritoTemp').then(
+        async () => {
+          console.log('temrino');
+          commit('logoutUser');
+        },
+      ).finally(router.push({ name: 'Login' }));
     },
-    */
   },
   modules: {
     products,

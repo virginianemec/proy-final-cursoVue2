@@ -1,28 +1,30 @@
 <!-- eslint-disable prettier/prettier -->
 <template>
-  <div class="container">
-    <div class="div--container">
+   <div>
+    <!--<h3 class="title">Bienvenido - Iniciar Sesión</h3> -->
+    <div class="encabezado">Productos</div>
+
+    <div class="form-caja">
+      <div class="form">
+
       <vue-form
         :state="formStateProducts"
         @submit.prevent="productAdd()"
         name="resgiterProduct"
-        class="form"
       >
-        <validate tag="label" :custom="{ customValidator: customValidator }">
-          <div class="renglon">
-            <p>Nombre*:</p>
-            <input v-model.trim="product.name" type="text" required name="name" />
+      <p>
+        <validate class="fc my-3" tag="label" :custom="{ customValidator: customValidator }">        
+            <input v-model.trim="product.name" type="text" required name="name" placeholder="Nombre*:"/>
             <field-messages class="etiqueta" name="name">
               <div>Ok.</div>
               <div slot="required">Ingrese un nombre por favor.</div>
               <div slot="customValidator">Ya existe un produto con el mismo nombre. Intente otro.</div>
             </field-messages>
-          </div>
         </validate>
+</p>
+<p>
+        <validate class="fc my-3" tag="label" :custom="{ priceValidator: priceValidator }">
 
-        <validate tag="label" :custom="{ priceValidator: priceValidator }">
-          <div class="renglon">
-            <p>Precio*:</p>
             <input
               v-model.number="product.price"
               type="number"
@@ -30,6 +32,7 @@
               name="price"
               min="1"
               max="9999"
+              placeholder="Precio*:"
             />
 
             <field-messages class="etiqueta" name="price">
@@ -39,12 +42,12 @@
               <div slot="min">El valor debe ser numerico mayor a cero.</div>
               <div slot="max">El valor debe ser numerico menor a 9999.</div>
             </field-messages>
-          </div>
+      
         </validate>
-
-        <validate tag="label" :custom="{ categoryValidator: categoryValidator }">
-          <div class="renglon">
-            <p>Categoria*:</p>
+</p>
+<p>
+        <validate class="fc my-3" tag="label" :custom="{ categoryValidator: categoryValidator }">
+          <p>Categoria*:</p>
             <select id="category" v-model="product.category" name="category" required>
               <option value="Comida rápida">Comida rápida</option>
               <option value="Comida vegana">Comida vegana</option>
@@ -55,11 +58,12 @@
               <div slot="required">Seleccione una categoria</div>
               <div slot="categoryValidator">La comida sin TACC no debe costar mas de $1500</div>
             </field-messages>
-          </div>
+
         </validate>
-        <validate tag="label" :custom="{ activoValidator: activoValidator }">
-          <p>¿Disponible para la venta?</p>
-          <div class="renglon">
+        </p>
+        <p>
+        <validate class="fc my-3" tag="label" :custom="{ activoValidator: activoValidator }">
+          <div>¿Disponible para la venta?
             <input
               id="si"
               name="activo"
@@ -76,23 +80,24 @@
             <label for="no">
               <span></span> No
             </label>
-            <field-messages class="etiqueta" name="activo">
-              <div>Ok.</div>
-              <div slot="required">Seleccione una categoria</div>
-              <div slot="activoValidator">La comida sin TACC no debe costar mas de $1500</div>
-            </field-messages>
-          </div>
+            
+            </div>
         </validate>
-        <div>
-          <button type="submit" class="btn btn-primary" @keyup.enter="submit">{{ etiqueta }}</button>
-        </div>
-      </vue-form>
-    </div>
-    <div>
-      <br />
-      <ProductsTableComponente @productController="productController($event)"></ProductsTableComponente>
+</p>
+          <div class="fila">
+            <button type="submit" class="btn btn-primary" @keyup.enter="submit">{{ etiqueta }}</button>
+            <button class="btn btn-primary" @click.prevent="resetProduct()">Cancelar</button>
+          </div>
+
+
+     
+            </vue-form>
+
+             <ProductsTableComponente @productController="productController($event)"></ProductsTableComponente>
+      </div>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -101,16 +106,9 @@ import ProductsTableComponente from '@/components/ProductsTableComponente.vue';
 
 export default {
   name: 'ProductFormComponent',
-  /*
-  props: {
-    // products: [],
-  },
-  */
+
   components: {
     ProductsTableComponente,
-  },
-  created() {
-    // this.product = this.productInit;
   },
   data() {
     return {
@@ -140,13 +138,7 @@ export default {
         return;
       }
       if (this.productNew) {
-        // alert("Guardamos el item");
         const objProduct = { ...this.product };
-        /*
-        // este id lo crea mockapi
-        const id = this.products.length + 1;
-        objProduct.id = id;
-        */
         await this.productSave(objProduct)
           .then((resp) => {
             console.log(resp);
@@ -158,7 +150,6 @@ export default {
             this.$alert(`No pudo crearse el producto. Intente de nuevo. ${err}`);
           })
           .finally();
-        // console.log("producto.add");
       } else {
         // actualizar...
         this.$confirm('¿Seguro desea actualizar este producto?', 'Atención', 'question').then(
@@ -204,7 +195,6 @@ export default {
         this.product.price = objController.product.price;
         this.product.category = objController.product.category;
         this.product.activo = objController.product.activo;
-        // this.product.id_producto = objController.product.id_producto;
         this.product.cant = objController.product.cant;
         this.product.negocio = objController.product.negocio;
         this.product.image = objController.product.image;
@@ -285,38 +275,13 @@ export default {
 label,
 p {
   display: block;
-  /*margin-top: 20px;*/
   letter-spacing: 1px;
 }
 
 .etiqueta {
   display: block;
   letter-spacing: 1px;
-  color: red;
 }
-
-.principal {
-  display: flex;
-  margin: 0 auto;
-  color: #666666;
-  padding-top: 2%;
-  padding-left: 20%;
-  font-family: Arial;
-  text-align: left;
-  /*border: 3px solid #00b100;*/
-  border-radius: 15px;
-  width: 80%;
-  box-shadow: 2px 2px 10px rgb(142, 142, 142);
-  background-color: #fff;
-  flex-direction: column;
-}
-.renglon {
-  display: flex !important;
-  flex-direction: row;
-  align-items: baseline;
-  flex-wrap: nowrap;
-}
-
 button {
   width: 85px;
   height: 35px;
@@ -352,7 +317,7 @@ input[type="radio"]:checked + label {
   font-weight: 700;
 }
 input[type="radio"]:checked + label span {
-  background-color: #eaee14;
+  background-color: orange;
   border: 2px solid #140a0a;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
 }

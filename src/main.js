@@ -2,7 +2,7 @@
 import Vue from 'vue';
 import VueSimpleAlert from 'vue-simple-alert';
 import VueForm from 'vue-form';
-
+import { BootstrapVue } from 'bootstrap-vue';
 import axios from 'axios';
 import VueRouter from 'vue-router';
 import VueAxios from 'vue-axios';
@@ -10,16 +10,8 @@ import { BootstrapVue } from 'bootstrap-vue';
 import router from './router/router';
 
 import store from './store';
-
-// import Login from './views/Login.vue';
 import App from './App.vue';
-/*
-import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-*/
-import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
-// import './styles.css';
 
 Vue.use(VueAxios, axios);
 Vue.use(VueRouter);
@@ -32,6 +24,11 @@ Vue.filter('categoryFilter', (value) => {
   console.log('en el main');
   if (!value) return 'Sin categoria';
   return value.toString().toUpperCase();
+});
+Vue.filter('dataFilter', (value) => {
+  if (!value) return '';
+  const arrayDate = value.toString().split('T')[0].split('-');
+  return `${arrayDate[2]}/${arrayDate[1]}/${arrayDate[0]}`;
 });
 
 new Vue({

@@ -13,7 +13,6 @@ export default {
       return state.negocios;
     },
     getNegocioOrders(state, objData) {
-      // return state.negocios[objData.index].orders;
       const negocio = state.negocios.find((item) => item.id === objData.id);
       return negocio.orders;
     },
@@ -23,15 +22,9 @@ export default {
       state.negocios = payload;
     },
     setNegocioOrders(state, objData) {
-      // state.negocios[objData.index].orders = objData.orders;
       const negocio = state.negocios.find((item) => item.id === objData.id);
       negocio.orders = objData.orders;
     },
-    /*
-    reset(state, rootState) {
-        state.negocio = [];
-    },
-    */
   },
   actions: {
 
@@ -49,35 +42,11 @@ export default {
               await dispatch('getOrdersFromApi', negocio.id, { root: true });
             }),
           );
-          /*
-          state.negocios.forEach(async (negocio, index) => {
-            // dispatch('someOtherAction', null, { root: true }) // -> 'someOtherAction'
-           // let orders = [];
-           // orders = await dispatch('getNegocioOrdersFromApi', negocio.id, { root: true });
-          //  if (orders) await commit('setNegocioOrders', { index, orders });
-
-          await dispatch('getOrdersFromApi', negocio.id, { root: true });
-          });
-          */
         })
         .catch((err) => {
           console.error('error', err);
         })
         .finally(() => console.log('Peticion terminada - action getNegociosFromApi.'));
     },
-    /*
-    async updateNegocios({ state }) {
-      state.negocios.forEach(async (negocio) => {
-        await axios
-          .put(`${URL}/${parseInt(negocio.id, 10)}`, negocio)
-          .then((response) => {
-            console.table(response.data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      });
-    },
-    */
   },
 };

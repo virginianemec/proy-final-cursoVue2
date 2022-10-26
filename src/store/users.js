@@ -1,4 +1,3 @@
-import router from '@/router/router';
 import axios from 'axios';
 
 const URL = 'https://632ba1f21aabd8373989647d.mockapi.io/users';
@@ -6,18 +5,6 @@ const URL = 'https://632ba1f21aabd8373989647d.mockapi.io/users';
 export default {
   namespace: true,
   state: {
-    /*  en MockApi.
-"email": "virginia@ta.com",
-"id": "1"
-"name": "Virginia",
-"password": "123",
-"rol": "admin",
-"age": "29",
-"birthday": "2022-09-23T23:27:08.664Z",
-"fovourite_color": "green",
-"createdAt": "2022-09-23T23:27:08.664Z",
-*/
-    // usuario harcodeado.
     userLogged: {
       email: '',
       name: '',
@@ -61,8 +48,6 @@ export default {
         email: objUserToLoging.email,
       };
       let usersFromApi = [];
-      //  TODO: ver que sea el usaurio con el email,
-      // o bien filtrar el que tenga el email.
       await axios
         .get(URL, data)
         .then(async (response) => {
@@ -91,13 +76,11 @@ export default {
     },
 
     // return true if user is register.
-    async getUserRegisterFromApi({ commit }, objUserToLoging) {
+    async getUserRegisterFromApi(objUserToLoging) {
       const data = {
         email: objUserToLoging.email,
       };
       let usersFromApi = [];
-      //  TODO: ver que sea el usaurio con el email,
-      // o bien filtrar el que tenga el email.
       await axios
         .get(URL, data)
         .then(async (response) => {
@@ -111,21 +94,5 @@ export default {
         })
         .finally(() => console.log('Peticion terminada - action getUserRegisterFromApi.'));
     },
-
-    logout({ commit}) {
-      commit('logoutUser');
-      // commit('reset');
-      /*
-      commit("resetProducts");
-      commit("resetUsers");
-      */
-      router.push({ name: "Login" });
-    },
-    /* async login({},data){
-
-},
-async register({},data){
-
-} */
   },
 };
