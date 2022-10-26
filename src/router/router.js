@@ -9,7 +9,7 @@ import Carrito from '../views/Carrito.vue';
 
 Vue.use(VueRouter);
 
-// const router = new VueRouter({routes, mode: 'history'});
+
 export default new VueRouter({
   // generar historial de navegación
   mode: "history",

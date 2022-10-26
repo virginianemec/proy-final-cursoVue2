@@ -6,20 +6,21 @@
         name="compra"
         class="form"
       >
-        <validate tag="label">
-          <div class="renglon">
-            <p>Dirección*:</p>
-            <input v-model.trim="compra.direccion" type="text" required name="direccion" />
+      <p>
+        <validate class="fc my-3" tag="label">
+          <div >
+            <input v-model.trim="compra.direccion" type="text" required name="direccion"  placeholder="Dirección*"/>
             <field-messages class="etiqueta" name="direccion">
               <div>Ok.</div>
               <div slot="required">Ingrese una direccion por favor.</div>
             </field-messages>
           </div>
         </validate>
-
-        <validate tag="label">
-          <div class="renglon">
-            <p>Medio de Pago*:</p>
+      </p>
+      <p>
+        <validate class="fc my-3" tag="label">
+          <div >
+            <p>Medio de Pago*</p>
             <select id="medioPago" v-model="compra.medioPago" name="medioPago" required>
               <option value="Tarjeta">Tarjeta</option>
               <option value="Efectivo">Efectivo</option>
@@ -30,13 +31,16 @@
             </field-messages>
           </div>
         </validate>
+
         <div>{{mensajeMedioPago}}</div>
-     
-        Total:  {{getTotal}}
-       <div  class="container px-4 text-center">
+      </p>
+      <p>
+       <div class="fila"> Total: $ {{getTotal}}</div>
+       <div  class="fila">
           <button type="submit" class="btn btn-primary" @click="comprar()">Pagar</button>
           <button class="btn btn-primary" @click="onCancel()">Cancelar</button>
         </div>
+      </p>
       </vue-form>
    </div>
 
@@ -46,7 +50,7 @@
 export default {
   name: 'CompraForm',
   props: {
-    total: Number,
+    total: String,
   },
   data() {
     return {
@@ -85,7 +89,7 @@ export default {
   },
   computed: {
     getTotal() {
-      return (this.compra.medioPago === 'Tarjeta') ? this.total * 1.10 : this.total;
+      return (this.compra.medioPago === 'Tarjeta') ? parseFloat(this.total) * 1.10 : parseFloat(this.total);
     },
     mensajeMedioPago() {
       return (this.compra.medioPago && this.compra.medioPago === 'Tarjeta') ? 'Con Tarjeta 10% más. ¿Esta de acuerdo?' : '';

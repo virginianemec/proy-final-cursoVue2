@@ -38,7 +38,6 @@ export default {
           name: 'Sand. Vegano',
           image: 'SandwichVegano',
           price: 150,
-          // no se si necesito cant.
           cant: 0,
         },
         {
@@ -46,7 +45,6 @@ export default {
           name: 'Ensalada variadito de primavera!',
           image: 'ensaladaVarPrimavera',
           price: 150,
-          // no se si necesito cant.
           cant: 0,
         },
         {

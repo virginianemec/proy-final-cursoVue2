@@ -51,7 +51,6 @@ export default {
         name: '',
         email: '',
         password: '',
-        // agrego el rol del usaurio
         rol: '',
       },
     };
@@ -89,21 +88,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-/*
-.form {
-  border-radius: 5px;
-  padding: 20px;
-  box-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.3);
-  width: 400px;
-}
-.btn-primary {
-  color: #fff;
-  background-color: orange;
-  border-color: orange;
-}
-.class-label {
-  color: #04000a;
-}
-*/
-</style>

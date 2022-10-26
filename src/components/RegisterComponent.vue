@@ -176,7 +176,6 @@ export default {
     async exsistUser() {
       const dataToGet = {
         email: this.data.email,
-        // password: this.data.password,
       };
       const existUserRegister = await this.$store.dispatch('getUserRegisterFromApi', dataToGet);
       return existUserRegister;
@@ -225,10 +224,6 @@ export default {
     userNameExists() {
       // TODO: verificar contra mas datos
       // no puedo esto por que no tenog los usuarios aun....
-      /*
-      const obj = this.users.find((val) => val.name === this.data.name);
-      return !!obj;
-      */
       return false;
     },
   },

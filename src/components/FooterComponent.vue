@@ -6,9 +6,7 @@
 
 <style scoped>
 .footer-map {
-  /*height: 20%;
-    background-image: url('../assets/logo.png');
-    */
+  height: 10%;
   background-color: rgb(214, 142, 45);
   width: 100%;
   background-size: cover;
@@ -17,7 +15,6 @@
 
 h1 {
   text-align: center;
-  /*padding: 20px;*/
   color: #131212;
 }
 </style>

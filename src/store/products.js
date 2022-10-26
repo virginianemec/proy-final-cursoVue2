@@ -111,14 +111,5 @@ export default {
       );
       return productsFromNegocio;
     },
-
-    /*
-    deleteTodo(id){
-        axios.delete(`url/todos/${id}`)
-        .then(res => this.todos = this.todos.filter(todo => todo.id !== id))
-        .catch(err => console.log(err));
-        //this.todos = this.todos.filter(todo => todo.id !== id);
-    } // si el metodo estuviene sen otro modulo: dispatch("movement/goForward", speed, { root: true });
-    */
   },
 };

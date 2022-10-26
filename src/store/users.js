@@ -1,4 +1,3 @@
-import router from '@/router/router';
 import axios from 'axios';
 
 const URL = 'https://632ba1f21aabd8373989647d.mockapi.io/users';
@@ -6,7 +5,6 @@ const URL = 'https://632ba1f21aabd8373989647d.mockapi.io/users';
 export default {
   namespace: true,
   state: {
-    // usuario harcodeado.
     userLogged: {
       email: '',
       name: '',
@@ -50,8 +48,6 @@ export default {
         email: objUserToLoging.email,
       };
       let usersFromApi = [];
-      //  TODO: ver que sea el usaurio con el email,
-      // o bien filtrar el que tenga el email.
       await axios
         .get(URL, data)
         .then(async (response) => {
@@ -80,13 +76,11 @@ export default {
     },
 
     // return true if user is register.
-    async getUserRegisterFromApi({ commit }, objUserToLoging) {
+    async getUserRegisterFromApi(objUserToLoging) {
       const data = {
         email: objUserToLoging.email,
       };
       let usersFromApi = [];
-      //  TODO: ver que sea el usaurio con el email,
-      // o bien filtrar el que tenga el email.
       await axios
         .get(URL, data)
         .then(async (response) => {
@@ -99,11 +93,6 @@ export default {
           console.error('error', err);
         })
         .finally(() => console.log('Peticion terminada - action getUserRegisterFromApi.'));
-    },
-
-    logout({ commit}) {
-      commit('logoutUser');
-      router.push({ name: "Login" });
     },
   },
 };

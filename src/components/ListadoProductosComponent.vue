@@ -1,6 +1,6 @@
 <template>
   <div class="contenedor">
-    <div v-for="product in products" :key="product.id">
+    <div v-for="(product, index) in products" :key="index">
       <CardProducto
         :producto="product"
         :id="product.id"
@@ -30,12 +30,6 @@ export default {
 </script>
 <style scoped>
 .contenedor {
-  /*display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-  padding-top: 20px;*/
   display: flex;
   gap: 10px;
 }

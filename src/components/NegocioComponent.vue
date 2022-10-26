@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="tabla--titulo">{{ name }} - {{ category }}
-      <router-link v-if="isAdmin" :to="{ path: `pedidos/${this.id}` }">Pedidos</router-link> <br>
+      <router-link v-if="isAdmin" :to="{ path: `pedidos/${this.id}` }"> Ver Pedidos</router-link> <br>
     </div>
      <br>
 
@@ -63,8 +63,10 @@ export default {
 <style scoped>
 
 .tabla--titulo {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
   background: yellowgreen;
-  height: 25px;
   color: black;
   text-align: center;
   padding: 20px;

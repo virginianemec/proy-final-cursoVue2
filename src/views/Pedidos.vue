@@ -7,11 +7,6 @@ import { mapGetters } from 'vuex';
 import ListadoPedidosComponent from '../components/ListadoPedidosComponent.vue';
 
 export default {
-  data() {
-    return {
-
-    };
-  },
   components: {
     ListadoPedidosComponent,
   },
@@ -41,6 +36,7 @@ export default {
     },
     titulo() {
       if (this.$route.params.idNegocio) return `Pedidos de negocio ${this.$route.params.idNegocio}`;
+      if (this.$route.params.idUser) return 'Mis pedidos';
       return this.isAdmin ? 'Listado de Todos los pedidos del sitio.' : 'Mis pedidos';
     },
   },

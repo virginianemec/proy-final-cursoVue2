@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
+import router from '@/router/router';
 
 import products from './products';
 import users from './users';
@@ -36,6 +37,15 @@ export default new Vuex.Store({
   actions: {
     cambiarWorkDescription({ commit }, message) {
       commit('setWorkDescription', message);
+    },
+
+    async logout({ commit, dispatch }) {
+      await dispatch('setCarritoTemp').then(
+        async () => {
+          console.log('temrino');
+          commit('logoutUser');
+        },
+      ).finally(router.push({ name: 'Login' }));
     },
   },
   modules: {

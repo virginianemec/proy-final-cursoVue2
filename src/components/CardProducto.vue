@@ -76,7 +76,6 @@ export default {
   },
   data() {
     return {
-      // creo  que necesitare inicializar la cant en caso de edit.
       cant: 0,
       total: 0,
     };
@@ -93,14 +92,6 @@ export default {
   methods: {
     async carritoUpdate(objEvent) {
       this.total = objEvent.total;
-      /* const objectdata = {
-        productId: objEvent.productId,
-        productPrice: this.price,
-        productName: this.name,
-        updateFuntion: objEvent.updateFuntion,
-        userId: this.userId,
-        negocio: this.negocio,
-      }; */
       const objectdata = {
         productId: objEvent.productId,
         productPrice: objEvent.productPrice,
@@ -114,7 +105,6 @@ export default {
       } else {
         await this.$store.dispatch('decrease', objectdata);
       }
-      // await this.$store.dispatch('carritoUserFromApi', this.userId);
     },
     getImage() {
       return this.producto.image === '' ? 'No-image-available' : this.producto.image;
@@ -124,14 +114,6 @@ export default {
 </script>
 
 <style scoped>
-.div--container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 10px;
-  width: 100%;
-  padding-top: 20px;
-}
 table {
   width: 90%;
   margin: auto;
@@ -150,7 +132,7 @@ p {
   margin: 12px 0px 0px 0px;
   color: #fd9001;
   text-align: center;
-  font-size: 18px;
+  font-size: 12px;
 }
 img {
   width: 150px;

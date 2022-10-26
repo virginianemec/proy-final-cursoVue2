@@ -48,13 +48,7 @@ export default {
   },
   methods: {
     increase() {
-      // if (this.cant >= 0) {
       this.cant += 1;
-      /* this.$emit('carritoUpdate', {
-        updateFuntion: '+',
-        total: this.totalPrice,
-      });
-      */
       const objectdata = {
         productId: this.id,
         productPrice: this.price,
@@ -64,15 +58,9 @@ export default {
         total: this.totalPrice,
       };
       this.$emit('carritoUpdate', objectdata);
-      // }
     },
     decrease() {
-      // if (this.cant > 0) {
       this.cant -= 1;
-      /*  this.$emit('carritoUpdate', {
-        updateFuntion: '-',
-        total: this.totalPrice,
-      }); */
 
       const objectdata = {
         productId: this.id,
@@ -83,7 +71,6 @@ export default {
         total: this.totalPrice,
       };
       this.$emit('carritoUpdate', objectdata);
-      // }
     },
     reset() {
       this.cant = 0;
@@ -114,7 +101,7 @@ p {
   margin: 12px 0px 0px 0px;
   color: #fd9001;
   text-align: center;
-  font-size: 18px;
+  font-size: 12px;
 }
 .row--botones {
   display: flex;

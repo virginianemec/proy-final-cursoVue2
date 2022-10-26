@@ -3,7 +3,7 @@
     <div class="encabezado">Mis negocios</div>
 
     <div class="tabla-negocios">
-      <div v-for="negocio in negocios" :key="negocio.id">
+      <div v-for="(negocio, index) in negocios" :key="index">
         <NegocioComponent
           :id="negocio.id"
           :name="negocio.name"

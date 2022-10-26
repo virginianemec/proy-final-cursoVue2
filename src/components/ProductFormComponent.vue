@@ -47,8 +47,8 @@
 </p>
 <p>
         <validate class="fc my-3" tag="label" :custom="{ categoryValidator: categoryValidator }">
-          
-            <select id="category" v-model="product.category" name="category" required placeholder="Categoria*">
+          <p>Categoria*:</p>
+            <select id="category" v-model="product.category" name="category" required>
               <option value="Comida rápida">Comida rápida</option>
               <option value="Comida vegana">Comida vegana</option>
               <option value="Comida sin TACC">Comida sin TACC</option>
@@ -84,13 +84,16 @@
             </div>
         </validate>
 </p>
-          <div>
+          <div class="fila">
             <button type="submit" class="btn btn-primary" @keyup.enter="submit">{{ etiqueta }}</button>
             <button class="btn btn-primary" @click.prevent="resetProduct()">Cancelar</button>
           </div>
-      </vue-form>
 
-      <ProductsTableComponente @productController="productController($event)"></ProductsTableComponente>
+
+     
+            </vue-form>
+
+             <ProductsTableComponente @productController="productController($event)"></ProductsTableComponente>
       </div>
     </div>
   </div>
@@ -136,10 +139,6 @@ export default {
       }
       if (this.productNew) {
         const objProduct = { ...this.product };
-        /*
-        // este id lo crea mockapi
-            objProduct.id = id;
-        */
         await this.productSave(objProduct)
           .then((resp) => {
             console.log(resp);
@@ -196,7 +195,6 @@ export default {
         this.product.price = objController.product.price;
         this.product.category = objController.product.category;
         this.product.activo = objController.product.activo;
-        // this.product.id_producto = objController.product.id_producto;
         this.product.cant = objController.product.cant;
         this.product.negocio = objController.product.negocio;
         this.product.image = objController.product.image;
@@ -277,14 +275,12 @@ export default {
 label,
 p {
   display: block;
-  /*margin-top: 20px;*/
   letter-spacing: 1px;
 }
 
 .etiqueta {
   display: block;
   letter-spacing: 1px;
-  /*color: red;*/
 }
 button {
   width: 85px;
