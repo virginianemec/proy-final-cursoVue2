@@ -111,7 +111,7 @@ export default {
       } else {
         await this.$store.dispatch('decrease', objectdata);
       }
-      await this.$store.dispatch('carritoUserFromApi', this.userId);
+      // await this.$store.dispatch('carritoUserFromApi', this.userId);
     },
     getImage() {
       return this.image === '' ? 'No-image-available' : this.image;
