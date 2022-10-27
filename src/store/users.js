@@ -51,7 +51,7 @@ export default {
       await axios
         .get(URL, data)
         .then(async (response) => {
-          console.table(response.data);
+          // (response.data);
           usersFromApi = response.data;
           const objUser = usersFromApi.find((val) => val.email === data.email);
           if (objUser) await commit('setUserLogged', objUser);
@@ -66,17 +66,19 @@ export default {
       await axios
         .post(URL, objUserToRegister)
         .then(async (response) => {
-          console.table(response.data);
+          // console.table(response.data);
           const objUser = response.data;
-          if (objUser) await commit('setUserLogged', objUser);
+          await commit('setUserLogged', objUser);
+          // return objUser;
         })
         .catch((err) => {
-          console.error(err);
-        });
+          console.error('error', err);
+        })
+        .finally(() => console.log('Peticion terminada - action registerUserOnApi.'));
     },
 
     // return true if user is register.
-    async getUserRegisterFromApi(objUserToLoging) {
+    async getUserRegisterFromApi({ commit }, objUserToLoging) {
       const data = {
         email: objUserToLoging.email,
       };
@@ -84,10 +86,11 @@ export default {
       await axios
         .get(URL, data)
         .then(async (response) => {
-          console.table(response.data);
+          // console.table(response.data);
           usersFromApi = response.data;
           const objUser = usersFromApi.find((val) => val.email === data.email);
-          return objUser;
+          if (objUser) await commit("setUserLogged", objUser);
+          // return objUser;
         })
         .catch((err) => {
           console.error('error', err);

@@ -36,6 +36,9 @@
           </div>
         </vue-form>
       </div>
+          <div v-if="loading">
+            <div class="loader"></div>
+          </div>
     </div>
 </template>
 
@@ -53,6 +56,7 @@ export default {
         password: '',
         rol: '',
       },
+      loading: false,
     };
   },
   methods: {
@@ -62,6 +66,7 @@ export default {
         this.$alert('Los datos no son correctos. Verifiquelos por favor.', 'Atención', 'error');
         return;
       }
+      this.loading = true,
       // si el form es correcto sigue con la autenticacion.
       // este metodo espera que el store recupere y guarde un usuario.
       await this.$store.dispatch('getUsersFromApi', this.data);
@@ -71,8 +76,10 @@ export default {
         await this.$store.dispatch('getNegociosFromApi');
         await this.$store.dispatch('productsFromApi');
         await this.$store.dispatch('carritoUserFromApi', this.userId);
+        this.loading = false;
         this.$router.push({ name: 'Index' });
       } else {
+        this.loading = false;
         this.$alert('Los datos ingresados no corresponden a un usuario.', 'Atención', 'error');
       }
     },

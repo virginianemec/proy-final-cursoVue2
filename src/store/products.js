@@ -31,7 +31,7 @@ export default {
       await axios
         .get(URL)
         .then(async (response) => {
-          console.table(response.data);
+          // console.table(response.data);
           await commit('setProducts', response.data);
         })
         .catch((err) => {
@@ -52,7 +52,7 @@ export default {
       await axios
         .post(URL, data)
         .then((response) => {
-          console.table(response.data);
+          // (response.data);
         })
         .catch((err) => {
           console.error(err);

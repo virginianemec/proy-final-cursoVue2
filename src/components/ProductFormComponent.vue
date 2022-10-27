@@ -88,10 +88,12 @@
             <button type="submit" class="btn btn-primary" @keyup.enter="submit">{{ etiqueta }}</button>
             <button class="btn btn-primary" @click.prevent="resetProduct()">Cancelar</button>
           </div>
-
-
      
             </vue-form>
+
+            <div v-if="loading">
+            <div class="loader"></div>
+          </div>
 
              <ProductsTableComponente @productController="productController($event)"></ProductsTableComponente>
       </div>
@@ -125,6 +127,7 @@ export default {
         image: '',
       },
       etiqueta: 'Nuevo',
+      loading: false,
     };
   },
   methods: {
@@ -137,19 +140,23 @@ export default {
         );
         return;
       }
+      this.loading = true;
       if (this.productNew) {
         const objProduct = { ...this.product };
         await this.productSave(objProduct)
           .then((resp) => {
             console.log(resp);
             this.$alert('Se ha creado el producto.', 'Atención', 'success');
+            this.loading = false;
             this.$store.dispatch('productsFromApi');
             this.resetProduct();
           })
           .catch((err) => {
             this.$alert(`No pudo crearse el producto. Intente de nuevo. ${err}`);
+            this.loading = false;
           })
           .finally();
+          this.loading = false;
       } else {
         // actualizar...
         this.$confirm('¿Seguro desea actualizar este producto?', 'Atención', 'question').then(
@@ -159,15 +166,18 @@ export default {
               .then((resp) => {
                 console.log(resp);
                 this.$alert('Se ha actualizado el producto.', 'Atención', 'success');
+                this.loading = false;
                 this.$store.dispatch('productsFromApi');
                 this.resetProduct();
               })
               .catch((err) => {
                 this.$alert(`No se pudo actualizar el producto. Intente de nuevo. ${err}`);
+                this.loading = false;
               })
               .finally();
           },
         );
+        this.loading = false;
       }
     },
     async productSave(objToSave) {
@@ -205,16 +215,19 @@ export default {
         this.$confirm('¿Seguro desea eliminar este producto?', 'Atención', 'question')
           .then(async () => {
             const { id } = objController.product;
+            this.loading = true;
             await this.$store
               .dispatch('productDelete', id)
               .then(async () => {
                 this.$alert('Se ha eliminado el producto.', 'Atención', 'success');
+                this.loading = false;
                 await this.$store.dispatch('productsFromApi');
                 this.resetProduct();
               })
               .catch(console.log('no se borro el producto'));
           })
           .catch(console.log('error en el cancel o dijo que no'));
+        this.loading = false;
       }
     },
     customValidator() {

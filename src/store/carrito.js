@@ -53,7 +53,7 @@ export default {
   },
   actions: {
     async increase({ commit, state }, objEvento) {
-      console.table(objEvento);
+      // console.table(objEvento);
       const objIndex = state.carrito.findIndex((val) => (
         val.productId === objEvento.productId && val.estado === 'PENDIENTE'
       ));
@@ -112,8 +112,8 @@ export default {
             axios
               .put(`${URL}/${valId}`, element)
               .then((response) => {
-                console.log('se modifico al carrito el producto');
-                console.table(response.data);
+                // console.log('se modifico al carrito el producto');
+                // console.table(response.data);
               })
               .catch((error) => {
                 console.log(error);
@@ -122,8 +122,8 @@ export default {
             axios
               .post(`${URL}`, element)
               .then((response) => {
-                console.log('se agrego al carrito el producto');
-                console.table(response.data);
+                // console.log('se agrego al carrito el producto');
+                // console.table(response.data);
               })
               .catch((error) => {
                 console.log(error);
@@ -161,7 +161,7 @@ export default {
           axios
             .delete(`${URL}/${element.id}`)
             .then(async (response) => {
-              console.table(response.data);
+              // console.table(response.data);
             })
             .catch((error) => {
               console.log(error);
@@ -210,7 +210,7 @@ export default {
             axios
               .put(`${URL}/${valId}`, element)
               .then((response) => {
-                console.table(response.data);
+                // console.table(response.data);
               })
               .catch((error) => {
                 console.log(error);
@@ -219,7 +219,7 @@ export default {
             axios
               .post(`${URL}`, element)
               .then((response) => {
-                console.table(response.data);
+                // console.table(response.data);
               })
               .catch((error) => {
                 console.log(error);
