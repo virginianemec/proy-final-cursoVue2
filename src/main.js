@@ -6,7 +6,6 @@ import { BootstrapVue } from 'bootstrap-vue';
 import axios from 'axios';
 import VueRouter from 'vue-router';
 import VueAxios from 'vue-axios';
-import { BootstrapVue } from 'bootstrap-vue';
 import router from './router/router';
 
 import store from './store';
