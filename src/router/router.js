@@ -12,7 +12,7 @@ Vue.use(VueRouter);
 
 export default new VueRouter({
   // generar historial de navegación
-  mode: "history",
+  mode: "hash", // "history",
   // Ruta gral del endpoint
   base: process.env.BASE_URL,
   // array que contendrá las vistas de ruteo

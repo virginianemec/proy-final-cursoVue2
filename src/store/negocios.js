@@ -33,7 +33,7 @@ export default {
       await axios
         .get(URL)
         .then(async (response) => {
-          console.table(response.data);
+          // console.table(response.data);
           const negociosFromApi = response.data;
           if (negociosFromApi) await commit('setNegocios', negociosFromApi);
           // por cada negocio, busca los carritos cuyo negocio = negocio.id

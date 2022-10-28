@@ -36,6 +36,9 @@
           </div>
         </vue-form>
       </div>
+          <div v-if="loading">
+            <div class="loader"></div>
+          </div>
     </div>
 </template>
 
@@ -53,6 +56,7 @@ export default {
         password: '',
         rol: '',
       },
+      loading: false,
     };
   },
   methods: {
@@ -62,6 +66,9 @@ export default {
         this.$alert('Los datos no son correctos. Verifiquelos por favor.', 'Atención', 'error');
         return;
       }
+      this.loginUser();
+      /*
+      this.loading = true,
       // si el form es correcto sigue con la autenticacion.
       // este metodo espera que el store recupere y guarde un usuario.
       await this.$store.dispatch('getUsersFromApi', this.data);
@@ -70,21 +77,53 @@ export default {
         // llama a la vista para que se mueva.
         await this.$store.dispatch('getNegociosFromApi');
         await this.$store.dispatch('productsFromApi');
-        await this.$store.dispatch('carritoUserFromApi', this.userId);
+        await this.$store.dispatch('carritoUserFromApi');
+        this.loading = false;
         this.$router.push({ name: 'Index' });
       } else {
+        this.loading = false;
         this.$alert('Los datos ingresados no corresponden a un usuario.', 'Atención', 'error');
       }
+      */
+    },
+    async loginUser() {
+      this.loading = true;
+      await this.$store.dispatch('getUsersFromApi', this.data)
+        .then(async () => {
+          if (this.user.id !== '') {
+          // llama a la vista para que se mueva.
+            await this.$store.dispatch('getNegociosFromApi');
+            await this.$store.dispatch('productsFromApi');
+            await this.$store.dispatch('carritoUserFromApi');
+            this.loading = false;
+            this.$router.push({ name: 'Index' });
+          } else {
+            this.loading = false;
+            this.$alert('Los datos ingresados no corresponden a un usuario.', 'Atención', 'error');
+          }
+        })
+        .catch((err) => {
+          this.$alert(`Ocurrió un error. Los datos ingresados no corresponden a un usuario. ${err}`, 'Atención', 'error');
+          this.loading = false;
+        })
+        .finally();
+      this.loading = false;
+    },
+    async existeUser() {
+      await this.$store.dispatch('getUsersFromApi', this.data);
+      return this.user;
     },
   },
   computed: {
-    ...mapGetters(['getUserLogged', 'getUserLoggedId']),
+    ...mapGetters(['getUserLogged']), // , 'getUserLoggedId'
     user() {
       return this.$store.getters.getUserLogged;
     },
+    /*
     userId() {
       return this.$store.getters.getUserLoggedId;
     },
+    */
   },
 };
 </script>

@@ -102,11 +102,21 @@
           <button type="submit" class="btn btn btn-primary">Registrarme</button>
         </div>
       </vue-form>
+
+          <div v-if="loading">
+             <div class="loader"></div>
+           </div>
+
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+import { mapGetters } from 'vuex';
+
+const URL = 'https://632ba1f21aabd8373989647d.mockapi.io/users';
+
 export default {
   name: 'RegisterComponent',
   data() {
@@ -121,6 +131,7 @@ export default {
         age: '',
         favouriteColor: '',
       },
+      loading: false,
     };
   },
   methods: {
@@ -136,64 +147,6 @@ export default {
         // si son correctos continua.
         this.userRegister();
       }
-    },
-
-    async userRegister() {
-      if (await this.exsistUser()) {
-        this.$alert(
-          'Ya existe un usuario con mismos datos. Intente nuevamente.',
-          'Atención',
-          'error',
-        );
-      } else {
-        const userToPost = {
-          email: this.data.email,
-          password: this.data.password,
-          name: this.data.name,
-          age: this.data.age,
-          createdAt: new Date(),
-          birthday: new Date(),
-          rol: 'usuario',
-          fovourite_color: 'green',
-        };
-
-        // llama al store para guardar el usuario nuevo.
-        await this.$store.dispatch('registerUserOnApi', userToPost);
-
-        if (this.user) {
-        // llama a la vista para que se mueva.
-          this.$alert(
-            'Su usuario se ha creado correctamente. Bienvenido',
-            'Atención',
-            'success',
-          );
-          this.$router.push({ name: 'Index' });
-        } else {
-          this.$alert('No pudo crearse el usuairo. Intente de nuevo.', 'Atención', 'error');
-        }
-      }
-    },
-    async exsistUser() {
-      const dataToGet = {
-        email: this.data.email,
-      };
-      const existUserRegister = await this.$store.dispatch('getUserRegisterFromApi', dataToGet);
-      return existUserRegister;
-    },
-
-    async register() {
-      const userToPost = {
-        email: this.data.email,
-        password: this.data.password,
-        name: this.data.name,
-        age: this.data.age,
-        createdAt: new Date(),
-        birthday: new Date(),
-        rol: 'user',
-        fovourite_color: 'green',
-      };
-      // llama al store para guardar el usuario nuevo.
-      await this.$store.dispatch('registerUserOnApi', userToPost);
     },
 
     ageValidator() {
@@ -226,6 +179,73 @@ export default {
       // no puedo esto por que no tenog los usuarios aun....
       return false;
     },
+
+    async existeUser() {
+      const response = await axios.get(URL);
+      const usersFromApi = response.data;
+      return usersFromApi.find((val) => val.email === this.data.email);
+    },
+
+    async userRegister() {
+      this.loading = true;
+      if (await this.existeUser()) {
+        this.$alert(
+          'Ya existe un usuario con mismos datos. Intente nuevamente.',
+          'Atención',
+          'error',
+        );
+        this.loading = false;
+      } else {
+        const userToPost = {
+          email: this.data.email,
+          password: this.data.password,
+          name: this.data.name,
+          age: this.data.age,
+          createdAt: new Date(),
+          birthday: new Date(),
+          rol: 'usuario',
+          fovourite_color: 'green',
+        };
+
+        // llama al store para guardar el usuario nuevo.
+        await this.$store.dispatch('registerUserOnApi', userToPost)
+          .then(async () => {
+            if (this.user.id !== '') {
+              // llama a la vista para que se mueva.
+              await this.$store.dispatch('getNegociosFromApi');
+              await this.$store.dispatch('productsFromApi');
+              await this.$store.dispatch('carritoUserFromApi');
+              this.$alert(
+                'Su usuario se ha creado correctamente. Bienvenido',
+                'Atención',
+                'success',
+              );
+              this.loading = false;
+              this.$router.push({ name: 'Index' });
+            } else {
+              this.$alert('No pudo crearse el usuario. Intente de nuevo.', 'Atención', 'error');
+              this.loading = false;
+            }
+          })
+          .catch((err) => {
+            this.$alert(`Ocurrió un error. No pudo crearse el usuario. Intente de nuevo. ${err}`, 'Atención', 'error');
+            this.loading = false;
+          })
+          .finally();
+        this.loading = false;
+      }
+    },
+  },
+  computed: {
+    ...mapGetters(['getUserLogged', 'getUserLoggedId']),
+    user() {
+      return this.$store.getters.getUserLogged;
+    },
+    /*
+    userId() {
+      return this.$store.getters.getUserLoggedId;
+    },
+    */
   },
 };
 </script>

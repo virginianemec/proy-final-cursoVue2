@@ -7,19 +7,16 @@
         class="form"
       >
       <p>
-        <validate class="fc my-3" tag="label">
-          <div >
+        <validate class="fc my-3" tag="label">      
             <input v-model.trim="compra.direccion" type="text" required name="direccion"  placeholder="Dirección*"/>
             <field-messages class="etiqueta" name="direccion">
               <div>Ok.</div>
               <div slot="required">Ingrese una direccion por favor.</div>
             </field-messages>
-          </div>
         </validate>
       </p>
       <p>
         <validate class="fc my-3" tag="label">
-          <div >
             <p>Medio de Pago*</p>
             <select id="medioPago" v-model="compra.medioPago" name="medioPago" required>
               <option value="Tarjeta">Tarjeta</option>
@@ -29,28 +26,26 @@
               <div>Ok.</div>
               <div slot="required">Seleccione un Medio de Pago</div>
             </field-messages>
-          </div>
         </validate>
 
         <div>{{mensajeMedioPago}}</div>
       </p>
       <p>
        <div class="fila"> Total: $ {{getTotal}}</div>
-       <div  class="fila">
+       <div class="fila">
           <button type="submit" class="btn btn-primary" @click="comprar()">Pagar</button>
           <button class="btn btn-primary" @click="onCancel()">Cancelar</button>
         </div>
       </p>
       </vue-form>
    </div>
-
 </template>
 
 <script>
 export default {
   name: 'CompraForm',
   props: {
-    total: String,
+    total: Number,
   },
   data() {
     return {

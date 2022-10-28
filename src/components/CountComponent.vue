@@ -60,17 +60,19 @@ export default {
       this.$emit('carritoUpdate', objectdata);
     },
     decrease() {
-      this.cant -= 1;
+      if (this.cant > 0) {
+        this.cant -= 1;
 
-      const objectdata = {
-        productId: this.id,
-        productPrice: this.price,
-        productName: this.name,
-        updateFuntion: '-',
-        negocio: this.negocio,
-        total: this.totalPrice,
-      };
-      this.$emit('carritoUpdate', objectdata);
+        const objectdata = {
+          productId: this.id,
+          productPrice: this.price,
+          productName: this.name,
+          updateFuntion: '-',
+          negocio: this.negocio,
+          total: this.totalPrice,
+        };
+        this.$emit('carritoUpdate', objectdata);
+      }
     },
     reset() {
       this.cant = 0;

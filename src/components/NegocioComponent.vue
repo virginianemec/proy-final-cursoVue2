@@ -50,9 +50,11 @@ export default {
     isAdmin() {
       return this.$store.getters.isAdmin;
     },
+    /*
     userId() {
       return this.$store.getters.getUserLoggedId;
     },
+    */
   },
   components: {
     ListadoProductosComponent,
