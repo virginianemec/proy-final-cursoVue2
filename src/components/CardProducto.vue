@@ -5,7 +5,7 @@
     <table class="table">
       <thead>
         <tr>
-          <th colspan="2">{{ name }}</th>
+          <th colspan="2" style="max-width: 150px;">{{ name }}</th>
         </tr>
       </thead>
       <tbody>

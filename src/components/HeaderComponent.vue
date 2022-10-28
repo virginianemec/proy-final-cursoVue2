@@ -2,11 +2,10 @@
   <div class="header">
       <div v-if="userIsLogged" class="navbarMenu">
            Bienvenido {{ userName }}
-            <router-link :to="{ name: 'Index' }">Inicio</router-link>
-            <div v-if="isAdmin">
-             <router-link :to="{ name: 'Productos' }">ABM Productos</router-link> || 
-             <router-link :to="{ name: 'Pedidos' }">Ver Todos los Pedidos</router-link>
-            </div>
+            <router-link :to="{ name: 'Index' }">Inicio</router-link>           
+             <router-link v-if="isAdmin" :to="{ name: 'Productos' }">ABM Productos</router-link> || 
+             <router-link v-if="isAdmin" :to="{ name: 'Pedidos' }">Ver Todos los Pedidos</router-link>
+     
             <router-link :to="{ path: `pedidosDelUser/${this.userId}` }">Mis Pedidos</router-link>
             <router-link :to="{ name: 'Carrito' }">Ver Carrito</router-link>
             <a href="" @click="$store.dispatch('logout')">Cerrar Session</a>

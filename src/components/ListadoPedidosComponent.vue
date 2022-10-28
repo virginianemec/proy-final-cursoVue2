@@ -6,7 +6,8 @@
       <thead>
         <tr>
         <th>Fecha</th>
-        <th>Cant. / Descripción</th>
+        <th>Cant.</th>
+        <th>Producto</th>
         <th>Precio</th>
         <th>Total</th>
         </tr>
@@ -14,6 +15,7 @@
       <tbody v-for="(order, index) in orders" :key="index">
         <tr>
           <td>{{ order.createdAt  | dataFilter(order.createdAt)}}</td>
+          <td>{{ order.cant }}</td>
           <td><p>{{ displayOrder(order) }}</p></td>
           <td>$ {{ order.productPrice }}</td>
           <td> <strong>$ {{ totalPrice(order) }} </strong>  </td>
@@ -37,7 +39,8 @@ export default {
       return order.cant > 0 ? order.cant * parseFloat(order.productPrice) : 0;
     },
     displayOrder(order) {
-      return ` ${order.cant} ${order.productName} `;
+      // return ` ${order.cant} ${order.productName} `;
+      return order.productName;
     },
   },
   props: {
