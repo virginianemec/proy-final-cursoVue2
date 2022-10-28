@@ -31,6 +31,9 @@ export default {
 <style scoped>
 .contenedor {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
   gap: 10px;
 }
 </style>
