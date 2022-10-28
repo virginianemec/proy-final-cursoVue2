@@ -113,8 +113,7 @@ export default {
     async aceptarComprar() {
       this.loading = true;
       await this.$store.dispatch('carritoComprarDevolver', {
-        accion: 'comprar',
-        userId: this.userId,
+        accion: 'comprar', // userId: this.userId,
       });
       this.mostrarFormCompra = false;
       this.loading = false;
@@ -126,8 +125,7 @@ export default {
     async devolver() {
       this.loading = true;
       await this.$store.dispatch('carritoComprarDevolver', {
-        accion: 'devolver',
-        userId: this.userId,
+        accion: 'devolver', // userId: this.userId,
       });
       this.loading = false;
     },
@@ -154,7 +152,7 @@ export default {
         productPrice: objEvent.productPrice,
         productName: objEvent.productName,
         updateFuntion: objEvent.updateFuntion,
-        userId: this.userId,
+        // userId: this.userId,
         negocio: objEvent.negocio,
       };
       if (objEvent.updateFuntion === '+') {
@@ -166,9 +164,10 @@ export default {
   },
   computed: {
     ...mapGetters(['getCarrito', 'getUserLoggedId']),
-    userId() {
+    /* userId() {
       return this.$store.getters.getUserLoggedId;
     },
+    */
     carrito() {
       return this.$store.getters.getCarrito;
     },

@@ -52,7 +52,7 @@ export default {
     },
   },
   actions: {
-    async increase({ commit, state }, objEvento) {
+    async increase({ commit, state, rootGetters }, objEvento) {
       // console.table(objEvento);
       const objIndex = state.carrito.findIndex((val) => (
         val.productId === objEvento.productId && val.estado === 'PENDIENTE'
@@ -65,14 +65,16 @@ export default {
         }
       } else {
         console.log('en el carrito el producto NOOO existe.');
+        const userId = parseInt(rootGetters.getUserLoggedId, 10);
         const productToCarrito = {
           createdAt: new Date(),
-          user: parseInt(objEvento.userId, 10),
+          // user: parseInt(objEvento.userId, 10),
+          user: parseInt(userId, 10),
           productId: objEvento.productId,
           productName: objEvento.productName,
           productPrice: objEvento.productPrice,
           cant: 1,
-          estado: 'PENDIENTE',
+          estado: "PENDIENTE",
           negocio: objEvento.negocio,
         };
 
@@ -102,7 +104,7 @@ export default {
       }
     },
     // comprar -> estado: COMPRADO, o volver a estado: pendiente.
-    async carritoComprarDevolver({ state, dispatch }, objData) {
+    async carritoComprarDevolver({ state, dispatch, rootGetters}, objData) {
       await Promise.all(
         state.carrito.map(async (element) => {
           element.estado = objData.accion === 'comprar' ? 'COMPRADO' : 'PENDIENTE';
@@ -131,10 +133,13 @@ export default {
           }
         }),
       );
-      await dispatch('carritoUserFromApi', objData.userId);
+
+      // await dispatch('carritoUserFromApi', objData.userId);
+      await dispatch("carritoUserFromApi");
     },
-    async carritoUserFromApi({ commit }, userId) {
+    async carritoUserFromApi({ commit, rootGetters }) {
       // busco en la Api todos los registros carrito que corresponden al usuario.
+      const userId = parseInt(rootGetters.getUserLoggedId, 10);
       await axios
         .get(`${URL}/?user=${userId}`)
         .then(async (response) => {
@@ -154,21 +159,25 @@ export default {
           console.log(error);
         });
     },
-    async resetCarritoUser({ state, dispatch }, userId) {
-      await dispatch('carritoUserFromApi', userId);
+    async resetCarritoUser({
+      state, dispatch, rootGetters,
+    }) {
+      // await dispatch('carritoUserFromApi');
       await Promise.all(
-        state.carrito.map(async (element) => {
-          axios
-            .delete(`${URL}/${element.id}`)
-            .then(async (response) => {
-              // console.table(response.data);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
+        state.carrito.map((element) => {
+          if (element.id) {
+            axios
+              .delete(`${URL}/${element.id}`)
+              .then((response) => {
+                console.table(response.data);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }
         }),
       );
-      await dispatch('carritoUserFromApi', userId);
+      await dispatch('carritoUserFromApi');
     },
     async getOrdersFromApi({ commit }, id) {
       await axios
@@ -197,6 +206,16 @@ export default {
             (todo) => todo.estado === 'COMPRADO',
           );
           await commit('setOrdersAll', result);
+          /*
+          await commit(
+            "setCarrito",
+            result.filter((item) => item.estado === "PENDIENTE")
+          );
+          await commit(
+            "setUserOrders",
+            result.filter((item) => item.estado === "COMPRADO")
+          );
+          */
         })
         .catch((error) => {
           console.log(error);

@@ -4,8 +4,13 @@
     <!--<h3 class="title">Bienvenido - Iniciar Sesión</h3> -->
     <div class="encabezado">Productos</div>
 
+                <div v-if="loading">
+            <div class="loader"></div>
+          </div>
+          
     <div class="form-caja">
       <div class="form">
+
 
       <vue-form
         :state="formStateProducts"
@@ -91,10 +96,6 @@
      
             </vue-form>
 
-            <div v-if="loading">
-            <div class="loader"></div>
-          </div>
-
              <ProductsTableComponente @productController="productController($event)"></ProductsTableComponente>
       </div>
     </div>
@@ -156,7 +157,7 @@ export default {
             this.loading = false;
           })
           .finally();
-          this.loading = false;
+        this.loading = false;
       } else {
         // actualizar...
         this.$confirm('¿Seguro desea actualizar este producto?', 'Atención', 'question').then(

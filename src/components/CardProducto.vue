@@ -1,6 +1,7 @@
 <!-- eslint-disable vuejs-accessibility/alt-text -->
 <template>
   <div> <!-- class="div--container-->
+   
     <table class="table">
       <thead>
         <tr>
@@ -40,7 +41,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import CountComponent from '@/components/CountComponent.vue';
 
 export default {
@@ -81,10 +81,12 @@ export default {
     };
   },
   computed: {
+    /*
     ...mapGetters(['getUserLoggedId']),
     userId() {
       return this.$store.getters.getUserLoggedId;
     },
+    */
     getImagenSrc() {
       return `./assets/${this.producto.image}.png`;
     },
@@ -97,7 +99,7 @@ export default {
         productPrice: objEvent.productPrice,
         productName: objEvent.productName,
         updateFuntion: objEvent.updateFuntion,
-        userId: this.userId,
+        // userId: this.userId,
         negocio: objEvent.negocio,
       };
       if (objEvent.updateFuntion === '+') {

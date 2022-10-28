@@ -149,134 +149,6 @@ export default {
       }
     },
 
-    async userRegister1() {
-      this.loading = true;
-      if (await this.exsistUser()) {
-        this.$alert(
-          'Ya existe un usuario con mismos datos. Intente nuevamente.',
-          'Atención',
-          'error',
-        );
-        this.loading = false;
-      } else {
-        const userToPost = {
-          email: this.data.email,
-          password: this.data.password,
-          name: this.data.name,
-          age: this.data.age,
-          createdAt: new Date(),
-          birthday: new Date(),
-          rol: 'usuario',
-          fovourite_color: 'green',
-        };
-
-        // llama al store para guardar el usuario nuevo.
-        /*
-        await this.$store.dispatch('registerUserOnApi', userToPost)
-          .then(async (respuesta) => {
-            console.log(respuesta);
-            this.$alert(
-              'Su usuario se ha creado correctamente. Bienvenido',
-              'Atención',
-              'success',
-            );
-            await this.$store.dispatch('getNegociosFromApi');
-            await this.$store.dispatch('productsFromApi');
-            await this.$store.dispatch('carritoUserFromApi', this.userId);
-            this.$router.push({ name: 'Index' });
-          })
-          .catch(this.$alert('aca --- No pudo crearse el usuario. Intente de nuevo.', 'Atención', 'error'))
-          .finally(this.loading = false);
-          */
-        /*
-        hazAlgo()
-.then(resultado => hazAlgoMas(resultado))
-.then(nuevoResultado => hazLaTerceraCosa(nuevoResultado))
-.then(resultadoFinal => {
-  console.log(`Obtenido el resultado final: ${resultadoFinal}`);
-})
-.catch(falloCallback);
-*/
-
-        /* if (usuarioCreado) {
-        // llama a la vista para que se mueva.
-          this.$alert(
-            'Su usuario se ha creado correctamente. Bienvenido',
-            'Atención',
-            'success',
-          );
-          this.$router.push({ name: 'Index' });
-        } else {
-          this.$alert('No pudo crearse el usuario. Intente de nuevo.', 'Atención', 'error');
-        }
- */
-        //      this.loading = false;
-
-        if (await this.register()) {
-          this.$alert(
-            'Su usuario se ha creado correctamente. Bienvenido',
-            'Atención',
-            'success',
-          );
-          await this.$store.dispatch('getNegociosFromApi');
-          await this.$store.dispatch('productsFromApi');
-          await this.$store.dispatch('carritoUserFromApi', this.userId);
-          this.loading = false;
-          this.$router.push({ name: 'Index' });
-        } else {
-          this.$alert('No pudo crearse el usuario. Intente de nuevo.', 'Atención', 'error');
-          this.loading = false;
-        }
-      }
-    },
-    async exsistUser() {
-      /*
-      const dataToGet = {
-        email: this.data.email,
-      };
-       const existUserRegister = await this.$store.dispatch('getUserRegisterFromApi', dataToGet);
-       return existUserRegister;
-      */
-      // await this.$store.dispatch('getUserRegisterFromApi', dataToGet);
-      let respuesta = false;
-      let usersFromApi = [];
-      respuesta = await axios
-        .get(URL)
-        .then((response) => {
-          console.table(response.data);
-          usersFromApi = response.data;
-          const objUser = usersFromApi.find((val) => val.email === this.data.email);
-          respuesta = objUser;
-          // return objUser;
-        }).catch(this.$alert('No pudo verificarse la existencia del usuario ya regostrado.', 'Atención', 'error'));
-      return respuesta;
-    },
-
-    async existeUser() {
-      const response = await axios.get(URL);
-      const usersFromApi = response.data;
-      return usersFromApi.find((val) => val.email === this.data.email);
-    },
-
-    async register() {
-      console.log('entro al register()');
-      // let userRegister = {};
-      const userToPost = {
-        email: this.data.email,
-        password: this.data.password,
-        name: this.data.name,
-        age: this.data.age,
-        createdAt: new Date(),
-        birthday: new Date(),
-        rol: 'usuario',
-        fovourite_color: 'green',
-      };
-      // llama al store para guardar el usuario nuevo.
-      // userRegister = await this.$store.dispatch('registerUserOnApi', userToPost);
-      await this.$store.dispatch('registerUserOnApi', userToPost);
-      return !(this.user === null); // userRegister;
-    },
-
     ageValidator() {
       let respuesta = false;
 
@@ -308,6 +180,12 @@ export default {
       return false;
     },
 
+    async existeUser() {
+      const response = await axios.get(URL);
+      const usersFromApi = response.data;
+      return usersFromApi.find((val) => val.email === this.data.email);
+    },
+
     async userRegister() {
       this.loading = true;
       if (await this.existeUser()) {
@@ -330,24 +208,31 @@ export default {
         };
 
         // llama al store para guardar el usuario nuevo.
-        await this.$store.dispatch('registerUserOnApi', userToPost);
-
-        if (this.user) {
-        // llama a la vista para que se mueva.
-          await this.$store.dispatch('getNegociosFromApi');
-          await this.$store.dispatch('productsFromApi');
-          await this.$store.dispatch('carritoUserFromApi', this.userId);
-          this.$alert(
-            'Su usuario se ha creado correctamente. Bienvenido',
-            'Atención',
-            'success',
-          );
-          this.loading = false;
-          this.$router.push({ name: 'Index' });
-        } else {
-          this.$alert('No pudo crearse el usuario. Intente de nuevo.', 'Atención', 'error');
-          this.loading = false;
-        }
+        await this.$store.dispatch('registerUserOnApi', userToPost)
+          .then(async () => {
+            if (this.user.id !== '') {
+              // llama a la vista para que se mueva.
+              await this.$store.dispatch('getNegociosFromApi');
+              await this.$store.dispatch('productsFromApi');
+              await this.$store.dispatch('carritoUserFromApi');
+              this.$alert(
+                'Su usuario se ha creado correctamente. Bienvenido',
+                'Atención',
+                'success',
+              );
+              this.loading = false;
+              this.$router.push({ name: 'Index' });
+            } else {
+              this.$alert('No pudo crearse el usuario. Intente de nuevo.', 'Atención', 'error');
+              this.loading = false;
+            }
+          })
+          .catch((err) => {
+            this.$alert(`Ocurrió un error. No pudo crearse el usuario. Intente de nuevo. ${err}`, 'Atención', 'error');
+            this.loading = false;
+          })
+          .finally();
+        this.loading = false;
       }
     },
   },
@@ -356,9 +241,11 @@ export default {
     user() {
       return this.$store.getters.getUserLogged;
     },
+    /*
     userId() {
       return this.$store.getters.getUserLoggedId;
     },
+    */
   },
 };
 </script>

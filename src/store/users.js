@@ -8,8 +8,8 @@ export default {
     userLogged: {
       email: '',
       name: '',
-      password: 'user', // user, admin
-      rol: false,
+      password: '',
+      rol: 'user', // user, admin
       id: '',
     },
   },
@@ -89,7 +89,7 @@ export default {
           // console.table(response.data);
           usersFromApi = response.data;
           const objUser = usersFromApi.find((val) => val.email === data.email);
-          if (objUser) await commit("setUserLogged", objUser);
+          if (objUser) await commit('setUserLogged', objUser);
           // return objUser;
         })
         .catch((err) => {
