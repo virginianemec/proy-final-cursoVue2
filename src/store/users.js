@@ -46,6 +46,7 @@ export default {
     async getUsersFromApi({ commit }, objUserToLoging) {
       const data = {
         email: objUserToLoging.email,
+        password: objUserToLoging.password,
       };
       let usersFromApi = [];
       await axios
@@ -53,7 +54,9 @@ export default {
         .then(async (response) => {
           // (response.data);
           usersFromApi = response.data;
-          const objUser = usersFromApi.find((val) => val.email === data.email);
+          const objUser = usersFromApi.find(
+            (val) => val.email === data.email && val.password === data.password,
+          );
           if (objUser) await commit('setUserLogged', objUser);
         })
         .catch((err) => {

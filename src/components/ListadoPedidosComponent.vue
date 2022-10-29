@@ -14,7 +14,7 @@
       </thead>
       <tbody v-for="(order, index) in orders" :key="index">
         <tr>
-          <td>{{ order.createdAt  | dataFilter(order.createdAt)}}</td>
+          <td>{{ order.createdAt  | dataFilter(order.createdAt)}} {{ usuario(order)}}</td>
           <td>{{ order.cant }}</td>
           <td><p>{{ displayOrder(order) }}</p></td>
           <td>$ {{ order.productPrice }}</td>
@@ -24,7 +24,7 @@
 
         <tbody v-if="!isThereOrders">
         <tr>
-          <td colspan="4" style="text-align: center;"> ---- NO HAY PEDIDOS PARA MOSTRAR ---- </td>
+          <td colspan="5" style="text-align: center;"> ---- NO HAY PEDIDOS PARA MOSTRAR ---- </td>
         </tr>
       </tbody>
     </table>
@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'ListadoPedidosComponent',
   methods: {
@@ -42,13 +44,23 @@ export default {
       // return ` ${order.cant} ${order.productName} `;
       return order.productName;
     },
+    usuario(order) {
+      return this.isAdmin && this.allOrders ? `|| ${order.userName}` : '';
+    },
   },
   props: {
     orders: [],
     titulo: String,
     isAdmin: Boolean,
+    allOrders: Boolean,
   },
   computed: {
+    /*
+    ...mapGetters(['isAdmin']),
+    isAdmin() {
+      return this.$store.getters.isAdmin;
+    },
+    */
     isThereOrders() {
       return this.orders.length > 0;
     },

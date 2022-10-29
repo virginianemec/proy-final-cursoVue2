@@ -29,7 +29,7 @@ export default {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.42857143;
-  color: #959595;
+  color: black; /* #959595; */
   box-sizing: border-box;
 }
 
@@ -43,7 +43,7 @@ body {
   padding: 20px;
   text-align: center;
   color:  rgb(214, 142, 45);
-  background-image: url('../src/assets/tituloHeader4.png');
+  background-image: url('../src/assets/tituloHeader5.png');
   background-size: cover;
   height: 250px;
   display: flex;

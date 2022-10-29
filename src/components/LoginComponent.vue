@@ -67,39 +67,28 @@ export default {
         return;
       }
       this.loginUser();
-      /*
-      this.loading = true,
-      // si el form es correcto sigue con la autenticacion.
-      // este metodo espera que el store recupere y guarde un usuario.
-      await this.$store.dispatch('getUsersFromApi', this.data);
-
-      if (this.user) {
-        // llama a la vista para que se mueva.
-        await this.$store.dispatch('getNegociosFromApi');
-        await this.$store.dispatch('productsFromApi');
-        await this.$store.dispatch('carritoUserFromApi');
-        this.loading = false;
-        this.$router.push({ name: 'Index' });
-      } else {
-        this.loading = false;
-        this.$alert('Los datos ingresados no corresponden a un usuario.', 'Atención', 'error');
-      }
-      */
     },
     async loginUser() {
       this.loading = true;
       await this.$store.dispatch('getUsersFromApi', this.data)
         .then(async () => {
           if (this.user.id !== '') {
-          // llama a la vista para que se mueva.
+            // if (this.user.password === this.data.password) {
             await this.$store.dispatch('getNegociosFromApi');
             await this.$store.dispatch('productsFromApi');
             await this.$store.dispatch('carritoUserFromApi');
             this.loading = false;
             this.$router.push({ name: 'Index' });
+            /*
+          } else {
+              this.loading = false;
+              this.$alert('Los datos ingresados no son correctos.
+              Verifique usuario o password.', 'Atención', 'error');
+            }
+            */
           } else {
             this.loading = false;
-            this.$alert('Los datos ingresados no corresponden a un usuario.', 'Atención', 'error');
+            this.$alert('Los datos ingresados no corresponden a un usuario. Verifique usuario o password.', 'Atención', 'error');
           }
         })
         .catch((err) => {
@@ -108,10 +97,6 @@ export default {
         })
         .finally();
       this.loading = false;
-    },
-    async existeUser() {
-      await this.$store.dispatch('getUsersFromApi', this.data);
-      return this.user;
     },
   },
   computed: {

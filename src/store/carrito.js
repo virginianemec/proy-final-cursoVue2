@@ -13,8 +13,13 @@ export default {
     getCarrito(state) {
       return state.carrito;
     },
-    getUserOrders(state) {
+    getUserOrders(state, getters, rootState, rootGetters) {
       return state.userOrders;
+      /*
+      return state.ordersAll.filter(
+        (item) => item.estado === 'COMPRADO' && item.user === rootGetters.getUserLoggedId,
+      );
+      */
     },
     getOrdersAll(state) {
       return state.ordersAll;
@@ -66,15 +71,17 @@ export default {
       } else {
         console.log('en el carrito el producto NOOO existe.');
         const userId = parseInt(rootGetters.getUserLoggedId, 10);
+        const userLoggued = rootGetters.getUserLoggedName;
         const productToCarrito = {
           createdAt: new Date(),
           // user: parseInt(objEvento.userId, 10),
           user: parseInt(userId, 10),
+          userName: userLoggued,
           productId: objEvento.productId,
           productName: objEvento.productName,
           productPrice: objEvento.productPrice,
           cant: 1,
-          estado: "PENDIENTE",
+          estado: 'PENDIENTE',
           negocio: objEvento.negocio,
         };
 
@@ -104,7 +111,7 @@ export default {
       }
     },
     // comprar -> estado: COMPRADO, o volver a estado: pendiente.
-    async carritoComprarDevolver({ state, dispatch, rootGetters}, objData) {
+    async carritoComprarDevolver({ state, dispatch, rootGetters }, objData) {
       await Promise.all(
         state.carrito.map(async (element) => {
           element.estado = objData.accion === 'comprar' ? 'COMPRADO' : 'PENDIENTE';
@@ -135,7 +142,7 @@ export default {
       );
 
       // await dispatch('carritoUserFromApi', objData.userId);
-      await dispatch("carritoUserFromApi");
+      await dispatch('carritoUserFromApi');
     },
     async carritoUserFromApi({ commit, rootGetters }) {
       // busco en la Api todos los registros carrito que corresponden al usuario.
@@ -248,5 +255,4 @@ export default {
       );
     },
   },
-  modules: {},
 };
