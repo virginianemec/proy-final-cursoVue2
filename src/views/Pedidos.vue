@@ -1,5 +1,6 @@
 <template>
-   <ListadoPedidosComponent :orders="orders" :titulo="titulo"></ListadoPedidosComponent>
+   <ListadoPedidosComponent :orders="orders" :titulo="titulo"
+   :isAdmin="isAdmin" :allOrders="isAllOrders"></ListadoPedidosComponent>
 </template>
 
 <script>
@@ -21,6 +22,9 @@ export default {
     userId() {
       return this.$store.getters.getUserLoggedId;
     },
+    isAllOrders() {
+      return !this.$route.params.idUser;
+    },
     orders() {
       if (this.$route.params.idNegocio) {
         let negocio = [];
@@ -30,7 +34,10 @@ export default {
         return negocio.orders;
       }
       if (this.$route.params.idUser) {
-        return this.$store.getters.getUserOrders;
+        // return this.$store.getters.getUserOrders;
+        return this.$store.getters.getOrdersAll.filter(
+          (item) => item.estado === 'COMPRADO' && item.user === parseInt(this.userId, 10),
+        );
       }
       return this.$store.getters.getOrdersAll;
     },

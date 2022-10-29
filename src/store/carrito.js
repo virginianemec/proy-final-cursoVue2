@@ -13,8 +13,13 @@ export default {
     getCarrito(state) {
       return state.carrito;
     },
-    getUserOrders(state) {
+    getUserOrders(state, getters, rootState, rootGetters) {
       return state.userOrders;
+      /*
+      return state.ordersAll.filter(
+        (item) => item.estado === 'COMPRADO' && item.user === rootGetters.getUserLoggedId,
+      );
+      */
     },
     getOrdersAll(state) {
       return state.ordersAll;
@@ -66,10 +71,12 @@ export default {
       } else {
         console.log('en el carrito el producto NOOO existe.');
         const userId = parseInt(rootGetters.getUserLoggedId, 10);
+        const userLoggued = rootGetters.getUserLoggedName;
         const productToCarrito = {
           createdAt: new Date(),
           // user: parseInt(objEvento.userId, 10),
           user: parseInt(userId, 10),
+          userName: userLoggued,
           productId: objEvento.productId,
           productName: objEvento.productName,
           productPrice: objEvento.productPrice,
@@ -249,5 +256,4 @@ export default {
       );
     },
   },
-  modules: {},
 };

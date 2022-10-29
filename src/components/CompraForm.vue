@@ -84,7 +84,7 @@ export default {
   },
   computed: {
     getTotal() {
-      return (this.compra.medioPago === 'Tarjeta') ? parseFloat(this.total) * 1.10 : parseFloat(this.total);
+      return (this.compra.medioPago === 'Tarjeta') ? parseFloat(this.total * 1.10).toFixed(2) : parseFloat(this.total);
     },
     mensajeMedioPago() {
       return (this.compra.medioPago && this.compra.medioPago === 'Tarjeta') ? 'Con Tarjeta 10% más. ¿Esta de acuerdo?' : '';

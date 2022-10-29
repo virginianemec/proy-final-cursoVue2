@@ -146,6 +146,7 @@ export default {
     },
 
     async carritoUpdate(objEvent) {
+      this.mostrarFormCompra = false;
       this.total = objEvent.total;
       const objectdata = {
         productId: objEvent.productId,
