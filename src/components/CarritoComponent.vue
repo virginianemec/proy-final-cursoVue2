@@ -1,79 +1,84 @@
 <template>
-  <!-- <div class="container"> -->
+  <!-- <div class='container'> -->
   <div>
-    <h1 class="encabezado">CARRITO!</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Cant.</th>
-            <th>Producto</th>
-            <th>Precio</th>
-            <th>Subtotal</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody v-for="(product,index) in carrito" :key="index">
-          <tr v-if="isPend(product)">
-            <td> {{ product.cant }}</td>
-            <td>
-              <p>{{ displayProduct(product) }}</p>
-            </td>
-            <td class="moneyCell">$ {{ product.productPrice }}</td>
-            <td class="moneyCell">$ {{ totalProduct(product) }}</td>
-            <td>
-              <CountComponent
-                :cantInicial="product.cant"
-                :id="product.productId"
-                :price="product.productPrice"
-                :name="product.productName"
-                :negocio="product.negocio"
-                @carritoUpdate="carritoUpdate($event)"
-              ></CountComponent>
-            </td>
-          </tr>
-        </tbody>
-          <tbody v-if="!isThereAnyPendiente">
-            <tr>
-              <td colspan="5" style="text-align: center;"> ---- NO HAY COMPRAS PENDIENTES ---- </td>
-            </tr>
-          </tbody>
-        <tfoot>
-          <td colspan="3"><div class="moneyCell">Total: $</div></td>
-          <td><div class="moneyCell">{{ getTotal }}</div></td>
-          <td></td>
-        </tfoot>
-      </table>
+    <h1 class='encabezado'>CARRITO!</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Cant.</th>
+          <th>Producto</th>
+          <th>Precio</th>
+          <th>Subtotal</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody v-for='(product, index) in carrito' :key='index'>
+        <tr v-if='isPend(product)'>
+          <td>{{ product.cant }}</td>
+          <td>
+            <p>{{ displayProduct(product) }}</p>
+          </td>
+          <td class='moneyCell'>$ {{ product.productPrice }}</td>
+          <td class='moneyCell'>$ {{ totalProduct(product) }}</td>
+          <td>
+            <CountComponent
+              :cantInicial='product.cant'
+              :id='product.productId'
+              :price='product.productPrice'
+              :name='product.productName'
+              :negocio='product.negocio'
+              @carritoUpdate='carritoUpdate($event)'
+            ></CountComponent>
+          </td>
+        </tr>
+      </tbody>
+      <tbody v-if='!isThereAnyPendiente'>
+        <tr>
+          <td colspan='5' style='text-align: center'>
+            ---- NO HAY COMPRAS PENDIENTES ----
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <td colspan='3'><div class='moneyCell'>Total: $</div></td>
+        <td>
+          <div class='moneyCell'>{{ getTotal }}</div>
+        </td>
+        <td></td>
+      </tfoot>
+    </table>
 
-    <div class="fila">
-    <button
-      :style="isThereAny"
-      type="button"
-      class="btn btn-primary"
-      :disabled="btnIsDisabled"
-      @click="reset()"
-    >Vaciar carrito</button>
+    <div class='fila'>
+      <button
+        :style='isThereAny'
+        type='button'
+        class='btn btn-primary'
+        :disabled='btnIsDisabled'
+        @click='reset()'
+      >
+        Vaciar carrito
+      </button>
 
-    <button
-      :style="isThereAny"
-      type="button"
-      :disabled="btnIsDisabled"
-      class="btn btn-primary"
-      @click="comprar()"
-    >Comprar</button>
-  </div>
-    <div v-show="mostrarFormCompra">
+      <button
+        :style='isThereAny'
+        type='button'
+        :disabled='btnIsDisabled'
+        class='btn btn-primary'
+        @click='comprar()'
+      >
+        Comprar
+      </button>
+    </div>
+    <div v-show='mostrarFormCompra'>
       <!-- form para comprar-->
       <CompraForm
-        @onCancel="onCancel($event)"
-        @aceptarComprar="aceptarComprar($event)"
-        :total="this.getTotal"
+        @onCancel='onCancel($event)'
+        @aceptarComprar='aceptarComprar($event)'
+        :total='this.getTotal'
       ></CompraForm>
     </div>
-
-    <!-- <b-loading :show="loading"></b-loading>
-    <b-spinner v-model="loading" label="Cargando..."></b-spinner>-->
-    <div v-if="loading">
-      <div class="loader"></div>
+    <div v-if='loading'>
+      <div class='loader'></div>
     </div>
   </div>
 </template>
@@ -107,7 +112,6 @@ export default {
       await this.$store.dispatch('resetCarritoUser');
     },
     onCancel() {
-      console.log('User cancelled the loader.');
       this.mostrarFormCompra = false;
     },
     async aceptarComprar() {
@@ -164,11 +168,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['getCarrito', 'getUserLoggedId']),
-    /* userId() {
-      return this.$store.getters.getUserLoggedId;
-    },
-    */
+    ...mapGetters(['getCarrito']),
     carrito() {
       return this.$store.getters.getCarrito;
     },
@@ -234,5 +234,4 @@ tfoot td {
   color: white;
   font-weight: bold;
 }
-
 </style>

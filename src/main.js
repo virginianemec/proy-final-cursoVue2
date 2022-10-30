@@ -20,7 +20,6 @@ Vue.use(VueSimpleAlert);
 Vue.use(VueForm);
 
 Vue.filter('categoryFilter', (value) => {
-  console.log('en el main');
   if (!value) return 'Sin categoria';
   return value.toString().toUpperCase();
 });

@@ -1,11 +1,10 @@
 <!-- eslint-disable vuejs-accessibility/alt-text -->
 <template>
-  <div> <!-- class="div--container-->
-   
+  <div>
     <table class="table">
       <thead>
         <tr>
-          <th colspan="2" style="max-width: 150px;">{{ name }}</th>
+          <th colspan="2" style="max-width: 150px">{{ name }}</th>
         </tr>
       </thead>
       <tbody>
@@ -25,11 +24,16 @@
         </tr>
         <tr>
           <td colspan="2">
-            <CountComponent :cantInicial="cant" :id="id" :price="price" :name="name" :negocio="negocio"
-               @carritoUpdate="carritoUpdate($event)"></CountComponent>
+            <CountComponent
+              :cantInicial="cant"
+              :id="id"
+              :price="price"
+              :name="name"
+              :negocio="negocio"
+              @carritoUpdate="carritoUpdate($event)"
+            ></CountComponent>
           </td>
         </tr>
-
         <tr>
           <td>
             <p>{{ total }}</p>
@@ -81,12 +85,6 @@ export default {
     };
   },
   computed: {
-    /*
-    ...mapGetters(['getUserLoggedId']),
-    userId() {
-      return this.$store.getters.getUserLoggedId;
-    },
-    */
     getImagenSrc() {
       return `./assets/${this.producto.image}.png`;
     },
@@ -109,7 +107,9 @@ export default {
       }
     },
     getImage() {
-      return this.producto.image === '' ? 'No-image-available' : this.producto.image;
+      return this.producto.image === ''
+        ? 'No-image-available'
+        : this.producto.image;
     },
   },
 };

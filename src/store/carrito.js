@@ -13,13 +13,8 @@ export default {
     getCarrito(state) {
       return state.carrito;
     },
-    getUserOrders(state, getters, rootState, rootGetters) {
+    getUserOrders(state) {
       return state.userOrders;
-      /*
-      return state.ordersAll.filter(
-        (item) => item.estado === 'COMPRADO' && item.user === rootGetters.getUserLoggedId,
-      );
-      */
     },
     getOrdersAll(state) {
       return state.ordersAll;
@@ -58,23 +53,24 @@ export default {
   },
   actions: {
     async increase({ commit, state, rootGetters }, objEvento) {
-      // console.table(objEvento);
       const objIndex = state.carrito.findIndex((val) => (
         val.productId === objEvento.productId && val.estado === 'PENDIENTE'
       ));
       if (objIndex >= 0) {
         if (state.carrito[objIndex].cant >= 0) {
           state.carrito[objIndex].cant += 1;
-        } else {
+        }
+        /*
+        else {
           console.log('en el carrito el producto existe con cantidad < 0.');
         }
+        */
       } else {
-        console.log('en el carrito el producto NOOO existe.');
+        // console.log('en el carrito el producto NOOO existe.');
         const userId = parseInt(rootGetters.getUserLoggedId, 10);
         const userLoggued = rootGetters.getUserLoggedName;
         const productToCarrito = {
           createdAt: new Date(),
-          // user: parseInt(objEvento.userId, 10),
           user: parseInt(userId, 10),
           userName: userLoggued,
           productId: objEvento.productId,
@@ -85,7 +81,7 @@ export default {
           negocio: objEvento.negocio,
         };
 
-        console.log('id - price', objEvento.productId, objEvento.productPrice);
+        // console.log('id - price', objEvento.productId, objEvento.productPrice);
         await commit('addItem', productToCarrito);
       }
     },
@@ -93,25 +89,29 @@ export default {
       const objIndex = state.carrito.findIndex((val) => (
         val.productId === objEvento.productId && val.estado === 'PENDIENTE'
       ));
-      console.log('index encontrado para decrementar:', objIndex);
+      // console.log('index encontrado para decrementar:', objIndex);
       if (objIndex >= 0) {
         if (state.carrito[objIndex].cant > 1) {
           state.carrito[objIndex].cant -= 1;
         } else {
+        /*
           console.log('con cantidad <= 1, lo borra.');
           console.log(
             'id - price',
             objEvento.productId,
             objEvento.productPrice,
           );
+          */
           await commit('removeItem', objIndex);
         }
-      } else {
+      } /*
+      else {
         console.log('el producto a decrementar no existe');
       }
+      */
     },
     // comprar -> estado: COMPRADO, o volver a estado: pendiente.
-    async carritoComprarDevolver({ state, dispatch, rootGetters }, objData) {
+    async carritoComprarDevolver({ state, dispatch }, objData) {
       await Promise.all(
         state.carrito.map(async (element) => {
           element.estado = objData.accion === 'comprar' ? 'COMPRADO' : 'PENDIENTE';
@@ -120,29 +120,18 @@ export default {
             const valId = element.id;
             axios
               .put(`${URL}/${valId}`, element)
-              .then((response) => {
-                // console.log('se modifico al carrito el producto');
-                // console.table(response.data);
-              })
               .catch((error) => {
                 console.log(error);
               });
           } else {
             axios
               .post(`${URL}`, element)
-              .then((response) => {
-                // console.log('se agrego al carrito el producto');
-                // console.table(response.data);
-              })
               .catch((error) => {
                 console.log(error);
               });
           }
         }),
-
       );
-
-      // await dispatch('carritoUserFromApi', objData.userId);
       await dispatch('carritoUserFromApi');
     },
     async carritoUserFromApi({ commit, rootGetters }) {
@@ -167,10 +156,7 @@ export default {
           console.log(error);
         });
     },
-    async resetCarritoUser({
-      state, dispatch, rootGetters,
-    }) {
-      // await dispatch('carritoUserFromApi');
+    async resetCarritoUser({ state, dispatch }) {
       await Promise.all(
         state.carrito.map((element) => {
           if (element.id) {
@@ -202,7 +188,7 @@ export default {
         });
     },
     async getOrdersAllFromApi({ commit }, data) {
-      // este metodo retorna el conjunto de registros de los carrits del sistema
+      // este metodo retorna el conjunto de registros de los carritos del sistema
       const urlCarritos = data.admin ? URL : `${URL}/?user=${data.id}`;
       // si el user es admin, rae todos,
       // sino los del usuario.
@@ -214,16 +200,6 @@ export default {
             (todo) => todo.estado === 'COMPRADO',
           );
           await commit('setOrdersAll', result);
-          /*
-          await commit(
-            "setCarrito",
-            result.filter((item) => item.estado === "PENDIENTE")
-          );
-          await commit(
-            "setUserOrders",
-            result.filter((item) => item.estado === "COMPRADO")
-          );
-          */
         })
         .catch((error) => {
           console.log(error);
@@ -236,18 +212,12 @@ export default {
             const valId = element.id;
             axios
               .put(`${URL}/${valId}`, element)
-              .then((response) => {
-                // console.table(response.data);
-              })
               .catch((error) => {
                 console.log(error);
               });
           } else {
             axios
               .post(`${URL}`, element)
-              .then((response) => {
-                // console.table(response.data);
-              })
               .catch((error) => {
                 console.log(error);
               });

@@ -1,45 +1,4 @@
 body {
-	/*padding-top: 50px;    /* Padding for .navbar-fixed-top. Change value if navbar height changes. Remove if using .navbar-static-top. */
-	color: #959595;
-	}
-	
-h1, 
-h2, 
-h3, 
-h4, 
-h5, 
-h6 {
-	/* color: #dd845a; */
-	}
-
-
-/*
- background-color: sandybrown;
- border-color: sandybrown;
-
-.form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 30%;
-    /*min-width: 20%;*/
- /*   max-width: 80%;
-    background: #9e94f3;
-    border-radius: 5px;
-    padding: 20px;
-    box-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.3);
-  }*/
-/*
-    .form {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      width: 20%;
-      min-width: 350px;
-      max-width: 80%;
-      background: rgba(19, 35, 47, 0.9);
-      border-radius: 5px;
-      padding: 20px;
-      box-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.3);
-    }*/
-
+  /*padding-top: 50px;    /* Padding for .navbar-fixed-top. Change value if navbar height changes. Remove if using .navbar-static-top. */
+  color: #959595;
+}

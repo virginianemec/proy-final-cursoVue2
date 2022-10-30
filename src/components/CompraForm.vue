@@ -1,5 +1,5 @@
 <template>
-     <div> <!-- class="div--container-->
+     <div>
       <vue-form
         :state="formStateCompra"
         @submit.prevent=""
@@ -7,8 +7,10 @@
         class="form"
       >
       <p>
-        <validate class="fc my-3" tag="label">      
-            <input v-model.trim="compra.direccion" type="text" required name="direccion"  placeholder="Dirección*"/>
+        <validate class="fc my-3" tag="label">
+            <input v-model.trim="compra.direccion" type="text"
+            required name="direccion"
+            placeholder="Dirección*"/>
             <field-messages class="etiqueta" name="direccion">
               <div>Ok.</div>
               <div slot="required">Ingrese una direccion por favor.</div>
@@ -77,23 +79,24 @@ export default {
       };
     },
     onCancel() {
-      console.log('User cancelled la compra form.');
       this.resetCompra();
       this.$emit('onCancel');
     },
   },
   computed: {
     getTotal() {
-      return (this.compra.medioPago === 'Tarjeta') ? parseFloat(this.total * 1.10).toFixed(2) : parseFloat(this.total);
+      return this.compra.medioPago === 'Tarjeta'
+        ? parseFloat(this.total * 1.1).toFixed(2)
+        : parseFloat(this.total);
     },
     mensajeMedioPago() {
-      return (this.compra.medioPago && this.compra.medioPago === 'Tarjeta') ? 'Con Tarjeta 10% más. ¿Esta de acuerdo?' : '';
+      return this.compra.medioPago && this.compra.medioPago === 'Tarjeta'
+        ? 'Con Tarjeta 10% más. ¿Esta de acuerdo?'
+        : '';
     },
   },
-
 };
 </script>
 
 <style>
-
 </style>

@@ -31,13 +31,11 @@ export default {
       await axios
         .get(URL)
         .then(async (response) => {
-          // console.table(response.data);
           await commit('setProducts', response.data);
         })
         .catch((err) => {
           console.error('error', err);
-        })
-        .finally(() => console.log('Peticion terminada - action productsFromApi.'));
+        });
     },
     async productSave({ commit }, objToSave) {
       const data = {
@@ -64,12 +62,11 @@ export default {
         await axios
           .delete(`${URL}/${valId}`)
           .then((response) => {
-            console.log(response);
+            // console.log(response);
           })
           .catch((err) => {
             alert(err);
-          })
-          .finally(() => console.log('Peticion terminada - volver a traer los datos.'));
+          });
       });
     },
     async productUpdate({ commit, state, context }, product) {
@@ -87,23 +84,21 @@ export default {
       await axios
         .put(`${URL}/${valId}`, data)
         .then(async (response) => {
-          console.log(response);
+          // console.log(response);
         })
         .catch((err) => {
           alert(err);
-        })
-        .finally(console.log('Peticion terminada - volver a traer los datos.'));
+        });
     },
     async productDelete({ commit, state, context }, valId) {
       await axios
         .delete(`${URL}/${valId}`)
         .then(async (response) => {
-          console.log(response);
+          // console.log(response);
         })
         .catch((err) => {
           alert(`No se pudo borrar el producto. ${err}`);
-        })
-        .finally(() => console.log('Peticion terminada - volver a traer los datos.'));
+        });
     },
     async getProductsFromNegocio({ commit, state, context }, negocio) {
       const productsFromNegocio = state.products.filter(

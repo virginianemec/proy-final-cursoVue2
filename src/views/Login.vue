@@ -7,9 +7,13 @@
       <br />Password es requerido pero no se valida.
     </p>
      -->
-      <LoginComponent />
-      <div class="title">No tengo cuenta</div>
-      <div class="divbtn"> <button type="submit" class="btn btn-primary" @click="registrame()">Registrarme</button> </div>
+    <LoginComponent />
+    <div class="title">No tengo cuenta</div>
+    <div class="divbtn">
+      <button type="submit" class="btn btn-primary" @click="registrame()">
+        Registrarme
+      </button>
+    </div>
   </div>
 </template>
 

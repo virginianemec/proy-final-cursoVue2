@@ -1,5 +1,5 @@
 <template>
-   <CarritoComponent  />
+  <CarritoComponent />
 </template>
 
 <script>

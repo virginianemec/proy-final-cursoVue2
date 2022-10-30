@@ -4,7 +4,6 @@
     <p>{{ cantidad }}</p>
     <button class="coder--button" @click="increase()">+</button>
     <br />
-    <!--<p>{{ precioTotal }}</p> -->
   </div>
 </template>
 

@@ -3,110 +3,130 @@
 <!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
   <div>
-   <div class="encabezado">Registrarme</div>
-      <div class="form-caja">
+    <div class="encabezado">Registrarme</div>
+    <div class="form-caja">
       <vue-form
         :state="formStateReg"
         @submit.prevent="onRegister()"
         name="registry"
       >
-       <p>
-        <validate
-          class="fc"
-          tag="label"
-          :custom="{ customValidator: customValidator }"
-        >
-          <input v-model="data.name" type="text" required name="name" placeholder="Nombre*" />
-          <field-messages name="name">
-            <div class="class-label">Ok.</div>
-            <div class="class-label" slot="required">
-              Ingrese un nombre por favor.
-            </div>
-            <div class="class-label" slot="customValidator">
-              El nombre debe ser unico. Intente otro.
-            </div>
-          </field-messages>
-        </validate>
-</p><p>
-        <validate class="fc my-3" tag="label">
-          <input v-model="data.email" required name="email" type="email" placeholder="Mail*"/>
-          <field-messages name="email">
-            <div class="class-label">Ok.</div>
-            <div class="class-label" slot="required">
-              Indique el email por favor.
-            </div>
-            <div class="class-label" slot="email">
-              Parece que no es un email válido!
-            </div>
-          </field-messages>
-        </validate>
-</p><p>
-        <validate class="fc my-3" tag="label">
-          <input
-            v-model="data.password"
-            required
-            name="password"
-            type="password"
-            placeholder="Password*"
-          />
-          <field-messages name="password">
-            <div class="class-label">Ok.</div>
-            <div class="class-label" slot="required">
-              Indique password por favor.
-            </div>
-          </field-messages>
-        </validate>
-        </p><p>
-        <validate
-          class="fc my-3"
-          tag="label"
-          :custom="{ customValidatorPassword: customValidatorPassword }"
-        >
-          <input
-            v-model="data.passwordRepeat"
-            required
-            name="passwordRepeat"
-            type="password"
-            placeholder="Repita la password*"
-          />
-          <field-messages name="passwordRepeat">
-            <div class="class-label">Ok.</div>
-            <div class="class-label" slot="required">
-              Indique password por favor.
-            </div>
-            <div class="class-label" slot="customValidatorPassword">
-              Las contraseñas ingresadas no coinciden.
-            </div>
-          </field-messages>
-        </validate>
-</p><p>
-        <validate
-          class="fc my-3"
-          tag="label"
-          :custom="{ ageValidator: ageValidator }"
-        >
-          <input v-model="data.age" required name="age" type="number" placeholder="Edad*"/>
-          <field-messages name="age">
-            <div class="class-label">Ok.</div>
-            <div class="class-label" slot="required">
-              Indique su edad por favor.
-            </div>
-            <!-- <div slot='number'>Parece que no es una edad válida!</div> -->
-            <div class="class-label" slot="ageValidator">
-              Debe ser mayor de edad (Mas de 18 años).
-            </div>
-          </field-messages>
-        </validate>
+        <p>
+          <validate
+            class="fc"
+            tag="label"
+            :custom="{ customValidator: customValidator }"
+          >
+            <input
+              v-model="data.name"
+              type="text"
+              required
+              name="name"
+              placeholder="Nombre*"
+            />
+            <field-messages name="name">
+              <div class="class-label">Ok.</div>
+              <div class="class-label" slot="required">
+                Ingrese un nombre por favor.
+              </div>
+              <div class="class-label" slot="customValidator">
+                El nombre debe ser unico. Intente otro.
+              </div>
+            </field-messages>
+          </validate>
+        </p>
+        <p>
+          <validate class="fc my-3" tag="label">
+            <input
+              v-model="data.email"
+              required
+              name="email"
+              type="email"
+              placeholder="Mail*"
+            />
+            <field-messages name="email">
+              <div class="class-label">Ok.</div>
+              <div class="class-label" slot="required">
+                Indique el email por favor.
+              </div>
+              <div class="class-label" slot="email">
+                Parece que no es un email válido!
+              </div>
+            </field-messages>
+          </validate>
+        </p>
+        <p>
+          <validate class="fc my-3" tag="label">
+            <input
+              v-model="data.password"
+              required
+              name="password"
+              type="password"
+              placeholder="Password*"
+            />
+            <field-messages name="password">
+              <div class="class-label">Ok.</div>
+              <div class="class-label" slot="required">
+                Indique password por favor.
+              </div>
+            </field-messages>
+          </validate>
+        </p>
+        <p>
+          <validate
+            class="fc my-3"
+            tag="label"
+            :custom="{ customValidatorPassword: customValidatorPassword }"
+          >
+            <input
+              v-model="data.passwordRepeat"
+              required
+              name="passwordRepeat"
+              type="password"
+              placeholder="Repita la password*"
+            />
+            <field-messages name="passwordRepeat">
+              <div class="class-label">Ok.</div>
+              <div class="class-label" slot="required">
+                Indique password por favor.
+              </div>
+              <div class="class-label" slot="customValidatorPassword">
+                Las contraseñas ingresadas no coinciden.
+              </div>
+            </field-messages>
+          </validate>
+        </p>
+        <p>
+          <validate
+            class="fc my-3"
+            tag="label"
+            :custom="{ ageValidator: ageValidator }"
+          >
+            <input
+              v-model="data.age"
+              required
+              name="age"
+              type="number"
+              placeholder="Edad*"
+            />
+            <field-messages name="age">
+              <div class="class-label">Ok.</div>
+              <div class="class-label" slot="required">
+                Indique su edad por favor.
+              </div>
+              <!-- <div slot='number'>Parece que no es una edad válida!</div> -->
+              <div class="class-label" slot="ageValidator">
+                Debe ser mayor de edad (Mas de 18 años).
+              </div>
+            </field-messages>
+          </validate>
         </p>
         <div>
           <button type="submit" class="btn btn btn-primary">Registrarme</button>
         </div>
       </vue-form>
-
-          <div v-if="loading">
-             <div class="loader"></div>
-           </div>
-
+      <div v-if="loading">
+        <div class="loader"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -208,7 +228,8 @@ export default {
         };
 
         // llama al store para guardar el usuario nuevo.
-        await this.$store.dispatch('registerUserOnApi', userToPost)
+        await this.$store
+          .dispatch('registerUserOnApi', userToPost)
           .then(async () => {
             if (this.user.id !== '') {
               // llama a la vista para que se mueva.
@@ -223,12 +244,20 @@ export default {
               this.loading = false;
               this.$router.push({ name: 'Index' });
             } else {
-              this.$alert('No pudo crearse el usuario. Intente de nuevo.', 'Atención', 'error');
+              this.$alert(
+                'No pudo crearse el usuario. Intente de nuevo.',
+                'Atención',
+                'error',
+              );
               this.loading = false;
             }
           })
           .catch((err) => {
-            this.$alert(`Ocurrió un error. No pudo crearse el usuario. Intente de nuevo. ${err}`, 'Atención', 'error');
+            this.$alert(
+              `Ocurrió un error. No pudo crearse el usuario. Intente de nuevo. ${err}`,
+              'Atención',
+              'error',
+            );
             this.loading = false;
           })
           .finally();
@@ -237,19 +266,10 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['getUserLogged', 'getUserLoggedId']),
+    ...mapGetters(['getUserLogged']),
     user() {
       return this.$store.getters.getUserLogged;
     },
-    /*
-    userId() {
-      return this.$store.getters.getUserLoggedId;
-    },
-    */
   },
 };
 </script>
-
-<style scoped>
-
-</style>

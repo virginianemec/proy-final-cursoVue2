@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <HeaderComponent/>
+    <HeaderComponent />
     <div class="content">
-    <router-view></router-view>
+      <router-view></router-view>
     </div>
-    <FooterComponent/>
+    <FooterComponent />
   </div>
 </template>
 
@@ -22,7 +22,6 @@ export default {
 </script>
 
 <style>
-
 * {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -42,8 +41,8 @@ body {
 .header {
   padding: 20px;
   text-align: center;
-  color:  rgb(214, 142, 45);
-  background-image: url('../src/assets/tituloHeader5.png');
+  color: rgb(214, 142, 45);
+  background-image: url("../src/assets/tituloHeader5.png");
   background-size: cover;
   height: 250px;
   display: flex;
@@ -51,15 +50,14 @@ body {
 }
 .header div {
   background-color: rgb(87, 82, 13);
-    height: 50px;
-    /* margin-block: 10px; */
-    padding: 10px;
+  height: 50px;
+  padding: 10px;
 }
 .header div a {
-    text-decoration: none;
-    color:  rgb(214, 142, 45);
+  text-decoration: none;
+  color: rgb(214, 142, 45);
 }
-.header div a:hover{
+.header div a:hover {
   color: aquamarine;
 }
 
@@ -73,30 +71,30 @@ body {
 
 /* Page Content */
 .content {
-    padding: 20px;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: center;
-   /* width: 800px; */
-    margin-left: auto;
-    margin-right: auto;
-  }
+  padding: 20px;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  /* width: 800px; */
+  margin-left: auto;
+  margin-right: auto;
+}
 
-  .scroll {
-      display: block;
-      border: 0px solid red;
-      padding: 5px;
-      margin-top: 5px;
-      width: 100%;
-      height: 100px;
-      overflow-y: scroll;
-        }
+.scroll {
+  display: block;
+  border: 0px solid red;
+  padding: 5px;
+  margin-top: 5px;
+  width: 100%;
+  height: 100px;
+  overflow-y: scroll;
+}
 /* barra de tareas */
 .navbarMenu {
-    display: inline-flex;
-    justify-content: space-between;
-    gap: 20px;
-    width: 100%;
+  display: inline-flex;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
 }
 .loader {
   border: 16px solid #f3f3f3; /* Light grey */
@@ -116,17 +114,17 @@ body {
 }
 
 .btn-primary {
-    color: #fff;
-    background-color: rgb(214, 142, 45);
-    border-color: rgb(214, 142, 45);
-    margin-bottom: 10px;
-    font-size: 16px;
+  color: #fff;
+  background-color: rgb(214, 142, 45);
+  border-color: rgb(214, 142, 45);
+  margin-bottom: 10px;
+  font-size: 16px;
 }
 .class-label {
   color: #04000a;
 }
 .divbtn {
-   text-align: center;
+  text-align: center;
 }
 
 .title {
@@ -139,10 +137,10 @@ p {
 }
 
 .fila {
-    display: flex;
-    direction: rtl;
-    column-span: 10px;
-    gap: 10px;
+  display: flex;
+  direction: rtl;
+  column-span: 10px;
+  gap: 10px;
 }
 .moneyCell {
   text-align: right;
@@ -170,8 +168,8 @@ select {
   font-style: normal;
   font-size: 16px;
   -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   position: relative;
   display: inline-block;
   background: none;
@@ -182,8 +180,12 @@ select {
   justify-content: space-between;
 }
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 @media screen and (max-width: 575px) {
   * {

@@ -1,5 +1,5 @@
 <template>
-    <ListadoNegociosComponent   />
+  <ListadoNegociosComponent />
 </template>
 
 <script>

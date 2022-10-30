@@ -1,106 +1,137 @@
 <!-- eslint-disable prettier/prettier -->
 <template>
-   <div>
-    <!--<h3 class="title">Bienvenido - Iniciar Sesión</h3> -->
+  <div>
     <div class="encabezado">Productos</div>
-
-                <div v-if="loading">
-            <div class="loader"></div>
-          </div>
-          
+    <div v-if="loading">
+      <div class="loader"></div>
+    </div>
     <div class="form-caja">
       <div class="form">
+        <vue-form
+          :state="formStateProducts"
+          @submit.prevent="productAdd()"
+          name="resgiterProduct"
+        >
+          <p>
+            <validate
+              class="fc my-3"
+              tag="label"
+              :custom="{ customValidator: customValidator }"
+            >
+              <input
+                v-model.trim="product.name"
+                type="text"
+                required
+                name="name"
+                placeholder="Nombre*:"
+              />
+              <field-messages class="etiqueta" name="name">
+                <div>Ok.</div>
+                <div slot="required">Ingrese un nombre por favor.</div>
+                <div slot="customValidator">
+                  Ya existe un produto con el mismo nombre. Intente otro.
+                </div>
+              </field-messages>
+            </validate>
+          </p>
+          <p>
+            <validate
+              class="fc my-3"
+              tag="label"
+              :custom="{ priceValidator: priceValidator }"
+            >
+              <input
+                v-model.number="product.price"
+                type="number"
+                required
+                name="price"
+                min="1"
+                max="9999"
+                placeholder="Precio*:"
+              />
 
+              <field-messages class="etiqueta" name="price">
+                <div>Ok.</div>
+                <div slot="required">Ingrese un precio por favor.</div>
+                <div slot="priceValidator">
+                  La comida sin TACC no debe costar mas de $1500
+                </div>
+                <div slot="min">El valor debe ser numerico mayor a cero.</div>
+                <div slot="max">El valor debe ser numerico menor a 9999.</div>
+              </field-messages>
+            </validate>
+          </p>
+          <p>
+            <validate
+              class="fc my-3"
+              tag="label"
+              :custom="{ categoryValidator: categoryValidator }"
+            >
+              <p>Categoria*:</p>
+              <select
+                id="category"
+                v-model="product.category"
+                name="category"
+                required
+              >
+                <option value="Comida rápida">Comida rápida</option>
+                <option value="Comida vegana">Comida vegana</option>
+                <option value="Comida sin TACC">Comida sin TACC</option>
+              </select>
+              <field-messages class="etiqueta" name="category">
+                <div>Ok.</div>
+                <div slot="required">Seleccione una categoria</div>
+                <div slot="categoryValidator">
+                  La comida sin TACC no debe costar mas de $1500
+                </div>
+              </field-messages>
+            </validate>
+          </p>
+          <p>
+            <validate
+              class="fc my-3"
+              tag="label"
+              :custom="{ activoValidator: activoValidator }"
+            >
+              <div>
+                ¿Disponible para la venta?
+                <input
+                  id="si"
+                  name="activo"
+                  value="1"
+                  checked="checked"
+                  type="radio"
+                  v-model="product.activo"
+                />
+                <label for="si"> <span></span> Si </label>
 
-      <vue-form
-        :state="formStateProducts"
-        @submit.prevent="productAdd()"
-        name="resgiterProduct"
-      >
-      <p>
-        <validate class="fc my-3" tag="label" :custom="{ customValidator: customValidator }">        
-            <input v-model.trim="product.name" type="text" required name="name" placeholder="Nombre*:"/>
-            <field-messages class="etiqueta" name="name">
-              <div>Ok.</div>
-              <div slot="required">Ingrese un nombre por favor.</div>
-              <div slot="customValidator">Ya existe un produto con el mismo nombre. Intente otro.</div>
-            </field-messages>
-        </validate>
-</p>
-<p>
-        <validate class="fc my-3" tag="label" :custom="{ priceValidator: priceValidator }">
-
-            <input
-              v-model.number="product.price"
-              type="number"
-              required
-              name="price"
-              min="1"
-              max="9999"
-              placeholder="Precio*:"
-            />
-
-            <field-messages class="etiqueta" name="price">
-              <div>Ok.</div>
-              <div slot="required">Ingrese un precio por favor.</div>
-              <div slot="priceValidator">La comida sin TACC no debe costar mas de $1500</div>
-              <div slot="min">El valor debe ser numerico mayor a cero.</div>
-              <div slot="max">El valor debe ser numerico menor a 9999.</div>
-            </field-messages>
-      
-        </validate>
-</p>
-<p>
-        <validate class="fc my-3" tag="label" :custom="{ categoryValidator: categoryValidator }">
-          <p>Categoria*:</p>
-            <select id="category" v-model="product.category" name="category" required>
-              <option value="Comida rápida">Comida rápida</option>
-              <option value="Comida vegana">Comida vegana</option>
-              <option value="Comida sin TACC">Comida sin TACC</option>
-            </select>
-            <field-messages class="etiqueta" name="category">
-              <div>Ok.</div>
-              <div slot="required">Seleccione una categoria</div>
-              <div slot="categoryValidator">La comida sin TACC no debe costar mas de $1500</div>
-            </field-messages>
-
-        </validate>
-        </p>
-        <p>
-        <validate class="fc my-3" tag="label" :custom="{ activoValidator: activoValidator }">
-          <div>¿Disponible para la venta?
-            <input
-              id="si"
-              name="activo"
-              value="1"
-              checked="checked"
-              type="radio"
-              v-model="product.activo"
-            />
-            <label for="si">
-              <span></span> Si
-            </label>
-
-            <input id="no" name="activo" value="2" type="radio" v-model="product.activo" />
-            <label for="no">
-              <span></span> No
-            </label>
-            
-            </div>
-        </validate>
-</p>
+                <input
+                  id="no"
+                  name="activo"
+                  value="2"
+                  type="radio"
+                  v-model="product.activo"
+                />
+                <label for="no"> <span></span> No </label>
+              </div>
+            </validate>
+          </p>
           <div class="fila">
-            <button type="submit" class="btn btn-primary" @keyup.enter="submit">{{ etiqueta }}</button>
-            <button class="btn btn-primary" @click.prevent="resetProduct()">Cancelar</button>
+            <button type="submit" class="btn btn-primary" @keyup.enter="submit">
+              {{ etiqueta }}
+            </button>
+            <button class="btn btn-primary" @click.prevent="resetProduct()">
+              Cancelar
+            </button>
           </div>
-     
-            </vue-form>
+        </vue-form>
 
-             <ProductsTableComponente @productController="productController($event)"></ProductsTableComponente>
+        <ProductsTableComponente
+          @productController="productController($event)"
+        ></ProductsTableComponente>
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -146,38 +177,46 @@ export default {
         const objProduct = { ...this.product };
         await this.productSave(objProduct)
           .then((resp) => {
-            console.log(resp);
             this.$alert('Se ha creado el producto.', 'Atención', 'success');
             this.loading = false;
             this.$store.dispatch('productsFromApi');
             this.resetProduct();
           })
           .catch((err) => {
-            this.$alert(`No pudo crearse el producto. Intente de nuevo. ${err}`);
+            this.$alert(
+              `No pudo crearse el producto. Intente de nuevo. ${err}`,
+            );
             this.loading = false;
           })
           .finally();
         this.loading = false;
       } else {
         // actualizar...
-        this.$confirm('¿Seguro desea actualizar este producto?', 'Atención', 'question').then(
-          async () => {
-            await this.$store
-              .dispatch('productUpdate', this.product)
-              .then((resp) => {
-                console.log(resp);
-                this.$alert('Se ha actualizado el producto.', 'Atención', 'success');
-                this.loading = false;
-                this.$store.dispatch('productsFromApi');
-                this.resetProduct();
-              })
-              .catch((err) => {
-                this.$alert(`No se pudo actualizar el producto. Intente de nuevo. ${err}`);
-                this.loading = false;
-              })
-              .finally();
-          },
-        );
+        this.$confirm(
+          '¿Seguro desea actualizar este producto?',
+          'Atención',
+          'question',
+        ).then(async () => {
+          await this.$store
+            .dispatch('productUpdate', this.product)
+            .then((resp) => {
+              this.$alert(
+                'Se ha actualizado el producto.',
+                'Atención',
+                'success',
+              );
+              this.loading = false;
+              this.$store.dispatch('productsFromApi');
+              this.resetProduct();
+            })
+            .catch((err) => {
+              this.$alert(
+                `No se pudo actualizar el producto. Intente de nuevo. ${err}`,
+              );
+              this.loading = false;
+            })
+            .finally();
+        });
         this.loading = false;
       }
     },
@@ -213,21 +252,31 @@ export default {
         this.etiqueta = 'Actualizar';
       } else {
         // delete
-        this.$confirm('¿Seguro desea eliminar este producto?', 'Atención', 'question')
+        this.$confirm(
+          '¿Seguro desea eliminar este producto?',
+          'Atención',
+          'question',
+        )
           .then(async () => {
             const { id } = objController.product;
             this.loading = true;
             await this.$store
               .dispatch('productDelete', id)
               .then(async () => {
-                this.$alert('Se ha eliminado el producto.', 'Atención', 'success');
+                this.$alert(
+                  'Se ha eliminado el producto.',
+                  'Atención',
+                  'success',
+                );
                 this.loading = false;
                 await this.$store.dispatch('productsFromApi');
                 this.resetProduct();
               })
-              .catch(console.log('no se borro el producto'));
+              .catch((error) => {
+                console.log('no se borro el producto', error);
+              });
           })
-          .catch(console.log('error en el cancel o dijo que no'));
+          .catch((error) => { console.log('error en el cancel o dijo que no', error); });
         this.loading = false;
       }
     },
@@ -252,7 +301,11 @@ export default {
       const prodExists = this.products.find((prod) => {
         const valor = prod.name;
         const compareValue = valor.toUpperCase();
-        return compareValue === param && !this.productNew && prod.id !== this.product.id;
+        return (
+          compareValue === param
+          && !this.productNew
+          && prod.id !== this.product.id
+        );
       });
       if (prodExists) {
         respuesta = true;
@@ -270,7 +323,7 @@ export default {
       return respuesta;
     },
     onCancel() {
-      console.log('User cancelled the loader.');
+      // console.log('User cancelled the loader.');
     },
   },
   computed: {

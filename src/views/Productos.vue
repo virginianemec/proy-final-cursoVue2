@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ProductFormComponent ></ProductFormComponent>
+    <ProductFormComponent></ProductFormComponent>
   </div>
 </template>
 

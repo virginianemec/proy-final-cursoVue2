@@ -1,5 +1,5 @@
 <template>
-  <div class='footer-map'>
+  <div class="footer-map">
     <h1>❤ ¡Gracias por visitarnos! ❤</h1>
   </div>
 </template>

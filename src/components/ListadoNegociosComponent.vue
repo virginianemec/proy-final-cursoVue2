@@ -1,7 +1,6 @@
 <template>
-  <div >
+  <div>
     <div class="encabezado">Mis negocios</div>
-
     <div>
       <div v-for="(negocio, index) in negocios" :key="index">
         <NegocioComponent
@@ -16,7 +15,6 @@
     <br />
   </div>
 </template>
-
 <script>
 import { mapGetters } from 'vuex';
 import NegocioComponent from './NegocioComponent.vue';

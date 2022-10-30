@@ -2,12 +2,11 @@
 <template>
   <div>
     <div v-if="isAnyProduct">
-       <div> <!-- class="div--container-->
+      <div>
         <div>LISTADO DE PRODUCTOS</div>
-
-        <table >
+        <table>
           <thead>
-            <tr >
+            <tr>
               <th>ID</th>
               <th>NOMBRE</th>
               <th>PRECIO</th>
@@ -16,14 +15,13 @@
               <th>Acciones</th>
             </tr>
           </thead>
-
           <tbody v-for="(product, index) in products" :key="index">
             <tr>
-              <td >{{ product.id }}</td>
-              <td >{{ product.name | nameFilter(product.name) }}</td>
-              <td >{{ product.price | priceFilter(product.price) }}</td>
-              <td >{{ product.category | categoryFilter }}</td>
-              <td >{{ product.activo | isActivo(product.activo) }}</td>
+              <td>{{ product.id }}</td>
+              <td>{{ product.name | nameFilter(product.name) }}</td>
+              <td>{{ product.price | priceFilter(product.price) }}</td>
+              <td>{{ product.category | categoryFilter }}</td>
+              <td>{{ product.activo | isActivo(product.activo) }}</td>
               <td>
                 <button v-on:click="productUpdate(product)">Update</button>
                 <button v-on:click="productDelete(product)">Delete</button>
@@ -45,8 +43,7 @@ export default {
   filters: {
     nameFilter(value) {
       if (!value) return '';
-      value = value.toString();
-      return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+      return value.toString().charAt(0).toUpperCase() + value.slice(1).toLowerCase();
     },
     priceFilter(value) {
       if (!value) return '$ No asignado.';
@@ -58,15 +55,12 @@ export default {
   },
   methods: {
     async reset() {
-      // metodo para vaciar el listado.
       await this.$store.dispatch('productsReset');
     },
     productUpdate(prod) {
-      console.log(`${prod.id}`);
       this.$emit('productController', { function: 'update', product: prod });
     },
     productDelete(prod) {
-      console.log(` ${prod.id}`);
       this.$emit('productController', { function: 'delete', product: prod });
     },
   },
@@ -101,13 +95,11 @@ th {
 }
 
 td {
-  /* padding: 10px; */
   border: 1px solid #ccc;
   text-align: left;
   font-size: 12x;
 }
 th {
-  /* padding: 10px; */
   border: 1px solid #ccc;
   text-align: left;
   font-size: 15px;
@@ -118,5 +110,4 @@ tfoot td {
   color: white;
   font-weight: bold;
 }
-
 </style>

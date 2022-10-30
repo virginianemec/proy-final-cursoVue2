@@ -1,19 +1,12 @@
 <template>
   <div>
     <div class="tabla--titulo">{{ name }} - {{ category }}
-      <router-link v-if="isAdmin" :to="{ path: `pedidos/${this.id}` }"> Ver Pedidos</router-link> <br>
+      <router-link v-if="isAdmin"
+      :to="{ path: `pedidos/${this.id}` }"> Ver Pedidos</router-link> <br>
     </div>
      <br>
-
       <ListadoProductosComponent :negocioId="this.id" :products="products" />
     <br />
-    <!--  Pendiente proxima entrega  -->
-        <!--
-        <br />
-        <div class='tabla--datos'> Ofertas</div>
-        <ListadoOfertasComponent :ofertas='ofertas' />
-        <br />
-    -->
   </div>
 </template>
 
@@ -39,7 +32,7 @@ export default {
   // ofertas: [],
   },
   computed: {
-    ...mapGetters(['isAdmin', 'getUserLoggedId', 'getProducts']),
+    ...mapGetters(['isAdmin', 'getProducts']),
     products() {
       let productsArray = [];
       productsArray = this.$store.getters.getProducts.filter(
@@ -50,11 +43,6 @@ export default {
     isAdmin() {
       return this.$store.getters.isAdmin;
     },
-    /*
-    userId() {
-      return this.$store.getters.getUserLoggedId;
-    },
-    */
   },
   components: {
     ListadoProductosComponent,

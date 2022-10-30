@@ -33,7 +33,6 @@ export default {
       await axios
         .get(URL)
         .then(async (response) => {
-          // console.table(response.data);
           const negociosFromApi = response.data;
           if (negociosFromApi) await commit('setNegocios', negociosFromApi);
           // por cada negocio, busca los carritos cuyo negocio = negocio.id
@@ -45,8 +44,7 @@ export default {
         })
         .catch((err) => {
           console.error('error', err);
-        })
-        .finally(() => console.log('Peticion terminada - action getNegociosFromApi.'));
+        });
     },
   },
 };

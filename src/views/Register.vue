@@ -1,7 +1,9 @@
 <template>
   <div>
     <RegisterComponent />
-     <div class="divbtn"><router-link :to="{ name: 'Login' }">Inicio - Login</router-link> </div>
+    <div class="divbtn">
+      <router-link :to="{ name: 'Login' }">Inicio - Login</router-link>
+    </div>
   </div>
 </template>
 
