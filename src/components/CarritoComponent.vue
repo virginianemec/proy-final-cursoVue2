@@ -42,7 +42,7 @@
       <tfoot>
         <td colspan='3'><div class='moneyCell'>Total: $</div></td>
         <td>
-          <div class='moneyCell'>{{ getTotal }}</div>
+          <div class='moneyCell'>{{ getTotalMostrar }}</div>
         </td>
         <td></td>
       </tfoot>
@@ -181,7 +181,7 @@ export default {
       return !!this.carrito.some(isPend);
     },
 
-    getTotal() {
+    getTotalMostrar() {
       let total1 = 0;
       this.carrito.forEach((val) => {
         if (val.estado === 'PENDIENTE') {
@@ -189,6 +189,15 @@ export default {
         }
       });
       return total1 > 0 ? total1 : '';
+    },
+    getTotal() {
+      let total1 = 0;
+      this.carrito.forEach((val) => {
+        if (val.estado === 'PENDIENTE') {
+          total1 += this.totalProductCalc(val.productPrice, val.cant);
+        }
+      });
+      return total1;
     },
     btnIsDisabled() {
       return this.mostrarFormCompra;

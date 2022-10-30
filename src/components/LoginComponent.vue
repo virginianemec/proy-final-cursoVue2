@@ -1,7 +1,8 @@
 <!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
   <div>
-    <div class="encabezado">Bienvenido - Iniciar Sesión</div>
+    <div class="encabezado">Bienvenido - Iniciar Sesión </div>
+    <div class="encabezado">Virginia Nemec - Curso Vue Cli 2 + Vuex 3</div>
     <div class="form-caja">
       <vue-form :state="formState" @submit.prevent="onSubmit()">
         <p>

@@ -44,7 +44,7 @@ body {
   color: rgb(214, 142, 45);
   background-image: url("../src/assets/tituloHeader5.png");
   background-size: cover;
-  height: 250px;
+  height: 200px;
   display: flex;
   align-items: flex-end;
 }
@@ -64,7 +64,7 @@ body {
 .encabezado {
   text-align: center;
   color: rgb(214, 142, 45);
-  padding-block: 5px;
+  /* padding-block: 5px; */
   font-size: 2em;
   font-weight: bold;
 }
