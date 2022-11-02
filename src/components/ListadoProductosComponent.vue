@@ -1,7 +1,7 @@
 <template>
   <div class="contenedor">
     <div v-for="(product, index) in products" :key="index">
-      <div v-if="product.activo === '1'">
+      <div v-if="parseInt(product.activo) != 0">
           <CardProducto
             :producto="product"
             :id="product.id"
