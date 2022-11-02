@@ -1,15 +1,17 @@
 <template>
   <div class="contenedor">
     <div v-for="(product, index) in products" :key="index">
-      <CardProducto
-        :producto="product"
-        :id="product.id"
-        :name="product.name"
-        :price="product.price"
-        :image="product.image"
-        :cant="product.cant"
-        :negocio="product.negocio"
-      ></CardProducto>
+      <div v-if="product.activo === '1'">
+          <CardProducto
+            :producto="product"
+            :id="product.id"
+            :name="product.name"
+            :price="product.price"
+            :image="product.image"
+            :cant="product.cant"
+            :negocio="product.negocio"
+          ></CardProducto>
+      </div>
     </div>
   </div>
 </template>
