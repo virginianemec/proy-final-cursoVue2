@@ -10,9 +10,8 @@
       <router-link v-if="isAdmin" :to="{ name: 'Pedidos' }"
         >Ver Todos los Pedidos</router-link
       >
-
-      <router-link :to="{ path: `pedidosDelUser/${this.userId}` }"
-        >Mis Pedidos</router-link
+      <router-link :to="{ name: 'PedidosDelUsuario', params: { idUser: this.userId }}">
+        Mis Pedidos</router-link
       >
       <router-link :to="{ name: 'Carrito' }">Ver Carrito</router-link>
       <a href="" @click="$store.dispatch('logout')">Cerrar Session</a>

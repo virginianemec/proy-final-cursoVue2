@@ -1,6 +1,7 @@
 <template>
   <div class="contenedor">
     <div v-for="(product, index) in products" :key="index">
+      <div v-if="product.activo == 1">
           <CardProducto
             :producto="product"
             :id="product.id"
@@ -10,6 +11,7 @@
             :cant="product.cant"
             :negocio="product.negocio"
           ></CardProducto>
+        </div>
       </div>
   </div>
 </template>

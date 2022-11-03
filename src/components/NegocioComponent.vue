@@ -2,7 +2,8 @@
   <div>
     <div class="tabla--titulo">{{ name }} - {{ category }}
       <router-link v-if="isAdmin"
-      :to="{ path: `pedidos/${this.id}` }"> Ver Pedidos</router-link> <br>
+      :to="{ name: 'PedidosDelNegocio', params: { idNegocio: this.id }}">
+      Ver Pedidos</router-link> <br>
     </div>
      <br>
       <ListadoProductosComponent :negocioId="this.id" :products="products" />
